@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bitácora de Urbanismo | Lota Indómito</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB-paFobvsS4u0YibNCOcSR6DKaVkCNUMD3zsl5YsZrqwd4zVOg8z7sYBf1ThO_cq6KZY4DrzOHQGQUE1k5JupxGzLGoj_ntiOwcDkfuwnqV0A2cehcoYIIU8vojb6g_DKeraAalbSgVsvv776zHBAML_dvAOve-5lUjwi0F7vN22D-9bml_cXS8YacFCY6tXsN2112E9Yamu6t-DA_bNQAAESYP65X1os0w5CrHU0hz5_D3mh5XI1V_bOJvDROTMLcY7RGyusUIXzg);
+    background-repeat: repeat
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #594238 50%, transparent 100%)
+    }
+.flicker-active {
+    animation: flicker 1.5s infinite alternate
+    }
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+        } 20%, 22%, 24%, 55% {
+        opacity: 0.4;
+        }
+    }
+.neon-glow {
+    box-shadow: 0 0 8px #65dabc
+    }
+.inset-etch {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.segmented-progress span {
+    display: block;
+    height: 100%;
+    background-color: #ee671c;
+    border-right: 2px solid #131313
+    }</style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "tertiary": "#bcc9ca",
+                "on-tertiary-container": "#202c2d",
+                "primary-container": "#ee671c",
+                "surface-dim": "#131313",
+                "on-tertiary-fixed": "#121e1f",
+                "on-error": "#690005",
+                "tertiary-fixed-dim": "#bcc9ca",
+                "primary-fixed-dim": "#ffb595",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-highest": "#353535",
+                "on-tertiary": "#263334",
+                "on-secondary-fixed-variant": "#005142",
+                "outline-variant": "#594238",
+                "on-tertiary-fixed-variant": "#3d494a",
+                "on-error-container": "#ffdad6",
+                "inverse-surface": "#e5e2e1",
+                "secondary": "#65dabc",
+                "on-secondary-fixed": "#002019",
+                "surface-variant": "#353535",
+                "tertiary-container": "#869394",
+                "surface": "#131313",
+                "tertiary-fixed": "#d8e5e6",
+                "on-primary-container": "#4c1a00",
+                "on-primary": "#571e00",
+                "on-secondary-container": "#003026",
+                "surface-container-low": "#1c1b1b",
+                "inverse-primary": "#a23f00",
+                "secondary-fixed-dim": "#65dabc",
+                "surface-tint": "#ffb595",
+                "surface-bright": "#393939",
+                "surface-container-high": "#2a2a2a",
+                "surface-container": "#20201f",
+                "secondary-fixed": "#82f7d8",
+                "on-surface": "#e5e2e1",
+                "on-primary-fixed-variant": "#7c2e00",
+                "primary-fixed": "#ffdbcd",
+                "on-background": "#e5e2e1",
+                "outline": "#a88a7e",
+                "inverse-on-surface": "#313030",
+                "error-container": "#93000a",
+                "error": "#ffb4ab",
+                "on-surface-variant": "#e0c0b2",
+                "background": "#131313",
+                "on-secondary": "#00382d",
+                "primary": "#ffb595",
+                "on-primary-fixed": "#351000",
+                "secondary-container": "#1ca388"
+            },
+            "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-lg": "48px",
+                "unit": "4px",
+                "stack-sm": "8px",
+                "gutter": "16px",
+                "margin-mobile": "20px",
+                "stack-md": "24px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "label-sm": ["JetBrains Mono"],
+                "headline-lg": ["Montserrat"],
+                "title-md": ["Montserrat"],
+                "body-md": ["Work Sans"],
+                "body-lg": ["Work Sans"],
+                "headline-lg-mobile": ["Montserrat"],
+                "display-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md selection:bg-secondary selection:text-on-secondary overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface fixed top-0 left-0 flex justify-between items-center w-full px-margin-mobile h-16 z-50 border-b-2 border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-surface-container-highest border border-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">engineering</span>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter uppercase text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-primary uppercase">500 Carboncillos</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+</div>
+</header>
+<main class="pt-20 pb-32 px-margin-mobile max-w-4xl mx-auto space-y-stack-lg">
+<!-- Header Section -->
+<section class="space-y-unit">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase tracking-tight">Tu Bitácora: Camina Lota</h2>
+<div class="w-full weld-line"></div>
+</section>
+<!-- Rank & Progress Card -->
+<section class="bg-surface-container border-2 border-outline-variant p-gutter relative overflow-hidden coal-grain inset-etch">
+<div class="flex justify-between items-end mb-stack-sm">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Estado Actual</span>
+<h3 class="font-title-md text-title-md text-secondary uppercase italic">Rango: Aprendiz de Urbanismo</h3>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block">Siguiente Nivel</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">Capataz de la Cuenca</span>
+</div>
+</div>
+<!-- Mechanical Progress Bar -->
+<div class="h-6 w-full bg-surface-container-lowest border border-outline-variant flex p-[2px] gap-[1px]">
+<div class="flex-1 bg-primary-container/20"><div class="h-full w-full bg-primary-container"></div></div>
+<div class="flex-1 bg-primary-container/20"><div class="h-full w-full bg-primary-container"></div></div>
+<div class="flex-1 bg-primary-container/20"><div class="h-full w-full bg-primary-container"></div></div>
+<div class="flex-1 bg-primary-container/20"><div class="h-full w-full bg-primary-container"></div></div>
+<div class="flex-1 bg-primary-container/20"></div>
+<div class="flex-1 bg-primary-container/20"></div>
+<div class="flex-1 bg-primary-container/20"></div>
+<div class="flex-1 bg-primary-container/20"></div>
+</div>
+<div class="mt-2 flex justify-between">
+<span class="font-label-sm text-label-sm opacity-60">XP: 450 / 1000</span>
+<span class="font-label-sm text-label-sm text-secondary">45% COMPLETADO</span>
+</div>
+</section>
+<!-- Captured Photos Grid (Bento Style) -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">photo_library</span>
+<h3 class="font-title-md text-title-md uppercase">Registros de Campo</h3>
+</div>
+<div class="grid grid-cols-2 gap-unit md:grid-cols-3">
+<!-- Photo 1 -->
+<div class="group relative aspect-square border-2 border-outline-variant overflow-hidden bg-surface-container-highest">
+<img alt="Pabellón 83" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A cinematic, low-angle shot of a weathered brick industrial building in Lota, Chile, known as Pabellón 83. The lighting is dramatic and moody, with high contrast between deep shadows and the bright afternoon sun. The aesthetic is industrial-brutalist, capturing the rough texture of the old coal mining infrastructure against a dark, slightly overcast sky. The overall tone is gritty, historic, and indomitable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMrXRPPFu2vKW8kyfxmqEAAoI68D_c1za7lGBSVqNWYE1jN-XFrLKKiaDLHANFsAC7yfTlFzMT4eWzZQXGyyoINX27K6C4bf2ull31E452Yv2J2Vrx_vtAgBcMWWM3uEaBcq5rLcQdorkwSANBVhU2810xHxXvuUCx0btG_K9FZgZ5B-yFRmdioQRpe8fw-98GCUFvcJ6h3aVliR46pVc3p9NAWv8-s5uU_NOpTsHgGz-aIfVqTSnFm52i9ilSTpqNzcOO6zcTy1A4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-stack-sm flex flex-col justify-end">
+<p class="font-label-sm text-label-sm text-white">12 OCT 2023</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-secondary uppercase">Pabellón 83</span>
+<button class="active:scale-95 transition-transform"><span class="material-symbols-outlined text-white text-[18px]">share</span></button>
+</div>
+</div>
+</div>
+<!-- Photo 2 -->
+<div class="group relative aspect-square border-2 border-outline-variant overflow-hidden bg-surface-container-highest">
+<img alt="Chiflón del Diablo" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A detailed, macro shot of rusty iron gears and mechanical components of a coal mine elevator system. The metal shows heavy oxidation with textures of orange rust and deep charcoal soot. The lighting is focused and sharp, highlighting the gritty industrial details. The atmosphere is heavy with history, using a dark color palette with metallic accents, consistent with a digital archaeology aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfgM9eTOexJrekipjydlkJvlu3pMPz6AnrOnUvMjMBaDYBXCKpl37bfXPkbnp35Gzd7oUuwZBfFgj9WKATTEfZIlMlmkJ8FI6nsLAfPcn5zomOuavyTAZPiFDFwAO4bXMEFN0SwlepmSrBfBGlAPUV7pVAi2Ta79nrAwFCjr7hFZO61GTwQergS8AyXujigYC6h1Q1hHWA32X3QvZnhBm324qtNuUI3RNG4QGHgZS-bIVDK8vK3QfVTUKRD2M9BCTfEFMD8-uzbN9j"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-stack-sm flex flex-col justify-end">
+<p class="font-label-sm text-label-sm text-white">14 OCT 2023</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-secondary uppercase">Chiflón del Diablo</span>
+<button class="active:scale-95 transition-transform"><span class="material-symbols-outlined text-white text-[18px]">share</span></button>
+</div>
+</div>
+</div>
+<!-- Photo 3 -->
+<div class="group relative aspect-square border-2 border-outline-variant overflow-hidden bg-surface-container-highest">
+<img alt="Torre del Reloj" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A tall, weathered clock tower standing against a dark, industrial landscape. The tower is constructed of dark stone and weathered metal, glowing faintly under a sharp digital overlay. The lighting is dramatic, suggesting an early dawn in a coal mining town. The visual style is modern-brutalism, emphasizing height, age, and industrial strength with a cold, illuminating neon glow on the clock face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEJcsjaZU4FSixXH80cxUOd6FsypIAighD0WFhIEXzTWREwvPkX4wMc9TJUPhtYNjz6XZ28HpwVLieYi5cHb0FlwgIsdYIDKwq5gn_1ETorsWErjpJZfQqoqYl7u9LdCj1c3GkSi2FvmMgparv7094oLKD921rLQmA_6-tjW9n3g4w4uFOkopuLNyBpJp_fFRq8x1oG_zlwAK3IHsbv-oOeDsAOZpAxOQ5FoF-QPoM-TRgRK6f32QRGDjvmVVAuCo5aLfUYtQEYvRO"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-stack-sm flex flex-col justify-end">
+<p class="font-label-sm text-label-sm text-white">15 OCT 2023</p>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-secondary uppercase">Torre del Reloj</span>
+<button class="active:scale-95 transition-transform"><span class="material-symbols-outlined text-white text-[18px]">share</span></button>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full border border-outline text-on-surface-variant font-label-sm text-label-sm py-stack-sm uppercase flex items-center justify-center gap-2 hover:bg-surface-container-highest transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">add_a_photo</span> Capturar Nuevo Registro
+            </button>
+</section>
+<!-- Secretos Descubiertos Section -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">key</span>
+<h3 class="font-title-md text-title-md uppercase">Secretos Descubiertos</h3>
+</div>
+<div class="space-y-gutter">
+<!-- Secret Item 1 -->
+<div class="bg-surface-container-low border-l-4 border-secondary p-gutter coal-grain inset-etch">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">El Código de las Lámparas</h4>
+<span class="font-label-sm text-[10px] opacity-40">FRAGMENTO #042</span>
+</div>
+<p class="font-body-md text-body-md italic text-on-surface-variant leading-relaxed">
+                        "Se dice que los mineros usaban el parpadeo de sus lámparas de carburo para enviarse mensajes en clave cuando el ruido de las máquinas impedía hablar. Un parpadeo largo significaba 'cambio de turno', dos cortos 'peligro inminente'..."
+                    </p>
+</div>
+<!-- Secret Item 2 -->
+<div class="bg-surface-container-low border-l-4 border-outline p-gutter coal-grain inset-etch opacity-80">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-sm text-label-sm text-on-surface uppercase tracking-widest">La Huelga de 1960</h4>
+<span class="font-label-sm text-[10px] opacity-40">FRAGMENTO #108</span>
+</div>
+<p class="font-body-md text-body-md italic text-on-surface-variant leading-relaxed">
+                        "Durante la gran huelga, las mujeres de Lota organizaron comedores comunes en el Pabellón 83. La solidaridad era el único combustible que no se agotaba en la cuenca del carbón."
+                    </p>
+</div>
+</div>
+<!-- Locked Secret Hint -->
+<div class="border-2 border-dashed border-outline-variant p-gutter flex items-center justify-center gap-stack-sm opacity-40">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-label-sm text-label-sm uppercase">Continúa explorando para desbloquear más relatos</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-unit bg-surface-container border-t-2 border-outline-variant">
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<!-- Routes -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">directions_run</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<!-- Scan -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan</span>
+</a>
+<!-- Profile (Active) -->
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary bg-on-primary-container/10 border-t-4 border-primary h-full w-full" href="#">
+<span class="material-symbols-outlined flicker-active" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for photo sharing
+        document.querySelectorAll('button span:contains("share")').forEach(btn => {
+            btn.parentElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Abriendo Instagram para compartir tu hallazgo en Lota...');
+            });
+        });
+
+        // Add coal dust flicker effect to primary CTA on interaction
+        const progressCard = document.querySelector('section.bg-surface-container');
+        progressCard.addEventListener('touchstart', () => {
+            progressCard.style.filter = 'brightness(1.2)';
+        });
+        progressCard.addEventListener('touchend', () => {
+            progressCard.style.filter = 'brightness(1)';
+        });
+    </script>
+</body></html>

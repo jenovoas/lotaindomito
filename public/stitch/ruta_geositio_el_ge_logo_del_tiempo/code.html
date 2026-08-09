@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómita - Ruta Geositio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary": "#263334",
+                "on-secondary-container": "#003026",
+                "secondary-fixed": "#82f7d8",
+                "inverse-primary": "#a23f00",
+                "on-surface-variant": "#e0c0b2",
+                "secondary-container": "#1ca388",
+                "inverse-surface": "#e5e2e1",
+                "surface-container-high": "#2a2a2a",
+                "tertiary-fixed": "#d8e5e6",
+                "on-secondary-fixed": "#002019",
+                "primary": "#ffb595",
+                "surface-dim": "#131313",
+                "on-primary-container": "#4c1a00",
+                "surface-variant": "#353535",
+                "surface-bright": "#393939",
+                "secondary": "#65dabc",
+                "surface-container": "#20201f",
+                "on-tertiary-fixed": "#121e1f",
+                "on-primary-fixed-variant": "#7c2e00",
+                "on-background": "#e5e2e1",
+                "on-error": "#690005",
+                "error": "#ffb4ab",
+                "on-surface": "#e5e2e1",
+                "on-secondary": "#00382d",
+                "surface": "#131313",
+                "outline": "#a88a7e",
+                "on-error-container": "#ffdad6",
+                "secondary-fixed-dim": "#65dabc",
+                "tertiary": "#bcc9ca",
+                "on-primary-fixed": "#351000",
+                "outline-variant": "#594238",
+                "on-tertiary-fixed-variant": "#3d494a",
+                "background": "#131313",
+                "error-container": "#93000a",
+                "inverse-on-surface": "#313030",
+                "surface-tint": "#ffb595",
+                "primary-fixed-dim": "#ffb595",
+                "surface-container-low": "#1c1b1b",
+                "primary-container": "#ee671c",
+                "on-tertiary-container": "#202c2d",
+                "on-secondary-fixed-variant": "#005142",
+                "primary-fixed": "#ffdbcd",
+                "on-primary": "#571e00",
+                "tertiary-fixed-dim": "#bcc9ca",
+                "surface-container-highest": "#353535",
+                "tertiary-container": "#869394",
+                "surface-container-lowest": "#0e0e0e"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "unit": "4px",
+                "stack-lg": "48px",
+                "margin-desktop": "40px",
+                "stack-md": "24px",
+                "stack-sm": "8px",
+                "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                "title-md": ["Montserrat"],
+                "label-sm": ["JetBrains Mono"],
+                "body-lg": ["Work Sans"],
+                "display-lg": ["Montserrat"],
+                "headline-lg": ["Montserrat"],
+                "body-md": ["Work Sans"],
+                "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.grain-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuALG9tJ_yIuj4E-Xjmj_qq5_YSgr9pjjEHit4OKrGK_skD5-ivdJKScHKG16m9Otd3rs0g1GJPfd7lQrr-IpqAquHzPvzlqdznQEQNwdtI68bDPlRe-l18qw3LOehH8sFrPG2kGqel8no7KXzAcKRS_DIKgT0QjmxOg6XtzotLWFHUrtYmeKVg0oyQv03iqLbh8AkdpBueESVe896D4GzYprwh7PO-pB27ydhaHy4FW75or1_-w_-Zrfn-qT3f8Qlf2zqRUJDCqLpzX);
+    opacity: 0.05;
+    position: absolute;
+    inset: 0;
+    pointer-events: none
+    }
+.neon-glow-mint {
+    text-shadow: 0 0 8px #65dabc
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a88a7e, transparent)
+    }
+.mechanical-shutter {
+    animation: shutter 0.5s ease-in-out forwards
+    }
+@keyframes shutter {
+    0% {
+        transform: scaleY(0);
+        } 100% {
+        transform: scaleY(1);
+        }
+    }
+.ar-scanner-line {
+    height: 2px;
+    background: #65dabc;
+    box-shadow: 0 0 15px #65dabc;
+    animation: scan 3s infinite linear
+    }
+@keyframes scan {
+    0% {
+        top: 0%;
+        } 100% {
+        top: 100%;
+        }
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary selection:text-on-secondary min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 bg-surface dark:bg-surface border-b-2 border-outline flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 rounded-full border border-outline-variant">
+<span class="font-label-sm text-label-sm text-primary">1,250 ⚒️</span>
+</div>
+</header>
+<main class="mt-16 pt-gutter px-margin-mobile space-y-stack-md">
+<!-- Hero Section: Ruta Title -->
+<section class="relative overflow-hidden bg-surface-container p-6 border-b-2 border-outline">
+<div class="grain-texture"></div>
+<div class="relative z-10">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-2 block neon-glow-mint">Geosite Route</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-tight">Ruta Geositio: El Geólogo del Tiempo</h2>
+<p class="font-body-md text-on-surface-variant mt-2 max-w-[80%]">Descubre los secretos que el carbón ha guardado por 40 millones de años bajo el océano.</p>
+</div>
+<!-- Decorative rivet -->
+<div class="absolute top-4 right-4 w-4 h-4 rounded-full bg-outline-variant border border-on-surface/20"></div>
+</section>
+<!-- Mission Progress Tracker -->
+<section class="bg-surface-container-high border-2 border-outline-variant p-4">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h3 class="font-title-md text-title-md text-primary">Misión: El Geólogo del Tiempo</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estatus: En Proceso</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary">60%</span>
+</div>
+</div>
+<div class="h-4 bg-surface flex gap-1 p-1 border border-outline-variant">
+<div class="h-full w-[20%] bg-secondary shadow-[0_0_8px_#65dabc]"></div>
+<div class="h-full w-[20%] bg-secondary shadow-[0_0_8px_#65dabc]"></div>
+<div class="h-full w-[20%] bg-secondary shadow-[0_0_8px_#65dabc]"></div>
+<div class="h-full w-[20%] bg-surface-variant"></div>
+<div class="h-full w-[20%] bg-surface-variant"></div>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 bg-surface border border-outline-variant font-label-sm text-label-sm text-on-surface">3/5 Estratos</span>
+<span class="px-2 py-1 bg-surface border border-outline-variant font-label-sm text-label-sm text-on-surface">1/2 Fósiles</span>
+</div>
+</section>
+<!-- AR Trigger Section -->
+<section class="relative group cursor-pointer active:scale-95 transition-all duration-300">
+<div class="aspect-video w-full bg-surface-container-lowest overflow-hidden border-2 border-secondary relative">
+<img class="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A cinematic, high-contrast view of raw geological rock formations and coal seams deep underground, illuminated by a sharp neon mint green holographic interface overlaying technical geological data. The aesthetic is industrial and dark with deep blacks and metallic textures, reflecting a modern-brutalist digital archaeology style. Glowing grid lines and topographical symbols map the texture of the rock surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdMEVe5rHTJ2DE6S0h-MW7gj4O2eDPOL5O5QWfGFejRAJ8kZDdTJ52XJ9Tgvvvwoly4peK5udq2SClzQ2nVnlS7EiMkHuAkLTdKXX02aSaQTujBPdI60VEL5VK58x8UhA9e4xzILzZ6MJFa-oSNk8KgnZZpetBqipE1wFFNk1-Z8tk23Ikd9imN19l9GJUhLs3WGQXlOINzJeZ88peSonRMtPN0KLWoeEjTpRmySydkAPDKqF4XKufBqUHvz4KzYG8TkFU7MQzxRF4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<div class="relative w-16 h-16 mb-4">
+<span class="material-symbols-outlined text-secondary text-5xl neon-glow-mint" data-icon="qr_code_scanner" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+<div class="ar-scanner-line absolute w-full"></div>
+</div>
+<span class="font-title-md text-title-md text-on-surface text-center">Escanear Estratos Geológicos</span>
+<span class="font-label-sm text-label-sm text-secondary mt-1">INICIAR AR VIEWPORT</span>
+</div>
+</div>
+<!-- HUD Elements -->
+<div class="absolute top-2 left-2 font-label-sm text-[10px] text-secondary opacity-60">COORD: -37.0944, -73.1614</div>
+<div class="absolute bottom-2 right-2 font-label-sm text-[10px] text-secondary opacity-60">O2 LEVEL: 98%</div>
+</section>
+<!-- Interactive POIs -->
+<section class="space-y-stack-sm">
+<h3 class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-4">Puntos de Interés Geológico</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- POI 1: Active -->
+<div class="bg-surface-container border-2 border-outline hover:border-secondary transition-colors p-4 relative">
+<div class="flex justify-between">
+<div class="flex-1">
+<h4 class="font-title-md text-title-md text-on-surface">El Chiflón del Diablo</h4>
+<p class="font-body-md text-on-surface-variant mt-1">Formación sedimentaria del Terciario. El punto más profundo de la ruta.</p>
+</div>
+<div class="ml-4 flex flex-col items-end gap-2">
+<span class="material-symbols-outlined text-secondary neon-glow-mint" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">450m</span>
+</div>
+</div>
+<div class="weld-line my-3"></div>
+<button class="w-full bg-primary-container py-2 text-on-primary-container font-label-sm text-label-sm uppercase tracking-tighter active:scale-[0.98] transition-transform">
+                        Iniciar Navegación
+                    </button>
+</div>
+<!-- POI 2: Locked -->
+<div class="bg-surface-container-low border-2 border-outline-variant p-4 opacity-70 relative grayscale">
+<div class="flex justify-between">
+<div class="flex-1">
+<h4 class="font-title-md text-title-md text-on-surface">Estrato de Aralia</h4>
+<p class="font-body-md text-on-surface-variant mt-1">Restos fósiles de flora subtropical preservados en lutitas oscuras.</p>
+</div>
+<div class="ml-4">
+<span class="material-symbols-outlined text-outline-variant" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="weld-line my-3"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-outline">Completa 'Chiflón' para desbloquear</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Quick View -->
+<section class="bg-surface-container border-2 border-outline">
+<div class="flex items-center justify-between p-3 bg-surface-container-highest">
+<span class="font-label-sm text-label-sm text-primary uppercase">Mapa Georeferenciado</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="open_in_full">open_in_full</span>
+</div>
+<div class="h-48 relative">
+<img class="w-full h-full object-cover grayscale brightness-50" data-alt="A stylized digital map interface showing the coastal region of Lota with glowing topographical lines and technical overlays. Points of interest are marked with neon mint diamond icons. The map style is dark with monochromatic grey tones and sharp green accents, mimicking a tactical military navigation display or a high-tech archaeological surveying tool." data-location="Lota, Chile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuh-5pLqS4UWi_bB8hUGzFyVN8veLyGfyP62awy0PiOOQgBNYtOTHGaonG-2K7kh0mWTdBoai0RlaV9TLDnynw95pA1Ue_Wyya6ycWZQpZ1oqFuqAOay3AoQmFA1eRUgX1dJU1L4CW3DBn31JrX0A6BjjEgslz2y337Dde1yCfftJqNl92aFU244x6XQesQQmwac0RshI7A40d4kQMUUrJRWJxMI8iNis7UwMZoU6x4oLR0c1rUzcCLooyTS2Ynj_adoaDA4GInVny"/>
+<!-- Map UI Elements -->
+<div class="absolute inset-0 bg-secondary/5 pointer-events-none"></div>
+<div class="absolute top-1/2 left-1/3 w-3 h-3 bg-secondary rounded-full shadow-[0_0_10px_#65dabc] animate-pulse"></div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-8 bg-surface-container h-20 border-t-2 border-outline">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm mt-1">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 border-b-2 border-secondary transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="map" style="font-variation-settings: 'FILL' 1;">map</span>
+<span class="font-label-sm text-label-sm mt-1">Routes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm mt-1">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+<!-- Atmospheric Overlay (Vignette) -->
+<div class="fixed inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.8)] z-[60]"></div>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('button, [role="button"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Haptic feedback simulation
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Simple AR Trigger Animation Simulation
+        const arTrigger = document.querySelector('section.group');
+        arTrigger.addEventListener('click', () => {
+            arTrigger.classList.add('brightness-150');
+            setTimeout(() => {
+                arTrigger.classList.remove('brightness-150');
+                console.log('AR Session Initialized...');
+            }, 200);
+        });
+    </script>
+</body></html>

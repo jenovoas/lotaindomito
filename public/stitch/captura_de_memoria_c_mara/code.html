@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lota Indómito - Registrar Evidencia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .flicker-effect:active {
+            opacity: 0.5;
+            transition: opacity 75ms;
+        }
+        .shutter-glow:active {
+            transform: scale(0.92);
+            box-shadow: 0 0 20px 2px #65dabc;
+        }
+        .viewfinder-corner {
+            width: 32px;
+            height: 32px;
+            border-color: #ffb595;
+            position: absolute;
+        }
+        .glass-panel {
+            background: rgba(19, 19, 19, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .etched-border {
+            border: 1px solid #594238;
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.05), 1px 1px 0px rgba(0, 0, 0, 0.5);
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline {
+            height: 2px;
+            background: rgba(101, 218, 188, 0.2);
+            animation: scanline 4s linear infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#bcc9ca",
+                        "secondary-fixed-dim": "#65dabc",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d8e5e6",
+                        "secondary-container": "#1ca388",
+                        "inverse-surface": "#e5e2e1",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-primary-fixed": "#351000",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#003026",
+                        "inverse-primary": "#a23f00",
+                        "on-background": "#e5e2e1",
+                        "surface-tint": "#ffb595",
+                        "surface-dim": "#131313",
+                        "secondary-fixed": "#82f7d8",
+                        "error-container": "#93000a",
+                        "primary": "#ffb595",
+                        "background": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#20201f",
+                        "secondary": "#65dabc",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#ffdbcd",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#005142",
+                        "surface-bright": "#393939",
+                        "on-tertiary-container": "#202c2d",
+                        "on-secondary-fixed": "#002019",
+                        "on-tertiary": "#263334",
+                        "on-primary": "#571e00",
+                        "surface-variant": "#353535",
+                        "tertiary-container": "#869394",
+                        "surface-container-highest": "#353535",
+                        "primary-container": "#ee671c",
+                        "on-primary-container": "#4c1a00",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-secondary": "#00382d",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#ffb595",
+                        "outline-variant": "#594238",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#a88a7e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "stack-md": "24px",
+                        "gutter": "16px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- Top Navigation -->
+<header class="bg-surface text-primary border-b-2 border-outline-variant flex justify-between items-center w-full px-margin-mobile py-stack-sm z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">photo_camera</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-primary">150 💎</span>
+<div class="w-8 h-8 rounded-full border-2 border-primary overflow-hidden">
+<img alt="Miner Rank Badge" class="w-full h-full object-cover" data-alt="A gritty, high-contrast close-up portrait of a coal miner's profile, wearing a weathered helmet with an integrated lamp. The lighting is dramatic, casting deep shadows and highlighting the dusty textures of the skin. The style is industrial and cinematic, with a palette dominated by deep blacks and warm ochre tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_9mMtH49fBjSZ6ZU2AiY1sgPYSlzaKref-iwFEZRsmCuCvzN78LJy5a-1-cCKsx9QE_tXV7l6Y3uJmzFf3XWyi3rXPVAlLbAdSZukZvkqHCo21LwKve26I3W3kfSQUzgrOVKnU6b6A-kBktJd5gPaskW1AIjeqnvPHrZWToH1_O_OoTr6wq4fWVLMpHGy1AM0yqNk9osM8JRE2XVG7QU5EG7X-o4n1Ca4AaHy_91Chz5Vzm80bjrlKdcq4I24aLa2_m57XHmvAvBR"/>
+</div>
+</div>
+</header>
+<!-- Main Viewfinder Canvas -->
+<main class="relative flex-1 bg-surface-container-lowest overflow-hidden">
+<!-- Live View (Mockup Image) -->
+<div class="absolute inset-0 z-0">
+<img alt="Lota Heritage Site" class="w-full h-full object-cover opacity-60 grayscale-[0.5]" data-alt="A panoramic wide shot of an abandoned industrial coal mine facility at dusk. Huge rusted steel structures and brick chimneys dominate the landscape. The sky is a moody dark grey with streaks of neon turquoise from modern AR markers floating near the structures. The atmosphere is heavy, gritty, and historically significant, reflecting the indomitable spirit of industrial heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPwl4Y1tkuEKh5Ge06nUABbXK7_bcnR75mETXMI0QgcSncXN9juGL4kjYO725KQ0IgRMyUQwY3U8HC8godUcEryupbcMa3SfVdPQpKMeDRza3NeploATehsGhkDmFGKCmmOnSpRvvOI4Tow72v6WgSG7OlDpxmTUz4i_Wy1gKPjStFCZeepCe_thVxlwc589gD5IKBmKg_5-s2-T9AXTj8bMrYUt-aheY117jzsb7SIoiMv6WY8tCS_QAu3FCPbQX41s8UfEGe5ZC4"/>
+<!-- Scanline Effect -->
+<div class="absolute inset-0 overflow-hidden pointer-events-none">
+<div class="scanline w-full"></div>
+</div>
+</div>
+<!-- Ghosted Heritage Frame Alignment Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<div class="w-[85%] h-[60%] border-2 border-primary/20 relative flex items-center justify-center">
+<!-- Corners -->
+<div class="viewfinder-corner top-0 left-0 border-t-4 border-l-4"></div>
+<div class="viewfinder-corner top-0 right-0 border-t-4 border-r-4"></div>
+<div class="viewfinder-corner bottom-0 left-0 border-b-4 border-l-4"></div>
+<div class="viewfinder-corner bottom-0 right-0 border-b-4 border-r-4"></div>
+<!-- Center Target -->
+<div class="w-8 h-8 flex items-center justify-center opacity-40">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 200;">add</span>
+</div>
+<!-- Ghosted Blueprint Frame Label -->
+<div class="absolute top-4 left-4 bg-primary/10 px-2 py-1">
+<span class="font-label-sm text-[10px] text-primary uppercase">Align: Shinkolobwe Tower</span>
+</div>
+</div>
+</div>
+<!-- Camera HUD Metadata -->
+<div class="absolute inset-0 p-margin-mobile flex flex-col justify-between pointer-events-none z-20">
+<div class="flex justify-between items-start">
+<div class="glass-panel etched-border p-2">
+<p class="font-label-sm text-[10px] text-secondary">REC [●] EV-0.3</p>
+<p class="font-label-sm text-[10px] text-on-surface-variant">ISO 400 | F/2.8</p>
+</div>
+<div class="glass-panel etched-border p-2 flex flex-col items-end">
+<p class="font-label-sm text-[10px] text-primary">GPS: 37°05'S 73°09'W</p>
+<p class="font-label-sm text-[10px] text-on-surface-variant">ALTITUDE: 154M</p>
+</div>
+</div>
+</div>
+<!-- Camera Controls Lower Section -->
+<div class="absolute bottom-0 left-0 w-full z-30 pb-20">
+<div class="flex flex-col items-center gap-6 px-margin-mobile">
+<!-- Instagram Toggle -->
+<label class="flex items-center gap-4 cursor-pointer glass-panel etched-border px-4 py-3 group hover:border-secondary transition-colors">
+<div class="relative">
+<input class="sr-only peer" id="ig-toggle" type="checkbox"/>
+<div class="w-10 h-5 bg-surface-variant rounded-none border border-outline peer-checked:bg-secondary-container transition-all"></div>
+<div class="absolute left-1 top-1 w-3 h-3 bg-on-surface peer-checked:left-6 transition-all"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface group-hover:text-secondary transition-colors">Publicar en Instagram de Lota Indómito</span>
+</label>
+<!-- Shutter Bar -->
+<div class="flex items-center justify-around w-full max-w-md pb-8">
+<button class="w-12 h-12 flex items-center justify-center bg-surface border border-outline-variant hover:border-primary transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">photo_library</span>
+</button>
+<button class="w-20 h-20 rounded-full border-4 border-on-surface p-1 active:scale-95 transition-transform shutter-glow" id="shutter-btn">
+<div class="w-full h-full bg-primary rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary font-bold">camera</span>
+</div>
+</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface border border-outline-variant hover:border-secondary transition-all active:scale-95 group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">history</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Success/Preview Overlay (Hidden by Default) -->
+<div class="fixed inset-0 z-[60] glass-panel flex flex-col items-center justify-center p-margin-mobile hidden" id="preview-overlay">
+<div class="w-full max-w-sm etched-border bg-surface p-4 flex flex-col gap-4">
+<div class="relative aspect-square bg-surface-container-low overflow-hidden border border-outline-variant">
+<img alt="Captured Evidence" class="w-full h-full object-cover" data-alt="A dramatic photograph of an industrial mining elevator shaft structure. The shot is captured in high contrast with deep blacks and vibrant neon turquoise digital overlays highlighting the architectural edges. The mood is respectful and historical, showcasing the grit of Lota's coal mining past under a modern digital lens." id="preview-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnI6yiVwZdeOcjZ192EjxWeCYxXSbys1HTKLDwGM-BrE97_gVdA7sq-Xc32PHLFJsEeqWr-ZBCozNF4L0J9rlrkqc7ugASkyerzHxYwKFyrR7YYj0kT9hlpvzcIBlgf-68C0zAowFG3yl8HY7Wfh2Qe57PO4K3ZxrgZR6ZRu88CBIxStCQ2ZiB2vU--JzACPGuvGDNhIGmokVtYY4JUJime0SoNyef2TscllOijwNILgWr1_Mf-2mYmN5d507UmmMAsC2XoFwhvovE"/>
+<div class="absolute top-2 right-2 bg-secondary text-on-secondary px-2 py-1 font-label-sm text-[10px]">
+                    REGISTRADO
+                </div>
+</div>
+<div class="space-y-2 border-t border-outline-variant pt-4">
+<p class="font-title-md text-title-md text-primary uppercase">EVIDENCIA GUARDADA</p>
+<p class="font-body-md text-body-md text-on-surface-variant italic">"Tu foto será parte de la Memoria de Lota"</p>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<button class="w-full py-3 bg-secondary text-on-secondary font-label-sm uppercase font-bold hover:brightness-110 active:scale-[0.98] transition-all" onclick="closePreview()">
+                    Continuar Explorando
+                </button>
+<button class="w-full py-2 bg-transparent border border-outline-variant text-on-surface-variant font-label-sm uppercase hover:border-primary transition-colors" onclick="closePreview()">
+                    Ver en Galería
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-2 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        const shutterBtn = document.getElementById('shutter-btn');
+        const previewOverlay = document.getElementById('preview-overlay');
+
+        shutterBtn.addEventListener('click', () => {
+            // Flash effect
+            const flash = document.createElement('div');
+            flash.className = 'fixed inset-0 bg-white z-[70] transition-opacity duration-300';
+            document.body.appendChild(flash);
+            
+            setTimeout(() => {
+                flash.style.opacity = '0';
+                setTimeout(() => {
+                    flash.remove();
+                    previewOverlay.classList.remove('hidden');
+                }, 300);
+            }, 50);
+        });
+
+        function closePreview() {
+            previewOverlay.classList.add('hidden');
+        }
+    </script>
+</body></html>

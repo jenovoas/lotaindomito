@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómita - Family Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353535",
+                    "secondary-fixed": "#82f7d8",
+                    "tertiary": "#bcc9ca",
+                    "primary": "#ffb595",
+                    "on-background": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-variant": "#353535",
+                    "on-secondary-fixed": "#002019",
+                    "secondary-fixed-dim": "#65dabc",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#1ca388",
+                    "surface-container-low": "#1c1b1b",
+                    "tertiary-fixed": "#d8e5e6",
+                    "secondary": "#65dabc",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-secondary-container": "#003026",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed": "#ffdbcd",
+                    "on-secondary": "#00382d",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#ffb595",
+                    "on-tertiary": "#263334",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#869394",
+                    "outline": "#a88a7e",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-container": "#4c1a00",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-dim": "#131313",
+                    "primary-container": "#ee671c",
+                    "surface-tint": "#ffb595",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed": "#351000",
+                    "on-primary": "#571e00",
+                    "inverse-primary": "#a23f00",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-tertiary-fixed": "#121e1f",
+                    "surface-bright": "#393939",
+                    "outline-variant": "#594238",
+                    "on-tertiary-container": "#202c2d",
+                    "surface-container": "#20201f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Work Sans"],
+                    "display-lg": ["Montserrat"],
+                    "title-md": ["Montserrat"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #131313;
+    background-image: radial-gradient(circle at 2px 2px, #20201f 1px, transparent 0);
+    background-size: 24px 24px
+    }
+.grain-texture {
+    position: relative
+    }
+.grain-texture::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBLfAn3j5JANzhc02FAAdnOWuLDgjMo24s1l-91RnBvkD2zxws7jVqhhB5YhFee2XOji5lYkceQ_HBw-4siLpRYjfdmFOBJIcGqVjVKmcB6gc87Cdg30JgYGYFmM4SV_jgVbi5yhXnVwZaFRCkQXUA7j1_G-rHIe0QVNmwtkpUhpmHqjjgPuNDY8fCJNT1PnfmwrIqXVKqTm6XnO_FNavnJ_kaLTV5bVXJHVnPvvtJC_4KgqZZX9217JRZ1Iv0u-AL0p2MKt2wf4q7-)
+    }
+.industrial-border {
+    border: 2px solid #a88a7e;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    text-shadow: 0 0 8px #65dabc
+    }
+.etch-inset {
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.8), inset -1px -1px 1px rgba(255, 255, 255, 0.05)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a88a7e, transparent)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- Top App Bar -->
+<header class="bg-surface fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-stack-sm h-16 border-b-2 border-outline">
+<div class="flex items-center gap-stack-sm active:scale-95 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-primary">menu</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-stack-sm bg-surface-container-highest px-3 py-1 border border-outline active:scale-95 transition-transform cursor-pointer">
+<span class="font-label-sm text-label-sm text-primary">1,250 ⚒️</span>
+</div>
+<!-- Language Toggle -->
+<div class="flex items-center bg-surface-container-low border border-outline-variant rounded h-8">
+<button class="px-2 py-1 font-label-sm text-label-sm text-primary bg-primary-container/20 border-r border-outline-variant">ENG</button>
+<button class="px-2 py-1 font-label-sm text-label-sm text-on-surface-variant">ESP</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-xl mx-auto">
+<!-- Hero Section -->
+<section class="mb-stack-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary neon-glow" style="font-variation-settings: 'FILL' 1;">groups</span>
+<h2 class="font-title-md text-title-md text-secondary uppercase tracking-widest">Family Mode</h2>
+</div>
+<p class="font-body-md text-on-surface-variant italic">Unite your bloodline. Conquer the pit.</p>
+<div class="weld-line mt-4"></div>
+</section>
+<!-- Invite Section -->
+<section class="mb-stack-lg industrial-border bg-surface-container-low p-stack-md grain-texture overflow-hidden">
+<div class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface uppercase mb-1">Assemble Squad</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">SCAN TO JOIN EXPEDITION</p>
+</div>
+<div class="p-2 bg-on-surface industrial-border">
+<span class="material-symbols-outlined text-surface text-4xl" data-icon="qr_code_2">qr_code_2</span>
+</div>
+</div>
+<div class="etch-inset bg-surface-container-lowest p-stack-sm flex justify-between items-center border border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant px-2 uppercase">CH-992-BETA</span>
+<button class="bg-primary px-4 py-2 font-label-sm text-on-primary font-bold uppercase hover:bg-primary-container transition-colors">Copy Code</button>
+</div>
+</div>
+</section>
+<!-- Role Selection -->
+<section>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface uppercase mb-stack-md">Choose Your Role</h3>
+<div class="grid gap-stack-md">
+<!-- Sentry (Vigía) -->
+<button class="role-card text-left industrial-border bg-surface-container grain-texture transition-all duration-300 group hover:border-secondary" id="role-sentry" onclick="selectRole('sentry')">
+<div class="flex h-full">
+<div class="w-24 bg-surface-container-highest flex items-center justify-center border-r-2 border-outline group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary group-hover:text-secondary group-hover:neon-glow" data-icon="visibility">visibility</span>
+</div>
+<div class="p-stack-md flex-1">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-title-md text-title-md text-on-surface uppercase">Sentry</h4>
+<span class="font-label-sm text-label-sm text-secondary">+15% PERCEPTION</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm">Detects hidden AR artifacts and ventilation leaks before they appear.</p>
+<div class="mt-2 flex gap-1">
+<div class="h-1 w-8 bg-secondary"></div>
+<div class="h-1 w-8 bg-secondary"></div>
+<div class="h-1 w-8 bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+</button>
+<!-- Chronicler (Cronista) -->
+<button class="role-card text-left industrial-border bg-surface-container grain-texture transition-all duration-300 group hover:border-secondary" id="role-chronicler" onclick="selectRole('chronicler')">
+<div class="flex h-full">
+<div class="w-24 bg-surface-container-highest flex items-center justify-center border-r-2 border-outline group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary group-hover:text-secondary group-hover:neon-glow" data-icon="history_edu">history_edu</span>
+</div>
+<div class="p-stack-md flex-1">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-title-md text-title-md text-on-surface uppercase">Chronicler</h4>
+<span class="font-label-sm text-label-sm text-secondary">X2 DATA XP</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm">Deciphers ancient mining logs and unlocks deeper narrative nodes.</p>
+<div class="mt-2 flex gap-1">
+<div class="h-1 w-8 bg-secondary"></div>
+<div class="h-1 w-8 bg-surface-container-highest"></div>
+<div class="h-1 w-8 bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+</button>
+<!-- Photographer (Fotógrafo) -->
+<button class="role-card text-left industrial-border bg-surface-container grain-texture transition-all duration-300 group hover:border-secondary" id="role-photographer" onclick="selectRole('photographer')">
+<div class="flex h-full">
+<div class="w-24 bg-surface-container-highest flex items-center justify-center border-r-2 border-outline group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary group-hover:text-secondary group-hover:neon-glow" data-icon="photo_camera">photo_camera</span>
+</div>
+<div class="p-stack-md flex-1">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-title-md text-title-md text-on-surface uppercase">Photographer</h4>
+<span class="font-label-sm text-label-sm text-secondary">GOLD RADIANCE</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-sm">Captures spectral echoes in high-definition for exclusive rewards.</p>
+<div class="mt-2 flex gap-1">
+<div class="h-1 w-8 bg-secondary"></div>
+<div class="h-1 w-8 bg-secondary"></div>
+<div class="h-1 w-8 bg-secondary"></div>
+</div>
+</div>
+</div>
+</button>
+</div>
+</section>
+<!-- Start Challenge CTA -->
+<div class="mt-stack-lg">
+<button class="w-full bg-primary-container p-stack-md industrial-border group relative overflow-hidden active:scale-95 transition-transform">
+<div class="absolute inset-0 bg-white/10 translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+<div class="flex items-center justify-center gap-stack-sm">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary-container uppercase">Start Expedition</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Navigation -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe bg-surface-container h-20 border-t-2 border-outline">
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90 cursor-pointer">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</div>
+<div class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 active:scale-90 transition-transform duration-150 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+<script>
+        function selectRole(roleId) {
+            // Reset all cards
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('border-secondary', 'bg-secondary-container/10');
+                card.classList.add('bg-surface-container', 'border-outline');
+                card.querySelector('.material-symbols-outlined').classList.remove('neon-glow');
+            });
+
+            // Select clicked card
+            const selectedCard = document.getElementById('role-' + roleId);
+            selectedCard.classList.remove('border-outline');
+            selectedCard.classList.add('border-secondary', 'bg-secondary-container/10');
+            selectedCard.querySelector('.material-symbols-outlined').classList.add('neon-glow');
+            
+            // Atmospheric feedback
+            console.log(`Role ${roleId} initialized.`);
+        }
+
+        // Initialize first role as default
+        window.onload = () => selectRole('sentry');
+    </script>
+</body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómito - Token Estampado</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#003026",
+                    "on-secondary": "#00382d",
+                    "on-primary": "#571e00",
+                    "on-primary-container": "#4c1a00",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "primary-container": "#ee671c",
+                    "surface-container-highest": "#353535",
+                    "on-secondary-fixed-variant": "#005142",
+                    "primary": "#ffb595",
+                    "primary-fixed": "#ffdbcd",
+                    "surface-container-high": "#2a2a2a",
+                    "on-secondary-fixed": "#002019",
+                    "outline-variant": "#594238",
+                    "on-tertiary-container": "#202c2d",
+                    "tertiary-container": "#869394",
+                    "tertiary-fixed": "#d8e5e6",
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "surface-container": "#20201f",
+                    "on-primary-fixed": "#351000",
+                    "inverse-primary": "#a23f00",
+                    "secondary-fixed-dim": "#65dabc",
+                    "on-surface-variant": "#e0c0b2",
+                    "inverse-on-surface": "#313030",
+                    "tertiary": "#bcc9ca",
+                    "secondary": "#65dabc",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-error-container": "#ffdad6",
+                    "on-surface": "#e5e2e1",
+                    "secondary-fixed": "#82f7d8",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "surface-tint": "#ffb595",
+                    "primary-fixed-dim": "#ffb595",
+                    "secondary-container": "#1ca388",
+                    "outline": "#a88a7e",
+                    "on-background": "#e5e2e1",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-variant": "#353535",
+                    "on-tertiary-fixed": "#121e1f",
+                    "surface-bright": "#393939",
+                    "on-tertiary": "#263334",
+                    "surface-dim": "#131313",
+                    "surface": "#131313"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "gutter": "16px",
+                    "stack-lg": "48px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "title-md": ["Montserrat"],
+                    "body-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #131313;
+    color: #e5e2e1
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAl2royyk0-s3mzGnshnjDhhICPtlboFOjio7KyR06VnRlZIZHpEEpilfrRbhhcXC8Xm4YLPc8QTWSV9uMaGXgFhT79IfmiM9NjZpOFGYS5ObxLdG2xZLyAKk53IDmlgwQHRbNEJcjRgUbjEBHA6P1-QCCQ_Oe5xNXC9dfKABD3H6nQqgrZXr8gNU12bQJQh_vZpRddWVjISFEI1jUS9NWV4sgBsn5T13S302CuOa5_OOvRvGmK5yIimWALPSb4naIlKM76dnGRWEbH);
+    opacity: 0.15;
+    pointer-events: none
+    }
+.metal-etch {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    filter: drop-shadow(0 0 8px #65dabc)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #a88a7e 50%, transparent 100%)
+    }
+.stamped-mark {
+    transform: rotate(-15deg);
+    border: 4px solid #ee671c;
+    color: #ee671c;
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface border-b-2 border-outline-variant dark:border-outline-variant z-50 shadow-none flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary">precision_manufacturing</span>
+<h1 class="font-display-lg text-[20px] md:text-display-lg tracking-tighter text-primary dark:text-primary uppercase">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-sm text-label-sm text-primary dark:text-primary border border-primary px-2 py-1">450 C</span>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center relative overflow-hidden px-margin-mobile py-stack-lg">
+<div class="absolute inset-0 coal-grain"></div>
+<!-- Success Canvas -->
+<div class="w-full max-w-md space-y-stack-md z-10">
+<!-- Headline Section -->
+<div class="text-center space-y-unit">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary uppercase tracking-tight">TOKEN ESTAMPADO</h2>
+<div class="w-24 h-1 bg-secondary mx-auto neon-glow"></div>
+</div>
+<!-- Visual: Metallic Token with Void Stamp -->
+<div class="relative group">
+<div class="aspect-square bg-surface-container-high border-2 border-outline-variant metal-etch flex items-center justify-center p-8 overflow-hidden">
+<!-- Industrial Texture Overlay -->
+<div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+<!-- The Token -->
+<div class="relative w-full aspect-square rounded-full border-8 border-primary/20 flex items-center justify-center bg-surface-container overflow-hidden">
+<img alt="Metallic copper industrial token" class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" data-alt="A highly detailed close-up of a circular copper industrial coin featuring deep-etched gear engravings and weathered metallic textures. The lighting is dramatic and high-contrast, highlighting the oxidized edges and heavy metallic sheen. A digital translucent neon mint green checkmark glows intensely over the center of the coin, suggesting a successful technical transaction. The overall atmosphere is gritty yet high-tech, fitting a modern brutalist industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCBsCpUVuYeC9APGK_U6EP-zSfb_pkGxGTPCo67dAaWPfx42Cig_u57G5rQN0-vgWL4DyhJmcKj6UBUIBrdhcur2JwXozjaxB_S4FfCcMApD2H7-77omUHOfciXIT8WIEy5Dva66l7RVlITGrYJDOB-ikYBh9aFRGfohu9ciqHfdWcD-rEgjeVqC1OVeLkmh_WtgNmJScyyNO8cmx9YMp6Q-8FCdv33i8niKjPBNAY2-Zl8Yp5d5CK3ek0E1c0vsFNJIQHVhsWX13I"/>
+<div class="z-20 flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary text-8xl neon-glow" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div class="stamped-mark mt-4 font-display-lg text-2xl border-4 border-primary-container text-primary-container">CANCELADO</div>
+</div>
+</div>
+</div>
+<!-- Rivet decorations -->
+<div class="absolute -top-1 -left-1 w-3 h-3 bg-outline rounded-full border border-black"></div>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-outline rounded-full border border-black"></div>
+<div class="absolute -bottom-1 -left-1 w-3 h-3 bg-outline rounded-full border border-black"></div>
+<div class="absolute -bottom-1 -right-1 w-3 h-3 bg-outline rounded-full border border-black"></div>
+</div>
+<!-- QR Code Section -->
+<div class="bg-surface-container-low border-2 border-outline-variant p-stack-md flex flex-col items-center gap-stack-sm metal-etch">
+<div class="bg-white p-2">
+<img alt="QR Code for merchant validation" class="w-40 h-40 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmoyLZdWSwQbTFeI3VKKXh0_ASHEkfynKQwB4bZqGwvpncI-V8pQNwO0Ww066ZQ-WM1yy2FlAlgrdaUXWXjWgqvZOxybs2xc20iZHmBip9QT4aUqcvnLrk_wds4coqbo7IhnzodBIL2ZDWlrGgIi0cRJTqcDylGEsRn2hjD6kjQDN3HgeCJ2TCGN1yOBzJxqrAR57tEX3zun0xft1NUK2O8yt3tOpgwkpZcBc8OnxzrfAtLa9Q7taWcpyAwviuUFnj2LXYUUkfsAbw"/>
+</div>
+<p class="font-body-md text-body-md text-center text-on-surface-variant max-w-[280px]">
+                    Presenta este código en el local para validar tu beneficio.
+                </p>
+<div class="w-full flex items-center gap-2 py-unit">
+<div class="flex-grow h-[1px] bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-outline">ID: LOTA-09238</span>
+<div class="flex-grow h-[1px] bg-outline-variant"></div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-1 gap-4">
+<button class="w-full bg-primary-container text-on-primary-container font-title-md text-title-md py-4 px-6 border-2 border-primary-container hover:bg-transparent hover:text-primary transition-all duration-200 active:scale-[0.98] uppercase">
+                    Ver mis otros cupones
+                </button>
+<button class="w-full bg-transparent text-on-surface font-title-md text-title-md py-4 px-6 border-2 border-outline-variant hover:border-secondary transition-all duration-200 active:scale-[0.98] flex items-center justify-center gap-2 uppercase">
+<span class="material-symbols-outlined">map</span>
+                    Volver al Mapa
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Suppressed based on Transactional/Success screen rules, but logic placeholder exists) -->
+<!-- Not rendered as this is a focused "Success/Confirmation" screen -->
+<script>
+        // Atmospheric interaction: slight flicker on the neon elements
+        setInterval(() => {
+            const glow = document.querySelector('.neon-glow');
+            if(glow) {
+                glow.style.opacity = Math.random() > 0.98 ? '0.7' : '1';
+            }
+        }, 100);
+
+        // Click effects for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 150);
+            });
+        });
+    </script>
+</body></html>

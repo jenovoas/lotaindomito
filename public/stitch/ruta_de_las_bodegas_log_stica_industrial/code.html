@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómita - Ruta de las Bodegas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#263334",
+                        "on-secondary-container": "#003026",
+                        "secondary-fixed": "#82f7d8",
+                        "inverse-primary": "#a23f00",
+                        "on-surface-variant": "#e0c0b2",
+                        "secondary-container": "#1ca388",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-secondary-fixed": "#002019",
+                        "primary": "#ffb595",
+                        "surface-dim": "#131313",
+                        "on-primary-container": "#4c1a00",
+                        "surface-variant": "#353535",
+                        "surface-bright": "#393939",
+                        "secondary": "#65dabc",
+                        "surface-container": "#20201f",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "on-background": "#e5e2e1",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary": "#00382d",
+                        "surface": "#131313",
+                        "outline": "#a88a7e",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#65dabc",
+                        "tertiary": "#bcc9ca",
+                        "on-primary-fixed": "#351000",
+                        "outline-variant": "#594238",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "background": "#131313",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#ffb595",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-container": "#ee671c",
+                        "on-tertiary-container": "#202c2d",
+                        "on-secondary-fixed-variant": "#005142",
+                        "primary-fixed": "#ffdbcd",
+                        "on-primary": "#571e00",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-container-highest": "#353535",
+                        "tertiary-container": "#869394",
+                        "surface-container-lowest": "#0e0e0e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-lg": "48px",
+                        "margin-desktop": "40px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Work Sans"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDZam5pZ7Kj8I7poM4p1b72Enj8uyJeniY5U5ek9zLOGDjr4k14db6NYjNqH2EJ6U8epUtkbTqx_mF676buFqFfPuIyB9T_k8Fluek27ZiRIxplJntmgD2glKacGf2G46cC08scZeEXnP_wG0FGViVRqsJhz8reBfH3mqFJCWqSd-m8boIl85cEHlGphVI4R24Uh2rwAuFQS-GxoV21yajmMB4AIM6PANq96bFvXS8V3UmMIPTE-PRyp6750CSQ2ZGqAFBClCN2iWV2);
+    background-blend-mode: overlay
+    }
+.industrial-border {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    text-shadow: 0 0 8px #65dabc
+    }
+.scan-line {
+    height: 2px;
+    background: #65dabc;
+    box-shadow: 0 0 15px #65dabc;
+    animation: scan 3s linear infinite
+    }
+@keyframes scan {
+    0% {
+        top: 0%;
+        } 100% {
+        top: 100%;
+        }
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #a88a7e, transparent)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary selection:text-on-primary min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 bg-surface flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16 border-b-2 border-outline">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+</div>
+<div class="flex items-center">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-3 py-1 border border-outline text-primary">1,250 ⚒️</span>
+</div>
+</header>
+<main class="mt-16 px-gutter pt-stack-md space-y-stack-md">
+<!-- Hero Header -->
+<section class="relative h-48 overflow-hidden coal-grain bg-surface-container border-2 border-outline-variant flex flex-col justify-end p-gutter">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="A cinematic, low-angle shot of a historic industrial warehouse complex in a coal mining district. The architecture features dark bricks, rusted iron support beams, and large weathered windows. The lighting is dramatic, with high-contrast shadows and a gritty, atmospheric haze. A faint neon mint digital overlay trace highlights the structural lines, blending industrial history with a modern augmented reality aesthetic in a deep charcoal and copper palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7cp-m-cjkKE_KgmVdxeBXBjTO9ZFY3dK4eCEJ0KLVdDPxABvWyQpmhF7DF7CBSPDkRDD7T1zLjdTJMj3jzHKzg8X6rhJdBtNawu2Cx0fH72GwjboWRuWWlGke2N1qiM0MRnwmRDY4a_lqv4oDuUmJ1Kzp2YJDjrz_FtQSbRCMY_VY9ulomMo1IAkyQ1xDgBLf2jlfJMlNWMTET4Z2GlaV8nAj0MrKd1V0hQ5kJR3tCozJcDxjXhlZ_lnq699d_dw3P2ebMtyvK17i"/>
+<div class="relative z-10">
+<p class="font-label-sm text-label-sm text-secondary tracking-widest uppercase mb-1">Ruta Activa</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-none">RUTA DE LAS BODEGAS:<br/><span class="text-primary">LOGÍSTICA INDUSTRIAL</span></h2>
+</div>
+</section>
+<!-- Mission Details -->
+<div class="bg-surface-container-high border-2 border-outline p-gutter space-y-stack-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="inventory">inventory</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span style="letter-spacing: -0.5px">Misión: El Inventario del Carbón</span>
+</h3>
+<div class="weld-line mb-2"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Registra la entrada a cada bodega histórica para reconstruir la cadena logística del siglo XIX. Cada escaneo revela manifiestos de carga olvidados y planos de distribución.
+            </p>
+<div class="flex justify-between items-center bg-surface-container-lowest p-3 border border-outline-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">RECOMPENSA</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">50 Carboncillos / sitio</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant">PROGRESO</span>
+<div class="flex gap-1 mt-1">
+<div class="w-4 h-2 bg-secondary"></div>
+<div class="w-4 h-2 bg-secondary"></div>
+<div class="w-4 h-2 bg-surface-variant"></div>
+<div class="w-4 h-2 bg-surface-variant"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- QR Scanner CTA -->
+<button class="w-full bg-primary-container text-on-primary-container h-16 flex items-center justify-center gap-4 active:scale-95 transition-transform border-2 border-primary shadow-[4px_4px_0px_#571e00]">
+<span class="material-symbols-outlined text-3xl" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-title-md text-title-md uppercase tracking-tight">Record Warehouse Entry</span>
+</button>
+<!-- Landmarks List -->
+<div class="space-y-4">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest border-l-4 border-secondary pl-3">Landmarks de Logística</h4>
+<!-- Item 1 -->
+<div class="group relative flex gap-4 p-3 bg-surface-container border border-outline-variant hover:border-secondary transition-colors cursor-pointer">
+<div class="w-20 h-20 bg-surface-variant flex-shrink-0 relative overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A gritty close-up of a weathered industrial warehouse door made of thick timber and reinforced with rusted iron bolts. The scene is set in a dark, atmospheric environment typical of 19th-century coal mines. The lighting is moody and directional, casting long shadows. Digital neon outlines in mint green subtly glow around the iron rivets, representing an augmented reality discovery marker." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkCxk4iLStWkw0WjgtrO5d9rw3MAa2zFBIV9gW23rTDPgbddA6qdiI5W6lLakK1CvdJUz5yaf4kvVY8j-R-NlnWL1bCmXwhSaLDj3Vf0MSGBD6gOacAufXydo8vlgNVN8RuY9TA8bOvHbMGPd7nxL220O_uI9ercUfFRZ11vm6Iv3H0of3SXtG1yqxqz1NdHr8cZhcGlOOVy8rwdC2qC_fubtd6drD2D5lpVwDD47gIEKRcmPEjrqcV3zfis-HxRLxBTKLqaUg44SM"/>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<h5 class="font-title-md text-title-md text-on-surface leading-tight">Bodega Central N°1</h5>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Centro de acopio principal</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative flex gap-4 p-3 bg-surface-container border border-outline-variant hover:border-secondary transition-colors cursor-pointer">
+<div class="w-20 h-20 bg-surface-variant flex-shrink-0 relative">
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="Old, heavy-duty railway tracks disappearing into a dark, foggy industrial tunnel at a coal mine. The tracks are worn and surrounded by dark gravel and industrial debris. The atmosphere is heavy and indomitable, with a cool blue and charcoal color palette. Neon mint digital coordinates are projected onto the railway ties in a monospaced font, suggesting a high-tech layer over historical remains." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcjYQSm9Jx9O290Jp1FyWb9jxY8TO3el9-kZSKBPVbKSL1YKnsSwTEM7C3UtkbqUIB3a9H48xO0DjD9HMIFBEP1qNSTpvsIIa46HaY-2j1mtVsF_rtwkeMWy3YtJ4hCTqpW1Tymqhrz4eWkiSblQ_HOgXBPmfTXTrurvPzyvtKtQbMf3RWJWoL1rbtEtcZ2bPSgHmCmTjFUE3LmJshhroA7rCDk_WfmHDNumRtwo8Cm0yZ7wFMOKwABGoR6GvFSrHU2OnTBSk6aQWZ"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40">
+<span class="material-symbols-outlined text-on-surface" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<h5 class="font-title-md text-title-md text-on-surface-variant leading-tight">Vías de Embarque</h5>
+<span class="material-symbols-outlined text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">250m • Desbloquea en el sitio</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group relative flex gap-4 p-3 bg-surface-container border border-outline-variant hover:border-secondary transition-colors cursor-pointer">
+<div class="w-20 h-20 bg-surface-variant flex-shrink-0 relative">
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="A massive industrial storage area filled with stacks of weathered timber beams and iron gears, partially covered by canvas. The environment is a dark, cavernous space with dusty air visible in shafts of dim light. The overall style is modern-brutalist with tactile industrial textures. A glowing neon mint progress ring is superimposed on one of the stacks, indicating an active quest objective." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFLVNdMKDuveuYZSN2Xun8rYcETmsAO0GzYWE7FmaRBMj5i8MpTpgdPfA6L1Dh3KvH4Mphg78HIi3W5afo0RDx9XN63LXNUfqFs_pAJLaDKggbTAYSb32KOHHzgPxbrrzPwKUNeWwry7BWETOBr7wgdEQEuaITVQbtun06ftfTMOAaC_NVAReswEdIUpuvYlV0UgSJ9UkWyqVJraL6H3CDXreQdMIxn2l6A5OAxF9lfAZ9DW766k8hnQ-oCEBWRHCjOCwm9Qps363z"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40">
+<span class="material-symbols-outlined text-on-surface" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="flex-grow flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<h5 class="font-title-md text-title-md text-on-surface-variant leading-tight">Patio de Acopios</h5>
+<span class="material-symbols-outlined text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">400m • Requisito: Misión Vías</p>
+</div>
+</div>
+</div>
+<!-- Mini HUD (AR Atmosphere) -->
+<div class="border-t-2 border-outline-variant pt-4 flex justify-between items-end opacity-60">
+<div class="font-label-sm text-[10px] space-y-1 uppercase">
+<p>Lat: -37.0907°</p>
+<p>Lon: -73.1554°</p>
+<p class="text-secondary neon-glow">Signal: Locked</p>
+</div>
+<div class="w-24 h-24 border border-outline flex items-center justify-center relative">
+<div class="absolute inset-2 border border-secondary/30"></div>
+<span class="material-symbols-outlined text-secondary" data-icon="explore">explore</span>
+<span class="absolute top-0 right-0 font-label-sm text-[8px] p-1">N</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe bg-surface-container h-20 border-t-2 border-outline">
+<!-- Routes is active -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for scanning button
+        const scanBtn = document.querySelector('button');
+        scanBtn.addEventListener('click', () => {
+            scanBtn.classList.add('animate-pulse');
+            setTimeout(() => scanBtn.classList.remove('animate-pulse'), 1000);
+        });
+
+        // Simulating digital flicker
+        setInterval(() => {
+            const targets = document.querySelectorAll('.neon-glow');
+            targets.forEach(t => {
+                if (Math.random() > 0.95) {
+                    t.style.opacity = '0.5';
+                    setTimeout(() => t.style.opacity = '1', 50);
+                }
+            });
+        }, 500);
+    </script>
+</body></html>

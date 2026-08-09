@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómito - Modo Turista</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#ffb595",
+                        "on-surface": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "secondary-container": "#1ca388",
+                        "on-primary-container": "#4c1a00",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-highest": "#353535",
+                        "outline-variant": "#594238",
+                        "on-surface-variant": "#e0c0b2",
+                        "surface": "#131313",
+                        "surface-variant": "#353535",
+                        "on-tertiary": "#263334",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "tertiary-container": "#869394",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#a88a7e",
+                        "error-container": "#93000a",
+                        "on-background": "#e5e2e1",
+                        "on-primary": "#571e00",
+                        "surface-bright": "#393939",
+                        "surface-container": "#20201f",
+                        "on-secondary-fixed": "#002019",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed-dim": "#ffb595",
+                        "on-error": "#690005",
+                        "on-secondary": "#00382d",
+                        "inverse-primary": "#a23f00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-tint": "#ffb595",
+                        "background": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-container": "#202c2d",
+                        "secondary-fixed": "#82f7d8",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "tertiary-fixed": "#d8e5e6",
+                        "primary-container": "#ee671c",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-secondary-container": "#003026",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#65dabc",
+                        "primary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#005142",
+                        "tertiary": "#bcc9ca",
+                        "on-primary-fixed": "#351000",
+                        "secondary": "#65dabc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-lg": "48px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Work Sans"],
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Work Sans"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.coal-dust {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCUTyJTq5OqBstV6utd3hWpAHGbI-ciaX9Vlsy5XAmGN1XRT4iahHI65O2WuEIbLAl0IrDL532nW7kySvrfNELkFFCwW_k61yptuevOf8As1sK6V_dhCMgT0-1_fahe-Eu8KprgbDdqa3e58K2qQ4eGNYBwFW9SJz2bB8WkTPMRBrd554qu3KHapcMWYgTOHumZHPlvQbIyLJnDv4tx8fjsmnvorME1JT2o5XEDnTTkD3_OsGE4Acq17JfelTDD7qDqneJEdpwIX9cd);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.flicker-effect:active {
+    opacity: 0.5;
+    animation: flicker 0.1s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        } 50% {
+        opacity: 0.4;
+        } 100% {
+        opacity: 0.8;
+        }
+    }
+.neon-glow {
+    box-shadow: 0 0 12px 0 rgba(101, 218, 188, 0.4)
+    }
+.industrial-etch {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px
+    }
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #131313
+    }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #594238
+    }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body></body></html>

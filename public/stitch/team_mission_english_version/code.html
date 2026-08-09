@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Challenge: The Great Extraction</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353535",
+                        "secondary-fixed": "#82f7d8",
+                        "tertiary": "#bcc9ca",
+                        "primary": "#ffb595",
+                        "on-background": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353535",
+                        "on-secondary-fixed": "#002019",
+                        "secondary-fixed-dim": "#65dabc",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#1ca388",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#d8e5e6",
+                        "secondary": "#65dabc",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-secondary-container": "#003026",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed": "#ffdbcd",
+                        "on-secondary": "#00382d",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "background": "#131313",
+                        "surface": "#131313",
+                        "primary-fixed-dim": "#ffb595",
+                        "on-tertiary": "#263334",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#869394",
+                        "outline": "#a88a7e",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#4c1a00",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "on-secondary-fixed-variant": "#005142",
+                        "surface-dim": "#131313",
+                        "primary-container": "#ee671c",
+                        "surface-tint": "#ffb595",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-fixed": "#351000",
+                        "on-primary": "#571e00",
+                        "inverse-primary": "#a23f00",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "on-tertiary-fixed": "#121e1f",
+                        "surface-bright": "#393939",
+                        "outline-variant": "#594238",
+                        "on-tertiary-container": "#202c2d",
+                        "surface-container": "#20201f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-lg": "48px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Work Sans"],
+                        "display-lg": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+        .coal-dust {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBhvZmGyYiBgbltq8DxgN2iqvDHf_mvqxxH1NWF4nFKaCuM151Cv187fxOB7K-qX_gnmN3YQLm1outNjC9VXOxQw4GlsQ4BoDJOxbxTghy0RqC03V9DHY6n1WhUFckRvVx9fpNVH4KPytr3o5PKzBR_6II9DOONKbcUGc5EE54b45ecMfXNVG6Z-gf1mnIf0FKu4eLh9bgu2P5VbbdSzcHB5VTXOxK-sJwa7bTxxk2Win7xMwvk5NEQFshKW4k_bBxLQVQYL2n82Fsl)
+        }
+        .copper-glow {
+            box-shadow: 0 0 15px rgba(255, 181, 149, 0.3)
+        }
+        .neon-mint-glow {
+            text-shadow: 0 0 8px #65dabc
+        }
+        .rivet {
+            width: 8px;
+            height: 8px;
+            background: #594238;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px #000, 1px 1px 1px rgba(255, 255, 255, 0.1)
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; } 
+            50% { opacity: 0.8; } 
+            95% { opacity: 1; } 
+            98% { opacity: 0.7; }
+        }
+        .flicker-animation {
+            animation: flicker 4s infinite
+        }
+        .segmented-progress {
+            background: repeating-linear-gradient(90deg, transparent, transparent 18%, #131313 18%, #131313 20%)
+        }
+        /* Scanline effect overlay */
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.4;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary">
+<div class="scanline"></div>
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16 fixed top-0 z-50 bg-surface border-b-2 border-outline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+</div>
+<div class="flex items-center gap-3">
+<!-- Language Toggle -->
+<button class="flex items-center gap-1 bg-surface-container-high px-2 py-1 border border-outline hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="language">language</span>
+<span class="font-label-sm text-[10px] text-on-surface">EN</span>
+</button>
+<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1 border border-outline">
+<span class="font-label-sm text-label-sm text-primary">1,250 ⚒️</span>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 px-margin-mobile coal-dust min-h-screen">
+<!-- Header Section: Mission Title & Global Progress -->
+<section class="mb-stack-md border-b-2 border-outline pb-stack-sm">
+<div class="flex justify-between items-end mb-2">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block mb-1 neon-mint-glow">ACTIVE MISSION</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface leading-tight">Team Challenge:<br/>The Great Extraction</h2>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-outline block">TIME REMAINING</span>
+<span class="font-label-sm text-title-md text-primary font-bold">14:52</span>
+</div>
+</div>
+<div class="relative h-6 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary-container copper-glow transition-all duration-1000 segmented-progress" style="width: 45%;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-label-sm text-[10px] text-on-primary-container font-bold z-10 uppercase">TOTAL PROGRESS 45%</span>
+</div>
+</div>
+</section>
+<!-- Team Members Grid -->
+<div class="grid grid-cols-1 gap-gutter">
+<!-- Member 1: Scanning -->
+<div class="bg-surface-container border-2 border-outline p-4 relative overflow-hidden group">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="rivet"></div>
+<div class="rivet"></div>
+</div>
+<div class="flex gap-4 items-start mb-4">
+<div class="w-16 h-16 border-2 border-secondary relative shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="A gritty close-up portrait of a male explorer in his late 30s wearing industrial mining gear and a heavy-duty headset." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvviRUAoBQPeo-KDXlL2oNuxHyF4SOurd5b5hq4VcxzR6BACy2yiaP3ZNDI9IjW7oIAwCb9pU_iE2ucY1BJJkxsSWYlsEAQu04j6BFyI3M9NQIRWaHtpHu4EEttgKTMepdGPfCYOzYvWqIfFBPWJUCl9T-oZ2UX7Vv05NSu6raJl4Q0VGq5eDUrDSe7-sldDmz5TzVazIT7-vWOGdjWF8RTP4-qFxnIq274VrkvDownV6gfd4_mUMQzKnO_g2EOJT4KvOqqXN9FOS6"/>
+<div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary px-1 py-0.5 font-label-sm text-[8px]">ACTIVE</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">MATEO_EXPLORER</h3>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span> Chiflón del Diablo
+                    </p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-outline uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="qr_code_scanner">qr_code_scanner</span> Scanning coal seam
+                    </span>
+<span class="text-secondary font-bold">75%</span>
+</div>
+<div class="h-3 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<div class="h-full bg-secondary-container transition-all duration-700 segmented-progress" style="width: 75%;"></div>
+</div>
+</div>
+</div>
+<!-- Member 2: Photo Capture -->
+<div class="bg-surface-container border-2 border-outline p-4 relative overflow-hidden group">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="rivet"></div>
+<div class="rivet"></div>
+</div>
+<div class="flex gap-4 items-start mb-4">
+<div class="w-16 h-16 border-2 border-primary relative shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="A detailed portrait of a female researcher in a dark industrial environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw5beLfWMgMqtX1uve69j_osQNUxWfLRCgGWHobFvSoPp8KlU_O8n6ZXCjjas1CnnNxDeHpC_XLeCB187XuHqMe7U6IKDhggTNTcbFpn4luzDjFLNw2ds83pWfvFfZmvooDcdLxbDWX8TGh4XTEMRfF5ILE_IyvRNCjGQIObPLUVNoD3C6JnaZ2ss9JT0kKBgRwfNCDvHOxUI2QmuhJEZ9syLPf6uoVnz7mUqnQ3Nq91ojm1YSpY_T-Rf5rl5cjjutrW2hy_EMWnoz"/>
+<div class="absolute -bottom-1 -right-1 bg-primary text-on-primary px-1 py-0.5 font-label-sm text-[8px]">WAITING</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">VALERIA_AR</h3>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span> Washing Plant
+                    </p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-outline uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="photo_camera">photo_camera</span> Photographic record
+                    </span>
+<span class="text-primary font-bold">20%</span>
+</div>
+<div class="h-3 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<div class="h-full bg-primary-container transition-all duration-1000 segmented-progress" style="width: 20%;"></div>
+</div>
+</div>
+</div>
+<!-- Member 3: Trivia -->
+<div class="bg-surface-container border-2 border-outline p-4 relative overflow-hidden group">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="rivet"></div>
+<div class="rivet"></div>
+</div>
+<div class="flex gap-4 items-start mb-4">
+<div class="w-16 h-16 border-2 border-secondary relative shrink-0">
+<img alt="Avatar" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="A male tech enthusiast in a futuristic mining control room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDom8aLZO2VRMel1090TvmnE6sCSpERv-y5bI3-0NGyHNdwjHK85zihS521GcrXX6jJIzdss2X-GEg9kZAPubHKl97njx8G9BoxTdImXBonnwwavHUftRyFqk-89YoQ1jT_hNvS3bRNQpxawYYBUtgj1JGdDi_U_LWyLX1C5t_s_hX6qRo7uHK8vDRLPxUcLguJJ9c7h3jTBCaVV0pRGqNRVW-cDcVaIRn0BFMCoO4dVEYdDOjkD-4RUHxWGAmXjF-lJ6FpaW-dfhtF"/>
+<div class="absolute -bottom-1 -right-1 bg-secondary text-on-secondary px-1 py-0.5 font-label-sm text-[8px]">SYNCING</div>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">LUCAS_TECH</h3>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span> Lota Castle
+                    </p>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-sm text-label-sm">
+<span class="text-outline uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="quiz">quiz</span> Historical trivia
+                    </span>
+<span class="text-secondary font-bold">40%</span>
+</div>
+<div class="h-3 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<div class="h-full bg-secondary-container transition-all duration-500 segmented-progress" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- HUD: Live Comms / Event Log -->
+<section class="mt-stack-md bg-surface-container-low border-2 border-outline p-3">
+<h4 class="font-label-sm text-label-sm text-primary uppercase mb-2 border-b border-outline-variant pb-1 flex justify-between">
+<span>Transmission Log</span>
+<span class="flicker-animation">● REC</span>
+</h4>
+<div class="space-y-1 font-label-sm text-[10px] uppercase leading-tight h-24 overflow-y-auto pr-2 scrollbar-hide">
+<p class="text-secondary">[12:45:01] MATEO_EXPLORER: Main seam located. Starting scan.</p>
+<p class="text-on-surface-variant">[12:45:12] SYSTEM: Node synchronization at 35%.</p>
+<p class="text-primary">[12:45:20] VALERIA_AR: Need extra lighting in the Washing Plant area.</p>
+<p class="text-secondary">[12:45:35] LUCAS_TECH: Castle data received. Processing trivia module.</p>
+<p class="text-error">[12:45:45] ALERT: Interference detected in Sector B.</p>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe bg-surface-container h-20 border-t-2 border-outline">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<!-- Floating Action Button Contextual -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary flex items-center justify-center copper-glow active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+</button>
+<script>
+    // Micro-interaction for HUD scrolling
+    const log = document.querySelector('.overflow-y-auto');
+    if (log) {
+        setInterval(() => {
+            log.scrollTop = log.scrollHeight;
+        }, 3000);
+    }
+
+    // Simulated progress bar updates
+    const progressBars = document.querySelectorAll('.segmented-progress');
+    setInterval(() => {
+        progressBars.forEach(bar => {
+            if(Math.random() > 0.7) {
+                let currentWidth = parseFloat(bar.style.width) || 0;
+                if(currentWidth < 95) {
+                    bar.style.width = (currentWidth + (Math.random() * 2)) + '%';
+                }
+            }
+        });
+    }, 2000);
+</script>
+</body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lota Indómito - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.flicker-effect:active {
+    animation: flicker 0.15s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        } 50% {
+        opacity: 0.7;
+        } 100% {
+        opacity: 1;
+        }
+    }
+.etch-shadow {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    box-shadow: 0 0 12px 0 #65dabc
+    }
+.coal-dust {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBrb9Nlk94GmsPpAhhgEApWaBipD1WaortHdE8b3XcXqbUGZYs0UbYK2a87l-wbX0bVU_ike1nXV4B7yoJsbQ78w68AO7Ox4Y8eC1_eC1BVmgWhQn9uFNlEonfALggs7lmrt4oAQowleCucPLeM7Mm8g-OjZk-Ob0C2vjJXlCCRuUi0fEDW0d8yXkxfdx9bU2yTepah8TeSfcVLfBWLGi3-6JF37klbtlaIKSmzhn98x2gsprSTcnB_yBOPwTVi_SpAaXk4LW6klxgQ)
+    }
+.map-container {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#82f7d8",
+                        "primary": "#ffb595",
+                        "surface-dim": "#131313",
+                        "on-tertiary": "#263334",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-primary": "#a23f00",
+                        "on-background": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#4c1a00",
+                        "surface-container-highest": "#353535",
+                        "tertiary-container": "#869394",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#a88a7e",
+                        "outline-variant": "#594238",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary": "#00382d",
+                        "tertiary": "#bcc9ca",
+                        "on-secondary-fixed": "#002019",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed": "#d8e5e6",
+                        "surface-tint": "#ffb595",
+                        "secondary-fixed-dim": "#65dabc",
+                        "surface": "#131313",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "background": "#131313",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-variant": "#353535",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-tertiary-container": "#202c2d",
+                        "on-secondary-container": "#003026",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed": "#351000",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "on-error": "#690005",
+                        "secondary": "#65dabc",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#ee671c",
+                        "primary-fixed": "#ffdbcd",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-container": "#20201f",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#1ca388",
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-primary": "#571e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "48px",
+                        "stack-md": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile py-stack-sm h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border-2 border-primary flex items-center justify-center bg-surface-container-high etch-shadow">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">LOTA INDÓMITO</h1>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aprendiz de Superficie</span>
+</div>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-highest px-3 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm font-bold text-primary">150</span>
+<span class="material-symbols-outlined text-[14px] text-primary">diamond</span>
+</div>
+</header><div class="fixed top-16 left-0 w-full z-40 bg-surface/90 backdrop-blur-sm border-b border-outline-variant overflow-x-auto no-scrollbar flex gap-2 px-margin-mobile py-3">
+<button class="flex-shrink-0 px-4 py-1.5 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase font-bold border border-primary-container">Todas</button>
+<button class="flex-shrink-0 px-4 py-1.5 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase font-bold border border-outline-variant hover:border-primary-container transition-colors">Camina Lota</button>
+<button class="flex-shrink-0 px-4 py-1.5 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase font-bold border border-outline-variant hover:border-primary-container transition-colors">Monumentos</button>
+<button class="flex-shrink-0 px-4 py-1.5 bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase font-bold border border-outline-variant hover:border-primary-container transition-colors">Comercio</button>
+</div>
+<main class="relative min-h-screen pt-16 pb-32">
+<!-- Interactive Background Map -->
+<div class="fixed inset-0 z-0 map-container"><img class="w-full h-full object-cover opacity-40 mix-blend-luminosity grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQHnrrS9Vo0F3bjdDPFP-CqiUD7t-lkgJkHGyZOZ3ITqyZsqzU4QKGfRUA6NyJVhF0jQsLOxAtCrXqcsdxIJCLnAFHkzsA8YSdteKR8g89dMGK9Pt5zGUZiF6c_7JY4klwCQpkf1vU808J3LIxz3VBt0AP1PHjaWVUhBJXlTfg5UftVU2JS9tA2OeDUnpUb4kvDMu61APgKUFBBDhuwKHCVyZFYiq9cd1wSGwd7aU4j8BCfQwnGE8nrljWade-klSiY0RdvDtCtIyU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<!-- Pin Markers -->
+<div class="absolute top-[40%] left-[35%] flex flex-col items-center group cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center border-2 border-surface neon-glow">
+<span class="material-symbols-outlined text-sm">apartment</span>
+</div>
+<span class="font-label-sm text-[10px] text-secondary bg-surface/80 px-1 mt-1 uppercase font-bold">Pabellón 83</span>
+</div>
+<div class="absolute top-[55%] left-[60%] flex flex-col items-center group cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-[#d35400] text-white flex items-center justify-center border-2 border-surface shadow-[0_0_10px_#d35400]">
+<span class="material-symbols-outlined text-base">fort</span>
+</div>
+<span class="font-label-sm text-[10px] text-[#d35400] bg-surface/80 px-1 mt-1 uppercase font-bold">Chiflón</span>
+</div></div>
+<!-- AR HUD Overlay Elements -->
+<div class="relative z-10 px-margin-mobile mt-8">
+<div class="flex flex-col gap-3 border-l-2 border-[#d35400] pl-4 mb-6 mt-12">
+<span class="font-label-sm text-label-sm text-[#d35400] uppercase tracking-widest font-bold">Hito Seleccionado</span>
+<div class="flex items-center gap-4 bg-surface-container-low p-3 border border-outline-variant etch-shadow">
+<img class="w-16 h-16 object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMf-YOAHUPQ0yZcesI-2i0uvo5ZsFF502wcfu4NI3WgknCMl_Sz9WD-bKuHlnDm_MEsnhbO6ZnRCwO2ZZUDbI4QAV26j64m6B7kZ6Uxmr05-4JOfZT5FsgrUwHBj9IaX9HFb7awSZjq69Ai5GyuMs7R-u9jTAHRRA6K1PAU7IiZujv4_CfsRRj7S0BbjlHP6EAGYwK4hmCWNVWHkuoFyuu_q_kWPO4z1v0y3KrYVmZZoC1uxhUdM-geQhcLuZTUpupzDKqLHX91ekp"/>
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface uppercase font-bold leading-none mb-1">Pabellón 83</h3>
+<span class="font-label-sm text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20 self-start uppercase font-bold">Misión: Arquitecto de Pabellones</span>
+</div>
+</div>
+</div>
+<!-- Central Action Area -->
+<div class="flex flex-col items-center justify-center gap-6 py-12">
+<button class="group relative flex flex-col items-center justify-center w-56 h-56 border-4 border-[#d35400] bg-surface-container-low flicker-effect hover:border-primary transition-colors duration-300 etch-shadow">
+<div class="absolute inset-0 coal-dust opacity-20 pointer-events-none"></div>
+<div class="mb-4 p-4 border-2 border-[#d35400] group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-5xl text-[#d35400] group-hover:text-primary transition-all">qr_code_scanner</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-center px-4 leading-tight uppercase text-[#d35400] group-hover:text-primary transition-colors">Escanear Hito</span>
+<div class="mt-2 font-label-sm text-label-sm text-on-surface-variant opacity-60 uppercase">Sincronizar Datos</div>
+</button>
+</div>
+<!-- Missions Section -->
+<section class="mt-12">
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="font-title-md text-title-md uppercase font-bold tracking-tight">Misiones Cercanas</h2>
+<span class="font-label-sm text-label-sm text-primary uppercase border-b border-primary">Ver todas</span>
+</div>
+<div class="flex overflow-x-auto gap-gutter pb-6 no-scrollbar snap-x"><!-- Card 1: Camina Lota -->
+<div class="flex-shrink-0 w-72 bg-surface-container-high border-2 border-outline-variant snap-start group">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMf-YOAHUPQ0yZcesI-2i0uvo5ZsFF502wcfu4NI3WgknCMl_Sz9WD-bKuHlnDm_MEsnhbO6ZnRCwO2ZZUDbI4QAV26j64m6B7kZ6Uxmr05-4JOfZT5FsgrUwHBj9IaX9HFb7awSZjq69Ai5GyuMs7R-u9jTAHRRA6K1PAU7IiZujv4_CfsRRj7S0BbjlHP6EAGYwK4hmCWNVWHkuoFyuu_q_kWPO4z1v0y3KrYVmZZoC1uxhUdM-geQhcLuZTUpupzDKqLHX91ekp"/>
+<div class="absolute top-2 right-2 bg-[#d35400] px-2 py-1 text-white font-bold font-label-sm text-label-sm">CAMINA LOTA</div>
+</div>
+<div class="p-4 relative">
+<div class="weld-line absolute top-0 left-0 right-0"></div>
+<h3 class="font-title-md text-title-md uppercase font-bold text-on-surface mb-2">Pabellón 83</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Misión: Documenta la arquitectura de los mineros.</p>
+<div class="flex justify-between items-center text-primary font-bold">
+<span class="font-label-sm text-label-sm">En curso</span>
+<span class="material-symbols-outlined">diamond</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Monumentos -->
+<div class="flex-shrink-0 w-72 bg-surface-container-high border-2 border-outline-variant snap-start group opacity-80">
+<div class="relative h-40 overflow-hidden">
+<img class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQHnrrS9Vo0F3bjdDPFP-CqiUD7t-lkgJkHGyZOZ3ITqyZsqzU4QKGfRUA6NyJVhF0jQsLOxAtCrXqcsdxIJCLnAFHkzsA8YSdteKR8g89dMGK9Pt5zGUZiF6c_7JY4klwCQpkf1vU808J3LIxz3VBt0AP1PHjaWVUhBJXlTfg5UftVU2JS9tA2OeDUnpUb4kvDMu61APgKUFBBDhuwKHCVyZFYiq9cd1wSGwd7aU4j8BCfQwnGE8nrljWade-klSiY0RdvDtCtIyU"/>
+<div class="absolute top-2 right-2 bg-surface-variant border border-outline px-2 py-1 text-on-surface-variant font-label-sm text-label-sm font-bold uppercase">Monumento</div>
+</div>
+<div class="p-4 relative">
+<div class="weld-line absolute top-0 left-0 right-0"></div>
+<h3 class="font-title-md text-title-md uppercase font-bold text-on-surface mb-2">Chiflón del Diablo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Check-in: Valida tu visita al monumento histórico.</p>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase font-bold">Próximo hito</span>
+<span class="material-symbols-outlined text-sm">near_me</span>
+</div>
+</div>
+</div></div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-[#d35400] text-white border-2 border-black flex items-center justify-center shadow-lg active:scale-95 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl">report</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 rect-none scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for the central button
+        const scanBtn = document.querySelector('button.group');
+        scanBtn.addEventListener('click', () => {
+            console.log('Activating Scanner...');
+            // Add a temporary high-flicker for activation feedback
+            scanBtn.classList.add('opacity-50');
+            setTimeout(() => scanBtn.classList.remove('opacity-50'), 150);
+        });
+
+        // Atmospheric parallax on scroll for the map
+        window.addEventListener('scroll', () => {
+            const map = document.querySelector('.map-container img');
+            const scrolled = window.pageYOffset;
+            map.style.transform = `translateY(${scrolled * 0.15}px)`;
+        });
+    </script>
+</body></html>

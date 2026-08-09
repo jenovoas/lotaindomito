@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#82f7d8",
+                        "primary": "#ffb595",
+                        "surface-dim": "#131313",
+                        "on-tertiary": "#263334",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-primary": "#a23f00",
+                        "on-background": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#4c1a00",
+                        "surface-container-highest": "#353535",
+                        "tertiary-container": "#869394",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#a88a7e",
+                        "outline-variant": "#594238",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary": "#00382d",
+                        "tertiary": "#bcc9ca",
+                        "on-secondary-fixed": "#002019",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#393939",
+                        "tertiary-fixed": "#d8e5e6",
+                        "surface-tint": "#ffb595",
+                        "secondary-fixed-dim": "#65dabc",
+                        "surface": "#131313",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "background": "#131313",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-variant": "#353535",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-tertiary-container": "#202c2d",
+                        "on-secondary-container": "#003026",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed": "#351000",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "on-error": "#690005",
+                        "secondary": "#65dabc",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#ee671c",
+                        "primary-fixed": "#ffdbcd",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-container": "#20201f",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#1ca388",
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-primary": "#571e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "48px",
+                        "stack-md": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBwFlsjAAhyOHsmIYudEOdmwG6Zecl8OEIK0VP0OydPsqukLlN8HPcoQtZ0dw8MQLzEK3a8klaPIrS59xB3yJtD0qUVJ0ciSLL30XBRxMPCFKAqDGCFovkWdUQsVuM0B2U1Is63i7-HG4A56asX4RNBbFILqZAhgG-F1rw5aNeJCYLSTA5IPBfhqZ9HCO47xcuVb6R659hDg4N_nHPVgZoSULF_NMaZFUmO5ffNKiD6Gxcel_bsBePk02vAPPaWvEllYjA0BMOuBFC4);
+    background-repeat: repeat
+    }
+.etch-inset {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.weld-line {
+    border-bottom: 2px solid #594238;
+    position: relative
+    }
+.weld-line::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 10%;
+    width: 20px;
+    height: 6px;
+    background: #a88a7e;
+    opacity: 0.3;
+    filter: blur(2px)
+    }
+.flicker-effect:active {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 8px #82f7d8)
+    }
+.industrial-grid {
+    background-size: 20px 20px;
+    background-image: radial-gradient(circle, #353535 1px, transparent 1px)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background selection:bg-secondary selection:text-on-secondary min-h-screen flex flex-col industrial-grid">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface border-b-2 border-outline-variant docked full-width top-0 z-40 sticky">
+<div class="flex justify-between items-center w-full px-margin-mobile py-stack-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center border border-outline shadow-sm overflow-hidden">
+<img alt="Miner Rank Badge" class="w-full h-full object-cover" data-alt="A close-up portrait of a determined coal miner in a historical 19th-century uniform, featuring a heavy canvas jacket and a metallic helmet with a glowing lamp. The style is gritty and cinematic with high-contrast lighting, emphasizing textures of soot and weathered fabric. Deep coal blacks and rusty oranges dominate the palette to align with an indomitable industrial museum aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6FwZdH6L0FcxiLYwKmWk7J2yf0PYX5TTf4-8Txf1734o6dGdEO3ENwnYvmGfyHN4hwECYfAyq9gqyPyFsUQ2uS-Ur8gFAY-PyDP-r-qJLb-s9vfIZXSXc1mzki28lX2_jzndP4d04rjC8ZjntceN4bbxPciV-rc75WSBqa3jFxpeiIreiqw-0dRsO2jL8Zu5IHhxBCTvp7xxaev30tHAcgJryvnPS3-cJ2p2liJfOu9pkCUVOwGnXKzJb1TKRBWnJ8Otx4GfsyaG8"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary dark:text-primary">
+                    LOTA INDÓMITO
+                </h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm bg-surface-container-highest px-2 py-1 text-primary border border-outline-variant">
+                    150 💎
+                </span>
+</div>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile py-stack-md flex flex-col gap-stack-md pb-32">
+<!-- Profile Hero Section -->
+<section class="flex flex-col gap-unit">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Pasaporte Indómito</span>
+<h2 class="font-display-lg text-[32px] font-black uppercase leading-none text-on-surface">Ignacio Figueroa</h2>
+<div class="flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-secondary-fixed text-sm">military_tech</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Capataz de la Cuenca</span>
+</div>
+</div>
+<div class="mt-4 bg-surface-container-low border border-outline-variant etch-inset p-4 coal-grain flex flex-col gap-stack-sm">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Nivel de Lealtad</span>
+<span class="font-label-sm text-label-sm text-primary">85% para ascenso</span>
+</div>
+<div class="h-3 bg-surface-container-highest border border-outline-variant flex gap-1 p-[2px]">
+<div class="h-full bg-primary-container w-[20%]"></div>
+<div class="h-full bg-primary-container w-[20%]"></div>
+<div class="h-full bg-primary-container w-[20%]"></div>
+<div class="h-full bg-primary-container w-[10%] opacity-50"></div>
+<div class="h-full bg-surface-variant w-[30%]"></div>
+</div>
+</div>
+</section>
+<!-- Billetera Digital -->
+<section class="flex flex-col gap-stack-sm">
+<h3 class="font-title-md text-title-md text-on-surface uppercase border-l-4 border-primary pl-3">Billetera Digital</h3>
+<div class="bg-surface-container-high border border-outline-variant p-5 coal-grain flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Saldo Disponible</span>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-headline-lg text-primary">500</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Carboncillos</span>
+</div>
+</div>
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container-highest border-2 border-outline rotate-45">
+<span class="material-symbols-outlined text-secondary -rotate-45" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 font-label-sm text-label-sm uppercase font-bold tracking-widest hover:bg-primary-container transition-colors flicker-effect">
+                    Ver Cupones de Canje
+                </button>
+</div>
+</section>
+<!-- Bóveda de Medallas (Bento Grid Style) -->
+<section class="flex flex-col gap-stack-sm">
+<h3 class="font-title-md text-title-md text-on-surface uppercase border-l-4 border-primary pl-3">Bóveda de Medallas</h3>
+<div class="grid grid-cols-2 gap-2">
+<!-- Medal 1 -->
+<div class="bg-surface-container border border-outline-variant p-4 flex flex-col items-center text-center gap-3 coal-grain">
+<div class="w-16 h-16 rounded-full bg-secondary-container/20 border-2 border-secondary-fixed flex items-center justify-center shadow-[0_0_15px_rgba(130,247,216,0.2)]">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface uppercase font-bold">Ojo de Lince</span>
+<span class="text-[10px] font-label-sm text-on-surface-variant leading-tight">10 Hallazgos AR</span>
+</div>
+</div>
+<!-- Medal 2 -->
+<div class="bg-surface-container border border-outline-variant p-4 flex flex-col items-center text-center gap-3 coal-grain">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 border-2 border-primary flex items-center justify-center opacity-80">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface uppercase font-bold">Amasadora de Memorias</span>
+<span class="text-[10px] font-label-sm text-on-surface-variant leading-tight">Relato compartido</span>
+</div>
+</div>
+<!-- Locked Slot -->
+<div class="bg-surface-container-lowest border border-dashed border-outline-variant p-4 flex flex-col items-center justify-center text-center gap-2">
+<span class="material-symbols-outlined text-outline-variant text-2xl">lock</span>
+<span class="font-label-sm text-label-sm text-outline-variant uppercase">Bloqueado</span>
+</div>
+<!-- Locked Slot -->
+<div class="bg-surface-container-lowest border border-dashed border-outline-variant p-4 flex flex-col items-center justify-center text-center gap-2">
+<span class="material-symbols-outlined text-outline-variant text-2xl">lock</span>
+<span class="font-label-sm text-label-sm text-outline-variant uppercase">Bloqueado</span>
+</div>
+</div>
+</section>
+<!-- Historial de Ciudadanía -->
+<section class="flex flex-col gap-stack-sm">
+<div class="flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface uppercase border-l-4 border-primary pl-3">Historial de Ciudadanía</h3>
+<span class="font-label-sm text-label-sm text-primary">5 Reportes</span>
+</div>
+<div class="bg-surface-container-low border border-outline-variant flex flex-col divide-y divide-outline-variant/30 coal-grain">
+<!-- Report 1 -->
+<div class="p-4 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Reparación luminaria "El Chiflón"</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Enviado: 12 OCT 2023</span>
+</div>
+<span class="font-label-sm text-[10px] px-2 py-1 bg-secondary-container text-on-secondary-container uppercase font-bold">Solucionado</span>
+</div>
+<!-- Report 2 -->
+<div class="p-4 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Microbasural en Sector Fundición</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Enviado: 05 NOV 2023</span>
+</div>
+<span class="font-label-sm text-[10px] px-2 py-1 bg-tertiary-container text-on-tertiary-container uppercase font-bold">En Proceso</span>
+</div>
+<!-- Report 3 -->
+<div class="p-4 flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-body-md text-body-md text-on-surface font-semibold">Bache en calle principal minera</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Enviado: 28 NOV 2023</span>
+</div>
+<span class="font-label-sm text-[10px] px-2 py-1 bg-surface-container-highest text-on-surface-variant uppercase font-bold">Recibido</span>
+</div>
+</div>
+<button class="mt-2 text-center font-label-sm text-label-sm text-secondary uppercase hover:underline">Ver historial completo</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-transform active:scale-95 duration-100">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-transform active:scale-95 duration-100">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-transform active:scale-95 duration-100">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center -mt-8 border-4 border-surface shadow-lg">
+<span class="material-symbols-outlined text-on-primary-container">qr_code_scanner</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan QR</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 rect-none transition-transform active:scale-95 duration-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for industrial feel
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                const audio = new Audio('https://www.soundjay.com/buttons/button-16.mp3');
+                audio.volume = 0.1;
+                audio.play().catch(() => {}); // Avoid error on some browsers
+            });
+        });
+    </script>
+</body></html>

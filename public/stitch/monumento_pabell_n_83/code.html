@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.flicker-effect:active {
+    animation: flicker 0.1s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        } 50% {
+        opacity: 0.4;
+        } 100% {
+        opacity: 0.8;
+        }
+    }
+.coal-dust-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAqvWGGyLOXINelLrFkBOG2-wGFC09sXnvFZJh0Pepx1Cxt_0ew6dZJgv88z7K0ueC6h1KTBmVJtZiM-kOWU9_557sj4pPhASDZ0q_3bB9GxRKj_t9An05oQX5yn0KnQp62BerTrv1sQAtd5gCGt4SUVwUmf-M3gg6CmdGlLJlR2mWbq0Igh2SAdSCkA3weXWY5Pl1nZJOHBrtkt7wH-5T6tB4qr08lJ5f7c7MpjEUm7gyDuFfLka-SUKHyKmtjD95vDrWFHOs9s5QV);
+    background-blend-mode: overlay
+    }
+.etch-inset {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow-mint {
+    box-shadow: 0 0 15px rgba(101, 218, 188, 0.4)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+::-webkit-scrollbar {
+    width: 4px
+    }
+::-webkit-scrollbar-track {
+    background: #131313
+    }
+::-webkit-scrollbar-thumb {
+    background: #594238
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#65dabc",
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-primary-fixed": "#351000",
+                        "surface-variant": "#353535",
+                        "primary-fixed": "#ffdbcd",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-container": "#202c2d",
+                        "on-secondary-fixed": "#002019",
+                        "on-secondary-container": "#003026",
+                        "secondary": "#65dabc",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "inverse-on-surface": "#313030",
+                        "outline-variant": "#594238",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-container": "#ee671c",
+                        "on-primary-container": "#4c1a00",
+                        "surface-dim": "#131313",
+                        "on-secondary": "#00382d",
+                        "primary": "#ffb595",
+                        "outline": "#a88a7e",
+                        "surface-container-lowest": "#0e0e0e",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "secondary-fixed": "#82f7d8",
+                        "inverse-surface": "#e5e2e1",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-tint": "#ffb595",
+                        "tertiary": "#bcc9ca",
+                        "surface-container": "#20201f",
+                        "on-primary": "#571e00",
+                        "surface-bright": "#393939",
+                        "secondary-container": "#1ca388",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#a23f00",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#353535",
+                        "surface": "#131313",
+                        "on-tertiary": "#263334",
+                        "tertiary-container": "#869394",
+                        "on-tertiary-fixed": "#121e1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-lg": "48px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "stack-md": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface h-16 border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-4">
+<button class="flicker-effect transition-opacity duration-75 text-primary">
+<span class="material-symbols-outlined text-headline-lg-mobile">arrow_back</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="bg-surface-container-high px-3 py-1 border border-outline-variant flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-secondary-fixed-dim">1200 炭</span>
+</div>
+</header>
+<main class="pt-16 pb-24 max-w-4xl mx-auto">
+<!-- Hero Section -->
+<section class="relative h-[353px] w-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale-[30%] brightness-75" data-alt="A grand historical industrial building made of weathered red bricks in Lota, Chile. The architecture features high windows and heavy wooden doors, set against a dramatic moody sky. The lighting is cinematic with deep shadows and warm highlights on the brickwork, reflecting the indomitable spirit of the mining era. The image has a sharp, high-contrast industrial aesthetic with metallic textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVfU2-0x5NhneB-X5zYSEm8aTTz5v_cfs4EO1toMykUEvMuk4d9Ka0pnbsE4UPOJbD4NSkNdLRa-h8_jGW66kuzifg9AtM7DPr9ozRMjGebiTO4fCMPZnPMamk5h5TUq8o8v4NlrFjb_5C6BMn-FYuAt0HT1szwqLoURjfG8aqKNXILktBkKATi442MKk7YRLEIjmH1JbbnXmTXtr27yakSbXWTuxl5q45He7WCXmn1Ej9k-AExqZ035VbTB59vzD6w5ODwsgTS-wP"/>
+<div class="absolute bottom-0 left-0 w-full p-margin-mobile bg-gradient-to-t from-background to-transparent">
+<p class="text-label-sm font-label-sm text-secondary-fixed-dim mb-1">MONUMENTO NACIONAL</p>
+<h2 class="text-headline-lg font-headline-lg text-primary">Pabellón 83 - Centro Cultural</h2>
+</div>
+</section>
+<!-- Action HUD -->
+<div class="px-margin-mobile -mt-6 relative z-10 flex gap-4">
+<button class="flex-1 h-14 bg-primary-container text-on-primary-container font-headline-lg-mobile flex items-center justify-center gap-2 border-b-4 border-on-primary-container active:translate-y-1 active:border-b-0 transition-all flicker-effect" onclick="toggleAR()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+                CORTE RAYOS X
+            </button>
+<button class="w-14 h-14 bg-surface-container border-2 border-outline-variant flex items-center justify-center text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+<!-- Description Content -->
+<div class="p-margin-mobile space-y-stack-md">
+<div class="bg-surface-container p-6 etch-inset coal-dust-grain border-l-4 border-primary">
+<p class="text-body-lg font-body-lg text-on-surface leading-relaxed">
+                    Construido en 1915, el Pabellón 83 fue originalmente una habitación colectiva para familias mineras. Hoy, este gigante de ladrillo rojo se erige como un faro de cultura y memoria, rescatando la identidad obrera del Carbón.
+                </p>
+</div>
+<div class="weld-line"></div>
+<!-- AR Preview / Living Conditions -->
+<div class="hidden relative rounded-lg border-2 border-secondary-fixed-dim overflow-hidden neon-glow-mint bg-black aspect-video mb-8" id="ar-view">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="text-center p-8">
+<span class="material-symbols-outlined text-secondary text-5xl animate-pulse">sensors</span>
+<p class="text-label-sm font-label-sm text-secondary mt-4">ESCANEANDO ESTRUCTURA...</p>
+</div>
+</div>
+<!-- Simulating a ghostly wireframe overlay -->
+<div class="absolute inset-0 opacity-40 pointer-events-none" style="background-image: linear-gradient(0deg, transparent 24%, rgba(101, 218, 188, .05) 25%, rgba(101, 218, 188, .05) 26%, transparent 27%, transparent 74%, rgba(101, 218, 188, .05) 75%, rgba(101, 218, 188, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(101, 218, 188, .05) 25%, rgba(101, 218, 188, .05) 26%, transparent 27%, transparent 74%, rgba(101, 218, 188, .05) 75%, rgba(101, 218, 188, .05) 76%, transparent 77%, transparent); background-size: 50px 50px;"></div>
+<div class="absolute bottom-4 left-4 right-4 bg-surface-dim/80 p-3 border border-outline-variant">
+<p class="text-label-sm font-label-sm text-primary">NIVEL 1: HABITACIONES DE 3x3m</p>
+<p class="text-[10px] text-on-surface-variant leading-tight">Originalmente albergaba hasta 12 personas por unidad habitacional en condiciones de hacinamiento crítico.</p>
+</div>
+</div>
+<!-- Historical Gallery -->
+<div class="space-y-4">
+<h3 class="text-title-md font-title-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined">history</span> ARCHIVO HISTÓRICO
+                </h3>
+<div class="grid grid-cols-2 gap-2">
+<div class="aspect-square bg-surface-container border border-outline-variant overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:scale-110 transition-transform duration-700" data-alt="Black and white archival photograph of miners standing outside a massive brick dormitory building in Lota, Chile. The men are wearing traditional flat caps and heavy work coats, covered in coal dust. The atmosphere is solemn and gritty, captured in a historical documentary style with high contrast and film grain textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDlNypX9Vyp5C6KGcjeYp1rAbPROvISwXdmVzSj2TOn0FljUzw3Cj7iTM9cKwnYmDIRf5GwTWYc1XJ629TOGLjbg0CuzIchStVfkilf_-naH1-fFomtJFzphBvFlr1jwYO7W-u3zCop0eLSHzoR3u0_SCYEODTQN4yWUyxjqHmOcBEW3UbcVDTFMBHwH3O7XuvewVhhOjK3ZxXi129Ei5I-Lp-IabBBNyx6kdBDofk6ez2Ibw9Qm82GhgA1I8s2c6sOFBzBfjQbUaj"/>
+</div>
+<div class="aspect-square bg-surface-container border border-outline-variant overflow-hidden group">
+<img class="w-full h-full object-cover filter grayscale hover:scale-110 transition-transform duration-700" data-alt="Interior view of a rustic, small room in a 1915 industrial housing complex. The walls are rough, there is a small cast-iron stove in the corner, and minimal wooden furniture. The lighting is low-key, coming from a single small window, creating a claustrophobic and atmospheric historical mood with deep shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyxHi_loiLJOHMuo2c7pDpXh3RZc0GpZ4K6PA9Z-7T2JAeMxBOU_Yc1yYSBO1dltX3cYvPCBXifXD9s9YNCnixTLNKd_UUQsIY4Kq606Q0PlYeko64I1j7gBTn7FTsD5WVGQUwjwCqi3IF8o9n5ci05M1OL4iB0AUbQyN4DXbAtaF2OKOY7SAJeL61YCXufTlwkQi0Aiho4WzcE6qMwuuO1lqPLa1LeiKZ0N-l2nLclmLeQeJRJBUxAp222Fqgcg3AjRE0ZBgoPxt5"/>
+</div>
+</div>
+</div>
+<!-- Audio Commentary Widget -->
+<div class="bg-surface-container-low p-4 border border-outline-variant flex items-center gap-4">
+<button class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="flex-1">
+<p class="text-label-sm font-label-sm text-secondary">AUDIO GUÍA</p>
+<div class="h-1 bg-surface-container-highest mt-2 relative">
+<div class="absolute left-0 top-0 h-full w-1/3 bg-secondary"></div>
+</div>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">01:45 / 05:20</span>
+</div>
+<!-- Next Destination -->
+<div class="mt-stack-lg p-6 bg-surface-container border-2 border-outline-variant">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4">SIGUIENTE MONUMENTO</p>
+<div class="flex justify-between items-center">
+<h4 class="text-headline-lg-mobile font-headline-lg-mobile text-primary">Teatro de Lota</h4>
+<button class="bg-surface-bright p-3 border border-outline-variant hover:border-secondary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container h-20 border-t-2 border-outline-variant flex justify-around items-center px-4">
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="text-label-sm font-label-sm">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary border-t-4 border-secondary pt-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="text-label-sm font-label-sm">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="text-label-sm font-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        function toggleAR() {
+            const arView = document.getElementById('ar-view');
+            arView.classList.toggle('hidden');
+            if (!arView.classList.contains('hidden')) {
+                arView.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Simple audio play toggle simulation
+        const audioBtn = document.querySelector('.bg-secondary');
+        let playing = false;
+        audioBtn.addEventListener('click', () => {
+            playing = !playing;
+            audioBtn.querySelector('.material-symbols-outlined').innerText = playing ? 'pause' : 'play_arrow';
+        });
+    </script>
+</body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#bcc9ca",
+                    "secondary-fixed-dim": "#65dabc",
+                    "surface-container-high": "#2a2a2a",
+                    "surface": "#131313",
+                    "tertiary-fixed": "#d8e5e6",
+                    "secondary-container": "#1ca388",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed": "#121e1f",
+                    "on-primary-fixed": "#351000",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "surface-container-low": "#1c1b1b",
+                    "on-secondary-container": "#003026",
+                    "inverse-primary": "#a23f00",
+                    "on-background": "#e5e2e1",
+                    "surface-tint": "#ffb595",
+                    "surface-dim": "#131313",
+                    "secondary-fixed": "#82f7d8",
+                    "error-container": "#93000a",
+                    "primary": "#ffb595",
+                    "background": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container": "#20201f",
+                    "secondary": "#65dabc",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#ffdbcd",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-bright": "#393939",
+                    "on-tertiary-container": "#202c2d",
+                    "on-secondary-fixed": "#002019",
+                    "on-tertiary": "#263334",
+                    "on-primary": "#571e00",
+                    "surface-variant": "#353535",
+                    "tertiary-container": "#869394",
+                    "surface-container-highest": "#353535",
+                    "primary-container": "#ee671c",
+                    "on-primary-container": "#4c1a00",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-secondary": "#00382d",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "inverse-on-surface": "#313030",
+                    "primary-fixed-dim": "#ffb595",
+                    "outline-variant": "#594238",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "outline": "#a88a7e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "40px",
+                    "stack-md": "24px",
+                    "gutter": "16px",
+                    "stack-lg": "48px"
+            },
+            "fontFamily": {
+                    "title-md": ["Montserrat"],
+                    "headline-lg": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "body-lg": ["Work Sans"],
+                    "body-md": ["Work Sans"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #131313;
+    color: #e5e2e1;
+    overflow-x: hidden
+    }
+.blueprint-grid {
+    background-image: linear-gradient(to right, rgba(255, 181, 149, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 181, 149, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px
+    }
+.coal-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDABnyIzYKJQqzC9OYyR26-IjfiR3PK287HTmG0_DFM9_X2lLL8NKY3ms2ZGmHnSQDwp2eHxzwTmTYHPeLWWrZxzgUBGgZ4G63PYmGXd-WBe6FbjfVn0GwKpVfPhMPtt428DdR3jCFG7uGIecoshB1VfvnfPLWqDzlELU4POA6fkLTQ_Sk8GQ0nOJTPuy_Wh2TXZnvjt5VjvKmmMq-nbtADfmN5Jrq-T4zE2wU9KsmWN31AXP7-g_z2-Zd-FMmCq_YowOEjs3_TfKaa);
+    opacity: 0.4
+    }
+.weld-line {
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #594238, #594238 4px, #a88a7e 4px, #a88a7e 8px)
+    }
+.flicker-effect:active {
+    animation: flicker 0.1s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        border-color: #65dabc;
+        } 50% {
+        opacity: 0.7;
+        border-color: #ffb595;
+        } 100% {
+        opacity: 1;
+        border-color: #65dabc;
+        }
+    }
+.etch-inset {
+    box-shadow: inset 1px 1px 0 rgba(229, 226, 225, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow-mint {
+    filter: drop-shadow(0 0 8px rgba(101, 218, 188, 0.6))
+    }
+.neon-glow-orange {
+    filter: drop-shadow(0 0 8px rgba(255, 181, 149, 0.4))
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md antialiased selection:bg-primary selection:text-on-primary">
+<!-- Background Blueprint Layer -->
+<div class="fixed inset-0 blueprint-grid z-0"></div>
+<div class="fixed inset-0 coal-texture z-0 pointer-events-none"></div>
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile py-stack-sm h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small circular profile avatar representing a miner rank badge with a metallic, rusted copper finish. The icon features a stylized pickaxe and a hard hat inside a gear-shaped border. The lighting is cinematic, highlighting the weathered textures against a dark industrial backdrop consistent with the Lota indomitable aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAW2m8iu293TzGK-lyXHYFH4zB3dUqlH-FCUeHtQGhbJ-IOn2qq9jxnSnXQDBh3df7OxT-bq05D-FZezeM_O21MbslabLAn5VJOd2r0SyYgqSVvOuDTWO3P0SD7-vLLpAI7wBSD2rfSPlKoHk5UxCwsOUlv47oyrMNXGZfSf9VmtGxxhjiie4NqBRIHWT2_nvSgu6LZmxQf8aS8lgirCfyBcwbyyGcDSkII6azbTCGicFCqj6XwzEcvCTalgn4RiuwuRcdk6wJKZosb"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">
+                LOTA INDÓMITO
+            </h1>
+</div>
+<div class="flex items-center bg-surface-container-low px-3 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-primary">150 💎</span>
+</div>
+</header>
+<main class="relative z-10 pt-24 pb-32 px-margin-mobile flex flex-col items-center min-h-screen max-w-2xl mx-auto">
+<!-- Header Section -->
+<div class="w-full mb-10 text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase mb-2 tracking-tight">ELIGE TU SENDA</h2>
+<div class="weld-line w-24 mx-auto mb-4"></div>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Configura tu interfaz para explorar la historia de la mina.</p>
+</div>
+<!-- Mode Selection Grid -->
+<div class="grid grid-cols-1 gap-6 w-full">
+<!-- Gamer Mode Card -->
+<button class="group relative flex flex-col w-full bg-surface-container border-2 border-outline-variant p-1 text-left transition-all duration-200 hover:border-secondary flicker-effect active:scale-[0.98]" onclick="selectMode('jugador')">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="w-2 h-2 bg-outline-variant group-hover:bg-secondary"></div>
+<div class="w-2 h-2 bg-outline-variant group-hover:bg-secondary"></div>
+</div>
+<div class="relative w-full aspect-[21/9] overflow-hidden mb-0">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 transition-all duration-500" data-alt="A dramatic high-contrast photograph of industrial mining machinery gears and cables illuminated by sharp neon mint green holographic overlays. The scene is set in a dark, atmospheric coal mine tunnel with particles of coal dust floating in the air. The visual style is modern-brutalist with tactile textures and a glowing digital archaeology aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyQhiEz1GHcYfCT0SwVIpIkdjb8BLIoXZHBo2pzwPjEMB_vJWSLVkfzBBYg1Zv67G-VNljWHDVg0eqowK7zRI62CzZQs-4w77uq-pvhdDFpuR8G2dcdjyL8XniJdx8fmwAVajDjuwoL-8ozTKKJKQ9PpgjhHypEfg_eARQuBCAc1C-UJ7EMQ6-1HHqRA5tO_z-x5ZnvPrFwy-5OUNKWFX6q8oihos6xpw6hEZpfmi4UgXmZ5qbJTUtQEckWTa4udwgvH3hRjIB9TZV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-3">
+<div class="bg-secondary p-2 neon-glow-mint">
+<span class="material-symbols-outlined text-on-secondary text-3xl" data-icon="videogame_asset">videogame_asset</span>
+</div>
+<h3 class="font-display-lg text-headline-lg text-on-surface font-black uppercase italic tracking-tighter">MODO JUGADOR</h3>
+</div>
+</div>
+<div class="p-6 pt-2">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-secondary uppercase border border-secondary/30">Desafíos AR</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-secondary uppercase border border-secondary/30">Rankings</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-secondary uppercase border border-secondary/30">Recompensas</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Conviértete en un minero moderno. Completa misiones en las locaciones históricas, recolecta <span class="text-primary font-bold">Carboncillo</span> y asciende en el escalafón del Chiflón del Diablo.
+                    </p>
+</div>
+<!-- Bottom Decorative Bar -->
+<div class="h-1 bg-outline-variant w-full mt-2 group-hover:bg-secondary transition-colors"></div>
+</button>
+<!-- Tourist Mode Card -->
+<button class="group relative flex flex-col w-full bg-surface-container border-2 border-outline-variant p-1 text-left transition-all duration-200 hover:border-primary flicker-effect active:scale-[0.98]" onclick="selectMode('turista')">
+<div class="absolute top-2 right-2 flex gap-1">
+<div class="w-2 h-2 bg-outline-variant group-hover:bg-primary"></div>
+<div class="w-2 h-2 bg-outline-variant group-hover:bg-primary"></div>
+</div>
+<div class="relative w-full aspect-[21/9] overflow-hidden mb-0">
+<img class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 transition-all duration-500" data-alt="A serene and contemplative wide-angle shot of the Lota coastal cliffs and historical industrial ruins at sunset. The lighting is warm and golden, casting long shadows over weathered stone structures. Subtle digital blueprints of the original 19th-century buildings are overlaid faintly in glowing orange lines, creating a sense of digital archaeology and peaceful exploration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxO1eezR0ugfw35Fp8l2amB-swQGwRMAuoRp2dtuZc2uG0Vbc3HC4G5M8st9fQ70c3ucMnw-eXymlk-M3UdnoD3spsGq34aLNRKQ5rOAbkJR9RunoEcnajzlHf1d57jflUYZ5usHz3IK3cNBmBfgIfgADG27Ngqb9zqwZV9HIS8gX2AaUv8xJ19loOzh719lZeFl2yaGg3eemCSVU1ej2BBT8WEFfJuBAUDWXB55XvXG_iaJeX2xY9I0l2dqSpgfziJCHbW7XC-gmD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center gap-3">
+<div class="bg-primary p-2 neon-glow-orange">
+<span class="material-symbols-outlined text-on-primary text-3xl" data-icon="photo_camera">photo_camera</span>
+</div>
+<h3 class="font-display-lg text-headline-lg text-on-surface font-black uppercase italic tracking-tighter">MODO TURISTA</h3>
+</div>
+</div>
+<div class="p-6 pt-2">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-primary uppercase border border-primary/30">Contemplación</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-primary uppercase border border-primary/30">Historia Viva</span>
+<span class="bg-surface-container-highest px-2 py-1 font-label-sm text-label-sm text-primary uppercase border border-primary/30">Paseo Guiado</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Explora a tu propio ritmo. Accede a archivos históricos, audioguías inmersivas y reconstrucciones AR que revelan la vida cotidiana y el patrimonio de la ciudad-museo de Lota.
+                    </p>
+</div>
+<!-- Bottom Decorative Bar -->
+<div class="h-1 bg-outline-variant w-full mt-2 group-hover:bg-primary transition-colors"></div>
+</button>
+</div>
+<!-- Footer Help -->
+<div class="mt-12 text-center">
+<p class="font-label-sm text-label-sm text-on-tertiary-fixed-variant uppercase tracking-widest">Puedes cambiar el modo en cualquier momento desde tu perfil.</p>
+</div>
+</main>
+<!-- Navigation Bar (Shell Logic Applied) -->
+<!-- Onboarding screen - Navigation is suppressed to focus user choice -->
+<!-- Industrial HUD elements for atmosphere -->
+<div class="fixed bottom-margin-mobile left-margin-mobile z-50 pointer-events-none hidden md:block">
+<div class="flex flex-col border-l-2 border-primary pl-3">
+<span class="font-label-sm text-[10px] text-primary/60 uppercase">System Status</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">Oxygen: 98%</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">Lat: -37.094</span>
+</div>
+</div>
+<div class="fixed top-margin-mobile right-margin-mobile z-50 pointer-events-none hidden md:block">
+<div class="flex flex-col border-r-2 border-secondary pr-3 text-right">
+<span class="font-label-sm text-[10px] text-secondary/60 uppercase">Signal</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase">AR Link Stable</span>
+</div>
+</div>
+<script>
+        function selectMode(mode) {
+            console.log('Mode selected:', mode);
+            // Visual feedback
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-primary z-[100] transition-opacity duration-300 opacity-0 flex items-center justify-center';
+            if (mode === 'jugador') overlay.classList.replace('bg-primary', 'bg-secondary');
+            
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                setTimeout(() => {
+                    // Logic to navigate or transition
+                    alert('Has seleccionado: MODO ' + mode.toUpperCase());
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.remove(), 300);
+                }, 500);
+            }, 10);
+        }
+
+        // Mechanical motion simulation on scroll
+        window.addEventListener('scroll', () => {
+            const grid = document.querySelector('.blueprint-grid');
+            const scrolled = window.pageYOffset;
+            grid.style.backgroundPositionY = -(scrolled * 0.2) + 'px';
+        });
+    </script>
+</body></html>

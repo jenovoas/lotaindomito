@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mission Success - LOTA INDÓMITA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353535",
+                    "secondary-fixed": "#82f7d8",
+                    "tertiary": "#bcc9ca",
+                    "primary": "#ffb595",
+                    "on-background": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-variant": "#353535",
+                    "on-secondary-fixed": "#002019",
+                    "secondary-fixed-dim": "#65dabc",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#1ca388",
+                    "surface-container-low": "#1c1b1b",
+                    "tertiary-fixed": "#d8e5e6",
+                    "secondary": "#65dabc",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-secondary-container": "#003026",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed": "#ffdbcd",
+                    "on-secondary": "#00382d",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#ffb595",
+                    "on-tertiary": "#263334",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#869394",
+                    "outline": "#a88a7e",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-container": "#4c1a00",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-dim": "#131313",
+                    "primary-container": "#ee671c",
+                    "surface-tint": "#ffb595",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed": "#351000",
+                    "on-primary": "#571e00",
+                    "inverse-primary": "#a23f00",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-tertiary-fixed": "#121e1f",
+                    "surface-bright": "#393939",
+                    "outline-variant": "#594238",
+                    "on-tertiary-container": "#202c2d",
+                    "surface-container": "#20201f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Work Sans"],
+                    "display-lg": ["Montserrat"],
+                    "title-md": ["Montserrat"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        .industrial-bg {
+            background-image: radial-gradient(circle at 2px 2px, #353535 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(101, 218, 188, 0.4);
+        }
+        .metal-etch {
+            border: 2px solid #a88a7e;
+            box-shadow: inset 1px 1px 0px rgba(229, 226, 225, 0.1), 1px 1px 0px rgba(0, 0, 0, 0.8);
+        }
+        .flicker-anim {
+            animation: flicker 3s infinite;
+        }
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.7; }
+        }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="industrial-bg font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16 docked full-width top-0 border-b-2 border-outline z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+</div>
+<div class="flex items-center bg-surface-container-high px-3 py-1 border border-outline">
+<span class="font-label-sm text-label-sm text-primary">1,250 ⚒️</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col px-margin-mobile pt-stack-md pb-32">
+<!-- Victory Header -->
+<section class="text-center mb-stack-lg">
+<div class="inline-block px-4 py-1 border-2 border-secondary text-secondary font-label-sm mb-stack-sm uppercase tracking-widest flicker-anim">
+                Misión Completada
+            </div>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface uppercase mb-stack-sm">Guardianes del Patrimonio</h2>
+<div class="flex justify-center items-center gap-4 text-primary">
+<div class="h-px w-12 bg-outline"></div>
+<span class="font-label-sm">COLECTIVO ALCANZADO</span>
+<div class="h-px w-12 bg-outline"></div>
+</div>
+</section>
+<!-- Medal & Reward Hero -->
+<section class="relative flex flex-col items-center mb-stack-lg">
+<!-- Asymmetric Medal Display -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<div class="absolute inset-0 border-2 border-outline rotate-45 opacity-20"></div>
+<div class="absolute inset-4 border-2 border-secondary rotate-12 opacity-40 neon-glow"></div>
+<div class="bg-surface-container-highest metal-etch w-48 h-48 flex flex-col items-center justify-center relative z-10">
+<img alt="Industrial family medal" class="w-32 h-32 object-contain filter drop-shadow-lg" data-alt="A heavy industrial medal made of weathered steel and glowing neon mint details. The center features a stylized coal lamp icon. The style is modern-brutalist with high contrast, sharp edges, and a dark atmospheric background reflecting the coal mining history of Lota. Cinematic lighting highlights the metallic textures and digital glowing overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8Z_TNBXFgRVEq7d8JPtNYUrP4FJe6fHR7vay-1AsbshCLARhVVn1KOk4p3ngWYeehg-XdLSPHuipIA0MaFFR2XBWd3QxpCXSvpCC3pNwJnMogsPD2WEn2mAslMgcIw0P1KNjGCK5zIBQCciaDpt9elBjPZCpYzXbDDjkXmXPQ05-JfaraciybcxJyfOmACsUN9yO91WM8nVpOIrv53SYcyv9Xo_qyGgtjXaXO_aok95hfB9owtBAYa4haPTCZqVSPc_i4IjcByRCb"/>
+<div class="absolute -bottom-4 bg-primary text-on-primary px-4 py-1 font-label-sm uppercase font-bold border-2 border-surface">
+                        Nivel Legendario
+                    </div>
+</div>
+</div>
+<!-- Reward Summary -->
+<div class="mt-stack-md bg-surface-container p-stack-md border-2 border-outline w-full max-w-sm">
+<div class="flex justify-between items-center mb-stack-sm">
+<span class="font-label-sm text-on-surface-variant uppercase">Recompensa Total</span>
+<span class="font-headline-lg-mobile text-primary">+850 Carboncillos</span>
+</div>
+<div class="w-full h-4 bg-surface-container-lowest border border-outline flex overflow-hidden">
+<div class="h-full bg-secondary-container w-[75%] border-r border-outline-variant"></div>
+<div class="h-full bg-secondary w-[25%]"></div>
+</div>
+<div class="mt-2 text-right">
+<span class="font-label-sm text-secondary-fixed">Bono familiar x1.5 aplicado</span>
+</div>
+</div>
+</section>
+<!-- Members Contribution (Bento/Panel Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-sm">
+<h3 class="col-span-full font-label-sm text-on-surface-variant uppercase mb-2">Contribución de la Cuadrilla</h3>
+<!-- Member Card 1 -->
+<div class="bg-surface-container-low border-2 border-outline p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high border border-secondary p-1">
+<img alt="Family member avatar" class="w-full h-full object-cover" data-alt="Portrait of a young woman wearing a modern miner helmet with neon light strips. The image has a gritty industrial aesthetic with coal dust textures and high contrast lighting. Dark background with subtle teal and orange glowing elements, reflecting a digital archaeology and AR museum experience style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9axholmD-LwrL9qAxo_ADM2UvcFqkUWQ6ATJf0B8LhkYc3kFyrRLnwt2xONbfvcpRbQqHTS4aMYRmzjrB1SKijbOrhiCT6etsUhRvgSLb01ctvGhO2XCs1KAIKag0U-vaTLsYF0MrV6eCf-215wHTj6iMmL5nB0eSQrZVhj3n9rLW5xtMc-vBWs4B831GZ21RumPasUoHBqN4LvPRBKQqHF8fE3hPfO54q3JXyitHZYIPBQNbJOuwYpG1uaU6Wx18AQsvNsoMOY_A"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<p class="font-title-md text-on-surface">Elena (Líder)</p>
+<span class="font-label-sm text-secondary">+300</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-sm uppercase">Escaneo de Estructuras</p>
+</div>
+</div>
+<!-- Member Card 2 -->
+<div class="bg-surface-container-low border-2 border-outline p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high border border-outline p-1">
+<img alt="Family member avatar" class="w-full h-full object-cover" data-alt="Portrait of an older man with a grey beard, wearing heavy duty industrial goggles. Gritty, high-detail skin textures with subtle coal soot. The lighting is cinematic, coming from a side angle like a headlamp. Dark, moody atmosphere with industrial steel and rust elements in the blurred background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS2nTP3QaLf_wE2zFC8QLn4dl-7Y8W-QfB2KDbjh8RCzhgWGIaQe0IYYHn4TU-IbPcgEW_Pnn7f5DJXanx5tc0TJM5tI4i_AdMPXXigOwVF12e4KFTarkZH2hc_ycbdJ4tJMrvOxk6Tk75DGrSCjhGNGpXQAx4cRCapaTMlxwwk4xum1nwSknsB_rscwXC3vljYkb2niezm3FwCxd363vLUdpG7DIIOzgt6ntrJhWqc1UzWbBxuw-fKWvTT_9RK0xLsPnYCK3-Cr8y"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<p class="font-title-md text-on-surface">Ricardo</p>
+<span class="font-label-sm text-secondary">+250</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-sm uppercase">Puzle Hidráulico</p>
+</div>
+</div>
+<!-- Member Card 3 -->
+<div class="bg-surface-container-low border-2 border-outline p-4 flex gap-4 items-center">
+<div class="w-16 h-16 bg-surface-container-high border border-outline p-1">
+<img alt="Family member avatar" class="w-full h-full object-cover" data-alt="Portrait of a teenage boy in a tech-integrated vest, holding a transparent tablet displaying AR coal mining blueprints. Neon mint accents and high contrast lighting. Gritty industrial setting with metallic reflections and a dark, moody color palette of deep blacks and rusty oranges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMzF5eqkd6bKWgdfFeVMQbnpiLKglT1puN60lyDmoyZ9JKqLvSQgFoqnYRWDjxrzmWV7i4qP51RWjLOwFVJq0RAs1AKtH0GlteiMtbwkDUUiI6T0kvbDSWq413kv4tlEWFFiCVgbqWYtGWZLr5a0A1Ps_YCJ-bG7aCscZcs5pqN77cu-U9lsamdahu5xObq8roBbqTN_ww1V4czoft2NAJweeBppaPV9d4P-KTuOm4Pk1p4X-wbppAG4BQbVD5tm62wz4jy-a6tOQq"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<p class="font-title-md text-on-surface">Mateo</p>
+<span class="font-label-sm text-secondary">+300</span>
+</div>
+<p class="text-on-surface-variant text-sm font-label-sm uppercase">Recolector de Datos</p>
+</div>
+</div>
+<!-- Card Stat - Shared Achievement -->
+<div class="bg-primary-container p-4 border-2 border-outline flex flex-col justify-center items-center text-on-primary-container">
+<span class="material-symbols-outlined text-4xl mb-2" data-icon="groups">groups</span>
+<p class="font-label-sm uppercase text-center font-bold">Sincronización Perfecta</p>
+<p class="text-xs text-center opacity-80">Finalizado en 12:45</p>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="mt-stack-lg flex flex-col gap-stack-sm">
+<button class="bg-primary text-on-primary font-label-sm py-4 w-full uppercase tracking-widest font-bold active:scale-95 transition-transform">
+                Continuar Expedición
+            </button>
+<button class="border-2 border-outline text-on-surface font-label-sm py-4 w-full uppercase tracking-widest hover:border-secondary transition-colors">
+                Ver Galería Familiar
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe bg-surface-container h-20 border-t-2 border-outline">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 transition-all duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple atmospheric interaction
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Flash effect simulation
+                const overlay = document.createElement('div');
+                overlay.className = 'fixed inset-0 bg-white opacity-10 z-[100] pointer-events-none';
+                document.body.appendChild(overlay);
+                setTimeout(() => overlay.remove(), 50);
+            });
+        });
+    </script>
+</body></html>

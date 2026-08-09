@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#bcc9ca",
+                        "on-tertiary-container": "#202c2d",
+                        "primary-container": "#ee671c",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary": "#263334",
+                        "on-secondary-fixed-variant": "#005142",
+                        "outline-variant": "#594238",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#65dabc",
+                        "on-secondary-fixed": "#002019",
+                        "surface-variant": "#353535",
+                        "tertiary-container": "#869394",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-primary-container": "#4c1a00",
+                        "on-primary": "#571e00",
+                        "on-secondary-container": "#003026",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-primary": "#a23f00",
+                        "secondary-fixed-dim": "#65dabc",
+                        "surface-tint": "#ffb595",
+                        "surface-bright": "#393939",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container": "#20201f",
+                        "secondary-fixed": "#82f7d8",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "primary-fixed": "#ffdbcd",
+                        "on-background": "#e5e2e1",
+                        "outline": "#a88a7e",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#e0c0b2",
+                        "background": "#131313",
+                        "on-secondary": "#00382d",
+                        "primary": "#ffb595",
+                        "on-primary-fixed": "#351000",
+                        "secondary-container": "#1ca388"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "48px",
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBOD2DB8zB9PBAD7WERnT4VsS2TFDQf96EdAthg4_IJfLZfQ4axw-cumjkOid6fSQKkiXUAEdr2yBMiy23pZVDefgAV2PNURq3ZMsHNDZZBVjP0YT2eR0wT88l0Kf6M63TlZt3BOhY4-JP8DJklqrs2PYETbZadOCdFqs7CyTwXbK7FYCbDfudtnfnTxq2BhcjhWYqXpQQKy0nTsipNHPZxYkbYqjmc0x8ugG2GhVXpgb4VxK0f7edGO1yWSJHcWyarKYz_C002W6EL);
+    opacity: 0.05
+    }
+.scan-line {
+    height: 2px;
+    background: #65dabc;
+    width: 100%;
+    position: absolute;
+    z-index: 20;
+    animation: scan 3s linear infinite;
+    box-shadow: 0 0 15px #65dabc
+    }
+@keyframes scan {
+    0% {
+        top: 0%;
+        } 100% {
+        top: 100%;
+        }
+    }
+.hard-inset {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.mechanical-flicker:active {
+    animation: flicker 0.15s ease-in-out
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        } 50% {
+        opacity: 0.3;
+        color: #65dabc;
+        } 100% {
+        opacity: 1;
+        }
+    }
+.sepia-filter {
+    filter: sepia(0.8) contrast(1.2) brightness(0.9)
+    }
+.ghost-overlay {
+    opacity: 0.35;
+    mix-blend-mode: screen;
+    filter: grayscale(1) invert(1)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface border-b-2 border-outline-variant flex justify-between items-center w-full px-margin-mobile h-16 z-50 fixed top-0 left-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border-2 border-primary overflow-hidden bg-surface-container-highest">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A close-up gritty portrait of a modern explorer wearing a vintage industrial coal mining helmet with a mounted lantern. The lighting is dramatic and high-contrast, casting deep shadows against a dark, textured slate background. The color palette is dominated by deep charcoal blacks and weathered copper tones, echoing a modern-brutalist industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmkErHfDchggUFCL0hVCSQyppM5hzEJR-E8Hk-UfmU5nbSIAIg-iQqVImQT9C0sA4pMfe4TybgodAv4EyBkKlvAGx_-lxq1UlcxcV5hBdr82ANclkKbNGC7jJ4bMAYkXzcxs9sGxcd5TPMANsvXSEc1lW_xIs68GvM6KtzLynRZ2S2YDUbpqkTu3qNDURRgZ3nnhLOws1vI6X0rhJ5630U_zN378S0R-FfOq2mJPF88nN4B0mZrjyaklAoEXAm09qXAXkZ0i_e0BFI"/>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter uppercase text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center bg-surface-container px-3 py-1 border border-outline-variant hard-inset">
+<span class="material-symbols-outlined text-primary mr-1 text-sm">filter_hdr</span>
+<span class="font-label-sm text-label-sm text-primary">500 Carboncillos</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 mb-20 relative flex flex-col overflow-hidden">
+<!-- Mission Header Section -->
+<section class="p-margin-mobile z-10 bg-surface-dim/80 backdrop-blur-md border-b-2 border-outline-variant">
+<div class="flex justify-between items-end mb-2">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tight">Misión: Arquitecto de Pabellones</h2>
+<p class="font-body-md text-on-surface-variant italic">Compara el ayer y hoy</p>
+</div>
+<div class="bg-primary-container/20 border border-primary-container px-2 py-1">
+<p class="font-label-sm text-label-sm text-primary-container uppercase">3 de 5 hitos completados</p>
+</div>
+</div>
+<div class="w-full bg-surface-container-highest h-2 flex gap-1">
+<div class="bg-primary-container w-1/5 h-full"></div>
+<div class="bg-primary-container w-1/5 h-full"></div>
+<div class="bg-primary-container w-1/5 h-full"></div>
+<div class="bg-surface-container-low w-1/5 h-full"></div>
+<div class="bg-surface-container-low w-1/5 h-full"></div>
+</div>
+</section>
+<!-- Split Screen Viewport -->
+<section class="flex-1 flex flex-col md:flex-row relative">
+<!-- Left: Historical Photo -->
+<div class="flex-1 relative border-b-2 md:border-b-0 md:border-r-2 border-outline-variant bg-surface-container overflow-hidden group">
+<img alt="Historical Miner Family" class="w-full h-full object-cover sepia-filter grayscale" data-alt="A detailed historical black and white photograph from the early 20th century depicting a large miner family standing proudly in front of a wooden pavilion in Lota. The family is dressed in period-accurate working-class clothing, with expressions of resilience. The setting is grainy and atmospheric, capturing the gritty industrial life of the era with high contrast and natural, soft daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbsXqI1mlfTtdXBCF6kXdDzLTVlbuqYFpU2rnbIJeEFAhkO9mim1K7Ucyz7A8VlSwgSm43U-SQmzpOEskhVjc80iwUt3B3FkEBZdnqeARfgVj0gO3UwW_DKoBRNKtVy8r4ld9Qu9rt7kp1g--R4SfAW4WCKEh9iS2y2ApbMGap7_7_5fhLd3nkmOwzQa3ekeRAclUHTLyLvOzTX6-CuNi8oaMKV3GwltgyF_9tbfZYKcHOpmFwtENlUTIZyfpGroRC8F7vKB8FDUpu"/>
+<div class="absolute top-4 left-4 bg-black/70 px-3 py-1 border border-white/20">
+<p class="font-label-sm text-label-sm text-white uppercase tracking-widest">Memoria: 1924</p>
+</div>
+<div class="coal-grain absolute inset-0 pointer-events-none"></div>
+</div>
+<!-- Right: Live AR Camera Feed -->
+<div class="flex-1 relative bg-surface-container-lowest overflow-hidden">
+<!-- Camera Placeholder with Blur -->
+<img alt="Live Camera View" class="w-full h-full object-cover brightness-50 contrast-125" data-alt="A first-person perspective live camera view of a modern-day architectural pavilion at a historic mining site. The scene is crisp and high-definition, showing weathered stone pillars and industrial metal structures. The lighting is bright afternoon sun with sharp shadows. A digital user interface overlay is visible with thin neon mint green lines framing the structure for alignment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaK5st1SmhwN5uZiWLrtOB6xuYT43mjW_YkGsvjEYSw7t7QtbhU6K5V1OUPzEGJzaiBRrca0zu0UPU_MpQPrbNQsFM6zLt_1J5J9pykmH2Lct21WPE8dOadJwZHoUnDE1bNYz_-g26qEexCz-YY3U07REEo37fO3O9nHvpKg2LH_6NYIsCk3XMyIX8Ycvr1ztiKm92B9fK6ypMnPXDJwQrl0QJuxF3Q3uYNFMM_9PErE0Tym1PTKx7mKDFLN2SygMr0xe8N8hXbyrv"/>
+<!-- Ghost Overlay -->
+<img alt="Ghost Guide" class="absolute inset-0 w-full h-full object-cover ghost-overlay pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGJ0z2-6SPBzxK6zsRQMBQrAY5EgS7Uf5dlGVA1sBPbxc7T9ryT7XI1vTS0IqSFRWoZQoRN7KLoir8ocj32sy5cjZXSVo_GghfVQoCbLdwqwpXdALq8DQ4iFB0n8hyjuX-WG6R4lou1Wum2CZ7LsLbtoqomQ0Hru2Wjc3155QLUK9ktziAsKV1jYT-idXZhcpFYrl1lRri6Kdi7-b8J4lGBQwDxbHYlMDyEWFPdXs0-fG1oKJuatCKDP9e6OePpjwzQCWcIv63UrVz"/>
+<!-- HUD Elements -->
+<div class="absolute inset-0 border-[20px] border-transparent pointer-events-none">
+<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-secondary"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-secondary"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-secondary"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-secondary"></div>
+<!-- Scan Line -->
+<div class="scan-line"></div>
+</div>
+<div class="absolute top-4 right-4 text-right">
+<p class="font-label-sm text-label-sm text-secondary bg-secondary/10 px-2 py-1 mb-1">SCANNING...</p>
+<p class="font-label-sm text-label-sm text-on-surface opacity-60">LAT: -37.0945<br/>LON: -73.1612</p>
+</div>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-48 h-48 border border-secondary/30 rounded-full flex items-center justify-center">
+<div class="w-4 h-4 bg-secondary shadow-[0_0_10px_#65dabc]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Panel -->
+<section class="p-margin-mobile bg-surface-container-high border-t-2 border-outline-variant z-20">
+<div class="mb-gutter">
+<p class="font-body-md text-on-surface leading-snug">
+<span class="font-bold text-primary">Instrucciones:</span> Alinea las columnas del Pabellón con la imagen histórica y captura la memoria para desbloquear el siguiente hito.
+                </p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary-container text-on-primary-container h-16 flex items-center justify-center gap-3 active:scale-95 transition-all mechanical-flicker hard-inset relative overflow-hidden group">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">photo_camera</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile uppercase font-black">Capturar</span>
+<div class="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12"></div>
+</button>
+<button class="w-16 h-16 border-2 border-outline-variant flex items-center justify-center text-on-surface-variant hover:text-secondary hover:border-secondary transition-colors hard-inset">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 bg-surface-container border-t-2 border-outline-variant pb-safe px-unit">
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<!-- Routes (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary bg-on-primary-container/10 border-t-4 border-primary h-full w-full mechanical-flicker" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">directions_run</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<!-- Scan -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for capture button flicker
+        const captureBtn = document.querySelector('button.bg-primary-container');
+        captureBtn.addEventListener('click', () => {
+            document.body.classList.add('brightness-150');
+            setTimeout(() => {
+                document.body.classList.remove('brightness-150');
+                // Simulate success vibration/flicker
+                const feedback = document.createElement('div');
+                feedback.className = 'fixed inset-0 bg-secondary/20 z-[100] pointer-events-none flex items-center justify-center';
+                feedback.innerHTML = '<span class="font-display-lg text-secondary uppercase animate-ping">CAPTURED</span>';
+                document.body.appendChild(feedback);
+                setTimeout(() => feedback.remove(), 1000);
+            }, 100);
+        });
+
+        // Toggle HUD elements for immersive feel
+        setInterval(() => {
+            const scanning = document.querySelector('.text-secondary');
+            if (scanning) {
+                scanning.style.opacity = scanning.style.opacity === '0.4' ? '1' : '0.4';
+            }
+        }, 800);
+    </script>
+</body></html>

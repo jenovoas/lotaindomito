@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBbL0R1l5hhlguo2U7lS96qRjn88mh8cYGeDzsXuNCNaUcmSrFcdCtMqwVVUjM013gNQ0_An3NmdLooDd31Qm-FHpOKBw9UjsdLOdyr6XJuvcSPfllobMfoqN79Pcdr5CokJpWZnQI9hsSFXShoJ_ylhh98fgCF5u81CwC-44ZG3l6HkNgecHCBjbhIwngnBDC9eJRC5u_OWR0H4-DPngoQHpMAazWzeMfZ4-oABC4nbGHjeY_SnSqD4CyO-DWfOn8nbVPUm1m_9qTX);
+    opacity: 0.05;
+    pointer-events: none
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+.gauge-segment {
+    height: 8px;
+    width: 15px;
+    background-color: #353535;
+    margin-right: 2px
+    }
+.gauge-segment.active {
+    background-color: #65dabc;
+    box-shadow: 0 0 8px #65dabc
+    }
+.industrial-inset {
+    box-shadow: inset 2px 2px 0 #353535, inset -1px -1px 0 #000
+    }
+.flicker-active {
+    animation: flicker 0.3s ease-in-out
+    }
+@keyframes flicker {
+    0% {
+        opacity: 0.5;
+        color: #ee671c;
+        } 50% {
+        opacity: 0.8;
+        color: #ffb595;
+        } 100% {
+        opacity: 1;
+        color: #ee671c;
+        }
+    }</style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#bcc9ca",
+                    "on-tertiary-container": "#202c2d",
+                    "primary-container": "#ee671c",
+                    "surface-dim": "#131313",
+                    "on-tertiary-fixed": "#121e1f",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "primary-fixed-dim": "#ffb595",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353535",
+                    "on-tertiary": "#263334",
+                    "on-secondary-fixed-variant": "#005142",
+                    "outline-variant": "#594238",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary": "#65dabc",
+                    "on-secondary-fixed": "#002019",
+                    "surface-variant": "#353535",
+                    "tertiary-container": "#869394",
+                    "surface": "#131313",
+                    "tertiary-fixed": "#d8e5e6",
+                    "on-primary-container": "#4c1a00",
+                    "on-primary": "#571e00",
+                    "on-secondary-container": "#003026",
+                    "surface-container-low": "#1c1b1b",
+                    "inverse-primary": "#a23f00",
+                    "secondary-fixed-dim": "#65dabc",
+                    "surface-tint": "#ffb595",
+                    "surface-bright": "#393939",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container": "#20201f",
+                    "secondary-fixed": "#82f7d8",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "primary-fixed": "#ffdbcd",
+                    "on-background": "#e5e2e1",
+                    "outline": "#a88a7e",
+                    "inverse-on-surface": "#313030",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#e0c0b2",
+                    "background": "#131313",
+                    "on-secondary": "#00382d",
+                    "primary": "#ffb595",
+                    "on-primary-fixed": "#351000",
+                    "secondary-container": "#1ca388"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "48px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg": ["Montserrat"],
+                    "title-md": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "body-lg": ["Work Sans"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "display-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface border-b-2 border-outline-variant fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary-container/20 border border-primary overflow-hidden rounded-full">
+<img class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="A gritty close-up portrait of a miner wearing a weathered metal helmet with a lamp, captured in a cinematic high-contrast industrial style. Deep shadows and warm copper highlights define the facial features, reflecting the Lota Indomito brand identity of unearthing history through a high-tech lens. The lighting is focused and dramatic, evoking the atmosphere of a deep coal mine." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwfqHUyXA9QKHI_nxqn4tcJchgi9fhTHUiMF5QA3Z0-KRESTxnQk6bjPyDiZl3uZN0yK5m-f0BNPDA2i9N3dqX7tG9Oh-ApFvbalpug5v_f5Z1f_lv_qHkAgAlV8XVm7KDzDSaJIKXytT50C5md_RqAFee4SDEVoB-brIDWeLB3Os31VjhKAVt-JLdswaIu7J84ER6cZrwM3QFeaBURZi7WDmf5Phy3R9vOoQDInsGJtM5wGI3eH4RFmAuUPTHeAlDopzoYaNIm0bl"/>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter uppercase text-primary dark:text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="bg-surface-container-highest px-3 py-1 flex items-center gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">500 Carboncillos</span>
+</div>
+</header>
+<main class="pt-16 pb-24 min-h-screen">
+<!-- Hero Section -->
+<section class="relative w-full h-[353px] flex flex-col justify-end p-margin-mobile overflow-hidden border-b-2 border-outline-variant">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale brightness-50" data-alt="A wide panoramic view of historic industrial coal mining architecture in Lota, Chile. The scene features weathered red-brick worker pavilions and towering metal headframes against a dramatic, overcast sky. The visual style is modern-brutalist with high-contrast, moody lighting and a grit-textured overlay. Deep blacks and rusty orange tones dominate the palette, capturing the indomitable spirit of the city's heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABs9d_cqkd4LCunlBdCpG33dvblpo5ag-0fqf1XK2TMfN_oleAzDS5HtV3o_FM0hSCHv-5Gr28aY7r0x-Sy0E9TbUeDFtZ3kbPBWEcqgdxYMDUB8LVK0JdJazH7oulMASPxEWQtm3ArV2cOw77aPLD6qI9BFPsv-Vlvcv-4azoyl4VzcE680YWnG0CJspDtKpGDaqv5fkmYtlO6j60uTWBlu83kBvFTtSdCsu0IsuhYt3-1pp1ZwWqZxL340prd4h0hq7rjx5xRX1K"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+</div>
+<div class="relative z-10">
+<div class="bg-primary px-2 py-0.5 inline-block mb-2">
+<span class="font-label-sm text-label-sm text-on-primary uppercase tracking-widest">Ruta Activa</span>
+</div>
+<h2 class="font-display-lg text-display-lg leading-none uppercase text-primary mb-1">Ruta Camina Lota</h2>
+<p class="font-title-md text-title-md text-secondary uppercase mb-4">Descubre el alma de los pabellones mineros</p>
+<div class="w-full h-[1px] bg-outline-variant mb-4"></div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">
+                    Recorre el trazado urbano que albergó a miles de familias mineras y descubre la arquitectura que forjó una identidad única.
+                </p>
+</div>
+<div class="coal-grain absolute inset-0"></div>
+</section>
+<!-- Progress HUD -->
+<section class="p-margin-mobile">
+<div class="bg-surface-container border-2 border-outline-variant p-4 industrial-inset">
+<div class="flex justify-between items-center mb-3">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">architecture</span>
+                        Misión: Arquitecto de Pabellones
+                    </h3>
+<span class="font-label-sm text-label-sm text-secondary">0/5 FOTOS</span>
+</div>
+<div class="flex gap-1">
+<!-- Gauge segments -->
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="flex-grow"></div>
+<span class="font-label-sm text-[10px] text-outline">ESTADO: INCOMPLETO</span>
+</div>
+</div>
+</section>
+<!-- Milestones List -->
+<section class="px-margin-mobile space-y-4">
+<h4 class="font-label-sm text-label-sm text-outline uppercase tracking-[0.2em] mb-4">Hitos de la Ruta</h4>
+<!-- Milestone Card 1 -->
+<div class="bg-surface-container border border-outline-variant flex flex-col md:flex-row overflow-hidden hover:border-primary transition-colors group">
+<div class="w-full md:w-32 h-32 bg-surface-variant relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Close up architectural detail of an old brick building with a large wooden door in Lota, Chile. The texture of the bricks is weathered and dusty, reflecting the coal mining history. The image is styled with high contrast, deep shadows, and a slight metallic tint to align with the modern-industrial aesthetic of Lota Indomito. The lighting is cinematic, emphasizing the tactile quality of the stone and brick." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUdbufg99v6meW3Y0yzWmBmxpkrJAg03H2VU6ESkjasRqn5BXilRfV8ytL-KLHAq7DJnZAA7vMJ5Yz-5sql1YDrcKJ9I8ajaenAB5Uti462lhhEs4NlJnk4XDMofdtHXMrl1wCU5-Qs4Aeu41r4e7WW8jzujwSc5dtY44KHhJYjU-ArQPNJ0v6vd82euLzoDNTYYYLLi86NF_f-wQIQigfJtYtJvZIAZyeo4-aKEM5uBiKOvhhty9vXOkuC0R7iglys1v0bS_ZUJhN"/>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+<div class="flex-grow p-4 flex flex-col justify-between">
+<div>
+<h5 class="font-title-md text-title-md text-on-surface mb-1 uppercase">Pabellón 83</h5>
+<p class="font-label-sm text-[10px] text-secondary uppercase mb-2">Centro Cultural</p>
+<div class="weld-line mb-3"></div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider active:scale-95 transition-transform">
+                            Check-in
+                        </button>
+<button class="px-3 py-2 border border-outline-variant hover:border-secondary hover:text-secondary font-label-sm text-label-sm text-on-surface-variant transition-colors uppercase">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Milestone Card 2 -->
+<div class="bg-surface-container border border-outline-variant flex flex-col md:flex-row overflow-hidden hover:border-primary transition-colors group">
+<div class="w-full md:w-32 h-32 bg-surface-variant relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A narrow alleyway between historic wooden worker houses in Lota, Chile, known as a 'pasaje'. The perspective is deep, with rough textures of wood and gravel under soft morning light. The color grading leans towards deep ochre and charcoal grey, maintaining the gritty industrial archaeology theme. Cinematic lighting creates long shadows, accenting the rhythmic repetition of the architectural structures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiyNclqRnJIbmLJrHp_6E62HTnXSXt3kJMU44lN-TyYqC0JMHeoG_QpeMVC965TExjOneYH88OiZyWETa7nBbWL7LfQarBTNO1KyMku2OXb5Qxa0GMt5xf1KCSrVaWYlGfH_p_8G_B-JjS_9XFqvR9rSiOjPB3yL0t8Nzb19yCQCCAfgJIrnQEb5vpABuY52OE26paMm9UWgf3xS6to6vIB3HPnGvTx1AodGX2LG5ER3IBTUxsUDApDVUuTZNOQSJWtymf1xsypqPw"/>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-on-surface-variant/30 text-[20px]">location_on</span>
+</div>
+</div>
+<div class="flex-grow p-4 flex flex-col justify-between">
+<div>
+<h5 class="font-title-md text-title-md text-on-surface mb-1 uppercase">Sector Chambeque</h5>
+<p class="font-label-sm text-[10px] text-secondary uppercase mb-2">Patrimonio Vivo</p>
+<div class="weld-line mb-3"></div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider active:scale-95 transition-transform">
+                            Check-in
+                        </button>
+<button class="px-3 py-2 border border-outline-variant hover:border-secondary hover:text-secondary font-label-sm text-label-sm text-on-surface-variant transition-colors uppercase">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Milestone Card 3 -->
+<div class="bg-surface-container border border-outline-variant flex flex-col md:flex-row overflow-hidden hover:border-primary transition-colors group">
+<div class="w-full md:w-32 h-32 bg-surface-variant relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Detailed view of a Neoclassical building facade in Lota, featuring weathered stone pillars and ornate cornices. The visual style is sharp and luminous, as if viewed through a digital archaeology lens. High contrast lighting emphasizes the decay and grandeur of the architecture, with a palette of stone greys and neon copper accents. The image captures the tension between the grit of history and the precision of the modern day." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGYfPzUc5gvz4MnWCURnc-tMgtKJDJ9SRDQtGUCYbIUVA7yGKJOeB8wvcwhbpDBGniIkst_p2fhQLhuZvz_7cKhWvXDbTZcfF9mu73f6ZAwcMUbqKE4720i34vvdQmf7NQIx-2fKm0ULqoh9oP6iglDMmaOClO59jWOu4X7O7l5Bm46qxEXT7PPcvUtkHYLcbhUk6xmI1DLoR6OILjfAroyCx9wgPDlsIdg_vSlUtLEvWA4h29S6y9CCocAH0p3Z3TRuHGjfOokcqW"/>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-on-surface-variant/30 text-[20px]">location_on</span>
+</div>
+</div>
+<div class="flex-grow p-4 flex flex-col justify-between">
+<div>
+<h5 class="font-title-md text-title-md text-on-surface mb-1 uppercase">Pasaje Cousiño</h5>
+<p class="font-label-sm text-[10px] text-secondary uppercase mb-2">Arquitectura Neoclásica</p>
+<div class="weld-line mb-3"></div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-primary-container text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider active:scale-95 transition-transform">
+                            Check-in
+                        </button>
+<button class="px-3 py-2 border border-outline-variant hover:border-secondary hover:text-secondary font-label-sm text-label-sm text-on-surface-variant transition-colors uppercase">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-surface-container dark:bg-surface-container border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary bg-on-primary-container/10 border-t-4 border-primary h-full w-full flicker-active" href="#">
+<span class="material-symbols-outlined" data-icon="directions_run">directions_run</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('flicker-active');
+                setTimeout(() => this.classList.remove('flicker-active'), 300);
+            });
+        });
+
+        // Atmospheric flickering effect for gauge segments
+        setInterval(() => {
+            const segments = document.querySelectorAll('.gauge-segment');
+            const randomIdx = Math.floor(Math.random() * segments.length);
+            if (!segments[randomIdx].classList.contains('active')) {
+                segments[randomIdx].style.opacity = '0.5';
+                setTimeout(() => segments[randomIdx].style.opacity = '1', 100);
+            }
+        }, 2000);
+    </script>
+</body></html>

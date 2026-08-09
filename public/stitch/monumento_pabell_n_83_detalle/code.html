@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .coal-dust {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 4px 4px;
+        }
+        .weld-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #594238, transparent);
+        }
+        .mechanical-gauge {
+            background: repeating-linear-gradient(90deg, #ee671c 0px, #ee671c 4px, transparent 4px, transparent 8px);
+        }
+        .neon-glow {
+            box-shadow: 0 0 12px 0 rgba(101, 218, 188, 0.4);
+        }
+        .inset-etch {
+            box-shadow: inset 1px 1px 0px rgba(255,255,255,0.05), inset -1px -1px 0px rgba(0,0,0,0.5);
+        }
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 22%, 24%, 55% { opacity: 0.4; }
+        }
+        .flicker-active {
+            animation: flicker 2s infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#bcc9ca",
+                        "on-tertiary-container": "#202c2d",
+                        "primary-container": "#ee671c",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#121e1f",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary": "#263334",
+                        "on-secondary-fixed-variant": "#005142",
+                        "outline-variant": "#594238",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary": "#65dabc",
+                        "on-secondary-fixed": "#002019",
+                        "surface-variant": "#353535",
+                        "tertiary-container": "#869394",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-primary-container": "#4c1a00",
+                        "on-primary": "#571e00",
+                        "on-secondary-container": "#003026",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-primary": "#a23f00",
+                        "secondary-fixed-dim": "#65dabc",
+                        "surface-tint": "#ffb595",
+                        "surface-bright": "#393939",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container": "#20201f",
+                        "secondary-fixed": "#82f7d8",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "primary-fixed": "#ffdbcd",
+                        "on-background": "#e5e2e1",
+                        "outline": "#a88a7e",
+                        "inverse-on-surface": "#313030",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#e0c0b2",
+                        "background": "#131313",
+                        "on-secondary": "#00382d",
+                        "primary": "#ffb595",
+                        "on-primary-fixed": "#351000",
+                        "secondary-container": "#1ca388"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "48px",
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile h-16 z-50 bg-surface border-b-2 border-outline-variant fixed top-0 left-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline flex items-center justify-center overflow-hidden">
+<img alt="User mining helmet avatar" class="w-full h-full object-cover" data-alt="A rugged portrait of a coal miner wearing a vintage safety helmet with a mounted lamp, presented in a high-contrast industrial photography style with deep shadows and metallic highlights, consistent with a dark gritty museum aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt5R6OJr_gr9Qf0VhsnxOGM9vJRD-9pg4OeO7jBz6_niQFjyKHIl64Dv8Zw1ZUDT_WXSUtpepT6f1XtuJmUUurfI_JBRVAH92_GTV12MUgG5zB_gbp4dk5u7tLg4Qo9yELk6kZwAtyhR85jGBJ1Biu_71IWQKCeMJ9rxWenb3PjwO45P1oQ0-QiF99utzi59_vpEIX4BJSAYDcx4S5Z2YBOapFs6SdxS-lt9fTeLrFwtrIB0pxV5MCneQ1-PB12pN_jEZAuAug7FML"/>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile tracking-tighter uppercase text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant inset-etch">
+<span class="material-symbols-outlined text-primary text-[18px]">workspace_premium</span>
+<span class="font-label-sm text-label-sm text-on-surface">500 Carboncillos</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-16 pt-unit">
+<!-- Hero Image Module -->
+<section class="relative w-full aspect-[4/3] bg-surface-container-lowest overflow-hidden">
+<img alt="Pabellón 83 building" class="w-full h-full object-cover opacity-80" data-alt="A monumental historic three-story wooden building with intricate industrial architecture, captured in dramatic low-light dusk conditions. The building is illuminated by warm orange interior lights contrasting against a deep coal-black sky. The photography is sharp and gritty, emphasizing the weathered texture of the wood and the imposing structural scale, following a modern-brutalist aesthetic with neon mint accents in the UI frame." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdwQmY7s-74bh22nRxAxgYpR2dk0WAU4gYLBkH-1CD0Uh3HIVhQfEqT1NInlDjzybk3scs9nIzlwDtXprBbaWAeNVsmAmPrYy_LA7S5XQK-QJd4mAvyTGyNJcTPQnNTDNuuWqVtz2WB_Lk7Wueap-ubRGVTuKpB3AeBb_uBOgwWw_1so2T7uBclKINnDpcAnx3kWKarFmCMVMTK_0DK_oegDtYf4DaqxUPyfu-y6O11LUoJ0BzTcfcae1G76Z1PhrjeiiCGNYIcWte"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<!-- HUD Overlays -->
+<div class="absolute top-4 left-4 border-l border-t border-secondary w-8 h-8 opacity-60"></div>
+<div class="absolute top-4 right-4 border-r border-t border-secondary w-8 h-8 opacity-60"></div>
+<div class="absolute bottom-4 left-4 flex flex-col font-label-sm text-label-sm text-secondary uppercase tracking-widest gap-1">
+<span>LAT: -37.0945</span>
+<span>LON: -73.1611</span>
+</div>
+<div class="absolute bottom-4 right-4 flex flex-col items-end gap-1">
+<div class="w-24 h-2 bg-surface-container-highest border border-outline-variant overflow-hidden">
+<div class="w-3/4 h-full mechanical-gauge"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase">Sync: 75%</span>
+</div>
+</section>
+<!-- Details Section -->
+<section class="px-margin-mobile -mt-8 relative z-10">
+<div class="bg-surface-container p-gutter border-2 border-outline-variant coal-dust relative overflow-hidden">
+<div class="w-full weld-line mb-gutter"></div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-1">Pabellón 83</h2>
+<p class="font-title-md text-title-md text-on-surface-variant mb-stack-sm uppercase tracking-tight">El Gigante de Madera</p>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed mb-stack-md">
+                    Construido en 1915, este edificio de tres pisos fue el hogar de 83 familias mineras. Hoy es un faro de cultura y resistencia patrimonial.
+                </p>
+<div class="flex items-center gap-2 mb-stack-lg">
+<span class="bg-surface-variant px-3 py-1 font-label-sm text-label-sm text-tertiary border border-outline-variant uppercase">Histórico</span>
+<span class="bg-surface-variant px-3 py-1 font-label-sm text-label-sm text-tertiary border border-outline-variant uppercase">Madera</span>
+<span class="bg-surface-variant px-3 py-1 font-label-sm text-label-sm text-secondary border border-secondary/30 uppercase neon-glow">Activo</span>
+</div>
+<!-- Mission Card -->
+<div class="bg-surface-container-low border border-outline-variant p-gutter mb-gutter relative">
+<div class="flex items-start gap-4">
+<div class="flex-shrink-0 w-12 h-12 bg-on-primary-container/20 flex items-center justify-center border border-primary-container text-primary-container">
+<span class="material-symbols-outlined text-[32px]">photo_camera</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Misión de Cámara</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-sm">
+                                Captura una perspectiva del frontis para comparar con la fotografía histórica de 1920.
+                            </p>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-[20px]">monetization_on</span>
+<span class="font-label-sm text-label-sm">Recompensa: 50 Carboncillos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container text-on-primary-container py-4 flex items-center justify-center gap-3 active:scale-95 transition-all duration-150 ease-in-out font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-tighter" onclick="this.classList.add('scale-95'); setTimeout(()=&gt;this.classList.remove('scale-95'), 150)">
+<span class="material-symbols-outlined">view_in_ar</span>
+<span>Abrir Cámara RA</span>
+</button>
+</div>
+</section>
+<!-- Historical Context Module -->
+<section class="px-margin-mobile mt-stack-lg mb-stack-lg">
+<div class="grid grid-cols-2 gap-unit">
+<div class="aspect-square bg-surface-container border border-outline-variant overflow-hidden group">
+<img alt="Historic coal mine workers" class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" data-alt="A vintage black and white photograph of coal miners in Lota, Chile, circa 1920. The men are shown with soot-covered faces and traditional mining gear, standing in front of a timber structure. The style is raw and historical, with film grain and sepia tones, reflecting the gritty industrial heritage of the Chilean mining era." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi439Whfw0EP9QnFi5DsxgZ2sHI0EIJgRlqa4rtrUj4SFCWTGwJv-l6E-dl_VtJeYZDAK65NOdvycU8bsL4dDz4n2TEKr7OMbtYj7UpY_2pYmyR1pPiRHzCO1y4_0AuIC7PgFoUBKEeeNSyOgYZMpdKwNY2qX7RGN30v6fKA6zgJVce8bsSiYC9JMCCnrZOeos_BE5VDNoU-ZncwrJNtIi7zwn4Ht5wF5wDcoiQ2vHkTC5Uq8sY8O6ICaKQqrTi_FlGGSSA4JfOC1M"/>
+</div>
+<div class="aspect-square bg-surface-container border border-outline-variant p-stack-sm flex flex-col justify-end">
+<span class="font-label-sm text-label-sm text-outline mb-1">Archivo #083</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase leading-tight">Planos originales de la estructura central de madera.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-unit bg-surface-container border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary bg-on-primary-container/10 border-t-4 border-primary h-full w-full" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">directions_run</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant h-full w-full opacity-70 hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Active nav items flicker briefly
+        document.querySelectorAll('nav a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if(!this.classList.contains('text-primary')) {
+                    const icon = this.querySelector('.material-symbols-outlined');
+                    icon.classList.add('flicker-active');
+                    setTimeout(() => {
+                        icon.classList.remove('flicker-active');
+                    }, 1000);
+                }
+            });
+        });
+
+        // Toggle AR Camera interaction
+        const cameraBtn = document.querySelector('button');
+        cameraBtn.addEventListener('click', () => {
+            console.log('Iniciando AR Viewport...');
+            // Simulated haptic feedback
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(20);
+            }
+        });
+    </script>
+</body></html>

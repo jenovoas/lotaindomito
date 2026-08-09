@@ -81,8 +81,8 @@ Thumbs.db
 *.webm
 *.mov
 
-# --- Stitch (prototipo estático, pesa y duplica lo del Drive) ---
-stitch_lota_ind_mito_ciudad_museo_gamificada/
+# --- Stitch: el prototipo se sirve desde el fan (no gitignored, va al repo) ---
+# stitch_lota_ind_mito_ciudad_museo_gamificada/
 
 # --- rclone bisync internals ---
 *.lst

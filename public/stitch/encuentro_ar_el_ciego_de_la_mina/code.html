@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lota Indómito - AR Encounter</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Predicted Tailwind Config Integrated -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ffb4ab",
+                "tertiary": "#bcc9ca",
+                "primary-container": "#ee671c",
+                "on-surface-variant": "#e0c0b2",
+                "on-primary": "#571e00",
+                "inverse-surface": "#e5e2e1",
+                "tertiary-fixed": "#d8e5e6",
+                "on-primary-fixed-variant": "#7c2e00",
+                "on-primary-container": "#4c1a00",
+                "surface-container-high": "#2a2a2a",
+                "on-background": "#e5e2e1",
+                "primary": "#ffb595",
+                "on-primary-fixed": "#351000",
+                "inverse-on-surface": "#313030",
+                "secondary-container": "#1ca388",
+                "secondary": "#65dabc",
+                "on-tertiary-fixed-variant": "#3d494a",
+                "on-error": "#690005",
+                "surface-variant": "#353535",
+                "on-secondary-fixed-variant": "#005142",
+                "primary-fixed": "#ffdbcd",
+                "on-secondary": "#00382d",
+                "surface": "#131313",
+                "surface-tint": "#ffb595",
+                "secondary-fixed": "#82f7d8",
+                "on-tertiary-fixed": "#121e1f",
+                "inverse-primary": "#a23f00",
+                "surface-container-highest": "#353535",
+                "outline": "#a88a7e",
+                "tertiary-fixed-dim": "#bcc9ca",
+                "surface-container": "#20201f",
+                "on-secondary-fixed": "#002019",
+                "surface-dim": "#131313",
+                "error-container": "#93000a",
+                "primary-fixed-dim": "#ffb595",
+                "outline-variant": "#594238",
+                "background": "#131313",
+                "surface-container-lowest": "#0e0e0e",
+                "on-tertiary-container": "#202c2d",
+                "tertiary-container": "#869394",
+                "on-secondary-container": "#003026",
+                "surface-bright": "#393939",
+                "secondary-fixed-dim": "#65dabc",
+                "on-error-container": "#ffdad6",
+                "surface-container-low": "#1c1b1b",
+                "on-surface": "#e5e2e1",
+                "on-tertiary": "#263334"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "4px",
+                "margin-mobile": "20px",
+                "stack-md": "24px",
+                "stack-lg": "48px",
+                "gutter": "16px",
+                "stack-sm": "8px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "display-lg": ["Montserrat"],
+                "body-md": ["Work Sans"],
+                "headline-lg": ["Montserrat"],
+                "body-lg": ["Work Sans"],
+                "label-sm": ["JetBrains Mono"],
+                "title-md": ["Montserrat"],
+                "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>.flicker-effect:active {
+    opacity: 0.7
+    }
+.neon-glow {
+    filter: drop-shadow(0 0 8px #65dabc)
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD8ppiVuzS2W2yvb8LNuhBqmeXzM0WbEeFqCSDkmXUPsohRNCGwcVGEauzIMNSpHPO453AXtHE_IPotCoZ9-mlDqpf1yQ2Atu8uaXt3TaRuK_Iu_OvqdaHxc5fZWHSQMEcSozE34j3N4xE3llUSvsOcNcB88MLg1ooq4kfwnGntqS0-LIJ5xK-b6pYEgsQmekFepZmKY8mhCCZni9q5EvWN205N3T7lsuuFgdbpZrjhGy3Jdr__G_CGrCbISHAkM4p5Z6vxLZP1kbJv)
+    }
+.scanline {
+    width: 100%;
+    height: 2px;
+    background: rgba(101, 218, 188, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: move-scanline 4s linear infinite
+    }
+@keyframes move-scanline {
+    from {
+        top: 0%;
+        } to {
+        top: 100%;
+        }
+    }
+.vignette {
+    background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8) 100%)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary selection:text-on-secondary overflow-hidden h-screen w-screen">
+<!-- AR VIEWPORT (BACKGROUND) -->
+<div class="fixed inset-0 z-0">
+<img class="w-full h-full object-cover grayscale brightness-50 contrast-125" data-alt="A dark, atmospheric underground coal mine tunnel within the Chifl\u00f3n del Diablo, featuring rough-hewn stone walls and rusted support beams. In the center, a spectral, semi-transparent 3D figure of a miner glows with an ethereal cyan light. The lighting is low-key with high-contrast shadows, emphasizing the gritty industrial texture of the cave. The visual style is a mix of modern augmented reality and raw tactile industrialism, consistent with a dark mode aesthetic using neon accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeIbDgJn2rnVtY7vFGSP5ljkbmmuUYd-90NSKJpmqX96WeCGy3BqmOQlfKNZFI77iVZnesaBESPpWbsJ1UrByXYKU7Tro1z9lOyiEsehFndMikicAMisFhd2EXqKf1WGBJa5RQRJ1V7x_KrNNfhQko2hwB8esgdo72gvVRi1EsXZVhqUda6g7V0_9zq1MV23rfct4SGtAe2DcULVJYctD2PLGNc5Tf-ocEk-96end9bOFDYYwp4IFzvyOvJ8SjyPCC5Q8i8pvgmHJf"/>
+<div class="vignette absolute inset-0"></div>
+<div class="scanline"></div>
+<!-- Spectral Character Visual (AR Object) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-64 h-96 neon-glow opacity-80 flex flex-col items-center">
+<!-- Representing the Spectral Miner via Icon/Silhouette simulation -->
+<span class="material-symbols-outlined text-[120px] text-secondary" style="font-variation-settings: 'FILL' 0; font-weight: 100;">person_apron</span>
+<div class="mt-stack-sm px-4 py-1 bg-secondary/20 border border-secondary text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+                    El Ciego de la Mina
+                </div>
+</div>
+</div>
+</div>
+<!-- UI LAYER: TOP APP BAR -->
+<header class="fixed top-0 left-0 w-full z-20 bg-surface/80 backdrop-blur-md flex justify-between items-center px-margin-mobile py-stack-sm border-b-2 border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up profile of a miner rank badge icon with weathered metallic textures and stamped industrial lettering. The lighting is focused and dramatic, highlighting the grit and history of the emblem in a dark mode setting with orange highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkvcDUd4ZKv3xbumkrs_ecfhzO2h1No_fM8U88O9MRmprtLaq_0973BeiShNdeEupsuYSdO_OIIyYVy3btmlbeW3wXggrQURsO0czg5UtPiVLGYTYRMBy3q7iyn-X5U7ApB-n6BpmOwMjf7zLpIbJjMRJf6-4iMjxlADLu5DT3CDFuba4umtSC5p7uRTvpLrBCi7g2jQOgrgmByIYMJcwgSUYKGS1r-Oht3ui8EwY1EpFILjD7kG0CqUkA3WgCm2AJjF6g_zQwtUuS"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-surface-container-high px-3 py-1 border border-outline-variant flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-primary">150 💎</span>
+</div>
+</div>
+</header>
+<!-- AR HUD: COORDINATES & SENSORS (ASIDE) -->
+<aside class="fixed top-24 left-margin-mobile z-10 hidden md:flex flex-col gap-unit">
+<div class="font-label-sm text-label-sm text-secondary flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary animate-pulse"></span>
+            LAT: -37.0945 | LON: -73.1610
+        </div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">DEPTH: -350M</div>
+<div class="mt-stack-md w-32">
+<div class="flex justify-between font-label-sm text-[10px] text-on-surface-variant mb-1">
+<span>OXYGEN</span>
+<span>88%</span>
+</div>
+<div class="h-1 bg-surface-container flex gap-1">
+<div class="w-1/4 h-full bg-secondary"></div>
+<div class="w-1/4 h-full bg-secondary"></div>
+<div class="w-1/4 h-full bg-secondary"></div>
+<div class="w-1/4 h-full bg-surface-variant"></div>
+</div>
+</div>
+</aside>
+<!-- INTERACTION CANVAS (MAIN CONTENT) -->
+<main class="relative z-10 w-full h-full flex flex-col justify-end pb-40 px-margin-mobile pointer-events-none">
+<!-- Challenge Card (Bento Style) -->
+<div class="w-full max-w-md mx-auto flex flex-col gap-gutter pointer-events-auto">
+<!-- Dialogue/Prompt Box -->
+<div class="bg-surface/90 border-2 border-outline-variant coal-grain p-stack-md relative overflow-hidden">
+<div class="absolute top-0 right-0 p-unit bg-primary text-on-primary font-label-sm text-[10px] uppercase">New Encounter</div>
+<h2 class="font-title-md text-title-md text-primary mb-unit">Listen to the Legend</h2>
+<p class="font-body-md text-body-md text-on-surface mb-stack-md leading-tight">
+                    "The darkness took my eyes, but the coal keeps my heart. Find my lamp, stranger, and the gallery will open for you."
+                </p>
+<div class="grid grid-cols-2 gap-stack-sm">
+<!-- Audio Button -->
+<button class="flex items-center justify-center gap-2 bg-surface-container-highest border-2 border-outline-variant py-stack-sm hover:border-secondary transition-colors flicker-effect group">
+<span class="material-symbols-outlined text-secondary" data-icon="volume_up">volume_up</span>
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant group-hover:text-secondary">Audio Log</span>
+</button>
+<!-- Challenge Action -->
+<button class="flex items-center justify-center gap-2 bg-primary py-stack-sm border-2 border-primary hover:bg-transparent hover:text-primary transition-all flicker-effect group">
+<span class="material-symbols-outlined text-on-primary group-hover:text-primary" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm uppercase text-on-primary group-hover:text-primary">Find Tool</span>
+</button>
+</div>
+</div>
+<!-- Reward Notification (Mini Card) -->
+<div class="flex items-center justify-between bg-secondary-container/20 border-2 border-secondary p-stack-sm backdrop-blur-sm">
+<div class="flex items-center gap-stack-sm">
+<div class="w-8 h-8 bg-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-sm" data-icon="token">token</span>
+</div>
+<div>
+<div class="font-label-sm text-[10px] text-secondary uppercase leading-none">Reward Potential</div>
+<div class="font-title-md text-title-md text-on-secondary-container">+25 Carboncillo</div>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-secondary animate-pulse">PENDING...</div>
+</div>
+</div>
+</main>
+<!-- FAB (Contextual for Home/Scan) -->
+<button class="fixed bottom-28 right-margin-mobile z-30 w-16 h-16 bg-primary-container text-on-primary-container flex items-center justify-center border-4 border-surface shadow-lg transition-transform active:scale-95">
+<span class="material-symbols-outlined text-3xl" data-icon="photo_camera" style="font-variation-settings: 'FILL' 1;">photo_camera</span>
+</button>
+<!-- BOTTOM NAV BAR -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 rect-none scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<!-- AR SAFE ZONE OVERLAY (SIMULATED) -->
+<div class="fixed bottom-0 left-0 w-full h-20 pointer-events-none z-40 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<script>
+        // Micro-interaction for the "Find Tool" button
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Flash effect simulation
+                const flash = document.createElement('div');
+                flash.className = 'fixed inset-0 bg-white opacity-20 z-[60] pointer-events-none';
+                document.body.appendChild(flash);
+                setTimeout(() => flash.remove(), 50);
+            });
+        });
+
+        // Ambient Flicker Logic for Spectral character
+        setInterval(() => {
+            const char = document.querySelector('.neon-glow');
+            if(char) {
+                char.style.opacity = (0.6 + Math.random() * 0.3).toString();
+            }
+        }, 150);
+    </script>
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lota Indómito - Oficios de Mar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>@keyframes flicker {
+    0% {
+        opacity: 0.95;
+        } 5% {
+        opacity: 0.8;
+        } 10% {
+        opacity: 1;
+        } 15% {
+        opacity: 0.9;
+        } 80% {
+        opacity: 1;
+        } 100% {
+        opacity: 0.95;
+        }
+    }
+.flicker-effect:active {
+    animation: flicker 0.1s infinite
+    }
+.metal-etch {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.8)
+    }
+.neon-glow {
+    box-shadow: 0 0 12px 2px rgba(101, 218, 188, 0.4)
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAIS1P7ZsAUqYWmQIYso4lu9LCZciCRcBnTt57GNSF1a76TNs69Pmhyc6XZo-vRQdsp9Ve2mucpOvnvWoRDSPKGo5TkUsJGKgzBJDncXiTxmd0W7A36VrpZP32xMnbMMNGaeRxkoiR6NW0Pd3G4ieQIH7paCwfqXMZVvPMgpQbzNwfFeJiKu4IUufWX_ab_YpUNt6HR19znlO0xptWOCysL2GH8O-Tzaf1PdsfceG_lqdyvcRHnsMBK98co7cpTakf1aaCfRuMJ1wOF);
+    background-blend-mode: overlay
+    }
+.segment-bar span {
+    width: 8px;
+    height: 100%;
+    margin-right: 2px;
+    background-color: #1ca388
+    }
+.segment-bar span.inactive {
+    background-color: #353535
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#1c1b1b",
+                      "tertiary": "#bcc9ca",
+                      "on-surface-variant": "#e0c0b2",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#ffb595",
+                      "on-secondary-container": "#003026",
+                      "surface": "#131313",
+                      "secondary-container": "#1ca388",
+                      "outline-variant": "#594238",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary": "#263334",
+                      "inverse-surface": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "surface-bright": "#393939",
+                      "on-primary": "#571e00",
+                      "on-secondary-fixed": "#002019",
+                      "inverse-primary": "#a23f00",
+                      "primary-container": "#ee671c",
+                      "background": "#131313",
+                      "secondary": "#65dabc",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#313030",
+                      "outline": "#a88a7e",
+                      "tertiary-fixed": "#d8e5e6",
+                      "on-secondary": "#00382d",
+                      "on-background": "#e5e2e1",
+                      "tertiary-fixed-dim": "#bcc9ca",
+                      "primary": "#ffb595",
+                      "on-tertiary-container": "#202c2d",
+                      "on-tertiary-fixed-variant": "#3d494a",
+                      "secondary-fixed": "#82f7d8",
+                      "primary-fixed-dim": "#ffb595",
+                      "on-primary-fixed-variant": "#7c2e00",
+                      "secondary-fixed-dim": "#65dabc",
+                      "primary-fixed": "#ffdbcd",
+                      "on-primary-fixed": "#351000",
+                      "on-primary-container": "#4c1a00",
+                      "surface-variant": "#353535",
+                      "on-secondary-fixed-variant": "#005142"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0px",
+                      "lg": "0px",
+                      "xl": "0px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "24px",
+                      "gutter": "16px",
+                      "stack-lg": "48px",
+                      "unit": "4px",
+                      "margin-desktop": "40px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-md": ["Work Sans"],
+                      "display-lg": ["Montserrat"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "title-md": ["Montserrat"],
+                      "body-lg": ["Work Sans"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-lg": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary border-b-2 border-outline-variant flex justify-between items-center w-full px-margin-mobile py-stack-sm z-40 fixed top-0 left-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 border-2 border-secondary flex items-center justify-center p-1">
+<img alt="Miner Rank" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEKGUgMGrylBjsoPnXhAs1Bi_IImmA88YYRjfgMPo1vXjElB9RcSsDnPvnDZeLCtCbpWafD11Qd378lWrR5SDSulZunETySyO4uNyp5Stnjne4OBZ6K1NVsl2B2ZaTSLOecaY1U5aojqPYDgO0bFJkxK3nNuBlUxhGCmC8zgCpJoMF-AsGl5Z4dpldSTivpdNG9CzDARl7YE02W1vHIChUsCtJfckIfuUMZ6vKQ3-e33xDVHhJcDaeYWPEHE2UlwrYF7EU60gv3Vzp"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">LOTA INDÓMITO</h1>
+</div>
+<button class="bg-surface-container-high border border-outline px-3 py-1 font-label-sm text-label-sm flex items-center gap-1 flicker-effect active:scale-95 transition-all">
+            150 <span class="text-secondary">💎</span>
+</button>
+</header>
+<!-- AR Immersive Viewport -->
+<main class="relative flex-grow mt-[60px] pb-20">
+<!-- Background Simulated AR Camera View -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover brightness-50 contrast-125" data-alt="A wide angle coastal scene of Lota, Chile, at dusk with rugged grey cliffs and a turbulent dark sea. The lighting is cinematic with deep orange sunset hues mixing with cold teal shadows. A modern digital interface overlay creates a high-tech archaeological feel with neon mint scan lines and industrial grid patterns, evoking a gritty and indomitable atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd1vcJqeGSxfowfRZag9aewHyVzpT4kdaUvsvbktBQSy_KxkYJ01zYQHot1dRTmwXRkqyPy46dWtpPm-AtNEIlpfQl_K1Wf-QX-FYq2vXjH_g7o1UY1utmmoxzw9KRnafsuAqXbu6TAW90J7IeJ-XANO2YvtnxFMPFDfxD1rEfzlL_xVOrJ_n0EH8xxqXykGrpvHLSaY-caVEzBNkmkN8kyMy90PmVIXZwrX_0Yn0EXdnLSGOPyfBgzc2wVvLUXVD-7Gymtgh80PjG"/>
+</div>
+<!-- AR HUD Elements -->
+<div class="absolute inset-0 z-10 p-margin-mobile pointer-events-none">
+<!-- Coordinates HUD -->
+<div class="absolute top-4 left-4 border-l-2 border-t-2 border-secondary p-2 bg-surface/40 backdrop-blur-sm">
+<p class="font-label-sm text-[10px] text-secondary">LOC: 37.0911° S, 73.1614° W</p>
+<p class="font-label-sm text-[10px] text-secondary">SCANNING AREA: EL BLANCO</p>
+</div>
+<!-- Virtual Character Overlay (Chinchorrera) -->
+<div class="absolute bottom-24 right-4 w-48 pointer-events-auto">
+<div class="relative">
+<img class="w-full h-auto drop-shadow-[0_0_15px_rgba(101,218,188,0.3)] filter brightness-110" data-alt="A stylized digital representation of a traditional Chilean seaweed harvester, a Chinchorrera. She wears a weathered headscarf and industrial-era clothing, rendered in a high-contrast digital archaeology style with neon green outlines. The character appears as a holographic guide against a dark, rugged coastal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwtZj8sKGE9Tjm74SNCGiEJ3FMyjTflLUcgRJyISUoMLkCW-cH8Gie3-oOtzIKt-Ki_cCbtJG34G069-7rHJIgaBv3oZ6U-LRKYa1-g_kpfRH9fIuMg1KPcPTgTQ4UYdo2KtRM_h86TbIU-IlxHdwWYlDNz9BNm-5lCjz4EzVWBAZL8dBQ2YIqwhqgYixS-Fbxqednh48r8VdFWtiIrAwbyPz-8-6I45biMmLA8ZFlYyA63MQQFDeqpLNdGDmhggBYkBAyi_6n49oB"/>
+<div class="absolute -top-12 -left-20 bg-surface-container border-2 border-outline p-3 w-48 pointer-events-none metal-etch">
+<p class="font-label-sm text-on-surface leading-tight italic">"The sea yields its riches only to the patient. Help me collect the 'Luga' seaweed before the tide turns."</p>
+</div>
+</div>
+</div>
+<!-- Mission Details Panel -->
+<div class="absolute top-4 right-4 bg-surface-container/80 border-2 border-outline-variant p-stack-sm w-48 metal-etch">
+<h2 class="font-label-sm text-secondary uppercase mb-1">MISIÓN: OFICIOS DE MAR</h2>
+<div class="h-[1px] bg-outline-variant w-full mb-2"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant">SUB-TASK: CHINCHORREANDO EN EL BLANCO</p>
+</div>
+</div>
+<!-- Task Interaction HUD (Interactive Layer) -->
+<div class="absolute bottom-10 inset-x-0 px-margin-mobile z-20 flex flex-col items-center">
+<!-- Progress Bar -->
+<div class="w-full max-w-md bg-surface border-2 border-outline-variant p-stack-sm coal-grain mb-gutter">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-secondary text-[10px] uppercase">Chinchorreo Progress</span>
+<span class="font-label-sm text-secondary" id="progress-text">65%</span>
+</div>
+<div class="h-4 flex segment-bar w-full overflow-hidden" id="progress-container">
+<!-- JS will fill segments -->
+<span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="flex-grow"></span><span class="inactive flex-grow"></span><span class="inactive flex-grow"></span><span class="inactive flex-grow"></span><span class="inactive flex-grow"></span><span class="inactive flex-grow"></span>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full max-w-md bg-primary-container text-on-primary-container h-14 font-headline-lg-mobile uppercase flex items-center justify-center gap-2 active:scale-95 transition-transform flicker-effect border-b-4 border-r-4 border-on-primary-container active:border-0 neon-glow" onclick="handleCollect()">
+<span class="material-symbols-outlined" data-icon="back_hand">back_hand</span>
+                COLLECT RESOURCES
+            </button>
+</div>
+<!-- Success Toast (Hidden) -->
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 opacity-0 pointer-events-none transition-opacity duration-300" id="toast">
+<div class="bg-secondary-container text-on-secondary-container p-6 border-4 border-secondary flex flex-col items-center gap-4">
+<span class="material-symbols-outlined text-4xl" data-icon="check_circle">check_circle</span>
+<p class="font-headline-lg uppercase text-center">Seaweed Collected!</p>
+<p class="font-label-sm">+25 EXP</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<script>
+        let progress = 65;
+        const totalSegments = 20;
+
+        function updateUI() {
+            const container = document.getElementById('progress-container');
+            const text = document.getElementById('progress-text');
+            const segments = container.getElementsByTagName('span');
+            
+            text.innerText = progress + '%';
+            
+            const activeCount = Math.floor((progress / 100) * totalSegments);
+            
+            for(let i = 0; i < totalSegments; i++) {
+                if (i < activeCount) {
+                    segments[i].classList.remove('inactive');
+                    segments[i].classList.add('bg-secondary');
+                } else {
+                    segments[i].classList.add('inactive');
+                    segments[i].classList.remove('bg-secondary');
+                }
+            }
+        }
+
+        function handleCollect() {
+            if (progress < 100) {
+                progress = Math.min(100, progress + 5);
+                updateUI();
+                
+                if (progress === 100) {
+                    const toast = document.getElementById('toast');
+                    toast.classList.remove('opacity-0');
+                    setTimeout(() => {
+                        toast.classList.add('opacity-0');
+                    }, 2000);
+                }
+            }
+        }
+
+        // Initialize HUD elements
+        window.onload = () => {
+            // Apply flicker randomly to secondary items
+            setInterval(() => {
+                const indicators = document.querySelectorAll('.text-secondary');
+                indicators[Math.floor(Math.random() * indicators.length)].style.opacity = Math.random() > 0.9 ? '0.5' : '1';
+            }, 150);
+        };
+    </script>
+</body></html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómito - Bitácora de Oficios</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.flicker-effect:active {
+    opacity: 0.7;
+    transition: opacity 75ms
+    }
+.etch-shadow {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.8)
+    }
+.neon-glow {
+    box-shadow: 0 0 12px #65dabc
+    }
+.coal-dust {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDpyzf5_x3DrXSLVq_sJ8asziFBjxc7EZeaa4LZf_Ou1QFqRvhxYfRw5_Sn5dv5ZJWKE3pxjltMNaF6emCz0SKKeTEb9tmB7FooMVygZ4qNsbDcsfBAuJ4sv7EAq-2_cAm70qAfYv8903NI-w37pqLKrEER6P5OByD6pwJDh31tU0gji_TxGxK14e_3CgYKOMGhN5zRRHzEp0pfaH9qkdx7N1ouo9sP7T_Fa4u6-4aDLV8IKB9Rl7EryKvkFlBOmTMBnK7bCjAqrxO3)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+body {
+    background-color: #131313;
+    color: #e5e2e1;
+    overflow-x: hidden
+    }
+.sepia-overlay {
+    filter: sepia(0.8) contrast(1.2) brightness(0.8)
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#1c1b1b",
+                      "tertiary": "#bcc9ca",
+                      "on-surface-variant": "#e0c0b2",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#ffb595",
+                      "on-secondary-container": "#003026",
+                      "surface": "#131313",
+                      "secondary-container": "#1ca388",
+                      "outline-variant": "#594238",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary": "#263334",
+                      "inverse-surface": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "surface-bright": "#393939",
+                      "on-primary": "#571e00",
+                      "on-secondary-fixed": "#002019",
+                      "inverse-primary": "#a23f00",
+                      "primary-container": "#ee671c",
+                      "background": "#131313",
+                      "secondary": "#65dabc",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#313030",
+                      "outline": "#a88a7e",
+                      "tertiary-fixed": "#d8e5e6",
+                      "on-secondary": "#00382d",
+                      "on-background": "#e5e2e1",
+                      "tertiary-fixed-dim": "#bcc9ca",
+                      "primary": "#ffb595",
+                      "on-tertiary-container": "#202c2d",
+                      "on-tertiary-fixed-variant": "#3d494a",
+                      "secondary-fixed": "#82f7d8",
+                      "primary-fixed-dim": "#ffb595",
+                      "on-primary-fixed-variant": "#7c2e00",
+                      "surface-dim": "#131313",
+                      "surface-container": "#20201f",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-highest": "#353535",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary-fixed": "#121e1f",
+                      "tertiary-container": "#869394",
+                      "secondary-fixed-dim": "#65dabc",
+                      "primary-fixed": "#ffdbcd",
+                      "on-primary-fixed": "#351000",
+                      "on-primary-container": "#4c1a00",
+                      "surface-variant": "#353535",
+                      "on-secondary-fixed-variant": "#005142"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "24px",
+                      "gutter": "16px",
+                      "stack-lg": "48px",
+                      "unit": "4px",
+                      "margin-desktop": "40px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-md": ["Work Sans"],
+                      "display-lg": ["Montserrat"],
+                      "headline-lg-mobile": ["Montserrat"],
+                      "title-md": ["Montserrat"],
+                      "body-lg": ["Work Sans"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-lg": ["Montserrat"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background selection:bg-secondary selection:text-on-secondary">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-5 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high etch-shadow flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-weight="fill">workspace_premium</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 etch-shadow">
+<span class="font-label-sm text-label-sm text-on-surface">150</span>
+<span class="text-sm">💎</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-5 max-w-4xl mx-auto">
+<!-- Hero Section / Title -->
+<section class="mb-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-8 h-[1px] bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Digital Archaeology</span>
+</div>
+<h2 class="font-display-lg text-4xl font-black uppercase text-on-surface leading-none mb-4">Bitácora de Oficios: Mar</h2>
+<p class="font-body-lg text-on-surface-variant max-w-prose border-l-2 border-secondary pl-4 py-1 italic">
+                Un registro táctico de las tradiciones pesqueras de Lota. Cada término desbloqueado representa un fragmento de la identidad indómita de la costa.
+            </p>
+</section>
+<!-- Stats Grid (HUD Style) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant mb-12 border-2 border-outline-variant">
+<div class="bg-surface p-4 flex flex-col">
+<span class="font-label-sm text-[10px] text-tertiary uppercase">Desbloqueado</span>
+<span class="font-headline-lg-mobile text-secondary">14 / 45</span>
+</div>
+<div class="bg-surface p-4 flex flex-col">
+<span class="font-label-sm text-[10px] text-tertiary uppercase">Rango</span>
+<span class="font-headline-lg-mobile text-primary">Contramaestre</span>
+</div>
+<div class="bg-surface p-4 flex flex-col">
+<span class="font-label-sm text-[10px] text-tertiary uppercase">Zonas Expl.</span>
+<span class="font-headline-lg-mobile text-on-surface">62%</span>
+</div>
+<div class="bg-surface p-4 flex flex-col">
+<span class="font-label-sm text-[10px] text-tertiary uppercase">Sincronía</span>
+<span class="font-headline-lg-mobile text-secondary">A+</span>
+</div>
+</div>
+<!-- Glossary Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1: Chinchorro -->
+<article class="group relative bg-surface border-2 border-outline-variant etch-shadow overflow-hidden coal-dust">
+<div class="aspect-video overflow-hidden relative border-b-2 border-outline-variant">
+<img alt="Chinchorro" class="w-full h-full object-cover sepia-overlay transition-transform duration-700 group-hover:scale-110" data-alt="A gritty, historical monochrome photograph of Chilean fishermen in Lota pulling a massive, heavy-duty fishing net called a Chinchorro from the dark, churning ocean onto a rocky shore. The atmosphere is foggy and industrial, with late 19th-century gear and weathered textures. The lighting is dramatic and high-contrast, echoing a modern-brutalist aesthetic with deep blacks and sepia tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYuneOkV6eN_MuiqkO9Q0DUbymGOzo2J5dSrsKHt5R_rtsA81UrvSe0hpXXQlZAvCXshqQEsujtBkG0onMGsYt5gbJo1ar3lDCeJRPGnkvQmUab2qo6ZOdhWOXhtfOTUibP4LtT7ZCuwBXaTHsWrK_rsTxZyCpuCtTGvIwrhu3NUZQIUibn-4tDZf6uKQeSNVYcWlKbuBcK89NenF30328Iq78EeBoPobTOR-8eM4833kSAPfPtaH14fYKHX3cH2cN4vrvVZDQsGYl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-2 py-1 font-label-sm text-[10px] neon-glow">DESBLOQUEADO</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline-lg-mobile text-primary font-black uppercase tracking-tighter">Chinchorro</h3>
+<span class="font-label-sm text-tertiary">REF: MAR-001</span>
+</div>
+<div class="weld-line mb-4"></div>
+<p class="font-body-md text-on-surface-variant mb-6">
+                        Red de arrastre de gran envergadura operada desde la orilla. Requiere la fuerza coordinada de la comunidad para ser recuperada del mar.
+                    </p>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary text-on-primary font-label-sm py-2 uppercase hover:bg-surface-tint transition-colors flicker-effect">Detalles</button>
+<button class="w-12 h-10 border-2 border-outline-variant flex items-center justify-center hover:border-secondary transition-colors group-hover:text-secondary">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+<div class="absolute top-0 right-0 p-2 opacity-10 font-label-sm text-[40px] select-none pointer-events-none">01</div>
+</article>
+<!-- Card 2: Palancre -->
+<article class="group relative bg-surface border-2 border-outline-variant etch-shadow overflow-hidden coal-dust">
+<div class="aspect-video overflow-hidden relative border-b-2 border-outline-variant">
+<img alt="Palancre" class="w-full h-full object-cover sepia-overlay transition-transform duration-700 group-hover:scale-110" data-alt="A close-up, historical sepia photograph of intricate maritime knotting and traditional longline fishing equipment known as Palancre. The image features thick, salted ropes and rusted iron hooks resting on a weathered wooden ship deck. The lighting highlights the tactile, gritty texture of the materials against a backdrop of a dark, industrial port. The style is vintage but captured with digital-archaeology precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi9H046MiHe3xXIXVO1MVbg8xav90ZELi00zpDvgfB7j6TLmvqoihl19UB7Cv9L9pLY8UdIQ9t23vbrr9dYpvCbLvXFvoQpPcJbwlZmLKP2K-RqY6N4R-sjYf88rXMAsY563uXcwmooaWJE0r_m0K5n_J-Swt0xLW9IHlO9BkJVi8Jyta9OCtg-FY7N3MiwCg0fN43W53lXs-pqMtcRLJR99HrmZEzMG3CMEYbyLILJ5EjcsLmlomEjVckk0DNFUJp0Kn3N40VRq7U"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-2 py-1 font-label-sm text-[10px] neon-glow">DESBLOQUEADO</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline-lg-mobile text-primary font-black uppercase tracking-tighter">Palancre</h3>
+<span class="font-label-sm text-tertiary">REF: MAR-005</span>
+</div>
+<div class="weld-line mb-4"></div>
+<p class="font-body-md text-on-surface-variant mb-6">
+                        Aparejo de pesca artesanal compuesto por una línea principal de la que penden numerosos anzuelos. Técnica de precisión para peces de roca.
+                    </p>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary text-on-primary font-label-sm py-2 uppercase hover:bg-surface-tint transition-colors flicker-effect">Detalles</button>
+<button class="w-12 h-10 border-2 border-outline-variant flex items-center justify-center hover:border-secondary transition-colors group-hover:text-secondary">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+<div class="absolute top-0 right-0 p-2 opacity-10 font-label-sm text-[40px] select-none pointer-events-none">02</div>
+</article>
+<!-- Card 3: Ahumar -->
+<article class="group relative bg-surface border-2 border-outline-variant etch-shadow overflow-hidden coal-dust">
+<div class="aspect-video overflow-hidden relative border-b-2 border-outline-variant">
+<img alt="Ahumar" class="w-full h-full object-cover sepia-overlay transition-transform duration-700 group-hover:scale-110" data-alt="A moody, atmospheric historical image showing the interior of a traditional smokehouse in Lota. Racks of fish are being cured by thick, hazy smoke rising from a low fire on a dirt floor. The walls are stained with years of soot, creating a rich, dark texture. The composition is structured and architectural, with shafts of dim light piercing through small cracks, emphasizing the grit and labor of the trade." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9d6ruXig-zUGHx0KmrN_rmUnuz29IOJHHWOhMCw7C-7jlVLRmyMt1yR9s_p97-iVAWvgSUNQp0qbpPWXNwCjTdtCPzDptkmByxn1k7wipbHOIMqZz0VRkkWs8XPuHMWDMNsxKFTjP741kPqstyXxIJZLAK-sIl1tr9lWKREer2PwUtTDy-sZuSfrGRe0bzJPnr26fF3nLFiErKvXGRrbeB9v90djZv2i2Yc7yrHPpfdXHV6MNJsBUtgaGxhljalAvbz83CccM4wlv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent opacity-60"></div>
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-2 py-1 font-label-sm text-[10px] neon-glow">DESBLOQUEADO</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline-lg-mobile text-primary font-black uppercase tracking-tighter">Ahumar</h3>
+<span class="font-label-sm text-tertiary">REF: TEC-012</span>
+</div>
+<div class="weld-line mb-4"></div>
+<p class="font-body-md text-on-surface-variant mb-6">
+                        Técnica ancestral de conservación mediante la exposición al humo de maderas nativas. Crucial para la subsistencia en las minas.
+                    </p>
+<div class="flex items-center gap-4">
+<button class="flex-1 bg-primary text-on-primary font-label-sm py-2 uppercase hover:bg-surface-tint transition-colors flicker-effect">Detalles</button>
+<button class="w-12 h-10 border-2 border-outline-variant flex items-center justify-center hover:border-secondary transition-colors group-hover:text-secondary">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+<div class="absolute top-0 right-0 p-2 opacity-10 font-label-sm text-[40px] select-none pointer-events-none">03</div>
+</article>
+<!-- Locked Card -->
+<article class="group relative bg-surface-container-low border-2 border-dashed border-outline-variant etch-shadow overflow-hidden opacity-60">
+<div class="aspect-video flex flex-col items-center justify-center text-outline">
+<span class="material-symbols-outlined text-4xl mb-2">lock_open</span>
+<span class="font-label-sm text-[10px] uppercase">Complete Desafío "Mar Adentro"</span>
+</div>
+<div class="p-6">
+<div class="h-6 bg-surface-container-highest w-3/4 mb-4"></div>
+<div class="h-2 bg-outline-variant w-full mb-2"></div>
+<div class="h-2 bg-outline-variant w-1/2 mb-6"></div>
+<div class="h-10 bg-surface-container-high w-full border border-outline-variant"></div>
+</div>
+</article>
+</div>
+<!-- Pagination / Load More (Mechanical Style) -->
+<div class="mt-12 flex justify-center">
+<button class="group relative px-8 py-3 border-2 border-secondary overflow-hidden">
+<span class="relative z-10 font-label-sm text-secondary group-hover:text-on-secondary transition-colors uppercase">Cargar Más Registros</span>
+<div class="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+</div>
+</main>
+<!-- Navigation Shell (BottomNavBar) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe bg-surface border-t-2 border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 rect-none scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-[10px] mt-1 uppercase">Profile</span>
+</a>
+</nav>
+<!-- AR Fixed Element (Coordinates) -->
+<div class="fixed top-24 right-5 hidden md:flex flex-col gap-1 text-[10px] font-label-sm text-secondary/40 pointer-events-none uppercase">
+<div class="flex justify-between gap-4"><span>LAT:</span><span>37.0907° S</span></div>
+<div class="flex justify-between gap-4"><span>LON:</span><span>73.1557° W</span></div>
+<div class="flex justify-between gap-4"><span>ALT:</span><span>12m MSL</span></div>
+<div class="mt-4 w-full h-[2px] bg-secondary/20">
+<div class="w-1/3 h-full bg-secondary"></div>
+</div>
+</div>
+<script>
+        // Simple flicker interaction for primary elements
+        document.querySelectorAll('.flicker-effect').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.style.opacity = '0.5';
+                setTimeout(() => { btn.style.opacity = '1'; }, 50);
+                setTimeout(() => { btn.style.opacity = '0.7'; }, 100);
+                setTimeout(() => { btn.style.opacity = '1'; }, 150);
+            });
+        });
+
+        // Add mechanical click sound logic placeholder or micro-vibrations
+        if ('vibrate' in navigator) {
+            document.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => navigator.vibrate(5));
+            });
+        }
+    </script>
+</body></html>

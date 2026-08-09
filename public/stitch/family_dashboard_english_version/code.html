@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómita - Family Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#353535",
+                    "secondary-fixed": "#82f7d8",
+                    "tertiary": "#bcc9ca",
+                    "primary": "#ffb595",
+                    "on-background": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-variant": "#353535",
+                    "on-secondary-fixed": "#002019",
+                    "secondary-fixed-dim": "#65dabc",
+                    "on-error-container": "#ffdad6",
+                    "secondary-container": "#1ca388",
+                    "surface-container-low": "#1c1b1b",
+                    "tertiary-fixed": "#d8e5e6",
+                    "secondary": "#65dabc",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-secondary-container": "#003026",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary-fixed": "#ffdbcd",
+                    "on-secondary": "#00382d",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "background": "#131313",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#ffb595",
+                    "on-tertiary": "#263334",
+                    "on-error": "#690005",
+                    "inverse-surface": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "tertiary-container": "#869394",
+                    "outline": "#a88a7e",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-container": "#4c1a00",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-dim": "#131313",
+                    "primary-container": "#ee671c",
+                    "surface-tint": "#ffb595",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed": "#351000",
+                    "on-primary": "#571e00",
+                    "inverse-primary": "#a23f00",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-tertiary-fixed": "#121e1f",
+                    "surface-bright": "#393939",
+                    "outline-variant": "#594238",
+                    "on-tertiary-container": "#202c2d",
+                    "surface-container": "#20201f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Work Sans"],
+                    "display-lg": ["Montserrat"],
+                    "title-md": ["Montserrat"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.coal-dust {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAX9UzkpquLX1_B2Uc1JjZshWNtKM_dcQzX8M5tbcOhjuooomjzAC2myN1QUHKBCN1xMHeNlspe9cBrG0c3WIYNf4XszgnsPRcL5IW-8qSnWvYkv6qdhQSlgGOung2qpObkcy-7B8i6CqZmaLUnHsH5KVpP-lauq9ax2hiBtq0aypwJoWFzCNfOQPiYNqXs5tF1gsKifeJ3sQ-p3ng8qW3PDvGVdC-SgiJN0r8l8cyVSOTZLBah-6E761CTt9IohEp2sGnfukQARZg4);
+    background-blend-mode: overlay
+    }
+.blueprint-grid {
+    background-image: linear-gradient(to right, rgba(168, 138, 126, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(168, 138, 126, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px
+    }
+.etched-panel {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    filter: drop-shadow(0 0 8px rgba(101, 218, 188, 0.6))
+    }
+.mechanical-hover:active {
+    transform: scale(0.98);
+    filter: brightness(1.2)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary selection:text-on-secondary min-h-screen overflow-x-hidden blueprint-grid">
+<!-- Top AppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16 fixed top-0 z-[100] bg-surface border-b-2 border-outline">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tighter">LOTA INDÓMITA</h1>
+</div>
+<div class="flex items-center bg-surface-container-high px-3 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-primary">1,250 ⚒️</span>
+</div>
+</header>
+<main class="pt-20 pb-24 px-margin-mobile max-w-5xl mx-auto space-y-stack-md">
+<!-- Family Identity Section -->
+<section class="relative coal-dust border-2 border-outline p-stack-md bg-surface-container-low overflow-hidden">
+<div class="absolute top-0 right-0 p-2 font-label-sm text-label-sm text-outline/30 uppercase">ID: LT-8842-FAM</div>
+<div class="flex flex-col gap-unit">
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Active Family Crew</p>
+<h2 class="font-headline-lg text-headline-lg text-primary uppercase italic">THE COAL WALKERS</h2>
+</div>
+<div class="mt-stack-md grid grid-cols-2 gap-gutter">
+<div class="etched-panel bg-surface-container p-stack-sm border border-outline-variant flex flex-col items-center justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Collected</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-3xl neon-glow" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<span class="font-display-lg text-headline-lg text-secondary">4.8k</span>
+</div>
+<span class="font-label-sm text-[10px] text-secondary/70 uppercase">Charcoals</span>
+</div>
+<div class="etched-panel bg-surface-container p-stack-sm border border-outline-variant flex flex-col items-center justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Global Rank</span>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="leaderboard">leaderboard</span>
+<span class="font-display-lg text-headline-lg text-primary">#12</span>
+</div>
+<span class="font-label-sm text-[10px] text-primary/70 uppercase">Top 5% in Lota</span>
+</div>
+</div>
+</section>
+<!-- Bento Grid: Progress Map & Team Chat -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Progress Map (Large Module) -->
+<div class="md:col-span-2 coal-dust border-2 border-outline bg-surface-container relative h-[320px] overflow-hidden group">
+<div class="absolute top-0 left-0 w-full p-stack-sm bg-surface-container-highest/80 backdrop-blur-sm z-10 flex justify-between border-b border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface uppercase">Current Mission: The Chiflón Depth</span>
+<span class="font-label-sm text-label-sm text-secondary">64% Complete</span>
+</div>
+<!-- Stylized Map Placeholder -->
+<div class="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 opacity-40">
+<img class="w-full h-full object-cover" data-alt="A highly detailed industrial blueprint map of a historic mining site, showing schematic lines of underground tunnels and coal veins. The image has a dark, gritty aesthetic with high-contrast glowing neon cyan lines representing active missions. The lighting is low-key, evoking a digital archaeology feeling within a professional museum interface. Colors are deep charcoal and electric mint." data-location="Lota, Chile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOojDYQjLIJZpZeKyMwUxLQaK06CHF6F064gA4EdryYbomJ3cRqsTD86FL1jsH388rgWGA7nkvoRm7HrgOiSMXKGB_AHEysB0fUqG45yaTsWSgkQKyAvai-kCrxRUUIoMf_KSNuX9H-LBYG6EMuweLLWmi6NZV_A9rkxNVowkJjB8V2b55nDsyneUt25eNTKnTZFFC-jdU2Mhjg833i5Tc4O-4Odg5HkwxOCCqRPXNiClH9_O_WOJAIkQkS1h92OERi_g_aC-_Vjy"/>
+</div>
+<!-- HUD Overlays -->
+<div class="absolute inset-0 p-stack-md pointer-events-none">
+<div class="w-full h-full border border-secondary/20 flex flex-col justify-end">
+<div class="p-2 bg-background/60 backdrop-blur-md border-t border-secondary/40 w-fit">
+<p class="font-label-sm text-[10px] text-secondary">COORD: 37.0905° S, 73.1611° W</p>
+</div>
+</div>
+</div>
+<!-- Floating Mission Points -->
+<div class="absolute top-1/2 left-1/4 w-4 h-4 bg-secondary neon-glow animate-pulse"></div>
+<div class="absolute top-1/3 right-1/3 w-4 h-4 border-2 border-primary rotate-45"></div>
+</div>
+<!-- Team Chat Shortcut -->
+<div class="md:col-span-1 coal-dust border-2 border-outline bg-surface-container flex flex-col">
+<div class="p-stack-sm border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary uppercase">Crew Comms</span>
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+</div>
+<div class="flex-grow p-stack-sm space-y-unit overflow-y-auto max-h-[180px]">
+<div class="text-[11px] font-label-sm">
+<span class="text-secondary">[PABLO]:</span> Found the sector 4 relay!
+                    </div>
+<div class="text-[11px] font-label-sm">
+<span class="text-primary">[MARTA]:</span> Heading to the winch now.
+                    </div>
+<div class="text-[11px] font-label-sm italic text-on-surface-variant">
+                        &gt; 2 new messages...
+                    </div>
+</div>
+<button class="w-full py-stack-sm bg-primary-container text-on-primary-container font-label-sm uppercase mechanical-hover transition-all">
+                    Open Channel
+                </button>
+</div>
+</div>
+<!-- Leaderboard Preview -->
+<section class="coal-dust border-2 border-outline bg-surface-container-low">
+<div class="p-stack-sm border-b border-outline-variant flex justify-between items-center bg-surface-container">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">Sector Leaderboard</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekly Reset: 2d 14h</span>
+</div>
+<div class="p-stack-sm space-y-1">
+<!-- Row 1 -->
+<div class="flex items-center justify-between p-2 border-b border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-primary">01</span>
+<span class="font-body-md text-on-surface">Los Mineros Locos</span>
+</div>
+<span class="font-label-sm text-secondary">12.4k ⚒️</span>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between p-2 border-b border-outline-variant/30 hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-on-surface-variant">02</span>
+<span class="font-body-md text-on-surface">The Rusty Gears</span>
+</div>
+<span class="font-label-sm text-secondary">10.1k ⚒️</span>
+</div>
+<!-- Row 3 (User's Team) -->
+<div class="flex items-center justify-between p-2 bg-secondary/10 border-l-4 border-secondary">
+<div class="flex items-center gap-stack-sm">
+<span class="font-label-sm text-secondary">12</span>
+<span class="font-body-md text-on-surface font-bold">The Coal Walkers (YOU)</span>
+</div>
+<span class="font-label-sm text-secondary">4.8k ⚒️</span>
+</div>
+</div>
+<button class="w-full py-unit text-center font-label-sm text-outline uppercase hover:text-primary transition-colors">
+                View Full Rankings
+            </button>
+</section>
+<!-- Quick Actions -->
+<div class="grid grid-cols-2 gap-gutter">
+<button class="flex items-center justify-center gap-2 p-stack-md border-2 border-outline bg-surface-container mechanical-hover">
+<span class="material-symbols-outlined text-secondary" data-icon="group_add">group_add</span>
+<span class="font-label-sm uppercase">Invite Crew</span>
+</button>
+<button class="flex items-center justify-center gap-2 p-stack-md border-2 border-outline bg-surface-container mechanical-hover">
+<span class="material-symbols-outlined text-primary" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm uppercase">Inventory</span>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe bg-surface-container h-20 border-t-2 border-outline">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary bg-secondary-container/20 px-4 py-1 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Contextual FAB (Scan/Mission) -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary flex items-center justify-center border-2 border-on-primary shadow-lg hover:scale-110 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined" data-icon="add_location" style="font-variation-settings: 'FILL' 1;">add_location</span>
+</button>
+<script>
+        // Simple micro-interaction for the map points
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapContainer = document.querySelector('.coal-dust.relative.h-\\[320px\\]');
+            mapContainer.addEventListener('mousemove', (e) => {
+                const rect = mapContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                // Atmospheric parallax or hover effects could go here
+            });
+
+            // Random flickering effect for "old" interface feel
+            setInterval(() => {
+                const h1 = document.querySelector('h1');
+                if (Math.random() > 0.98) {
+                    h1.style.opacity = '0.5';
+                    setTimeout(() => h1.style.opacity = '1', 50);
+                }
+            }, 1000);
+        });
+    </script>
+</body></html>

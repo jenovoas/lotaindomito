@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lota Indómito - Spirit Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ffb4ab",
+                    "tertiary": "#bcc9ca",
+                    "primary-container": "#ee671c",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-primary": "#571e00",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#d8e5e6",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "on-primary-container": "#4c1a00",
+                    "surface-container-high": "#2a2a2a",
+                    "on-background": "#e5e2e1",
+                    "primary": "#ffb595",
+                    "on-primary-fixed": "#351000",
+                    "inverse-on-surface": "#313030",
+                    "secondary-container": "#1ca388",
+                    "secondary": "#65dabc",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "on-error": "#690005",
+                    "surface-variant": "#353535",
+                    "on-secondary-fixed-variant": "#005142",
+                    "primary-fixed": "#ffdbcd",
+                    "on-secondary": "#00382d",
+                    "surface": "#131313",
+                    "surface-tint": "#ffb595",
+                    "secondary-fixed": "#82f7d8",
+                    "on-tertiary-fixed": "#121e1f",
+                    "inverse-primary": "#a23f00",
+                    "surface-container-highest": "#353535",
+                    "outline": "#a88a7e",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "surface-container": "#20201f",
+                    "on-secondary-fixed": "#002019",
+                    "surface-dim": "#131313",
+                    "error-container": "#93000a",
+                    "primary-fixed-dim": "#ffb595",
+                    "outline-variant": "#594238",
+                    "background": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-container": "#202c2d",
+                    "tertiary-container": "#869394",
+                    "on-secondary-container": "#003026",
+                    "surface-bright": "#393939",
+                    "secondary-fixed-dim": "#65dabc",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface": "#e5e2e1",
+                    "on-tertiary": "#263334"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "stack-lg": "48px",
+                    "gutter": "16px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Work Sans"],
+                    "label-sm": ["JetBrains Mono"],
+                    "title-md": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>.industrial-border {
+    border: 2px solid #594238;
+    /* outline-variant */
+    box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 0 rgba(0, 0, 0, 0.5)
+    }
+.coal-dust-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD2xZOg6H8HSJdvtLWsuo4tFVIzdvLrQgKxu2Q0KPFRXzNQMZ8-G09SNOYDgMuN8jishRKV7ZXs8Ad3HOTORXABoJnAxTdb-nxb0hw1fST55EkxxCCWfokBMYkMcbJnfuNBEFCfVpMNlT7k_XYS5RA99zXpN1pOFL9-HlGiTWyBKp2hU9H2eXieS03LlWdU5hBpyVpdw-hik11GJzAaS_Ty6Equ_Sy8kajO40FCzet0KwlYPCJh48-7RteeYG8aAZfETaktiSJjbu70);
+    background-blend-mode: overlay
+    }
+.flicker-effect:active {
+    animation: flicker 0.1s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 0.8;
+        } 50% {
+        opacity: 1;
+        } 100% {
+        opacity: 0.9;
+        }
+    }
+.gauge-segment {
+    height: 6px;
+    width: 100%;
+    background: #353535;
+    margin-right: 2px
+    }
+.gauge-segment.active {
+    background: #65dabc;
+    /* secondary */
+    box-shadow: 0 0 8px #65dabc
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container font-body-md overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile py-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-surface-container-high border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-black uppercase tracking-tighter text-primary">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-primary">150 💎</span>
+</div>
+</header>
+<main class="mt-20 mb-32 px-margin-mobile lg:px-margin-desktop max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-stack-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">Digital Archive</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface uppercase mb-4">Spirit Ledger</h2>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">
+                The deep shafts hold more than just coal. Re-synchronize with the echoes of Lota's past through discovered memories and industrial footprints.
+            </p>
+</div>
+<!-- Character Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Character Card: Isidora -->
+<div class="industrial-border bg-surface-container coal-dust-texture relative group flex flex-col">
+<div class="relative aspect-[3/4] overflow-hidden border-b-2 border-outline-variant">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" data-alt="A cinematic portrait of a 19th-century noblewoman with a stern yet mournful expression, set against a dark, industrial coal mine backdrop. She wears a period-accurate black lace mourning dress with ornate metallic jewelry that glows with a faint neon mint AR light. The lighting is dramatic and high-contrast, casting deep shadows of rusted gears and industrial beams behind her. The visual style is gritty and detailed, blending historical realism with sharp digital overlays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZcoBG-UwowSfVuoFkxn12mCFgD8bOtzLnBkFWW_RvmwfzDKJnQN2wWAtAN317Pwh2ge10VyM9JCch12EAL6ukkRWUu1Z0efBJqLv-lEDwe_FxOP2i-xOJjMr-fmh69IUB3vQdcXGEjXY9yDA92xNBISQknw52tehLFWEhthZUvpWhIr6zRFfGIdOcwOVUNI4LOgdG75U0_m-gDMIFxH3RBRngFOexurVL6RCXYG6N3i29gbyz-erkniX4M1uP-8L5egq9-CWJs4SW"/>
+<div class="absolute top-2 right-2 bg-background/80 px-2 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-secondary">LVL 08</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background to-transparent">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">Isidora</h3>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Relationship</span>
+<span class="font-label-sm text-label-sm text-secondary">82%</span>
+</div>
+<!-- Segmented Progress Bar -->
+<div class="flex mb-4">
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment"></div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Memories</span>
+<span class="font-title-md text-on-surface">12/15</span>
+</div>
+<div class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-full group-hover:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">memory</span>
+</div>
+</div>
+<button class="mt-auto w-full py-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-sm text-label-sm uppercase flex items-center justify-center gap-2 flicker-effect transition-all no-radius border-2 border-primary-container active:scale-95">
+<span class="material-symbols-outlined">deployed_code</span>
+                        Re-summon in AR
+                    </button>
+</div>
+</div>
+<!-- Character Card: El Ciego -->
+<div class="industrial-border bg-surface-container coal-dust-texture relative group flex flex-col">
+<div class="relative aspect-[3/4] overflow-hidden border-b-2 border-outline-variant">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" data-alt="A close-up portrait of an old, weathered coal miner with eyes closed, his face etched with deep wrinkles and coal dust. The background shows a dimly lit mine tunnel with structural wooden beams. Digital neon mint lines highlight the contours of his face as if being scanned by an AR interface. The mood is solemn and gritty, with a color palette of deep coal blacks and vibrant mint green highlights. The style is modern-brutalist and highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt9nvXFkcOAKrrHNsC97yIQSiCwCqtj7yymBmfTSGmWqNTsNyTPVY7_hnplm3ZUganCM70rZeuJD3AzKJFD81YQXZnuT9UTMhr9NOtn5U-NyplLjGgW_zClAJxqUXNNhqoDNQtWm2o0bPzC5yOBxu1lgM8P5ZllCcUkwWkCtG2nNqFnBdAW2sXWOzfiUzOftuqzhdXw_39OMpfMjAE4Fa0g1tvAtlDhN--Hv_sdpdo4AQqPFD-odrR108f7mecE0RHBLumjcKErlmh"/>
+<div class="absolute top-2 right-2 bg-background/80 px-2 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-secondary">LVL 04</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background to-transparent">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">El Ciego</h3>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Relationship</span>
+<span class="font-label-sm text-label-sm text-secondary">45%</span>
+</div>
+<div class="flex mb-4">
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Memories</span>
+<span class="font-title-md text-on-surface">06/15</span>
+</div>
+<div class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-full group-hover:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">visibility_off</span>
+</div>
+</div>
+<button class="mt-auto w-full py-3 bg-surface-container-high border-2 border-outline text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-center gap-2 hover:border-secondary hover:text-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined">deployed_code</span>
+                        Re-summon in AR
+                    </button>
+</div>
+</div>
+<!-- Character Card: La Chinchorrera -->
+<div class="industrial-border bg-surface-container coal-dust-texture relative group flex flex-col">
+<div class="relative aspect-[3/4] overflow-hidden border-b-2 border-outline-variant">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" data-alt="A portrait of a strong woman in working-class industrial attire from the early 1900s, standing confidently near a rusted mine elevator. Her face is determined, and she holds a heavy metal tool. Glowing AR data fragments and coal-colored particles swirl around her in a digital archaeology style. The aesthetic is high-contrast, featuring gritty textures and sharp luminous overlays in neon mint and rusty orange. The lighting is low-key with a cinematic industrial glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDL0WsUVoZq9JfYSeyN5-aivYRPLjIIn_545ENS4vZAnWgEgpxqA4pLDRYeblH8yf5iHUttTDDJJTApOr9z_zyeW3xSKxCONzzbpl1ORglp5Ez8Ug3YgoknjQiRMhIzv08-0Z_djx_-gNWOe3fjM6_6F-6Zs77Fh7vPOBaslYE1B4m95xaIT7bgC4GyADX0GqyK0VBQ1IrReV6BUUiz57zdD5QrOLvs1qeSDJ6rkmULSh6MLXt4ebObh6dLumFVJPAgfd5JK5y6Xsj"/>
+<div class="absolute top-2 right-2 bg-background/80 px-2 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-secondary">LVL 12</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background to-transparent">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">La Chinchorrera</h3>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Relationship</span>
+<span class="font-label-sm text-label-sm text-secondary">95%</span>
+</div>
+<div class="flex mb-4">
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+<div class="gauge-segment active"></div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Memories</span>
+<span class="font-title-md text-on-surface">14/15</span>
+</div>
+<div class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-full group-hover:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">shield</span>
+</div>
+</div>
+<button class="mt-auto w-full py-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-sm text-label-sm uppercase flex items-center justify-center gap-2 flicker-effect transition-all no-radius border-2 border-primary-container active:scale-95">
+<span class="material-symbols-outlined">deployed_code</span>
+                        Re-summon in AR
+                    </button>
+</div>
+</div>
+<!-- Character Card: El Palanquero -->
+<div class="industrial-border bg-surface-container coal-dust-texture relative group flex flex-col">
+<div class="relative aspect-[3/4] overflow-hidden border-b-2 border-outline-variant">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" data-alt="Portrait of a muscular man working the heavy machinery of a coal mine, his arms covered in grime and sweat. He is leaning against a massive rusted lever. The scene is illuminated by the sharp, flickering light of a miner's headlamp. Modern AR UI elements like coordinates and pressure gauges are digitally superimposed over the physical machinery. The style is gritty, tactile industrialism with a dark, moody color palette and sharp neon accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcq3SWbzgjvfTLmjmNxECJCi4CdTc8uOVMN5qYrkuYE5fHveBHggeAq0_t_ohJX8eXF-qBPPNJ3swQ9LPeNjnkA2Zhjs2Se9fXTCDqBO0o1cqRC-AvJCPnZ7XMCQtMpWXTV2MtHZq99h0qM0s8QTTy3B6NnoBeP2KbwOmLYxiD2z9BzZok4UaJ9HUbzkpKY6zOAmRcq-WJILeWof0NI3eRMssPeN00JnX3ou7AMbF3GZDZsDVag5qnZ0kyT13pn4c3Vtdhjz8AQhA9"/>
+<div class="absolute top-2 right-2 bg-background/80 px-2 py-1 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-secondary">LVL 02</span>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-background to-transparent">
+<h3 class="font-title-md text-title-md text-on-surface uppercase">El Palanquero</h3>
+</div>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<div class="flex justify-between items-end mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Relationship</span>
+<span class="font-label-sm text-label-sm text-secondary">15%</span>
+</div>
+<div class="flex mb-4">
+<div class="gauge-segment active"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+<div class="gauge-segment"></div>
+</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Memories</span>
+<span class="font-title-md text-on-surface">02/15</span>
+</div>
+<div class="w-10 h-10 flex items-center justify-center border border-outline-variant rounded-full group-hover:border-secondary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary">settings_slow_motion</span>
+</div>
+</div>
+<button class="mt-auto w-full py-3 bg-surface-container-high border-2 border-outline text-on-surface font-label-sm text-label-sm uppercase flex items-center justify-center gap-2 hover:border-secondary hover:text-secondary transition-all active:scale-95">
+<span class="material-symbols-outlined">deployed_code</span>
+                        Re-summon in AR
+                    </button>
+</div>
+</div>
+</div>
+<!-- System Stats / HUD Elements -->
+<div class="mt-stack-lg grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="industrial-border bg-surface-container-low p-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm">precision_manufacturing</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Mining Efficiency</span>
+</div>
+<div class="weld-line mb-4"></div>
+<div class="flex justify-between items-baseline">
+<span class="font-display-lg text-[40px] text-on-surface">74%</span>
+<span class="font-label-sm text-secondary">+5.2% O2</span>
+</div>
+</div>
+<div class="industrial-border bg-surface-container-low p-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm">hub</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Connection Node</span>
+</div>
+<div class="weld-line mb-4"></div>
+<div class="flex justify-between items-baseline">
+<span class="font-display-lg text-[40px] text-on-surface">LOT-01</span>
+<span class="font-label-sm text-secondary">ACTIVE</span>
+</div>
+</div>
+<div class="industrial-border bg-surface-container-low p-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-sm">query_stats</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Spirit Resonator</span>
+</div>
+<div class="weld-line mb-4"></div>
+<div class="flex justify-between items-baseline">
+<span class="font-display-lg text-[40px] text-on-surface">34.8</span>
+<span class="font-label-sm text-secondary">HZ/KHZ</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 h-20 pb-safe bg-surface border-t-2 border-outline-variant">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">map</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-1 hover:text-secondary-fixed transition-colors" href="#">
+<div class="bg-primary-container p-3 mt-[-40px] border-4 border-surface">
+<span class="material-symbols-outlined text-on-primary-container text-[28px]">qr_code_scanner</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan QR</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container p-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for the "industrial" feel
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                // Subtle flicker or sound trigger logic could go here
+            });
+        });
+
+        // Atmospheric Grain movement simulation (Optional performance-heavy stuff removed for UX)
+    </script>
+</body></html>

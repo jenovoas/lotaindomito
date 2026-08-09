@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#003026",
+                        "on-secondary": "#00382d",
+                        "on-primary": "#571e00",
+                        "on-primary-container": "#4c1a00",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "primary-container": "#ee671c",
+                        "on-secondary-fixed-variant": "#005142",
+                        "primary": "#ffb595",
+                        "primary-fixed": "#ffdbcd",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-fixed": "#002019",
+                        "outline-variant": "#594238",
+                        "on-tertiary-container": "#202c2d",
+                        "tertiary-container": "#869394",
+                        "tertiary-fixed": "#d8e5e6",
+                        "background": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "surface-container": "#20201f",
+                        "on-primary-fixed": "#351000",
+                        "inverse-primary": "#a23f00",
+                        "secondary-fixed-dim": "#65dabc",
+                        "on-surface-variant": "#e0c0b2",
+                        "inverse-on-surface": "#313030",
+                        "tertiary": "#bcc9ca",
+                        "secondary": "#65dabc",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e5e2e1",
+                        "secondary-fixed": "#82f7d8",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-tint": "#ffb595",
+                        "primary-fixed-dim": "#ffb595",
+                        "secondary-container": "#1ca388",
+                        "outline": "#a88a7e",
+                        "on-background": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-variant": "#353535",
+                        "on-tertiary-fixed": "#121e1f",
+                        "surface-bright": "#393939",
+                        "on-tertiary": "#263334",
+                        "surface-dim": "#131313",
+                        "surface": "#131313"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px",
+                        "stack-lg": "48px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "title-md": ["Montserrat"],
+                        "body-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .industrial-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .etched-border {
+            border: 1px solid rgba(168, 138, 126, 0.3);
+            box-shadow: inset 1px 1px 0px rgba(255,255,255,0.05), 1px 1px 0px rgba(0,0,0,0.5);
+        }
+        
+        /* Metallic Token Enhancement */
+        .token-metallic {
+            background: radial-gradient(circle at 30% 30%, #8a5d44 0%, #594238 40%, #2b1e18 80%);
+            box-shadow: 
+                inset -2px -2px 6px rgba(0,0,0,0.8),
+                inset 2px 2px 6px rgba(255,255,255,0.2),
+                0 15px 35px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        .token-metallic::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.15;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+        .token-metallic::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 45%, rgba(255,255,255,0.05) 48%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 52%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .engraved-text {
+            color: rgba(0,0,0,0.7);
+            text-shadow: 
+                -1px -1px 1px rgba(0,0,0,0.4),
+                1px 1px 1px rgba(255,255,255,0.1);
+        }
+
+        .industrial-stamp-btn {
+            background: linear-gradient(to bottom, #ee671c 0%, #a23f00 100%);
+            box-shadow: 
+                0 4px 0 #571e00,
+                0 8px 20px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.1s ease;
+        }
+        .industrial-stamp-btn:active {
+            transform: translateY(2px);
+            box-shadow: 
+                0 2px 0 #571e00,
+                0 4px 10px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .weld-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #594238, transparent);
+        }
+        
+        .oxidation-edge {
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md industrial-texture min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b-2 border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 active:opacity-80 transition-opacity" onclick="window.history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary uppercase">Detalle de Ficha</h1>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">precision_manufacturing</span>
+<span class="font-label-sm text-label-sm text-primary">450 C</span>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop mt-8 space-y-stack-lg">
+<!-- Token Visual Section -->
+<section class="flex flex-col items-center justify-center py-8 relative overflow-hidden">
+<!-- Asymmetric Grid Background Elements -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-primary"></div>
+<div class="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-primary"></div>
+</div>
+<div class="relative group">
+<!-- 3D Enhanced Metallic Token Representation -->
+<div class="token-metallic w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center relative p-2 border-4 border-[#3d2c25] oxidation-edge transition-transform duration-500 hover:scale-105">
+<div class="w-full h-full rounded-full border-2 border-dashed border-[#a88a7e]/20 flex flex-col items-center justify-center text-center p-6 bg-transparent relative z-10">
+<span class="material-symbols-outlined text-6xl md:text-8xl engraved-text mb-2 opacity-80" style="font-variation-settings: 'FILL' 1;">bakery_dining</span>
+<div class="font-display-lg text-display-lg engraved-text leading-none mb-1">15%</div>
+<div class="font-label-sm text-label-sm engraved-text font-bold tracking-widest opacity-90">DSCTO.</div>
+</div>
+<!-- Micro-scratches Layer (using CSS gradients) -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #000, #000 1px, transparent 1px, transparent 10px), repeating-linear-gradient(-45deg, #000, #000 1px, transparent 1px, transparent 15px);"></div>
+<!-- Rivets -->
+<div class="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#2b1e18] rounded-full shadow-[inset_-1px_-1px_2px_rgba(255,255,255,0.1),1px_1px_2px_rgba(0,0,0,0.5)]"></div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#2b1e18] rounded-full shadow-[inset_-1px_-1px_2px_rgba(255,255,255,0.1),1px_1px_2px_rgba(0,0,0,0.5)]"></div>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 bg-[#2b1e18] rounded-full shadow-[inset_-1px_-1px_2px_rgba(255,255,255,0.1),1px_1px_2px_rgba(0,0,0,0.5)]"></div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 bg-[#2b1e18] rounded-full shadow-[inset_-1px_-1px_2px_rgba(255,255,255,0.1),1px_1px_2px_rgba(0,0,0,0.5)]"></div>
+</div>
+<!-- Neon HUD Glow -->
+<div class="absolute -inset-6 border-2 border-secondary/10 rounded-full animate-pulse pointer-events-none"></div>
+</div>
+<div class="mt-8 text-center">
+<div class="font-label-sm text-label-sm text-secondary tracking-[0.2em] uppercase mb-2 neon-glow">ID_COAL_TOKEN</div>
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">LT-9942-BREAD</div>
+</div>
+</section>
+<!-- Details Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Merchant Card -->
+<div class="bg-surface-container-low p-stack-md etched-border relative">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-primary/10 border border-primary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">storefront</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase">Comercio</div>
+<div class="font-title-md text-title-md text-on-surface">Panadería La Niña</div>
+</div>
+</div>
+<div class="weld-line mb-4"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Establecimiento histórico que alimentó a generaciones de familias mineras en el Sector Chambeque.</p>
+</div>
+<!-- Value Card -->
+<div class="bg-surface-container-low p-stack-md etched-border relative">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-secondary/10 border border-secondary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">confirmation_number</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline uppercase">Beneficio</div>
+<div class="font-title-md text-title-md text-on-surface">15% de Descuento</div>
+</div>
+</div>
+<div class="weld-line mb-4"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Válido en toda la línea de panadería artesanal y repostería típica de la zona.</p>
+</div>
+</section>
+<!-- Historical Context -->
+<section class="bg-surface-container-highest p-stack-md border-l-4 border-primary">
+<h3 class="font-title-md text-title-md text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined">history_edu</span>
+                Legado de la Cuenca
+            </h3>
+<p class="font-body-md text-body-md text-on-surface">
+                Las fichas de salario fueron un sistema de pago utilizado por las compañías mineras en Lota. Aunque inicialmente limitaban el comercio, hoy las hemos transformado en un símbolo de orgullo y recompensa digital. Al redimir esta ficha, conectas con el esfuerzo de quienes forjaron esta ciudad bajo tierra.
+            </p>
+</section>
+<!-- Redemption Section -->
+<section class="flex flex-col items-center gap-stack-md pt-8">
+<button class="industrial-stamp-btn group relative w-full max-w-sm overflow-hidden text-on-primary-container px-stack-md py-6 flex items-center justify-center gap-4">
+<span class="material-symbols-outlined text-3xl group-active:scale-110 transition-transform">pan_tool_alt</span>
+<span class="font-title-md text-title-md uppercase font-black tracking-tighter">Estampar para Canjear</span>
+<!-- Mechanical Accents -->
+<div class="absolute top-0 left-0 w-2 h-full bg-black/20"></div>
+<div class="absolute top-0 right-0 w-2 h-full bg-black/20"></div>
+<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+</button>
+<p class="font-label-sm text-label-sm text-outline-variant text-center px-8">
+                Presenta esta pantalla en caja para que el encargado valide tu recompensa mediante escaneo digital.
+            </p>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 w-full z-50 h-20 flex justify-around items-center bg-surface-container-low border-t-2 border-outline-variant pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">directions_walk</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container h-full w-full border-t-4 border-primary hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase mt-1">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for the industrial stamp button
+        const stampBtn = document.querySelector('.industrial-stamp-btn');
+        stampBtn.addEventListener('click', () => {
+            // Haptic-like feedback visual
+            stampBtn.style.transform = 'scale(0.98) translateY(4px)';
+            setTimeout(() => {
+                stampBtn.style.transform = '';
+                alert('¡Ficha procesada! Presenta el código de validación al dependiente.');
+            }, 150);
+        });
+    </script>
+</body></html>

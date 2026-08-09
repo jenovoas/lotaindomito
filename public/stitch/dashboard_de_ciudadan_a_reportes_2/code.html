@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&amp;family=Work+Sans:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.industrial-grid {
+    background-image: radial-gradient(circle, #354248 1px, transparent 1px);
+    background-size: 24px 24px
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCGB-tsL_RNzTQd1ZYOCjWgQ7SrdiEkFJB--9ZReqGntufpJVqScyva3pU5U9lj1sbn9917NOrXzA72yW2ww_DfyjoMk0bwhZx5Tkad_j-53h4XEC9Jgm1m7AkHFvccDVScGfY3SdAGwzbbfMb9cYaWqtx5gG8qUHY-MMwX9Aq0fJzcjJIDQ7eeLlHO0IkDQ7jVmJg8tJWth81OMHhX7yW1w59dznBJPJNIiO3MNHR8hcWdDeVB3dcruGFcVjsZ54rJZcoisaSyDnem);
+    opacity: 0.05
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+.neon-glow-mint {
+    box-shadow: 0 0 15px -2px #65dabc
+    }
+.inset-etch {
+    box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 0 rgba(0, 0, 0, 0.5)
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#a88a7e",
+                      "surface-container-high": "#2a2a2a",
+                      "on-primary-container": "#4c1a00",
+                      "surface": "#131313",
+                      "tertiary-fixed": "#d8e5e6",
+                      "inverse-primary": "#a23f00",
+                      "surface-tint": "#ffb595",
+                      "outline-variant": "#594238",
+                      "on-tertiary-container": "#202c2d",
+                      "tertiary": "#bcc9ca",
+                      "on-primary-fixed": "#351000",
+                      "secondary-fixed": "#82f7d8",
+                      "on-background": "#e5e2e1",
+                      "on-surface-variant": "#e0c0b2",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#1ca388",
+                      "on-tertiary": "#263334",
+                      "on-primary": "#571e00",
+                      "on-tertiary-fixed-variant": "#3d494a",
+                      "tertiary-fixed-dim": "#bcc9ca",
+                      "surface-container": "#20201f",
+                      "on-secondary": "#00382d",
+                      "background": "#131313",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary-fixed": "#121e1f",
+                      "on-primary-fixed-variant": "#7c2e00",
+                      "surface-variant": "#353535",
+                      "on-secondary-fixed": "#002019",
+                      "inverse-on-surface": "#313030",
+                      "surface-bright": "#393939",
+                      "secondary": "#65dabc",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-dim": "#131313",
+                      "error": "#ffb4ab",
+                      "secondary-fixed-dim": "#65dabc",
+                      "on-secondary-container": "#003026",
+                      "primary-container": "#ee671c",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#353535",
+                      "primary": "#ffb595",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-fixed": "#ffdbcd",
+                      "on-error": "#690005",
+                      "on-secondary-fixed-variant": "#005142",
+                      "tertiary-container": "#869394",
+                      "primary-fixed-dim": "#ffb595",
+                      "on-surface": "#e5e2e1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "stack-md": "24px",
+                      "stack-lg": "48px",
+                      "unit": "4px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Montserrat"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-lg": ["Montserrat"],
+                      "display-lg": ["Montserrat"],
+                      "body-md": ["Work Sans"],
+                      "body-lg": ["Work Sans"],
+                      "title-md": ["Montserrat"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen industrial-grid">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky z-50 bg-surface dark:bg-surface border-b-2 border-outline-variant dark:border-outline-variant flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16 shadow-none">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h1 class="font-display-lg text-[24px] md:text-display-lg tracking-tighter text-primary dark:text-primary uppercase">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-3 py-1 bg-surface-container-highest border border-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm text-primary uppercase">450 C</span>
+</div>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-md pb-32">
+<!-- Guardian Status Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-unit mb-stack-md">
+<div class="bg-surface-container border-2 border-outline-variant p-gutter relative overflow-hidden group">
+<div class="coal-grain absolute inset-0 pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Guardian Rank</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase">Capataz</h2>
+<div class="mt-4 w-full h-1 bg-surface-variant">
+<div class="h-full bg-primary w-[75%]"></div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl opacity-10 text-primary rotate-12" data-icon="shield">shield</span>
+</div>
+<div class="bg-surface-container border-2 border-outline-variant p-gutter relative overflow-hidden">
+<div class="coal-grain absolute inset-0 pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Active Reports</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-secondary-fixed uppercase">3</h2>
+<div class="flex gap-1 mt-4">
+<div class="h-2 w-4 bg-secondary-fixed"></div>
+<div class="h-2 w-4 bg-secondary-fixed"></div>
+<div class="h-2 w-4 bg-secondary-fixed"></div>
+<div class="h-2 w-4 bg-surface-variant"></div>
+</div>
+</div>
+<div class="bg-surface-container border-2 border-outline-variant p-gutter relative overflow-hidden">
+<div class="coal-grain absolute inset-0 pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Resolved</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-tertiary uppercase">12</h2>
+<p class="font-label-sm text-label-sm text-outline mt-2 italic">+2 this week</p>
+</div>
+</section>
+<!-- Impact Metric Bento -->
+<div class="bg-surface-container-low border-2 border-outline-variant mb-stack-md flex flex-col md:flex-row items-center gap-gutter p-gutter relative inset-etch">
+<div class="w-24 h-24 relative flex-shrink-0">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-surface-variant" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-secondary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="55" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-label-sm text-label-sm text-secondary">45%</span>
+</div>
+</div>
+<div class="text-center md:text-left">
+<h3 class="font-title-md text-title-md text-on-surface uppercase tracking-tight">Preservation Impact</h3>
+<p class="text-on-surface-variant font-body-md">You have helped preserve 45% of your local sector by identifying critical infrastructure risks.</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary-container text-on-primary-container p-gutter flex items-center justify-between mb-stack-md active:scale-[0.98] transition-transform group relative overflow-hidden">
+<div class="flex items-center gap-gutter">
+<div class="bg-on-primary-container p-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="add_a_photo">add_a_photo</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-tighter">New Report</span>
+</div>
+<div class="flex gap-gutter overflow-hidden opacity-40 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="material-symbols-outlined" data-icon="construction">construction</span>
+</div>
+<div class="absolute inset-0 coal-grain pointer-events-none"></div>
+</button>
+<!-- Recent Reports List -->
+<div class="space-y-unit">
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Recent Activity</h4>
+<span class="material-symbols-outlined text-outline" data-icon="filter_list">filter_list</span>
+</div>
+<!-- Report Item 1 -->
+<div class="bg-surface-container border-2 border-outline-variant p-4 flex gap-4 items-center group hover:bg-surface-bright transition-colors">
+<div class="w-16 h-16 bg-surface-variant flex-shrink-0 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="A gritty close-up photograph of a metallic industrial railing that is visibly broken and weathered. The scene is set in a historic Chilean coal mine area under dramatic, overcast lighting that emphasizes the rusted textures and high-contrast shadows. The atmosphere is industrial and somber, with a sharp focus on the mechanical failure of the structure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_3MeZJvMj1Rtk945GPljGIrsGrwxpJD4Lu1BIhw89bZTeQeFwJeLwNm1IVeUflmRJkyjJW1GRGT80JEDwxr63gq3W61MyKThtflnIPXJbxdnaDgmsTn-rp8B0OOdkv2oX2yvUS3dMeEi8Mk_JfXhgoJE78_NW6tyEqRNyjuZT80jSX--es2NjHcKYWD_YcQAZZhr3KKC2dyloT1Z7GBZ-54nA7ncRlvLjiqRMp8ABD2nP4fuliEp8Kf0g4px4HmKgPYbWg-ZEMEhe"/>
+</div>
+<div class="flex-grow">
+<h5 class="font-title-md text-[16px] text-on-surface uppercase truncate">Broken railing at Chiflón</h5>
+<div class="flex items-center gap-2 mt-1">
+<div class="h-2 w-2 rounded-full bg-secondary-container animate-pulse"></div>
+<span class="font-label-sm text-[10px] text-secondary uppercase">In Progress</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Report Item 2 -->
+<div class="bg-surface-container border-2 border-outline-variant p-4 flex gap-4 items-center group hover:bg-surface-bright transition-colors">
+<div class="w-16 h-16 bg-surface-variant flex-shrink-0 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="A wide-angle industrial shot of a historical public park area with scattered debris and litter. The lighting is harsh and high-contrast, reminiscent of a digital archaeology HUD view. The surrounding architecture features old stone masonry and weathered metal, typical of a mining town's heritage site. The mood is one of urgent civic duty and environmental monitoring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoizstKnd_DJiI8o1DrskDcDOXn8BKJ6b8TpALwSbGnoz9yW7Ar2iGqirUjFGOBji6QcdyY9kkumGrurt4koPbld_Wg3X0hN5Z7S-BOCnL-fjoua-VuGlqeN2lrvTHJQRz7BkZUo3mTxH8v7Rx56N3FHDw3FE7qCNJvx_J5vhOSx5HMctkojlQTd-xLZ1V6rbGwzkVuYqZLk0Nn8ORNVDYD7WbULmDpbG35ZfQtBufIzvAoU595ggT2sVxOH6tE8T4FMh2h-TuIIwP"/>
+</div>
+<div class="flex-grow">
+<h5 class="font-title-md text-[16px] text-on-surface uppercase truncate">Litter at Parque Lota</h5>
+<div class="flex items-center gap-2 mt-1">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<span class="font-label-sm text-[10px] text-primary uppercase">Validated - Municipio Notified</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Report Item 3 -->
+<div class="bg-surface-container border-2 border-outline-variant p-4 flex gap-4 items-center group hover:bg-surface-bright transition-colors">
+<div class="w-16 h-16 bg-surface-variant flex-shrink-0 border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="A detail-oriented view of a historic brick building wall with colorful graffiti being professionally cleaned or restored. The setting is 'Pabellón 83', a cultural center in an industrial coal mining city. The visual style is modern-brutalist with high-contrast digital overlays indicating restoration progress. The lighting is bright and clear, highlighting the contrast between the old brickwork and the new digital archaeology interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKgVlFLH8-icK5TzUZJ00Ln5kzWhN30KnsHUD7jE0Ah6xrQ4U3rFBWAfRHzyzmhcHqnOSeuxG29NO0ibX3Ymy7Eo1E4T-a6xPfaChqtdurXceYS5g9fOHer5RLx5FU13ig-QmQHlQji3RcOQcWDqvS5kmS4cy4-sbF-HnWGunWFFSl8tGlU6eSDwtTLgUbCLkLmj8lOXFKJKZa7GHtspQhrG2bXzAYx_zWNcgswOUOICnbOka5eIWlpz-zJC5fu3vnzHZyocpjHD-H"/>
+</div>
+<div class="flex-grow">
+<h5 class="font-title-md text-[16px] text-on-surface uppercase truncate">Graffiti on Pabellón 83</h5>
+<div class="flex items-center gap-2 mt-1">
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<span class="font-label-sm text-[10px] text-secondary uppercase">Resolved</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 h-20 bg-surface-container-low dark:bg-surface-container-low border-t-2 border-outline-variant dark:border-outline-variant flex justify-around items-center w-full max-w-none mb-0 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="directions_walk">directions_walk</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container h-full w-full border-t-4 border-primary hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<!-- Floating HUD Elements -->
+<div class="fixed top-24 left-4 z-40 hidden md:flex flex-col gap-2 pointer-events-none">
+<div class="bg-black/80 border-l-4 border-primary p-2">
+<p class="font-label-sm text-[10px] text-primary uppercase">Sector: Sector Minero 4</p>
+<p class="font-label-sm text-[10px] text-outline uppercase tracking-widest">37.0907° S, 73.1601° W</p>
+</div>
+<div class="bg-black/80 border-l-4 border-secondary p-2">
+<p class="font-label-sm text-[10px] text-secondary uppercase">Air Quality: Stable</p>
+</div>
+</div>
+<script>
+        // Simple micro-interaction for status badges
+        document.querySelectorAll('.active\\:scale-95').forEach(el => {
+            el.addEventListener('click', () => {
+                // Haptic feedback simulation or navigation logic could go here
+                console.log('Navigating to ' + el.innerText.trim());
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOTA INDÓMITO - Teatro de Lota</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.flicker-effect:active {
+    animation: flicker 0.1s infinite
+    }
+@keyframes flicker {
+    0% {
+        opacity: 1;
+        } 50% {
+        opacity: 0.7;
+        } 100% {
+        opacity: 1;
+        }
+    }
+.coal-grain {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCMNFhjpx1928eUIqXuIAx9T1uGvpogTKkL0kwRtqKQ1M422XEbAstrHF-el5w4DZkLKDjnFDHWHf9yymIR27btimhy3T4LGutjQtse9AndZ6d6caKtaAVgylSusvBcFKqVEBiSqrroZbXvvMwL3dwoTrz5u9dl3ZLTBH_CTr2NSuymJYEpKxUR5l1cC3zV79tgTLeDKAoORYoVGfjHyAixYaChl64jIlMXCcuBORXgOp1jXFmzClnlCqMx_fFpm16JhZ11BZRe_I7X);
+    background-blend-mode: overlay
+    }
+.etch-inset {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    box-shadow: 0 0 15px rgba(101, 218, 188, 0.4)
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #594238, transparent)
+    }
+.segmented-progress {
+    display: flex;
+    gap: 2px
+    }
+.progress-block {
+    height: 8px;
+    flex: 1;
+    background-color: #353535
+    }
+.progress-block.active {
+    background-color: #65dabc;
+    box-shadow: 0 0 5px #65dabc
+    }</style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#65dabc",
+                    "tertiary-fixed": "#d8e5e6",
+                    "on-primary-fixed": "#351000",
+                    "surface-variant": "#353535",
+                    "primary-fixed": "#ffdbcd",
+                    "on-surface": "#e5e2e1",
+                    "on-tertiary-container": "#202c2d",
+                    "on-secondary-fixed": "#002019",
+                    "on-secondary-container": "#003026",
+                    "secondary": "#65dabc",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#3d494a",
+                    "inverse-on-surface": "#313030",
+                    "outline-variant": "#594238",
+                    "primary-fixed-dim": "#ffb595",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-container": "#ee671c",
+                    "on-primary-container": "#4c1a00",
+                    "surface-dim": "#131313",
+                    "on-secondary": "#00382d",
+                    "primary": "#ffb595",
+                    "outline": "#a88a7e",
+                    "surface-container-lowest": "#0e0e0e",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#e0c0b2",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-primary-fixed-variant": "#7c2e00",
+                    "secondary-fixed": "#82f7d8",
+                    "inverse-surface": "#e5e2e1",
+                    "background": "#131313",
+                    "tertiary-fixed-dim": "#bcc9ca",
+                    "surface-tint": "#ffb595",
+                    "tertiary": "#bcc9ca",
+                    "surface-container": "#20201f",
+                    "on-primary": "#571e00",
+                    "surface-bright": "#393939",
+                    "secondary-container": "#1ca388",
+                    "on-background": "#e5e2e1",
+                    "inverse-primary": "#a23f00",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#353535",
+                    "surface": "#131313",
+                    "on-tertiary": "#263334",
+                    "tertiary-container": "#869394",
+                    "on-tertiary-fixed": "#121e1f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "stack-lg": "48px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "40px",
+                    "stack-md": "24px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "title-md": ["Montserrat"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "body-md": ["Work Sans"],
+                    "headline-lg": ["Montserrat"],
+                    "body-lg": ["Work Sans"]
+            },
+            "fontSize": {
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "30px", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-secondary selection:text-on-secondary min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center w-full px-margin-mobile h-16 fixed top-0 z-50 border-b-2 border-outline-variant">
+<button class="text-primary flicker-effect transition-opacity duration-75">
+<span class="material-symbols-outlined text-[32px]">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter text-primary dark:text-primary uppercase">LOTA INDÓMITO</h1>
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span>1200 炭</span>
+</div>
+</header>
+<main class="pt-16 px-4 md:px-margin-desktop space-y-6">
+<!-- Navigation Back -->
+<nav class="mt-4">
+<a class="flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span>VOLVER AL CATÁLOGO DE MONUMENTOS</span>
+</a>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-[530px] w-full overflow-hidden border-2 border-outline-variant etch-inset group">
+<img class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 transition-all duration-700" data-alt="A grand, slightly weathered theater facade with monumental columns and industrial deco details under a dramatic, cloudy sky. The building is made of heavy grey stone with dark iron elements, reflecting a gritty industrial heritage. The lighting is cinematic, casting long shadows that highlight the textures of the masonry. The overall mood is indomitable and historic, with a subtle digital orange overlay indicating an interactive point of interest." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6cUlgVe4vJWSQtmT__0nrq07HCxHQg7RWec3r6bMOIHgWq2dTvGEewaDiwksStIHbAHaavL8TgyW-lFYjd7bprxFvGX00VZouFhy1QtYDlW5pqWDdKR1XF-8I-pOf0q4NUr4c47lmqCVrJmBWi4obFHi9jHrMsja-AsQWUk3Q5yYEMv3vzyJWbPLsg9bnDM5Suh5xGyZEl6QXmRL2zh0bdFBw6lLDIIDtrBxC5m9PhfOjiDR_qgyZbffVbv1y5ZdPZ_Wo-aNg3wyI"/>
+<!-- AR Overlay Trigger -->
+<div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-background/90 to-transparent">
+<div class="flex flex-col md:flex-row justify-between items-end gap-4">
+<div class="space-y-2">
+<span class="inline-block px-3 py-1 bg-primary text-on-primary font-label-sm text-label-sm">HISTORIA VIVA</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface md:text-headline-lg">TEATRO DE LOTA</h2>
+</div>
+<button class="flex items-center gap-3 px-6 py-4 bg-secondary-container text-on-secondary-container font-title-md text-title-md neon-glow hover:bg-secondary transition-all active:scale-95 group/ar">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+<span>RECONSTRUIR FACHADA ORIGINAL</span>
+</button>
+</div>
+</div>
+<!-- HUD Elements -->
+<div class="absolute top-4 right-4 flex flex-col items-end pointer-events-none opacity-60">
+<div class="font-label-sm text-label-sm text-secondary-fixed">COORD: 37.0905° S, 73.1558° W</div>
+<div class="font-label-sm text-label-sm text-secondary-fixed">STATUS: MONUMENTAL_ACTIVE</div>
+</div>
+</section>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Narrative -->
+<article class="md:col-span-7 space-y-6 bg-surface-container/50 p-6 border-2 border-outline-variant coal-grain etch-inset">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">theater_comedy</span>
+<h3 class="font-title-md text-title-md text-primary uppercase">Catedral de la Cultura Obrera</h3>
+</div>
+<div class="weld-line"></div>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<p>
+                        Inaugurado en la era dorada del carbón, el <span class="text-primary font-bold">Teatro de Lota</span> no fue solo un edificio; fue el epicentro del alma social de la ciudad. Mientras las profundidades de la mina reclamaban el esfuerzo físico, este coliseo de concreto y sueños ofrecía un refugio para la dignidad y el arte.
+                    </p>
+<p>
+                        Aquí, los mineros y sus familias pasaban de las galerías subterráneas a las galerías de terciopelo. El teatro albergó desde las compañías de ópera más prestigiosas de Europa hasta las asambleas sindicales que forjaron la identidad de un pueblo indómito. Su acústica perfecta fue diseñada para que hasta el susurro más leve de un actor fuera escuchado por el obrero en la última fila.
+                    </p>
+</div>
+<!-- Audio Guide Component -->
+<div class="bg-surface-container-high p-4 border border-outline-variant flex items-center gap-4">
+<button class="w-12 h-12 bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<div class="flex-1 space-y-1">
+<div class="font-label-sm text-label-sm text-on-surface flex justify-between">
+<span>GUÍA: LOS ECOS DEL CARBÓN</span>
+<span>02:45 / 05:12</span>
+</div>
+<div class="segmented-progress">
+<div class="progress-block active"></div>
+<div class="progress-block active"></div>
+<div class="progress-block active"></div>
+<div class="progress-block active"></div>
+<div class="progress-block"></div>
+<div class="progress-block"></div>
+<div class="progress-block"></div>
+<div class="progress-block"></div>
+</div>
+</div>
+</div>
+</article>
+<!-- Right Column: Stats & Events -->
+<aside class="md:col-span-5 space-y-gutter">
+<!-- Info Panel -->
+<div class="bg-surface-container p-6 border-2 border-outline-variant space-y-4">
+<h4 class="font-label-sm text-label-sm text-primary uppercase tracking-widest">DETALLES ESTRUCTURALES</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-surface-dim border border-outline-variant">
+<div class="text-label-sm font-label-sm text-on-surface-variant">CAPACIDAD</div>
+<div class="text-title-md font-title-md text-secondary">1.400 PAX</div>
+</div>
+<div class="p-3 bg-surface-dim border border-outline-variant">
+<div class="text-label-sm font-label-sm text-on-surface-variant">ESTILO</div>
+<div class="text-title-md font-title-md text-secondary">DECO IND.</div>
+</div>
+</div>
+</div>
+<!-- Timeline/History List -->
+<div class="bg-surface-container-low p-6 border-2 border-outline-variant space-y-4">
+<h4 class="font-label-sm text-label-sm text-primary uppercase tracking-widest">CRONOLOGÍA DE LAS ARTES</h4>
+<div class="space-y-4">
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<div class="w-0.5 flex-1 bg-outline-variant my-1"></div>
+</div>
+<div class="pb-4">
+<div class="font-label-sm text-label-sm text-secondary">1944</div>
+<div class="font-title-md text-[16px] text-on-surface group-hover:text-primary transition-colors">Inauguración Monumental</div>
+</div>
+</div>
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+<div class="w-0.5 flex-1 bg-outline-variant my-1"></div>
+</div>
+<div class="pb-4">
+<div class="font-label-sm text-label-sm text-on-surface-variant">1960</div>
+<div class="font-title-md text-[16px] text-on-surface group-hover:text-primary transition-colors">Resistencia al Terremoto</div>
+</div>
+</div>
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">2024</div>
+<div class="font-title-md text-[16px] text-on-surface group-hover:text-primary transition-colors">Restauración Digital AR</div>
+</div>
+</div>
+</div>
+<button class="w-full py-2 border border-outline-variant text-label-sm font-label-sm text-on-surface hover:bg-surface-variant transition-colors uppercase">
+                        Ver Archivo Histórico
+                    </button>
+</div>
+</aside>
+</div>
+<!-- Technical Specs / Metadata Footer -->
+<div class="mt-8 pt-8 border-t-2 border-outline-variant opacity-40 font-label-sm text-[10px] flex justify-between uppercase tracking-tighter">
+<div>DATASET_ID: THEATER_LOTA_044</div>
+<div>STATUS: ARCHIVE_ACCESSIBLE</div>
+<div>VER: 2.0.44_BETA</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 mb-0 h-20 pb-2 border-t-2 border-outline-variant bg-surface-container dark:bg-surface-container">
+<!-- Map -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed transition-transform active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="text-label-sm font-label-sm">Map</span>
+</a>
+<!-- Routes -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed transition-transform active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-label-sm font-label-sm">Routes</span>
+</a>
+<!-- Scan (Active) -->
+<a class="flex flex-col items-center justify-center text-secondary border-t-4 border-secondary pt-1 transition-transform active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner" style="font-variation-settings: 'FILL' 1;">qr_code_scanner</span>
+<span class="text-label-sm font-label-sm">Scan</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-2 hover:text-secondary-fixed transition-transform active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

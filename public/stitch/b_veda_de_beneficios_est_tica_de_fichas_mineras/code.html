@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bóveda de Beneficios - Lota Indómito</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.coal-dust-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDMtNvaO8KB9ByZPPhrQ080ZFwjMDE8uHgj93QyTp_69jRUeQ36_76f5Hz-8j2QVRMA08DiM5o6dQyZ_mbGPSF4__T_ft9pAlHv2n_m2qVFTnqpNawzJVx4ItVXJBqim--0NZHxCxNNk2vQYUnSMDkaYJ7mz2a_paZZeLwvHf9B3CKgem7YPDfROeBBEedaUBXwapv0tbiUMt9mMBVFM2L7One6FoFXdEppYEs9qQeCgferihdfBeRKC0wJfAHIsbLzq6pghXnPBHwQ);
+    background-blend-mode: overlay
+    }
+.industrial-border {
+    border: 2px solid #594238
+    }
+.weld-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #a88a7e 50%, transparent 100%);
+    opacity: 0.3
+    }
+.etched-inset {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.05), inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    }
+.neon-glow {
+    box-shadow: 0 0 12px rgba(101, 218, 188, 0.3)
+    }
+.segment-bar {
+    display: flex;
+    gap: 2px
+    }
+.segment {
+    height: 6px;
+    flex-grow: 1;
+    background-color: #353535
+    }
+.segment.active {
+    background-color: #ffb595
+    }</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#ffb595",
+                        "primary": "#ffb595",
+                        "outline-variant": "#594238",
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "primary-fixed-dim": "#ffb595",
+                        "secondary-fixed-dim": "#65dabc",
+                        "secondary-container": "#1ca388",
+                        "outline": "#a88a7e",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface": "#131313",
+                        "surface-variant": "#353535",
+                        "on-tertiary-container": "#202c2d",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#65dabc",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#a23f00",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-dim": "#131313",
+                        "on-primary-container": "#4c1a00",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary": "#263334",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#e0c0b2",
+                        "surface-container": "#20201f",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#00382d",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary-fixed": "#002019",
+                        "on-primary": "#571e00",
+                        "secondary-fixed": "#82f7d8",
+                        "on-tertiary-fixed": "#121e1f",
+                        "tertiary": "#bcc9ca",
+                        "on-secondary-container": "#003026",
+                        "primary-fixed": "#ffdbcd",
+                        "tertiary-container": "#869394",
+                        "on-secondary-fixed-variant": "#005142",
+                        "primary-container": "#ee671c",
+                        "background": "#131313",
+                        "on-primary-fixed": "#351000",
+                        "surface-bright": "#393939"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "30px", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>\n.token-shape {\n  aspect-ratio: 1/1;\n  border-radius: 50%;\n  position: relative;\n  overflow: hidden;\n  border: 4px solid #a88a7e;\n  box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 8px 8px 15px rgba(0,0,0,0.6);\n  background: radial-gradient(circle at 30% 30%, #594238 0%, #1c1b1b 100%);\n}\n.token-emboss {\n  text-shadow: -1px -1px 1px rgba(255,255,255,0.1), 1px 1px 1px rgba(0,0,0,0.8);\n  color: #d8e5e6;\n}\n.mint-mark {\n  border: 2px solid #a88a7e;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: #351000;\n  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);\n}\n.stamp-button {\n  background: #ee671c;\n  border: 2px solid #7c2e00;\n  box-shadow: 0 4px 0 #7c2e00;\n  transition: all 0.1s active;\n}\n.stamp-button:active {\n  transform: translateY(2px);\n  box-shadow: 0 2px 0 #7c2e00;\n}\n</style></head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden pb-24">
+<!-- Top AppBar -->
+<header class="w-full top-0 sticky bg-surface z-50 border-b-2 border-outline-variant shadow-none">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-16">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<h1 class="font-display-lg text-[24px] md:text-display-lg tracking-tighter text-primary uppercase">LOTA INDÓMITO</h1>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-highest border border-outline-variant etched-inset">
+<span class="material-symbols-outlined text-secondary text-sm">thermostat</span>
+<span class="font-label-sm text-primary">450 C</span>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop mt-stack-md">
+<!-- Header Section -->
+<section class="mb-stack-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary uppercase tracking-tight">Bóveda de Beneficios</h2>
+<p class="font-body-md text-on-surface-variant max-w-xl">Intercambia tu esfuerzo en las minas digitales por recompensas reales en el comercio local de Lota.</p>
+</div>
+<!-- Balance Display -->
+<div class="relative bg-surface-container p-4 border-2 border-primary etched-inset coal-dust-texture min-w-[200px]">
+<div class="absolute -top-3 -left-2 bg-primary px-2 py-0.5">
+<span class="font-label-sm text-on-primary text-[10px] uppercase">Balance Actual</span>
+</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">generating_tokens</span>
+<span class="font-display-lg text-[32px] text-on-surface">1,240</span>
+</div>
+<span class="font-label-sm text-secondary uppercase">Carboncillos</span>
+</div>
+<div class="mt-2 segment-bar">
+<div class="segment active"></div>
+<div class="segment active"></div>
+<div class="segment active"></div>
+<div class="segment active"></div>
+<div class="segment"></div>
+<div class="segment"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Marketplace Grid -->
+<section class="mb-stack-lg">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-secondary">shopping_cart</span>
+<h3 class="font-title-md text-on-surface uppercase tracking-wider">Canjes Disponibles</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class='\"flex' flex-col="" gap-4="" group\"="" items-center="">\n  <div class='\"token-shape' flex="" flex-col="" grayscale="" hover:grayscale-0="" items-center="" justify-center="" md:w-72="" p-8="" text-center="" transition-all\"="" w-64="">\n    <div class='\"absolute' inset-0="" opacity-20="" pointer-events-none\"="">\n      <img class='\"w-full' h-full="" object-cover\"="" src='\"https://lh3.googleusercontent.com/aida-public/AB6AXuDob6Ur4V_1tzamrWaBN3wSJwYqTL647KIYsyhj1FVgZzsi3qRiHJk85L8c18QHl0dAhhAQxBsVjEw867CHiYCuX1I8yzfTNT4uPLObkIAhhz7pJn3LpBtJG1SFLw_WSs3lnyZT1kNIKc38my-vnZ_EkAaB_4F6NDrk8Yn9tHYHXYVRuvigITNT-xu_QIcDqlIMsRB7LWA0La8qLUi084zrLCpTpVEEzp-7atlzvc2IIZm80JiTSfu5PDpdaWX4qiB2j_V9QF-GAzUb\"'/>\n    </div>\n    <div class='\"mint-mark' h-16="" mb-4\"="" w-16="">\n      <span class='\"font-display-lg' text-lg="" text-primary="" token-emboss\"="">15%</span>\n    </div>\n    <h4 class='\"font-title-md' leading-tight\"="" text-primary="" token-emboss="" uppercase="">Panadería<br/>La Niña</h4>\n    <div bg-outline="" class='\"w-full' h-px="" my-3\"="" opacity-30=""></div>\n    <div class='\"flex' flex-col="" items-center\"="">\n      <span class='\"font-label-sm' text-[10px]\"="" text-secondary="" uppercase="">Valor de Canje</span>\n      <span class='\"font-display-lg' text-2xl="" text-on-surface="" token-emboss\"="">350</span>\n      <span class='\"font-label-sm' text-[10px]="" text-secondary="" uppercase\"="">Carboncillos</span>\n    </div>\n  </div>\n  <button class='\"stamp-button' font-label-sm="" py-3="" text-on-primary="" tracking-widest\"="" uppercase="" w-48="">Estampar Canje</button>\n</div>\n<div class='\"flex' flex-col="" gap-4="" group\"="" items-center="">\n  <div class='\"token-shape' flex="" flex-col="" grayscale="" hover:grayscale-0="" items-center="" justify-center="" md:w-72="" p-8="" text-center="" transition-all\"="" w-64="">\n    <div class='\"absolute' inset-0="" opacity-20="" pointer-events-none\"="">\n      <img class='\"w-full' h-full="" object-cover\"="" src='\"https://lh3.googleusercontent.com/aida-public/AB6AXuAWeRyWODTZI66YgTOadGTP9Vunyh_D8mAqw6gMtdbgKZQyuAL8mCsp_15f2NocyVJVT4ToddHCL8hp7xis_uO1syOywmlmSmG3xOZk0P1Q9_hoiB1gX5aw8iBxwl32XOqhaF8uKrFzMa1cRMIy-B9LOrMRkqMpQWNSxBtr1DnnNR8UL5zJgteNo4BxwtOWIHhfPSHrA5CWqFgQvkWSJ8w-tzKSzWZIKuadwdK1tA6f5_-wBxPq-nX5lMSDaLiCvaxtf5rZ9RXlrGPB\"'/>\n    </div>\n    <div class='\"mint-mark' h-16="" mb-4\"="" w-16="">\n      <span class='\"font-display-lg' text-lg="" text-primary="" token-emboss\"="">20%</span>\n    </div>\n    <h4 class='\"font-title-md' leading-tight\"="" text-primary="" token-emboss="" uppercase="">Artesanías<br/>Del Carbón</h4>\n    <div bg-outline="" class='\"w-full' h-px="" my-3\"="" opacity-30=""></div>\n    <div class='\"flex' flex-col="" items-center\"="">\n      <span class='\"font-label-sm' text-[10px]\"="" text-secondary="" uppercase="">Valor de Canje</span>\n      <span class='\"font-display-lg' text-2xl="" text-on-surface="" token-emboss\"="">500</span>\n      <span class='\"font-label-sm' text-[10px]="" text-secondary="" uppercase\"="">Carboncillos</span>\n    </div>\n  </div>\n  <button class='\"stamp-button' font-label-sm="" py-3="" text-on-primary="" tracking-widest\"="" uppercase="" w-48="">Estampar Canje</button>\n</div>\n<div class='\"flex' flex-col="" gap-4="" group\"="" items-center="">\n  <div class='\"token-shape' flex="" flex-col="" grayscale="" hover:grayscale-0="" items-center="" justify-center="" md:w-72="" p-8="" text-center="" transition-all\"="" w-64="">\n    <div class='\"absolute' inset-0="" opacity-20="" pointer-events-none\"="">\n      <img class='\"w-full' h-full="" object-cover\"="" src='\"https://lh3.googleusercontent.com/aida-public/AB6AXuDyWOTHFpT47aAa4pQs4fjOZr-FZ5WFMlLb3mglbpHOl0nYD-k_okWRKC3lORVI65h_WMcKA-dqNpU7OuFWNrX1vEZC2A3nBOmcA3wIn9UpaRyGfS23QmzO_TmS8ZHPBxP7CiN5C-iJEVizMNZzVUeAAuy-RruCWS8tyBW7ZWy8S4mk1RFQETenrFrhKInIPuCmSrloxrSclKn-jDd-2OfY4tYUBMDVhODJRRYBa0KZgo_CDlR0RkROmB2ty8bWrpOkZ6IYyEjLmEO8\"'/>\n    </div>\n    <div class='\"mint-mark' h-16="" mb-4\"="" w-16="">\n      <span class='\"font-display-lg' text-lg="" text-primary="" token-emboss\"="">10%</span>\n    </div>\n    <h4 class='\"font-title-md' leading-tight\"="" text-primary="" token-emboss="" uppercase="">Restaurante<br/>El Minero</h4>\n    <div bg-outline="" class='\"w-full' h-px="" my-3\"="" opacity-30=""></div>\n    <div class='\"flex' flex-col="" items-center\"="">\n      <span class='\"font-label-sm' text-[10px]\"="" text-secondary="" uppercase="">Valor de Canje</span>\n      <span class='\"font-display-lg' text-2xl="" text-on-surface="" token-emboss\"="">280</span>\n      <span class='\"font-label-sm' text-[10px]="" text-secondary="" uppercase\"="">Carboncillos</span>\n    </div>\n  </div>\n  <button class='\"stamp-button' font-label-sm="" py-3="" text-on-primary="" tracking-widest\"="" uppercase="" w-48="">Estampar Canje</button>\n</div></div>
+</section>
+<!-- My Coupons Section (Previously Redeemed) -->
+<section class="mb-stack-lg border-2 border-outline-variant bg-surface-container-lowest p-6 coal-dust-texture relative overflow-hidden">
+<!-- Decorative rivet -->
+<div class="absolute top-2 left-2 w-2 h-2 rounded-full bg-outline opacity-50"></div>
+<div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-outline opacity-50"></div>
+<div class="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-outline opacity-50"></div>
+<div class="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-outline opacity-50"></div>
+<div class="flex items-center justify-between mb-stack-md border-b border-outline-variant pb-4">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-secondary">confirmation_number</span>
+<h3 class="font-title-md text-on-surface uppercase tracking-wider">Mis Cupones</h3>
+</div>
+<button class="font-label-sm text-secondary hover:underline uppercase">Ver Todo</button>
+</div>
+<div class="space-y-4"><div bg-surface-container="" border="" border-outline-variant="" class='\"flex' gap-4="" items-center="" p-4="" relative\"="" shadow-lg="">\n  <div border-2="" border-secondary="" class='\"token-shape' flex-shrink-0="" h-16="" shadow-none\"="" w-16="">\n    <div class='\"flex' h-full\"="" items-center="" justify-center="">\n      <span class='\"material-symbols-outlined' text-secondary\"="">store</span>\n    </div>\n  </div>\n  <div class='\"flex-grow\"'>\n    <p class='\"font-label-sm' mb-1\"="" text-[10px]="" text-secondary="" uppercase="">Activo - Redimido</p>\n    <h5 class='\"font-body-lg' font-bold="" text-on-surface="" token-emboss\"="" uppercase="">Café de la Estación</h5>\n    <p class='\"font-label-sm' font-mono\"="" text-on-surface-variant="">ID: LOTA-9923-X</p>\n  </div>\n  <button class='\"stamp-button' font-label-sm="" px-4="" py-2="" text-on-primary="" uppercase\"="">Ver QR</button>\n</div>\n<div bg-surface-container="" border="" border-outline-variant="" class='\"flex' gap-4="" grayscale\"="" items-center="" opacity-50="" p-4="">\n  <div border-2="" border-outline-variant="" class='\"token-shape' flex-shrink-0="" h-16="" shadow-none\"="" w-16="">\n    <div class='\"flex' h-full\"="" items-center="" justify-center="">\n      <span class='\"material-symbols-outlined' text-outline\"="">history</span>\n    </div>\n  </div>\n  <div class='\"flex-grow\"'>\n    <p class='\"font-label-sm' mb-1\"="" text-[10px]="" text-outline="" uppercase="">Usado el 12/10/23</p>\n    <h5 class='\"font-body-lg' font-bold="" text-on-surface="" uppercase\"="">Museo Histórico</h5>\n    <p class='\"font-label-sm' text-on-surface-variant\"="">Cupón Utilizado</p>\n  </div>\n  <span border="" border-outline="" class='\"font-label-sm' px-2="" py-1="" text-outline="" uppercase\"="">Validado</span>\n</div></div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 h-20 border-t-2 border-outline-variant bg-surface-container-low flex justify-around items-center max-w-none mb-0 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">map</span>
+<span class="font-label-sm text-label-sm uppercase">Map</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">directions_walk</span>
+<span class="font-label-sm text-label-sm uppercase">Routes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-70 h-full w-full hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm uppercase">Scan</span>
+</a>
+<!-- Active State: Profile/Bóveda (Assuming Profile is the hub for rewards) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container h-full w-full border-t-4 border-primary hover:bg-surface-container-high transition-all active:scale-95 duration-75" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm uppercase">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.filter = 'brightness(1.2)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.filter = 'brightness(1)';
+            });
+        });
+
+        // Simulating some mechanical torque in movement
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            document.querySelectorAll('.weld-line').forEach((line, index) => {
+                const speed = 0.05 * (index + 1);
+                line.style.transform = `translateX(${scrollPos * speed % 20}px)`;
+            });
+        });
+    </script>
+</body></html>

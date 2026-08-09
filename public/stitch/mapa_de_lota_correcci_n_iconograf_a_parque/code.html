@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Lota Indómita - Mapa Comunal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#d8e5e6",
+                        "on-primary-fixed-variant": "#7c2e00",
+                        "surface-tint": "#ffb595",
+                        "primary": "#ffb595",
+                        "outline-variant": "#594238",
+                        "primary-fixed-dim": "#ffb595",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface": "#131313",
+                        "secondary-fixed-dim": "#65dabc",
+                        "secondary-container": "#1ca388",
+                        "outline": "#a88a7e",
+                        "on-tertiary-container": "#202c2d",
+                        "surface-variant": "#353535",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#65dabc",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#a23f00",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#3d494a",
+                        "tertiary-fixed-dim": "#bcc9ca",
+                        "surface-container-highest": "#353535",
+                        "on-tertiary": "#263334",
+                        "on-error": "#690005",
+                        "surface-dim": "#131313",
+                        "on-primary-container": "#4c1a00",
+                        "surface-container": "#20201f",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#e0c0b2",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#00382d",
+                        "on-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#002019",
+                        "on-primary": "#571e00",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed": "#121e1f",
+                        "secondary-fixed": "#82f7d8",
+                        "tertiary-container": "#869394",
+                        "on-secondary-fixed-variant": "#005142",
+                        "tertiary": "#bcc9ca",
+                        "on-secondary-container": "#003026",
+                        "primary-fixed": "#ffdbcd",
+                        "primary-container": "#ee671c",
+                        "background": "#131313",
+                        "on-primary-fixed": "#351000",
+                        "surface-bright": "#393939"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "stack-lg": "48px",
+                        "unit": "4px",
+                        "stack-md": "24px",
+                        "margin-desktop": "40px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Montserrat"],
+                        "title-md": ["Montserrat"],
+                        "label-sm": ["JetBrains Mono"],
+                        "display-lg": ["Montserrat"],
+                        "body-md": ["Work Sans"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Work Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.filled-icon {
+    font-variation-settings: "FILL" 1
+    }
+.coal-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuABfmeKI_XBvBu9ST13nUoHRoeBb4g6j6WcZbs0961a_Ywq5ncg0DEX5cHkdHLOv0MXaDr7eo_4iY0JSfqg-F4S5ryuhtL0b8ozGItW0RhbrHR_PbyjRiMpAba1uKOVW_scrbmvcZnLWUugLEGFbvNheU6k71jTbI5pmdUWcZJFER_8zj5RP8XO7kdBvZrN5ohVeWoSIBtUYS7VUkayG_lFZ1q_2w-M_MXVNm7S9IlYQI3ryC_AIZq2BfSVJj5pH45cPlow2x5SqD0g);
+    opacity: 0.05
+    }
+.metal-border {
+    border: 2px solid #a88a7e;
+    box-shadow: inset 1px 1px 0 #e0c0b2, 1px 1px 0 #000
+    }
+.marker-glow {
+    filter: drop-shadow(0 0 8px rgba(101, 218, 188, 0.6))
+    }
+.industrial-shadow {
+    box-shadow: 4px 4px 0 0 #000
+    }
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+    opacity: 0.03;
+    z-index: 999
+    }
+/* Custom scrollbar for industrial feel */
+::-webkit-scrollbar {
+    width: 4px
+    }
+::-webkit-scrollbar-track {
+    background: #131313
+    }
+::-webkit-scrollbar-thumb {
+    background: #a88a7e
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary-container overflow-hidden">
+<div class="noise-overlay"></div>
+<!-- UI Overlay Wrapper -->
+<div class="relative h-screen w-full flex flex-col">
+<!-- TopAppBar (Shared Component Logic) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface h-16 flex justify-between items-center px-margin-mobile border-b-2 border-outline">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-tighter">MAPA COMUNAL</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1 border-2 border-outline">
+<span class="font-label-sm text-label-sm text-primary">1,250</span>
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="conditions">conditions</span>
+</div>
+</header>
+<!-- Main Map Area (Full Screen) -->
+<main class="flex-grow relative bg-[#0e0e0e]">
+<!-- Simulated Map Image with Data-Location -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale opacity-40 mix-blend-luminosity" data-alt="A highly detailed, dark-themed geographical map of a coastal industrial city. The map features high-contrast linework in copper and neon mint, highlighting the rugged terrain of Alto and Bajo sectors. Subtle grid patterns and blueprint schematics are overlaid across the landscape. The atmosphere is moody and technical, reminiscent of a digital archaeology interface with deep coal blacks and metallic textures." data-location="Lota, Chile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Po7PbodWP389ET7pRBbTrZVphklcfZSeNqC4TbyuxyoULshmCX9QeBgsGUwiRU6lt9tzVxkp7D3JXT1kaBrGIZXZXLWdW_Rm9ttedpTWiT9xa4yKUDJuYyPt1ur_aqqHnWvBhvK3sNakIevLsuroXy-C44Q2ehMjUb56FQPAwFsTVdg9aQ9zbGneWBeMmvjCRorhgl4hj2K3Ya_Vy017L5cvGhLHncE8qEFvW2QjgtjAHyjfLyPRajoL9_1YdbDsr-ehYMt2rgDT"/>
+<!-- Grid Overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#a88a7e 1px, transparent 1px); background-size: 32px 32px;"></div>
+</div>
+<!-- Custom Markers (Interactive) -->
+<!-- Parque de Lota Marker -->
+<div class="absolute top-[35%] left-[45%] group cursor-pointer" onclick="selectPoint('Parque de Lota', 'Monumento Nacional con jardines franceses y estatuas de fierro fundido.')">
+<div class="relative flex flex-col items-center">
+<div class="w-10 h-10 bg-surface border-2 border-primary rounded-full flex items-center justify-center marker-glow transform group-hover:scale-110 transition-transform" style="filter: drop-shadow(0 0 8px #d35400);">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="park" style="font-variation-settings: 'FILL' 1;">park</span>
+</div>
+<div class="mt-1 px-2 py-0.5 bg-background/80 border border-outline backdrop-blur-sm">
+<span class="font-label-sm text-[10px] text-on-surface uppercase">Parque de Lota</span>
+</div>
+</div>
+</div>
+<!-- Chiflón del Diablo Marker -->
+<div class="absolute top-[60%] left-[30%] group cursor-pointer" onclick="selectPoint('Chiflón del Diablo', 'Mina de carbón submarina, única en el mundo abierta al turismo.')">
+<div class="relative flex flex-col items-center">
+<div class="w-10 h-10 bg-surface border-2 rounded-full flex items-center justify-center marker-glow transform group-hover:scale-110 transition-transform border-[#d35400]" style="filter: drop-shadow(0 0 8px #d35400);">
+<span class="material-symbols-outlined text-xl text-[#d35400]" data-icon="precision_manufacturing" style="font-variation-settings: 'FILL' 1;">construction</span>
+</div>
+<div class="mt-1 px-2 py-0.5 bg-background/80 border border-outline backdrop-blur-sm">
+<span class="font-label-sm text-[10px] text-on-surface uppercase">Chiflón del Diablo</span>
+</div>
+</div>
+</div>
+<!-- Geopoint Marker -->
+<div class="absolute top-[50%] left-[70%] group cursor-pointer" onclick="selectPoint('Geositio Piedra Blanca', 'Formación geológica milenaria frente al Océano Pacífico.')">
+<div class="relative flex flex-col items-center">
+<div class="w-8 h-8 bg-surface border-2 border-tertiary rounded-full flex items-center justify-center marker-glow transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="landscape" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+</div>
+</div>
+<!-- Map HUD Elements -->
+<div class="absolute top-20 right-margin-mobile flex flex-col gap-2 z-10">
+<button class="w-12 h-12 bg-surface-container border-2 border-outline flex items-center justify-center industrial-shadow active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="my_location">my_location</span>
+</button>
+<button class="w-12 h-12 bg-surface-container border-2 border-outline flex items-center justify-center industrial-shadow active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="layers">layers</span>
+</button>
+</div>
+<!-- Legend/Filter Drawer (Industrial Style) -->
+<div class="absolute bottom-40 left-margin-mobile right-margin-mobile z-20 pointer-events-none">
+<div class="flex gap-2 overflow-x-auto pb-4 pointer-events-auto no-scrollbar">
+<button class="flex-shrink-0 bg-primary-container text-on-primary-container px-4 py-2 border-2 border-on-primary-fixed-variant flex items-center gap-2 industrial-shadow">
+<span class="material-symbols-outlined text-sm" data-icon="account_balance">account_balance</span>
+<span class="font-label-sm text-[11px] font-bold">MONUMENTOS</span>
+</button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface-variant px-4 py-2 border-2 border-outline flex items-center gap-2 industrial-shadow">
+<span class="material-symbols-outlined text-sm" data-icon="route">route</span>
+<span class="font-label-sm text-[11px] font-bold">RUTAS</span>
+</button>
+<button class="flex-shrink-0 bg-surface-container text-on-surface-variant px-4 py-2 border-2 border-outline flex items-center gap-2 industrial-shadow">
+<span class="material-symbols-outlined text-sm" data-icon="store">store</span>
+<span class="font-label-sm text-[11px] font-bold">COMERCIO</span>
+</button>
+</div>
+</div>
+<!-- Selected Point Overlay (Hidden by default) -->
+<div class="absolute bottom-24 left-margin-mobile right-margin-mobile z-30 transition-all duration-300 translate-y-full opacity-0 pointer-events-none" id="pointCard">
+<div class="bg-surface border-2 border-outline p-4 industrial-shadow relative overflow-hidden pointer-events-auto">
+<div class="coal-texture absolute inset-0"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-title-md text-title-md text-primary uppercase tracking-tight" id="cardTitle">PARQUE DE LOTA</h3>
+<button class="text-on-surface-variant" onclick="closePoint()">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2" id="cardDesc">
+                            Monumento Nacional con jardines franceses y estatuas de fierro fundido.
+                        </p>
+<button class="w-full bg-primary py-3 flex items-center justify-center gap-2 text-on-primary font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="near_me">near_me</span>
+<span class="font-label-sm">IR A LA RUTA</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Shared Component Hybrid) -->
+<button class="fixed bottom-24 right-margin-mobile z-40 w-16 h-16 bg-primary-container border-4 border-outline-variant flex items-center justify-center industrial-shadow active:scale-90 transition-all">
+<div class="relative">
+<span class="material-symbols-outlined text-on-primary-container text-3xl" data-icon="camera" data-weight="fill" style="font-variation-settings: 'FILL' 1;">camera</span>
+</div>
+</button>
+</main>
+<!-- BottomNavBar (Shared Component Logic) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 h-20 bg-surface-container flex justify-around items-center px-margin-mobile border-t-2 border-outline pb-safe">
+<!-- Map (Active) -->
+<div class="flex flex-col items-center justify-center text-secondary bg-secondary-container/20 px-4 py-1 transition-all duration-300">
+<span class="material-symbols-outlined text-2xl" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-label-sm text-label-sm">Map</span>
+</div>
+<!-- Routes -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined text-2xl" data-icon="map">map</span>
+<span class="font-label-sm text-label-sm">Routes</span>
+</div>
+<!-- Scan -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined text-2xl" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</div>
+<!-- Profile -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all duration-300">
+<span class="material-symbols-outlined text-2xl" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+</div>
+<script>
+        function selectPoint(title, desc) {
+            const card = document.getElementById('pointCard');
+            const cardTitle = document.getElementById('cardTitle');
+            const cardDesc = document.getElementById('cardDesc');
+            
+            cardTitle.innerText = title;
+            cardDesc.innerText = desc;
+            
+            card.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+            card.classList.add('translate-y-0', 'opacity-100');
+            
+            // Atmospheric micro-interaction: Subtle vibration or sound simulation
+            if (window.navigator.vibrate) {
+                window.navigator.vibrate(10);
+            }
+        }
+
+        function closePoint() {
+            const card = document.getElementById('pointCard');
+            card.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+            card.classList.remove('translate-y-0', 'opacity-100');
+        }
+
+        // Simulate some atmospheric "glitch" or data loading effect on markers
+        setInterval(() => {
+            const markers = document.querySelectorAll('.marker-glow');
+            const randomMarker = markers[Math.floor(Math.random() * markers.length)];
+            if (randomMarker) {
+                randomMarker.style.opacity = '0.7';
+                setTimeout(() => randomMarker.style.opacity = '1', 50);
+            }
+        }, 3000);
+    </script>
+</body></html>
