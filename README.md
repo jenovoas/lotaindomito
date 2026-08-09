@@ -1,8 +1,8 @@
 # Lota Indómito
 
-Aplicación web progresiva (PWA) con mapa interactivo, gamificación cultural y módulo de reportes ciudadanos para la comuna de Lota (Chile).
+Juego tipo Pokémon GO ambientado en Lota (Chile). El jugador camina por la ciudad, entra a zonas históricas, descubre personajes del pasado (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero), completa misiones y sube de rango recogiendo Carboncillos. Construido con three.js + React Three Fiber como PWA web.
 
-> **Estado:** prototipo en diseño. Ver `docs/estado.md` para el estado vivo del proyecto.
+> **Estado:** game design document en `docs/concepto-juego.md`. Estado vivo del proyecto en `docs/estado.md`.
 
 ---
 

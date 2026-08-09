@@ -15,7 +15,7 @@
 
 ## 2. El proyecto en una línea
 
-App gamificada de turismo cultural para Lota (ciudad carbonífera, Chile). Visita a sectores culturales, mecánica de juego, estadísticas y alertas ciudadanas alimentan un dashboard para municipio + instituciones patrimoniales.
+Juego tipo Pokémon GO ambientado en Lota (Chile). El jugador (Explorador del Carbón / Guardián de la Memoria) camina por la ciudad, entra a zonas turísticas, descubre historia, recoge Carboncillos y sube de rango (Aprendiz → Capataz → Leyenda de la Cuenca). **No es turismo literal, es un game con objetivos y metas de recorrido.** Ver GDD completo en `docs/concepto-juego.md`.
 
 ---
 
