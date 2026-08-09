@@ -233,6 +233,7 @@ def main():
         ("_analisis/01_resumen_audios_cliente.md",  "_analisis/01_resumen_audios_cliente.html",  "Síntesis audios del cliente"),
         ("_analisis/02_cotejo_audis_vs_prototipo.md", "_analisis/02_cotejo_audis_vs_prototipo.html", "Cliente vs prototipo"),
         ("_analisis/04_propuesta_tecnica_stack_osm.md", "_analisis/04_propuesta_tecnica_stack_osm.html", "Propuesta técnica"),
+        ("docs/concepto-juego.md",               "docs/concepto-juego.html",               "Concepto del juego (GDD)"),
     ]
 
     print(f"Renderizando docs en {root}")
