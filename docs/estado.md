@@ -95,3 +95,5 @@ find . -type f \( -name "*.md" -o -name "*.txt" -o -name "*.py" \) ! -path "*/tr
 ```
 
 (Ver `decisiones.md` para el patrón regex completo.)
+
+## Live test 15:53:45
