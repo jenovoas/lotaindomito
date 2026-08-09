@@ -1,0 +1,96 @@
+# ============================================================
+# Lota Indómito — gitignore raíz
+# ============================================================
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+*.egg-info/
+
+# --- Node / JS / build artifacts ---
+node_modules/
+.next/
+.nuxt/
+out/
+dist/
+build/
+.cache/
+.parcel-cache/
+.turbo/
+*.tsbuildinfo
+.npm/
+.yarn/
+
+# --- Secrets / keys (NUNCA commitear) ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.crt
+secrets/
+.secrets/
+config.local.yaml
+config.local.json
+credentials.json
+service-account*.json
+
+# --- IDEs / editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Claude / agentes ---
+.claude/
+.aider*
+.opencode/
+
+# --- Hermes (agent local state) ---
+.hermes/
+
+# --- Logs / runtime ---
+*.log
+*.pid
+*.sock
+.cache/
+
+# --- Audio/video pesado (audios del cliente en otro lado) ---
+*.ogg
+*.opus
+*.mp3
+*.wav
+*.m4a
+*.mp4
+*.webm
+*.mov
+
+# --- Stitch (prototipo estático, pesa y duplica lo del Drive) ---
+stitch_lota_ind_mito_ciudad_museo_gamificada/
+
+# --- rclone bisync internals ---
+*.lst
+*.lst-new
+
+# --- WhatsApp (audios originales del cliente, pesados) ---
+whatsapp/
+
+# --- OS ---
+.Trash-*
+.nfs*
