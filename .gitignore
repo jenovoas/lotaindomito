@@ -94,3 +94,8 @@ whatsapp/
 # --- OS ---
 .Trash-*
 .nfs*
+
+# HTML generados por docs/_render/render-docs.py (se regeneran en el fan)
+docs/*.html
+_analisis/*.html
+README.html

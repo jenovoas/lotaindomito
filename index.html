@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lota Indómito · Piloto</title>
+<style>
+  :root {
+    --turquesa: #3FE6C0;
+    --coral:    #F5A285;
+    --cobre:    #D17A4F;
+    --bg:       #0f1216;
+    --bg2:      #1a1f2a;
+    --border:   #2a3140;
+    --text:     #e6e9ef;
+    --muted:    #8a93a3;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    padding: 48px 40px 32px;
+    background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: var(--turquesa);
+  }
+  .tagline {
+    margin-top: 8px;
+    color: var(--coral);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .lede {
+    margin: 16px 0 0;
+    color: var(--muted);
+    max-width: 720px;
+    font-size: 15px;
+  }
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 40px 80px;
+  }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--coral);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .stat {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .stat .label {
+    color: var(--muted);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .stat .value {
+    margin-top: 6px;
+    color: var(--turquesa);
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .stat .note { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .pantallas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .pantalla {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+  .pantalla:hover { border-color: var(--turquesa); }
+  .pantalla .cat {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--cobre);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .pantalla a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+  .docs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .docs-links a {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 18px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    transition: border-color 0.15s;
+  }
+  .docs-links a:hover { border-color: var(--coral); color: var(--coral); }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+  footer a { color: var(--coral); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Lota Indómito</h1>
+  <div class="tagline">Ciudad museo interactiva · Piloto</div>
+  <p class="lede">
+    Aplicación web progresiva con mapa interactivo, gamificación cultural y reportes
+    ciudadanos. Esta página muestra el estado actual del piloto y los materiales de
+    avance del proyecto.
+  </p>
+</header>
+
+<main>
+
+<section>
+  <h2>Estado del piloto</h2>
+  <div class="status-grid">
+    <div class="stat">
+      <div class="label">Etapa</div>
+      <div class="value">Diseño + propuesta</div>
+      <div class="note">3–4 semanas para postulación</div>
+    </div>
+    <div class="stat">
+      <div class="label">Stack</div>
+      <div class="value">Open-source</div>
+      <div class="note">PostgreSQL + PostGIS + MapLibre</div>
+    </div>
+    <div class="stat">
+      <div class="label">Prototipo Stitch</div>
+      <div class="value">53 pantallas</div>
+      <div class="note">12 categorías funcionales</div>
+    </div>
+    <div class="stat">
+      <div class="label">Avance</div>
+      <div class="value">En desarrollo</div>
+      <div class="note">Esta página se actualiza sola</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Funcionalidades del prototipo (resumen)</h2>
+  <ul style="color: var(--text); padding-left: 20px;">
+    <li>Mapa interactivo de Lota con puntos turísticos.</li>
+    <li>Sistema de check-in con foto o QR en sitio.</li>
+    <li>Geofencing: la experiencia se activa al entrar a una zona.</li>
+    <li>Insignias y diplomas digitales por completar rutas.</li>
+    <li>Reportes ciudadanos (basura, derrumbe, infraestructura).</li>
+    <li>Dashboard para el Municipio con estadísticas de uso.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Catálogo de pantallas del prototipo</h2>
+  <p style="color: var(--muted); font-size: 13px; margin-top: 0;">
+    Las pantallas del prototipo Stitch están agrupadas por categoría. Esta lista se
+    mantiene sincronizada con los archivos del proyecto.
+  </p>
+  <div class="pantallas">
+
+    <div class="pantalla">
+      <div class="cat">Selección de modo y onboarding</div>
+      Pasaporte (perfil, selector, idiomas)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Selección de modo y onboarding</div>
+      Selección de modo Lota Indómito
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Mapas interactivos</div>
+      Mapa general de la comuna
+    </div>
+    <div class="pantalla">
+      <div class="cat">Mapas interactivos</div>
+      Mapa interactivo con reportes ciudadanos
+    </div>
+    <div class="pantalla">
+      <div class="cat">Mapas interactivos</div>
+      Mapa interactivo de rutas e hitos
+    </div>
+    <div class="pantalla">
+      <div class="cat">Mapas interactivos</div>
+      Mapa interactivo y misiones
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Rutas / itinerarios</div>
+      Ruta Camina Lota (urbanismo social)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Rutas / itinerarios</div>
+      Ruta de las bodegas (logística industrial)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Rutas / itinerarios</div>
+      Ruta del comercio (misiones pyme)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Rutas / itinerarios</div>
+      Ruta de fuego y carbón (gastronomía)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Rutas / itinerarios</div>
+      Ruta Geositio (geología del tiempo)
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Misiones</div>
+      Misión: Amasando pan (fuego y carbón)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Misiones</div>
+      Misión: Arquitecto de pabellones (RA)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Misiones</div>
+      Misión familiar: desafío colaborativo
+    </div>
+    <div class="pantalla">
+      <div class="cat">Misiones</div>
+      Misión: Oficios de mar (chinchorreo)
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Monumento Chiflón del Diablo
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Monumento Pabellón 83 (y detalle)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Monumento Parque de Lota
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Monumento Teatro de Lota
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Encuentro AR: El Ciego de la Mina
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Encuentro AR: Isidora Goyenechea
+    </div>
+    <div class="pantalla">
+      <div class="cat">Monumentos y AR</div>
+      Monumentos nacionales (modo turista)
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Reportes y dashboards</div>
+      Dashboard de ciudadanía (reportes 1 y 2)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Reportes y dashboards</div>
+      Dashboard de familia: el clan minero
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bitácora de guardianes (colección)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bitácora de oficios de mar
+    </div>
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bitácora de urbanismo y progreso
+    </div>
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bóveda de beneficios (fichas mineras)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bóveda de beneficios (recompensas)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Bitácoras y bóveda</div>
+      Bóveda de diplomas y certificados
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Recompensas y canje</div>
+      Canje de Carboncillos (feria de Lota)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Recompensas y canje</div>
+      Canje exitoso (ficha digital)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Recompensas y canje</div>
+      Detalle de ficha de recompensa
+    </div>
+    <div class="pantalla">
+      <div class="cat">Recompensas y canje</div>
+      Detalle de ficha estética metálica
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Diplomas</div>
+      Detalle de diploma (Guardian of the Mine)
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Modo familia</div>
+      Selección de roles (modo familia)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Modo familia</div>
+      Misión cumplida (logro de familia)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Modo familia</div>
+      Versiones en inglés (family dashboard, mission complete, team mission)
+    </div>
+
+    <div class="pantalla">
+      <div class="cat">Otros</div>
+      Captura de memoria (cámara)
+    </div>
+    <div class="pantalla">
+      <div class="cat">Otros</div>
+      Desafío Vigía del Golfo
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Documentos del proyecto</h2>
+  <div class="docs-links">
+    <a href="docs/estado.html">Estado del proyecto</a>
+    <a href="docs/decisiones.html">Decisiones tomadas</a>
+    <a href="docs/procedimientos.html">Procedimientos</a>
+    <a href="_analisis/01_resumen_audios_cliente.html">Síntesis audios cliente</a>
+    <a href="_analisis/02_cotejo_audis_vs_prototipo.html">Cliente vs prototipo</a>
+    <a href="_analisis/04_propuesta_tecnica_stack_osm.html">Propuesta técnica</a>
+    <a href="README.html">README</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Repositorio público: <a href="https://github.com/jenovoas/lotaindomito" target="_blank">github.com/jenovoas/lotaindomito</a>
+  · Esta página se actualiza automáticamente con cada cambio del proyecto.
+</footer>
+
+</body>
+</html>
