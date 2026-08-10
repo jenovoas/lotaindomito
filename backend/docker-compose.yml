@@ -1,0 +1,34 @@
+# docker-compose.yml — PostgreSQL 16 + PostGIS 3.4 para Lota Indómito.
+#
+# Uso:
+#   docker-compose up -d
+#   docker-compose exec db psql -U postgres -d lotaindomito
+version: "3.9"
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: lotaindomito-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lotaindomito
+    ports:
+      # Expuesto solo en localhost para desarrollo local
+      - "5432:5432"
+    volumes:
+      # Persistencia de datos
+      - pgdata:/var/lib/postgresql/data
+      # Init script para extensiones adicionales si se necesitan
+      # - ./init-sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lotaindomito"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  pgdata:
+    name: lotaindomito-pgdata

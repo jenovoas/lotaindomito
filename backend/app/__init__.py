@@ -1,0 +1,1 @@
+"""Lota Indómito backend app."""
