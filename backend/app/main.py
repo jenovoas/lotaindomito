@@ -13,6 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.db import close_db
+from app.routers.wallet import router as wallet_router
 from app.routers.zonas import router as zonas_router
 
 
@@ -43,6 +44,7 @@ app.add_middleware(
 
 # Routers
 app.include_router(zonas_router)
+app.include_router(wallet_router)
 
 
 @app.get("/health")
