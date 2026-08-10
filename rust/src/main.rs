@@ -5,12 +5,18 @@
 //! Binario `lota-server`. Inicializa el pipeline GPU (wgpu/Vulkan),
 //! construye un `ResonantMatrix` real de Sentinel, lo sube a VRAM,
 //! dispatchea el compute shader de interferencia dual-lane y reporta
-//! portales abiertos.
+//! portales abiertos, todo mientras corre el servidor HTTP de NPCs.
 
+use std::sync::Arc;
+
+use axum::serve;
 use lota_engine::gpu::pipeline::LotaGpuPipeline;
+use lota_engine::npc::orchestrator::NpcOrchestrator;
+use lota_engine::server::{create_app, AppState};
 use me60os_core::atlantean::GpuController;
 use me60os_core::resonant_matrix::ResonantMatrix;
 use me60os_core::spa::SPA;
+use tokio::net::TcpListener;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -40,15 +46,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("🔮 ResonantMatrix dual-lane construida: {} nodos por carril", lane_a.size());
 
     // ── 3. Injectar perturbación inicial en algunos nodos ──
-    // Esto crea diferencias de amplitud entre Lane A y Lane B,
-    // que el shader evalúa para detectar portales.
     for i in 0..5 {
-        lane_a.inject(i * 18, 5_000_000); // presión SPA en nodos distribuidos
-        lane_b.inject(i * 18 + 9, 3_000_000); // Lane B desfasada
+        lane_a.inject(i * 18, 5_000_000);
+        lane_b.inject(i * 18 + 9, 3_000_000);
     }
 
     // ── 4. Evolucionar la lattice algunos pasos ──
-    // step() propaga la onda por la malla hexagonal
     for _tick in 0..68 {
         lane_a.step();
         lane_b.step();
@@ -57,7 +60,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // ── 5. Subir a VRAM y dispatchear compute shader ──
     let tick = 68u32;
-    let time_sec = 1.36f32; // 68 ticks × 20ms = 1.36s
+    let time_sec = 1.36f32;
 
     println!("🚀 Dispatcheando compute shader (lattice_interference.wgsl)...");
     let result = pipeline.upload_and_dispatch(&lane_a, &lane_b, tick, time_sec)?;
@@ -74,7 +77,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!("  Índices de portales:   {:?}", result.portal_indices);
     }
 
-    // Mostrar algunos valores de onda (muestra de los primeros 10 nodos)
     let sample = result.wave_values.iter().take(10).copied().collect::<Vec<_>>();
     println!("  Wave values (10):     {:?}", sample);
     println!("═══════════════════════════════════════════════");
@@ -85,10 +87,30 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("⚙️ GPU Controller P-Target Latency: {} ms", controller.target_latency_msx1000 / 1000);
 
     // ── 8. SPA sanity check ──
-    let spa_test = SPA::new(1, 30, 0, 0, 0); // 1.5 en sexagesimal
+    let spa_test = SPA::new(1, 30, 0, 0, 0);
     println!("💎 SPA S60 Test Value: {:?}", spa_test);
 
-    println!();
-    println!("✅ Lota Indómito Engine — ciclo completo OK");
+    // ── 9. Inicializar orquestador de NPCs y estado compartido ──
+    let app_state = AppState::new(NpcOrchestrator::new());
+    // Guardar resultado del dispatch para endpoints /dispatch y /portales.
+    *app_state.last_dispatch.write().unwrap() = Some(result);
+
+    // ── 10. Lanzar tick loop NPCs en background ──
+    let tick_state = Arc::clone(&app_state);
+    tokio::spawn(async move {
+        let mut interval = tokio::time::interval(std::time::Duration::from_millis(1000));
+        loop {
+            interval.tick().await;
+            tick_state.orchestrator.write().unwrap().tick();
+        }
+    });
+
+    // ── 11. Iniciar servidor HTTP (bloquea hasta Ctrl+C) ──
+    let app = create_app(app_state);
+    let listener = TcpListener::bind("0.0.0.0:8080").await?;
+    println!("🌐 Servidor HTTP escuchando en 0.0.0.0:8080");
+
+    serve(listener, app).await?;
+
     Ok(())
 }

@@ -3,3 +3,5 @@
 //! # 💎 LOTA INDÓMITO ENGINE - CORE LIBRARY 💎
 
 pub mod gpu;
+pub mod npc;
+pub mod server;
