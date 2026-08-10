@@ -65,12 +65,11 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Reversible:** sí, antes de escribir el servidor.
 - **Estado (2026-08-09, tarde):** congelada — forma parte de la **Opción A** del menú para Fabiola (D-008). Si Fabiola elige la Opción B, el servidor pasa a ser Rust (Axum + PostGIS).
 
-### D-007 · Interfaz = React 18 + Vite + TypeScript
-- **Decisión:** la app (y la demo de postulación) se construye con React 18 + Vite + TypeScript.
-- **Razón:** análisis comparativo en `_analisis/05_analisis_tecnologias_disponibles.md`. Si la fase 2 incorpora Three.js vía React Three Fiber, React queda amarrado de todas formas.
-- **Contraparte analizada:** Svelte (menor ecosistema 3D declarativo) y Vue 3 + TresJS (envoltorio inmaduro) — ambas descartadas.
-- **Nota:** el doc 04 queda actualizado con esta decisión.
-- **Estado (2026-08-09, tarde):** congelada — forma parte de la **Opción A** del menú para Fabiola (D-008). Pendiente de su elección.
+### D-007 · Interfaz = Vue 3 + TypeScript
+- **Decisión:** la app (y la demo de postulación) se construye con Vue 3 + TypeScript.
+- **Razón:** análisis comparativo en `_analisis/05_analisis_tecnologias_disponibles.md`. Vue 3 es liviano, rápido, con buen ecosistema. La versión original del concepto ya decía "Vue 3 o Svelte (liviano, rápido)".
+- **Contraparte analizada:** React + Vite (descartado — más pesado, innecesario para este piloto), Svelte (descartado — menor ecosistema).
+- **Estado (2026-08-10):** confirmado como Piloto A (tecnología de mercado) en D-013.
 
 ---
 
@@ -238,7 +237,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 
 ### D-013 · Dos pilotos en paralelo: motor propio vs tecnología de mercado (2026-08-10)
 - **Decisión:** ejecutar dos pilotos paralelos con el mismo contenido (5 zonas, misiones, personajes, reportes, estadísticas) para evaluar cuál es la versión definitiva.
-  - **Piloto A — Tecnología de mercado:** PWA con React + Vite + TypeScript + MapLibre + OpenStreetMap + FastAPI. GPS real en celular desde el primer día.
+  - **Piloto A — Tecnología de mercado:** PWA con Vue 3 + TypeScript + MapLibre + OpenStreetMap + FastAPI. GPS real en celular desde el primer día.
   - **Piloto B — Motor gráfico propio:** Rust + wgpu (Vulkan/WebGPU) + Sentinel S60 + Axum. Control total, sincronización con cielo real.
 - **Razón:** la decisión técnica es del responsable técnico (INTERLOCUTOR), no de la clienta. Se le quita la carga a Fabiola y se evalúa con datos reales. Ambos pilotos comparten contenido: la evaluación es de experiencia y viabilidad técnica.
 - **Contraparte analizada:** pedir a Fabiola que elija entre A y B (rechazado — es preguntarle algo que no maneja y que no es su responsabilidad).
