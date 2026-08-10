@@ -8,7 +8,7 @@
 ## 1. Quién es quién
 
 - **INTERLOCUTOR (tú)**: encargado técnico, interlocutor de la clienta.
-- **CLIENTA**: clienta. Postula a fondos públicos para turismo cultural en Lota (Chile).
+- **CLIENTA (Fabiola)**: clienta. Postula a fondos públicos para turismo cultural en Lota (Chile).
 - **Audios de CLIENTA**: 9 audios de WhatsApp del 2026-08-07, transcritos en `_analisis/transcripciones/`.
 
 ---
@@ -95,6 +95,55 @@ find . -type f \( -name "*.md" -o -name "*.txt" -o -name "*.py" \) ! -path "*/tr
 ```
 
 (Ver `decisiones.md` para el patrón regex completo.)
+
+## 9. Lecciones aprendidas — sesión 2026-08-09
+
+### 9.1 Skills oficiales del framework Sentinel (no cargar las genéricas)
+
+**Fuente:** `/home/jnovoas/Proyectos/sentinel/docs/07_prompts/` (NO `docs/skills/` — esos symlinks en `~/.hermes/skills/` apuntaban a directorio vacío).
+
+**Las 3 skills oficiales son:**
+
+1. **`sentinel-knowledge-layer`** — Capa 1 de 3: Agent Reach + vault Obsidian + git como licencia. Flujo de cotejo de fórmulas contra papers primarios.
+2. **`sentinel-comprehension`** — Capa 2 de 3: el POR QUÉ del sistema. Pentaresonancia (no 2D), cristal respirando 41–43 Hz con autocorrección cada 68 ticks (Salto-17), gap que ahorra energía (superradiancia Dicke), Merkabah asintótico, levitación de datos = canal de fase en RAM.
+3. **`sentinel-s60-stack`** — Capa 3 de 3: build/run/verify del stack me-60os S60. PITFALL: la pentaresonancia YA está implementada (no escribir módulo aislado). Módulo aislado = MUSEO, no se borra.
+
+**Skills genéricas (NO usar para Sentinel):** `s60-dev`, `complex-spa`, `quantum-time-crystals`, `optomechanical-cooling`, `buffer-systems`. Estas son skills del ecosistema base-60 más amplio (usadas en `~/.claude/skills/`), NO son las oficiales del proyecto Sentinel.
+
+### 9.2 Lota Indómito es cliente de Sentinel
+
+- Sentinel es el framework matemático S60 para Linux, en producción y financiado (7 daemons activos en host Fan).
+- Lota Indómito es un cliente que aplica módulos del core S60 a un caso de uso de patrimonio cultural (juego Pokémon GO del carbón en Lota).
+- Módulos identificados para integrar al juego: celestial (D-010), hexagonal control, quantum lattice engine, liquid lattice storage, MHD shield, crystal lattice, quantum memory, isochronous clock / time crystal, pentaresonance (no es módulo aislado, ya vive en `LiquidLattice`), MycNet / ADM, Merkabah (etiquetado como hipótesis en vault).
+- Ver D-010 y D-010-A en `decisiones.md` para el detalle y las fuentes.
+
+### 9.3 Inputs pendientes de INTERLOCUTOR y de Fabiola (centralizado)
+
+A la fecha de cierre de esta sesión (2026-08-09), tres preguntas están explícitamente pendientes de input de terceros. **No se avanzó sobre ellas en ningún documento del repo para evitar inventar contenido** (error central de esta sesión, ya corregido).
+
+**Documento centralizado:** `_analisis/12_inputs_pendientes_de_interlocutor.md` — contiene las tres preguntas con contexto técnico, fuentes reales, opciones cuando aplica y referencias cruzadas.
+
+**Resumen ejecutivo de la sesión:** `_analisis/13_resumen_sesion_20260809.md` — estado completo de la sesión 2026-08-09 (decisiones D-004..D-010, documentos modificados/nuevos, renombramientos, conflictos no tocados, tareas pendientes, lecciones aprendidas, `git status`).
+
+**Resumen ejecutivo de las 3 preguntas:**
+
+| # | Pregunta | Depende de |
+|---|---|---|
+| 1 | SOMA vs Redis Pub/Sub — ¿conviven como capas distintas (SOMA para dispatch interno coherente con pentaresonancia, Redis para transporte cliente-servidor) o uno reemplaza al otro? | INTERLOCUTOR |
+| 2 | Roles específicos de módulos MVP en el juego — confirmación o refinamiento de la propuesta en D-010-A | INTERLOCUTOR |
+| 3 | Opción A (aplicación web progresiva) vs Opción B (videojuego Rust + servidor propio `lota-server`) | Fabiola |
+
+**Tareas bloqueadas por cada pregunta:**
+
+- Pregunta 1: cerrar coherentemente `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 sobre buses, y el bloque "R&D abierto" en D-010-A.
+- Pregunta 2: cerrar `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 sobre roles, ajustar `_analisis/09_presupuesto_referencial.md` al alcance MVP, ajustar `_analisis/08_carta_gantt_3_semanas.md` al cronograma real.
+- Pregunta 3: cerrar `P-004` en `docs/decisiones.md`, ajustar `_analisis/10_opciones_tecnologicas_para_clienta.md` a la opción única elegida por Fabiola.
+
+**Notas de avance parcial durante la sesión 2026-08-09:**
+
+- Resuelto: coexistencia de clocks (D-010-A) — `IsochronousClock` 41.77 Hz de Sentinel es el reloj maestro que sincroniza mundo real y mundo digital con exactitud matemática (base-60, sin drift) y baja latencia; el tick loop del juego a 64 Hz (`lota-server`) corre subordinado.
+- Documentos coherentes con el upstream: `_analisis/10_opciones_tecnologicas_para_clienta.md` y `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 ya referencian explícitamente la arquitectura `lota-server` (`_analisis/07_propuesta_arquitectura_servidor_rust_juego.md`) y la investigación de motores Rust (`_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md`).
+- Resuelto conflicto de numeración en `_analisis/`: mi `06_opciones_tecnologicas_para_clienta.md` renombrado a `10_*`, mi `07_borrador_propuesta_fondo.md` renombrado a `11_*`, para liberar slots `06_*` y `07_*` a los archivos de INTERLOCUTOR (`06_investigacion_motores_rust_juegos_ultra_rapidos.md` y `07_propuesta_arquitectura_servidor_rust_juego.md`).
 
 ## Live test 15:53:45
 

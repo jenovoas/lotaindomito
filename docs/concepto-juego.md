@@ -1,151 +1,162 @@
 # Lota Indómito — Concepto del juego (Game Design Document)
 
-**Tipo:** juego tipo Pokémon GO, basado en geolocalización.
-**Stack:** three.js + React Three Fiber, Web PWA.
-**Plataforma objetivo:** navegador web (mobile-first), instalable como PWA.
+**Título:** *Lota Indómito: Guardianes de la Cuenca*  
+**Género:** Geo-RPG / Juego de exploración urbana, patrimonio y aventuras  
+**Plataforma:** Web PWA Mobile-First (Three.js / React Three Fiber + MapLibre GL)  
+**Estilo Visual:** Retro-industrial + futurista-gamer (Turquesa `#3FE6C0`, Coral `#F5A285`, Cobre `#D17A4F`, fondo nocturno `#0F1216`)
 
 ---
 
-## 1. Concepto en una línea
+## 1. Visión general del juego
 
-El jugador es un **Explorador del Carbón** que camina por Lota (físicamente o virtualmente), entra a zonas históricas y desbloquea misiones, descubre personajes del pasado (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero), y sube de rango recogiendo **Carboncillos** (la moneda virtual del juego).
+*Lota Indómito* es un juego de exploración y aventuras en mundo real basado en geolocalización (estilo *Pokémon GO*). El jugador asume el rol de **Explorador del Carbón** o **Guardián de la Memoria**. 
 
----
-
-## 2. Lectura de las pantallas del Stitch
-
-El prototipo Stitch (~53 pantallas) **no es un sitio web de turismo**. Es la maqueta de los menús, HUDs e indicadores de un juego. Categorías reinterpretadas:
-
-| Stitch dice | En el juego es |
-|---|---|
-| "Selección de modo" | Menú de inicio: Jugador (verde) vs Turista (coral) |
-| "Pasaporte" | Perfil del jugador, avatar, nivel |
-| "Mapas interactivos" | Vista del mundo 3D con marcadores de zonas (POIs) |
-| "Rutas / itinerarios" | Tracks temáticos que agrupan zonas (Ruta de las Bodegas, etc.) |
-| "Misiones" | Quests asociadas a cada zona: "Amasando Pan", "Arquitecto de Pabellones" |
-| "Monumentos y AR" | POIs con encuentro AR: cuando entras, aparece un personaje fantasma que te cuenta historia |
-| "Reportes y dashboards" | Menú de reportes ciudadanos (feature social) y dashboard de progreso |
-| "Bitácoras y bóveda" | Colección de logros, skins, items desbloqueados |
-| "Recompensas y canje" | Inventario, Carboncillos, canjeables en "ferias" (locales asociados) |
-| "Diplomas" | Certificados de finalización de ruta, compartibles como PDF |
-| "Modo familia" | Multiplayer cooperativo local (roles Vigía, Cronista, Fotógrafo) |
+Al recorrer las calles y zonas históricas de Lota (Chile), el jugador descubre zonas patrimoniales, interactúa con espíritus y personajes emblemáticos del pasado, resuelve minijuegos contextuales, junta **Carboncillos** (la moneda virtual) y sube de rango en el pasaporte digital.
 
 ---
 
-## 3. Mecánicas centrales
+## 2. Core Game Loop (Ciclo principal del juego)
 
-### 3.1 Movimiento y descubrimiento
-- **Geofencing (real):** el jugador camina con la app abierta; al entrar al radio de un POI (50-200 m), se desbloquea el encuentro.
-- **Modo virtual (fallback):** si no quiere caminar o no hay GPS, puede hacer "teleport" a cualquier POI desbloqueado previamente y revivir el encuentro.
-- **Vista:** cámara cenital o tercera persona con three.js, mapa renderizado con elevación real de OSM.
-
-### 3.2 Encuentros AR
-- Al entrar a un POI, se abre un "encuentro" con un personaje histórico (Isidora, Ciego, Chinchorrera, Palanquero).
-- Personaje es un modelo 3D que aparece en escena, no requiere cámara del usuario (es 3D dentro del mundo del juego, no AR en sentido estricto).
-- Conversación corta (3-5 líneas) +授予de Carboncillos + activación de misión de la zona.
-
-### 3.3 Misiones
-- Cada zona tiene 1 misión específica. Ejemplos:
- - **Bodegas:** "El Inventario del Carbón" — encontrar 5 piezas en la zona.
- - **Geositio:** "El Geólogo del Tiempo" — ordenar estratos geológicos.
- - **Comercio:** "El Trueque Lota" — canjear Carboncillos en 3 locales.
- - **Camina Lota:** "Arquitecto de Pabellones" —拍照selfies comparativas (modo fácil: solo marcos de la app).
- - **Costera:** "Vigía del Golfo" — encontrar 3 especies nativas en una mini-guícon mini-juego.
- - **Indómita:** "Rastreador de la Flora" — ID plantas con pistas de la app.
- - **Oficios de Mar:** "Chinchorreando en el Blanco" — pesca simbólica.
- - **Fuego y Carbón:** "Amasando Pan" — minijuego de tiempo/cantidad.
-
-### 3.4 Sistema de progresión
-- **Carboncillos:** moneda virtual, ganados por misiones, canjeables en locales reales (alianza con comercio).
-- **Rangos:** Aprendiz → Capataz → Leyenda de la Cuenca (basado en # de Carboncillos o # de zonas completadas).
-- **Medallas:** Ojo de Lince (reportes), Amasadora de Memorias (pan), Vigía de la Cuenca.
-- **Bóveda:** inventario persistente con diplomas PDF compartibles.
-
-### 3.5 Modos de juego
-- **Individual:** un solo jugador.
-- **Familia:** 2-4 jugadores en un mismo dispositivo, roles:
- - **Vigía:** scanner de zonas.
- - **Cronista:** narrador de la historia.
- - **Fotógrafo:** captura in-game.
-
-### 3.6 Reportes ciudadanos (side quest)
-- Botón para reportar basura, derrumbe, infraestructura.
-- Validación cooperativa: otros jugadores pueden confirmar.
-- Estado: pendiente → validado → resuelto.
-- Esto es **side quest**, no mecánica central, pero alimenta el "Historial de Impacto" del perfil.
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    EXPLORACIÓN DEL MAPA 3D                      │
+│   El jugador navega el mapa 3D de Lota (GPS real o modo virtual) │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │
+                     (Llegada a Zona / Geofence)
+                                 │
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   ENCUENTRO 3D CON PERSONAJE                    │
+│   Aparece un personaje histórico (Isidora, El Ciego, etc.)      │
+│   con diálogo contextual e historia vivencial.                   │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │
+                        (Aceptar la Quest)
+                                 │
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    MINIJUEGO Y DESAFÍO EN SITIO                 │
+│   Minijuego táctil (amasar pan, clasificar estratos, etc.)      │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │
+                     (Misión Completada con Éxito)
+                                 │
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   PROGRESIÓN Y RECOMPENSAS                      │
+│   + Carboncillos (₡) · + Puntos de Experiencia (XP)              │
+│   Insignias unlocked · Certificado en el Pasaporte              │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 4. Mapa del mundo
+## 3. Mecánicas de juego y minijuegos por ruta
 
-- **Render:** three.js sobre mapa real de Lota con elevación (DEM).
-- **Estilo visual:** bajo-poli industrial-futurista (paleta Stitch: turquesa #3FE6C0, coral #F5A285, cobre #D17A4F).
-- **Cámara:** cenital con orbital; en encuentros cambia a tercera persona.
-- **Brújula y minimapa** en HUD.
-- **Marcadores:** zonas turísticas con icono + distancia restante + estado (no descubierta / descubierta / completada).
+Cada una de las 8 rutas temáticas de la comuna activa una mecánica de juego o minijuego exclusivo:
 
----
-
-## 5. UI / HUD
-
-Reinterpretación de las pantallas Stitch como componentes de juego:
-
-- **HUD superior:** Carboncillos, rango, misiones activas.
-- **HUD inferior:** botones de acción (mapa, mochila, misiones, reportes, perfil).
-- **Perfil:** pasaporte con avatar + stats + diplomas + historial de impacto.
-- **Menú principal (modo Jugador):** iniciar partida, continuar, multijugador familia.
-- **Menú principal (modo Turista):** recorrido contemplativo, audioguías, sin mecánicas de juego.
-- **Mapas:** vista 3D + vista minimapa + lista de zonas por ruta.
-- **Pantalla de encuentro:** personaje AR + diálogo +授予de Carboncillos + animación.
-- **Pantalla de misión completada:** diploma + stats + opción de compartir.
-- **Billetera:** Carboncillos + cupones de canje.
-- **Reportes:** cámara (en el juego, no real) + tipo + descripción + enviar.
-- **Dashboard familia:** misiones compartidas entre roles.
+| Ruta | Minijuego | Mecánica de juego |
+|---|---|---|
+| **Fuego y Carbón** | *Amasando Pan* | Minijuego QTE y ritmo táctil para sobar, amasar y hornear pan de mina en horno de barro. |
+| **Ruta Geositio** | *El Geólogo del Tiempo* | Puzle estratigráfico donde el jugador clasifica capas de carbón, fósiles y rocas según eras geológicas. |
+| **Ruta de las Bodegas** | *El Inventario del Carbón* | Búsqueda de objetos 3D ocultos (hidden object game) entre las herramientas y ruinas industriales. |
+| **Oficios de Mar** | *Chinchorreando en el Blanco* | Minijuego de física donde se ajusta la fuerza y dirección para lanzar la red de pesca artesanal. |
+| **Camina Lota** | *Arquitecto de Pabellones* | Superposición de fotos históricas vs actual; encuadre exacto para reconstruir el pabellón en 3D. |
+| **Ruta del Comercio** | *El Trueque Lota* | Minijuego de gestión y canje de Carboncillos en puestos del comercio local. |
+| **Ruta Costera** | *Vigía del Golfo* | Desafío de avistamiento con prismáticos virtuales para identificar la fauna del borde costero. |
+| **Ruta Indómita** | *Rastreador de la Flora* | Trivia botánica interactiva con pistas de la vegetación nativa del Parque de Lota. |
 
 ---
 
-## 6. Stack técnico confirmado
+## 4. Sistema de economía in-game (Carboncillos)
 
-| Capa | Tecnología |
-|---|---|
-| Frontend | React + TypeScript + Vite |
-| 3D | three.js + React Three Fiber (R3F) + drei |
-| Mapa base | OpenStreetMap + tileserver-gl o MapTiler (vector tiles) |
-| Geolocalización | Web Geolocation API + Turf.js para geofencing cliente |
-| Estado | Zustand |
-| UI | React + CSS modules (sin Tailwind por ahora) |
-| Build | Vite → PWA con service worker |
-| Backend (futuro) | FastAPI (Python) + PostgreSQL + PostGIS |
-| Auth (futuro) | magic link o email simple |
+La moneda oficial del juego es el **Carboncillo** (`₡`).
 
----
+### 4.1 Formas de ganar Carboncillos
+- **Descubrir nuevo POI / Zona:** +50 ₡
+- **Completar diálogo con personaje histórico:** +100 ₡
+- **Minijuego superado con puntaje perfecto:** +150 ₡
+- **Reporte ciudadano validado por la comunidad:** +75 ₡
+- **Racha diaria de exploración:** +30 ₡
 
-## 7. Alcance del MVP (primer entregable)
-
-Esto es lo que sí se construye. Lo demás se queda como diseño.
-
-1. **Mapa 3D de Lota** con 5 POIs desbloqueables (no las 8 rutas completas).
-2. **Modo Jugador** funcional (no modo Turista todavía).
-3. **Encuentros AR** con 2 personajes (Isidora + El Ciego).
-4. **2 misiones** completas (1 de Bodegas, 1 de Geositio).
-5. **Sistema de Carboncillos** funcional.
-6. **Perfil** básico (sin diplomas todavía).
-7. **Geofencing** real (GPS) + modo virtual (teleport).
-8. **Brújula y minimapa** en HUD.
-
-**Fuera del MVP (fase 2):**
-- Modo Turista.
-- Modo Familia multiplayer.
-- Reportes ciudadanos reales.
-- Comercio integrado (canje en locales).
-- 8 rutas completas.
-- Sistema de diplomas PDF.
+### 4.2 Usos y canje de Carboncillos
+- **Canje real en locales asociados:** Cupones de descuento en panaderías, cafeterías y locales de artesanía local de Lota.
+- **Personalización in-game:** Desbloqueo de marcadores de mapa personalizados, marcos para el Pasaporte y títulos de avatar.
+- **Bóveda de Diplomas:** Emisión de diplomas digitales de honor descargables en PDF.
 
 ---
 
-## 8. Datos duros (sin cambios)
+## 5. Sistema de progresión y rangos
+
+El jugador acumula experiencia y Carboncillos para avanzar en los rangos del pasaporte:
+
+| Rango | Carboncillos acumulados | Desbloqueables |
+|---|---|---|
+| **Aprendiz del Carbón** | 0 – 500 ₡ | Brújula básica, 3 zonas iniciales |
+| **Capataz de la Cuenca** | 501 – 2.000 ₡ | Modo Multijugador Familiar, 5 zonas adicionales, skins |
+| **Leyenda Indómita** | 2.001+ ₡ | Pasaporte de Oro, Diplomas PDF de Honor, Medalla de la Comuna |
+
+### Medallas especiales
+- 🏅 **Ojo de Lince:** 5 reportes ciudadanos validados en el dashboard municipal.
+- 🍞 **Amasadora de Memorias:** Puntaje máximo en el minijuego de pan de mina.
+- 🌊 **Vigía del Golfo:** Completar toda la Ruta Costera y Oficios de Mar.
+
+---
+
+## 6. Modos de juego
+
+### 6.1 Modo Jugador (Turquesa `#3FE6C0`)
+- Experiencia gamificada completa con misiones, barra de energía, tiempo en minijuegos, ranking de puntuación y recompensas.
+
+### 6.2 Modo Turista (Coral `#F5A285`)
+- Modo contemplativo y de recorrido libre. Sin temporizadores ni minijuegos complejos. Enfoque en audioguías, fotos históricas y paseo tranquilo.
+
+### 6.3 Modo Familia (Multijugador Cooperativo Local)
+Juego en equipo en un solo dispositivo o sincronizado, asignando roles:
+- 👁️ **El Vigía:** Escanea el terreno y localiza los marcadores y pistas en el mapa.
+- 📜 **El Cronista:** Lee la historia y responde las preguntas de los personajes.
+- 📸 **El Fotógrafo:** Encargado de encuadrar los minijuegos visuales y fotos de evidencia.
+
+---
+
+## 7. Interfaz del juego (HUD & UI)
+
+El HUD se organiza respetando la paleta visual del proyecto (retro-futurista industrial):
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [₡ 1.250 Carboncillos]   [Rango: Capataz]   [GPS: Activo 🟢]    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│                      CANVAS MAPA 3D (R3F)                       │
+│             [ Avatar 3D / Posición del Jugador ]               │
+│                                                                 │
+│     [ Marcador POI: Chiflón ]        [ Marcador POI: Parque ]   │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│ [🗺️ Mapa]  [🎒 Mochila]  [📜 Quests]  [🪪 Perfil]  [📢 Reporte] │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 8. Alcance del MVP (Piloto jugable)
+
+Para el entregable de la postulación al fondo se construirá un demostrador web interactivo que incluya:
+
+1. **Mapa 3D interactivo de Lota** con 3 POIs principales (Chiflón del Diablo, Pabellón 83, Parque de Lota).
+2. **2 Personajes 3D** con diálogo (Isidora Goyenechea y El Ciego de la Mina).
+3. **2 Minijuegos jugables:** *Amasando Pan* (Ruta Fuego y Carbón) y *El Geólogo del Tiempo* (Ruta Geositio).
+4. **Sistema de Carboncillos** funcional con contador y balance.
+5. **Pasaporte del Guardián** con stats del jugador y medallas.
+6. **Geofencing dual:** GPS real + modo virtual (teleport para pruebas sin estar físicamente en Lota).
+
+---
+
+## 9. Datos duros y plazos
 
 - **Presupuesto total:** 10 millones CLP.
-- **Plazo de postulación:** fines de agosto / primera semana de septiembre 2026.
-- **Fondos posibles:** principal (10 M) + fondo del patrimonio (15-20 M).
-- **Entregable para el fondo:** demo del juego (MVP) + propuesta escrita + Gantt.
+- **Plazo de postulación:** Fines de agosto / primera semana de septiembre 2026.
+- **Fondos objetivo:** Fondo principal (10M) + Fondo del Patrimonio (15-20M).
+- **Entregable clave:** Demo jugable en PWA web + Propuesta escrita de Game Design + Carta Gantt.

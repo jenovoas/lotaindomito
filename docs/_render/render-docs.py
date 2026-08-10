@@ -232,7 +232,9 @@ def main():
         ("README.md",               "README.html",               "README"),
         ("_analisis/01_resumen_audios_cliente.md",  "_analisis/01_resumen_audios_cliente.html",  "Síntesis audios del cliente"),
         ("_analisis/02_cotejo_audis_vs_prototipo.md", "_analisis/02_cotejo_audis_vs_prototipo.html", "Cliente vs prototipo"),
-        ("_analisis/04_propuesta_tecnica_stack_osm.md", "_analisis/04_propuesta_tecnica_stack_osm.html", "Propuesta técnica"),
+        ("_analisis/05_analisis_tecnologias_disponibles.md", "_analisis/05_analisis_tecnologias_disponibles.html", "Análisis de tecnologías"),
+        ("_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md", "_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.html", "Investigación juegos ultra rápidos Rust"),
+        ("_analisis/07_propuesta_arquitectura_servidor_rust_juego.md", "_analisis/07_propuesta_arquitectura_servidor_rust_juego.html", "Propuesta arquitectura servidor dedicado Rust"),
         ("docs/concepto-juego.md",               "docs/concepto-juego.html",               "Concepto del juego (GDD)"),
     ]
 
