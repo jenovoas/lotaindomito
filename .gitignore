@@ -34,6 +34,12 @@ build/
 .npm/
 .yarn/
 
+# --- Rust / Cargo build artifacts ---
+target/
+**/target/
+*.rustc_info.json
+Cargo.lock.bak
+
 # --- Secrets / keys (NUNCA commitear) ---
 .env
 .env.local
@@ -64,6 +70,12 @@ Thumbs.db
 
 # --- Hermes (agent local state) ---
 .hermes/
+
+# --- Tooling local (indexadores, run-continuation) ---
+.omo/
+.omo/run-continuation/
+.codegraph/
+*.codegraph
 
 # --- Logs / runtime ---
 *.log
@@ -99,3 +111,10 @@ whatsapp/
 docs/*.html
 _analisis/*.html
 README.html
+
+# Conflictos de merge huérfanos (resolver y limpiar antes de commit)
+*.conflict1
+*.conflict2
+*.conflict3
+*.orig
+*.rej
