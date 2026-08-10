@@ -34,6 +34,11 @@ build/
 .npm/
 .yarn/
 
+# --- Piloto A (Vue 3 + MapLibre) ---
+piloto-a/dist/
+piloto-a/node_modules/
+piloto-a/.vite/
+
 # --- Rust / Cargo build artifacts ---
 target/
 **/target/
