@@ -1,7 +1,7 @@
 # Documento de Arquitectura: Motor Gráfico Lota (GPU)
 
-**Fecha:** 2026-08-09
-**Estado:** Activo / En Desarrollo
+**Fecha:** 2026-08-09 (actualizado 2026-08-10)
+**Estado:** Motor con demo funcional (ciclo completo probado). Es el centro del concepto (D-014 corregida); el teléfono (Piloto A) es la capa accesible.
 **Proyecto:** Lota Indómito
 **Autor/Desarrollador:** Jaime Novoa
 
@@ -74,8 +74,15 @@ El motor en Rust está ubicado en `/home/jnovoas/Proyectos/LotaIndomito/rust/`.
 *   **`src/gpu/shaders/spa_unpack.wgsl`**: Provee decodificación en "última milla" `spa_raw_to_f32(raw_lo, raw_hi)` y `spa_components_to_f32(c0..c4)` convirtiendo representaciones exactas a flotantes puramente para rendering.
 *   **`src/gpu/shaders/lattice_interference.wgsl`**: Shader de cómputo con un `@workgroup_size(64)` en el entry point `main`. Detecta el umbral de convergencia `|amp_A.raw - amp_B.raw| < SCALE_0 / 50` y determina un estado de "portal", exportándolo al buffer.
 
-## 5. El Eslabón Faltante: `upload_lattice_to_gpu()`
-Para completar la iteración actual, se debe extender `LotaGpuPipeline` implementando la comunicación entre la representación de datos S60 en memoria RAM y el proceso de cómputo en la GPU.
+## 5. El Eslabón Faltante: `upload_lattice_to_gpu()` — ✅ RESUELTO (2026-08-10)
+
+> **Estado:** implementado como `upload_and_dispatch(lane_a, lane_b, tick, time_sec, delta_time)`
+> en `rust/src/gpu/pipeline.rs` (commits `de42f61`, integrado en `main.rs` en `1f5e3f`),
+> usando `GpuLatticeNode` (272 bytes, dual-lane) en lugar del empaquetado simple de un
+> solo carril. Flujo completo operativo: `ResonantMatrix::crystals → GpuLatticeNode::from_lanes()
+> → VRAM → lattice_interference.wgsl → staging readback → DispatchResult { wave_values,
+> portal_count, portal_indices }`. 4/4 tests pasando. La especificación original se conserva
+> abajo como referencia histórica.
 
 ### Especificación técnica requerida:
 Se debe crear el método `upload_lattice_to_gpu(&self, matrix: &ResonantMatrix) -> Result<(), anyhow::Error>` (o equivalente funcional con acceso a estado interno).
@@ -100,7 +107,8 @@ El incumplimiento de cualquiera de estas reglas rompe la arquitectura del sistem
 5.  **Aislamiento del Repositorio Core**: **NUNCA** escribir o commitear código al repositorio de Sentinel (`/home/jnovoas/Proyectos/sentinel/`). El desarrollo del motor sucede íntegramente dentro de `~/Proyectos/LotaIndomito/`.
 6.  **Heartbeat QHC Determinístico**: El compás del motor está gobernado exclusivamente por la tensor `QhcTensor` con patrón (10;5,6,5). La corrección o tick principal sucede rigurosamente cada **68 ticks**.
 
-## 7. Próximos Pasos (Priorizados)
-1.  **Implementar `upload_lattice_to_gpu`**: Integrar el eslabón faltante descrito en la sección 5 en el pipeline actual de WGPU (`rust/src/gpu/pipeline.rs`).
-2.  **Configurar el Readback Async**: Gestionar el mapeo del wgpu Buffer en CPU usando `pollster::block_on` (si es un proceso síncrono simple) para sacar el boolean del Portal State tras un dispatch de la GPU.
-3.  **Probar el Pipeline Completo End-to-End**: Generar un entorno de test donde se alimenten frecuencias desfasadas que en algún momento converjan al umbral dual-lane y confirmar que el shader retorna un flag afirmativo a la RAM (Rust).
+## 7. Próximos Pasos (actualizado 2026-08-10)
+1.  ✅ **Implementar `upload_lattice_to_gpu`** — resuelto como `upload_and_dispatch` (ver sección 5).
+2.  ✅ **Configurar el Readback Async** — resuelto: staging readback con mapeo async en `pipeline.rs`.
+3.  ✅ **Probar el Pipeline Completo End-to-End** — `main.rs` corre el ciclo completo con `ResonantMatrix` real (91 nodos dual-lane, 68 ticks, reporte de portales).
+4.  **Siguiente (cuando se retome el Piloto B, post-maqueta según D-014):** geofencing con R-Tree (`rstar`) y primer asset visual como `IsochronousOscillator`.

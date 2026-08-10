@@ -1,6 +1,6 @@
 # Proyecto Lota Indómito — Estado vivo
 
-**Última actualización:** 2026-08-09
+**Última actualización:** 2026-08-10
 **Raíz:** ``
 
 ---
@@ -168,11 +168,47 @@ Flujo completo conectado:
     ↓  staging readback + unmap
   DispatchResult { wave_values, portal_count, portal_indices }
 
-### 10.2 Próximo paso
+### 10.2 Integración en main.rs — RESUELTA (2026-08-10)
 
-Integrar `upload_and_dispatch` en `main.rs` con un `ResonantMatrix` real de Sentinel
-y verificar portales abiertos en GPU física (GTX 1050 / Vulkan).
+`upload_and_dispatch` quedó integrado en `main.rs` con un `ResonantMatrix` real de
+Sentinel (commits `de42f61` + `1f5e3f`). El binario `lota-server` corre el ciclo
+completo: lattice dual-lane de 91 nodos → VRAM → compute shader → readback →
+reporte de portales. 4/4 tests pasando. **Piloto B es el centro del concepto (D-014 corregida), no R&D.**
 
-## Live test 15:53:45
+---
 
-## Render test 15:57:22
+## 11. Workstream activo: piloto de concepto (D-014 corregida, desde 2026-08-10)
+
+**Norte del proyecto:** potenciar el turismo de Lota para **revivir el comercio local**.
+El juego es el medio: patrimonio + jugabilidad llevan turistas a la comuna, el juego los
+guía por las zonas y el comercio, el comercio revive y **autofinancia** la plataforma.
+
+**Encuadre vigente:** la postulación al fondo es dominio de Fabiola. INTERLOCUTOR prepara
+el proyecto y su diseño: un **piloto / diseño de concepto** en ~30 días que demuestra el
+diferenciador central. NO el juego completo. La fase 1 arranca después.
+
+**Concepto (visión completa):**
+- Evento real (cielo/hora, Sentinel) → decide qué pasa en el juego.
+- Enjambre SOMA de NPCs simples y vivos (deambulan en su zona, sin IA pesada).
+- La caza en el teléfono (PWA accesible, stack Piloto A).
+- Encuentro en RA (gafas Meta Quest 3/3S, préstamo en sitio) que reconstruye la historia
+  e imágenes reales de Lota.
+- Costura de baja latencia: teléfono ↔ lota-server + SOMA ↔ gafas (carriles de la lattice).
+- Etapa 2: avisos de comercio en RA + circuito de Carboncillos → autofinanciamiento.
+- Expansión regional: Lota es la prueba de concepto; se expande a Curanilahue, Lebu,
+  Arauco y Concepción (corredor patrimonial de la zona del carbón). El motor es agnóstico
+  de comuna: cada una aporta su contenido. Modelo regional escalable.
+
+| Ítem | Valor |
+|---|---|
+| Entregable ~30 días | Piloto / diseño de concepto que demuestra el diferenciador (evento real → NPC vivo → caza → encuentro) |
+| Dispositivos | Teléfono (PWA, Piloto A: Vue 3 + MapLibre + Turf) + gafas RA (Meta Quest 3/3S) |
+| Motor | Piloto B / Sentinel — centro del concepto, NO congelado |
+| Ubicación código | `piloto-a/` (teléfono) y `rust/` (motor); convenciones en `.gitignore` |
+| Fuera de alcance (~30 días) | Juego completo, 8 rutas, GPS real, etapa 2 de comercio |
+
+**Nota de capacidad:** INTERLOCUTOR programa desde los 9 años, autor de Sentinel,
+construye sistemas complejos rápido. No recortar alcance por defecto.
+
+**Pendiente inmediato:** definir la zona y el encuentro con que el piloto demuestra el
+diferenciador; obtener polígonos reales de las zonas de Lota (Overpass/OSM).

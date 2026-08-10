@@ -2,7 +2,7 @@
 
 **Título:** *Lota Indómito: Guardianes de la Cuenca*  
 **Género:** Geo-RPG / Juego de exploración urbana, patrimonio y aventuras  
-**Plataforma:** Web PWA Mobile-First (Three.js / React Three Fiber + MapLibre GL)  
+**Plataforma:** Web PWA Mobile-First (Vue 3 + TypeScript + MapLibre GL — decisión D-007)  
 **Estilo Visual:** Retro-industrial + futurista-gamer (Turquesa `#3FE6C0`, Coral `#F5A285`, Cobre `#D17A4F`, fondo nocturno `#0F1216`)
 
 ---
@@ -142,6 +142,10 @@ El HUD se organiza respetando la paleta visual del proyecto (retro-futurista ind
 ---
 
 ## 8. Alcance del MVP (Piloto jugable)
+
+> **Nota de encuadre (D-005, D-014):** este MVP 3D es la visión de fase 2. El entregable
+> vigente de 30 días es la maqueta piloto lean definida en D-014 (slice jugable 2D sobre
+> mapa: zonas + teleport + 1 misión + Carboncillos), que es la base de código de la fase 1.
 
 Para el entregable de la postulación al fondo se construirá un demostrador web interactivo que incluya:
 

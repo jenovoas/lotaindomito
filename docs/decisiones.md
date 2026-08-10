@@ -209,9 +209,9 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 ## Decisiones pendientes (abiertas)
 
 ### P-001 · Alcance del MVP vs prototipo Stitch
-- **Estado:** abierto. Se debate en `_analisis/02_cotejo_audis_vs_prototipo.md`.
-- **Hay que decidir:** qué entra al piloto (10 palos / 3-4 semanas) y qué se deja para fase 2.
-- **Pendiente:** elección de Fabiola entre Opción A y Opción B (D-008, P-004).
+- **Estado:** parcialmente cerrado por D-014 (2026-08-10). El alcance de la maqueta de 30 días está definido en D-014 (slice jugable M2). El alcance de la fase 1 post-maqueta sigue abierto.
+- **Hay que decidir:** qué entra en la fase 1 (post-maqueta) y qué se deja para fase 2.
+- **Cerrado en su parte de stack:** P-004 fue cerrado por D-013; la maqueta usa Piloto A (D-014).
 
 ### P-002 · Pila técnica de la aplicación — DECIDIDO código abierto
 - **Decisión (2026-08-09):** pila de código abierto autoalojada, no Google Maps Platform.
@@ -243,3 +243,35 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Contraparte analizada:** pedir a Fabiola que elija entre A y B (rechazado — es preguntarle algo que no maneja y que no es su responsabilidad).
 - **Piloto B ya tiene el eslabón resuelto:** `upload_and_dispatch` implementado y probado (4/4 tests, commit `de42f61`).
 - **Reversible:** sí. La evaluación decide cuál pasa a ser la versión del piloto para el fondo.
+- **Estado (2026-08-10):** reinterpretado por D-014 (corregida) — Piloto A y Piloto B no son alternativas en competencia sino **capas de un mismo sistema**: teléfono (Piloto A, capa accesible) + motor/Sentinel (Piloto B, el diferenciador) + RA (capa de encuentro). El motor NO está congelado.
+
+---
+
+### D-014 · Encuadre vigente: concepto real del proyecto (2026-08-10, corregida el mismo día)
+
+> Esta versión reemplaza el encuadre anterior ("maqueta M2 slice genérico / Piloto B
+> congelado como R&D"), que estaba errado por simplificación excesiva. El concepto real:
+
+- **Norte del proyecto:** potenciar el turismo de Lota para **revivir el comercio local**. El juego es el medio, no el fin: patrimonio + jugabilidad llevan turistas a caminar la comuna → el juego los guía por las zonas y el comercio → el comercio recibe flujo real y revive → ese comercio **autofinancia** la plataforma.
+- **Idea fuerza del juego:** *el mundo real maneja el juego.* Matemática soberana S60 (Sentinel), sin floats, sin Google.
+
+- **Concepto (visión completa):**
+  1. **Evento real → juego.** Eventos de cielo y hora (`celestial.rs` + `IsochronousClock` de Sentinel) deciden qué está activo en cada momento. Sincronización de baja latencia vía los carriles separados de la lattice (`dual_lane.rs`).
+  2. **NPCs vivos y simples.** Enjambre SOMA de NPCs livianos: deambulan dentro de su zona, máquina de estados simple, aparecen por evento real. Sin IA pesada — trucos de RPG de toda la vida, deterministas y reproducibles en S60. Cada NPC es un agente SOMA barato; el enjambre los coordina.
+  3. **La caza en el teléfono.** El jugador busca al NPC que se mueve, por geolocalización. PWA accesible en cualquier teléfono (stack Piloto A: Vue 3 + MapLibre + Turf). Es la capa masiva.
+  4. **Encuentro en RA que reconstruye la historia real.** En el punto de encuentro, gafas de RA (Meta Quest 3/3S, préstamo en sitio) reconstruyen la historia y las imágenes reales de Lota: el Chiflón operativo, los mineros, el pabellón como era. Es el corazón patrimonial. La fidelidad depende del material histórico (contenido de Fabiola + archivos / CMN).
+  5. **Dos niveles de dispositivo.** Teléfono (propio, universal: caza + lógica) + gafas RA (prestadas en sitio: encuentro). La costura entre niveles es la sincronización de baja latencia (teléfono ↔ lota-server + SOMA ↔ gafas).
+
+- **Etapa 2 (hoja de ruta y modelo económico):**
+  - **Avisos de comercio en RA:** al pasar por una zona, recomendación de comida típica, puntos de interés y dónde. Evolución del canje de Carboncillos y el Panel Comerciantes (ya en GDD y Stitch).
+  - **Autofinanciamiento:** circuito cerrado de Carboncillos — el jugador gana jugando y gasta en el comercio local; el comercio participa (comisión / cuota) a cambio de los clientes que el juego le lleva. El juego se financia con el flujo que genera.
+  - (Y lo del GDD: 8 rutas completas, GPS real, más personajes.)
+
+- **Visión de expansión regional:** Lota es la prueba de concepto; el modelo se expande a **Curanilahue, Lebu, Arauco y Concepción** — el corredor patrimonial de la zona del carbón (Provincia de Arauco). El concepto es agnóstico de comuna: cada una aporta su contenido (zonas, personajes, historia, comercio) sobre el mismo motor. Concepción es el embudo de volumen; las comunas patrimoniales, la experiencia. El modelo de autofinanciamiento se replica por comuna. Esto convierte el proyecto de una comuna en un modelo regional escalable — de los argumentos más fuertes para el fondo.
+
+- **Entregable de los próximos ~30 días:** un **piloto / diseño de concepto** que demuestra el diferenciador central (evento real → NPC vivo → caza → encuentro), NO el juego completo. La fase 1 arranca después.
+- **Capacidad (no recortar por defecto):** INTERLOCUTOR programa desde los 9 años, es autor de Sentinel y construye sistemas complejos en poco tiempo. No aplicar supuestos de "desarrollador primerizo" ni simplificar alcance por reflejo.
+- **Piloto B (motor / Sentinel):** es el **centro** del concepto, NO R&D congelado. El motor y los módulos Sentinel (SOMA, dual-lane, celestial, lattice) son el diferenciador. Ya tiene demo funcional (`upload_and_dispatch` integrado en `main.rs`, commits `de42f61` + `1f5e3f`).
+- **Dominios:** la postulación al fondo (presupuesto, avales, propuesta escrita, Carta Gantt) es **dominio de Fabiola**. INTERLOCUTOR prepara el proyecto y su diseño. No intervenir en la postulación.
+- **Razón:** INTERLOCUTOR (2026-08-10): el concepto es "el mundo real maneja el juego", con NPCs simples del enjambre SOMA, caza en el teléfono, encuentro RA que reconstruye la historia real, y una etapa 2 de comercio que lo autofinancia. "La idea del proyecto es potenciar el turismo de la zona para revivir el comercio."
+- **Reversible:** sí; el alcance del piloto de concepto se ajusta según qué demuestra mejor el diferenciador.

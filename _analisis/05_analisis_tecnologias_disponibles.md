@@ -1,6 +1,7 @@
 # Análisis Comparativo de Tecnologías Disponibles — Lota Indómito
 
 **Fecha:** 2026-08-09  
+**Nota (2026-08-10):** documento histórico de análisis. La recomendación de Three.js/R3F fue superada por la decisión D-007 (Vue 3 + TypeScript) y el encuadre D-014 (maqueta Piloto A). Se conserva como registro del análisis comparativo.
 **Objetivo:** Evaluar las tecnologías disponibles para la construcción del PWA Web 3D, geofencing, backend e infraestructura de *Lota Indómito*, considerando costos, rendimiento en móviles y tiempo de desarrollo.
 
 ---
