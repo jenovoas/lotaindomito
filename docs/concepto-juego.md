@@ -17,38 +17,91 @@ Al recorrer las calles y zonas históricas de Lota (Chile), el jugador descubre 
 
 ## 2. Core Game Loop (Ciclo principal del juego)
 
+> **Diseño actualizado (2026-08-10):** el loop de encuentro que sigue es la **unidad atómica** dentro de un **loop de visita**. El día-a-día del turista se compone de ~6-10 micro-sesiones durante 1-2 días en Lota, más un loop de retorno posterior (D+1 → D+30) que ata al turista a la próxima visita. Diseño completo en [`_analisis/20_loop_jugador_dia_a_dia.md`](../_analisis/20_loop_jugador_dia_a_dia.md).
+>
+> **Tesis:** para un turista de paso (1-2 días en Lota) no hay loop diario tradicional. Hay **loop de visita** (dentro de la estadía) y **loop de retorno** (post-visita). Las mecánicas clásicas de mobile (racha diaria, energía que regenera) NO aplican y se descartan — ver §2.5.
+
+### 2.1 El loop de visita (dentro de 1-2 días en Lota)
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    EXPLORACIÓN DEL MAPA 3D                      │
-│   El jugador navega el mapa 3D de Lota (GPS real o modo virtual) │
+│            MICRO-SESIÓN (1-5 min, 6-10 por visita)              │
+│   Trigger (geofence) → Contexto (NPC + diálogo) →               │
+│   Acción (minijuego o escaneo) → Recompensa →                   │
+│   Dirección (siguiente POI o evento del cielo)                   │
 └────────────────────────────────┬────────────────────────────────┘
-                                 │
-                     (Llegada a Zona / Geofence)
-                                 │
-                                 ▼
+                                  │
+                       (Repetición n veces durante la visita)
+                                  │
+                                  ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   ENCUENTRO 3D CON PERSONAJE                    │
-│   Aparece un personaje histórico (Isidora, El Ciego, etc.)      │
-│   con diálogo contextual e historia vivencial.                   │
+│         EVENTO DEL CIELO (5-30 min, 1-3 por día de visita)      │
+│   Ventana corta con anuncio anticipado. Determinista, movido     │
+│   por Sentinel S60: astronómico, climático, temporal, portal.   │
 └────────────────────────────────┬────────────────────────────────┘
-                                 │
-                        (Aceptar la Quest)
-                                 │
-                                 ▼
+                                  │
+                                  ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    MINIJUEGO Y DESAFÍO EN SITIO                 │
-│   Minijuego táctil (amasar pan, clasificar estratos, etc.)      │
+│               CANJE EN COMERCIO LOCAL (D-014)                   │
+│   Sugerencia al turista antes de dormir: "Hay una panadería     │
+│   con descuento a 200 m." Gasta Carboncillos, ata el juego      │
+│   al comercio real. Esta es la pieza que convierte el juego     │
+│   en motor de reactivación económica de Lota.                    │
 └────────────────────────────────┬────────────────────────────────┘
-                                 │
-                     (Misión Completada con Éxito)
-                                 │
-                                 ▼
+                                  │
+                                  ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                   PROGRESIÓN Y RECOMPENSAS                      │
-│   + Carboncillos (₡) · + Puntos de Experiencia (XP)              │
-│   Insignias unlocked · Certificado en el Pasaporte              │
+│                      PASAPORTE DIGITAL                           │
+│   Stats finales, diploma descargable, % completado.             │
+│   URL pública compartible (efecto red).                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+### 2.2 El loop de retorno (después de irse)
+
+```
+D+1  →  "Tu pasaporte está al 75%. Vuelve antes del [evento]."
+D+7  →  Newsletter del cielo con la próxima ventana importante.
+D+30 →  "Lota tiene 3 eventos esta temporada. ¿Vienes?"
+```
+
+Mecánicas activas: pasaporte incompleto, calendario del cielo público (1 año adelantado), cupones con caducidad (30-60 días), contenido nuevo por temporada.
+
+### 2.3 Anatomía de la micro-sesión (1-5 min)
+
+| Tramo | Tiempo | Qué pasa | Regla dura |
+|---|---|---|---|
+| **Trigger** | 0-15 s | Vibración + banner: *"Estás en el Chiflón del Diablo. Toca para descubrir."* | Geofencing cliente (Turf.js). Sin texto antes del tap. |
+| **Contexto** | 15-60 s | Mapa mini + avatar del personaje histórico + 2-3 frases de diálogo + audio opcional | Sin scrolls. Sin muros de texto. ≤30 palabras en pantalla. |
+| **Acción** | 60-180 s | Minijuego táctil corto (QTE, hidden object, trivia) o escaneo de cámara | Pre-cargado. Cero loading entre tramos. **1 acción por micro-sesión.** |
+| **Recompensa** | 180-240 s | +Carboncillos, +XP, animación de insignia, *"Has rescatado un fragmento del carbón."* | Siempre gana algo. Nunca "casi". Si pierde → retry sin penalización. |
+| **Próximo** | 240-300 s | *"La próxima zona está a 320 m al sur."* Mini-mapa con ruta | Nunca terminar sin dirección. La pantalla siempre cierra con un "hacé X". |
+
+**Variantes del tramo Acción según modo:**
+
+- **Jugador** = 90 s de acción dura (QTE, puzle, estratigrafía).
+- **Turista** = 0 s (escaneo + foto, sin minijuego).
+- **Familia** = rol-asignado, todos participan en su rol (Vigía / Cronista / Fotógrafo).
+
+### 2.4 Catálogo de eventos del cielo (resumen)
+
+- **Astronómicos** (anuales): salida/puesta de sol, luna llena/nueva, equinoccios, solsticios.
+- **Climáticos** (ventana corta, parcialmente impredecibles): niebla en el Parque, marejada en el Borde Costero, lluvia en el Chiflón.
+- **Temporales** (recurrentes): Amanecer del Minero 07:00, Hora del Trueque 14:00, Atardecer del Carbón 19:00, Noche de las Chinchorreras 22:00.
+- **Raros (S60)** — el diferenciador central: portales cuando `|amp_A - amp_B| < SCALE_0 / 50` en GPU. Carboncillo único (no se repite). Diploma *"Cazador de Portales"*.
+
+> Cada evento tiene ventana corta (5-30 min) → urgencia real, no FOMO cosmético. Se anuncian con 5-15 min de anticipación, pero el marcador no aparece en el mapa hasta cerca de la hora. El **Calendario del Cielo** los lista con horario exacto para que el turista planifique su visita.
+
+### 2.5 Lo que se descarta del modelo "loop diario" clásico
+
+Para un turista de paso, las siguientes mecánicas **NO aplican** y se sacan del diseño:
+
+- Racha diaria / streak con penalización por skip.
+- Energía que regenera con tiempo real.
+- Notificación genérica *"vuelve a jugar"*.
+- Cualquier mensaje del tipo "hoy no jugaste" — para un turista de 1-2 días, es ruido insoportable.
+
+El retorno se logra por **pasaporte incompleto + calendario del cielo + cupones con caducidad**, no por hábito forzado.
 
 ---
 
