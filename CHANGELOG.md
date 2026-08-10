@@ -17,6 +17,15 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
   expansión regional Lota → Curanilahue/Lebu/Arauco/Concepción. (`e7b868c`)
 - Propuestos dos pilotos paralelos — motor propio vs tecnología de mercado (D-013). (`b9b485b`)
 - Consolidada la propuesta al fondo en lenguaje humano. (`1e87bf4`)
+- Rediseñado el **Core Game Loop** del GDD: el turista de paso (1-2 días en Lota)
+  no tiene loop diario, sino **loop de visita** (6-10 micro-sesiones de 1-5 min cada
+  una + 1-3 eventos del cielo por día) y **loop de retorno** (D+1 → D+30 vía
+  pasaporte incompleto, calendario del cielo y cupones con caducidad). Las mecánicas
+  clásicas de mobile (racha diaria, energía que regenera) se descartan por no
+  aplicar al turista. Nuevo análisis completo en
+  `_analisis/20_loop_jugador_dia_a_dia.md`. `docs/concepto-juego.md` §2
+  reescrito con 5 subsecciones (loop de visita, loop de retorno, anatomía de
+  micro-sesión, catálogo de eventos, descartes del modelo clásico). (`8a92131`)
 
 ### Piloto A (web — teléfono)
 - Scaffold Vue 3 + TypeScript + MapLibre: mapa de Lota con 5 zonas patrimoniales. (`9e793c4`)
