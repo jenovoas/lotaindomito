@@ -80,6 +80,7 @@ abs(amp_a_raw - amp_b_raw) < SCALE_0 / 50  // SCALE_0 = 12_960_000
 6. Licencia: Apache 2.0 + cláusula No Comercial (heredada de Sentinel).
 
 ## Documentos clave para IAs
+- `CHANGELOG.md` — registro de hitos con evidencia real (commits, tests); material de portfolio. **Convención de INTERLOCUTOR: siempre CHANGELOG + `docs/decisiones.md`. Agregar una entrada al CHANGELOG con cada hito.**
 - `docs/decisiones.md` — D-001 a D-014, decisiones de diseño registradas. **D-014 es el encuadre vigente.**
 - `docs/estado.md` — estado vivo del proyecto.
 - `docs/concepto-juego.md` — GDD completo.
