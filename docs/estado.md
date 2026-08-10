@@ -145,6 +145,34 @@ A la fecha de cierre de esta sesión (2026-08-09), tres preguntas están explíc
 - Documentos coherentes con el upstream: `_analisis/10_opciones_tecnologicas_para_clienta.md` y `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 ya referencian explícitamente la arquitectura `lota-server` (`_analisis/07_propuesta_arquitectura_servidor_rust_juego.md`) y la investigación de motores Rust (`_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md`).
 - Resuelto conflicto de numeración en `_analisis/`: mi `06_opciones_tecnologicas_para_clienta.md` renombrado a `10_*`, mi `07_borrador_propuesta_fondo.md` renombrado a `11_*`, para liberar slots `06_*` y `07_*` a los archivos de INTERLOCUTOR (`06_investigacion_motores_rust_juegos_ultra_rapidos.md` y `07_propuesta_arquitectura_servidor_rust_juego.md`).
 
+## 10. Motor GPU — estado del eslabón faltante (2026-08-10)
+
+### 10.1 Eslabón faltante RESUELTO
+
+El puente SHM→VRAM→compute→readback está implementado y probado:
+
+- `GpuLatticeNode` (272 bytes, dual-lane): Lane A + Lane B + position xyz + coherence_flag
+- `upload_and_dispatch(lane_a, lane_b, time_sec, delta_time, salto17_tick)` en `pipeline.rs`
+- `DispatchResult { wave_values, portal_count, portal_indices }`
+- 4/4 tests pasando (alignment, sizes 128/272, from_lanes)
+
+Flujo completo conectado:
+
+  ResonantMatrix::crystals (Sentinel Rust)
+    ↓  GpuLatticeNode::from_lanes()
+  Vec<GpuLatticeNode>  [272 bytes/nodo, interleaved A+B]
+    ↓  device.create_buffer_init() → VRAM
+  wgpu::Buffer STORAGE
+    ↓  dispatch_workgroups(ceil(n/64), 1, 1)
+  lattice_interference.wgsl  [@workgroup_size(64)]
+    ↓  staging readback + unmap
+  DispatchResult { wave_values, portal_count, portal_indices }
+
+### 10.2 Próximo paso
+
+Integrar `upload_and_dispatch` en `main.rs` con un `ResonantMatrix` real de Sentinel
+y verificar portales abiertos en GPU física (GTX 1050 / Vulkan).
+
 ## Live test 15:53:45
 
 ## Render test 15:57:22

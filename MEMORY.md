@@ -18,11 +18,12 @@ Este archivo es la memoria de inicio de sesión rápida. Cualquier IA que lo lea
 - Sin Bevy, Godot, Unity, Fyrox.
 - GPU: GTX 1050 / Vulkan, corriendo.
 
-## Estado del motor GPU (2026-08-09)
+## Estado del motor GPU (2026-08-10)
 - **Pipeline GPU activo:** `rust/src/gpu/pipeline.rs` — `LotaGpuPipeline` inicializado, GTX 1050 / Vulkan detectado.
-- **Buffer packer:** `rust/src/gpu/buffer_pack.rs` — `GpuSPA` (32B), `GpuVector3` (96B), `GpuOscillator` (64B), `GpuLatticeCell`. Tests pasando.
+- **Buffer packer:** `rust/src/gpu/buffer_pack.rs` — `GpuSPA` (32B), `GpuVector3` (96B), `GpuOscillator` (128B), `GpuLatticeCell` (224B), `GpuLatticeNode` (272B dual-lane). 4/4 tests pasando.
 - **Shaders:** `rust/src/gpu/shaders/spa_unpack.wgsl` (desempaquetado S60) y `lattice_interference.wgsl` (convergencia dual-lane `@workgroup_size(64)`).
-- **Crate:** `lota_engine` (`rust/Cargo.toml`). Deps: `me60os_core` (path), `wgpu`, `bytemuck`, `anyhow`, `pollster`.
+- **Crate:** `lota_engine` (`rust/Cargo.toml`). Deps: `me60os_core` (path), `wgpu`, `bytemuck`, `anyhow`, `tokio`, `rstar`, `serde`.
+- **ESLABÓN FALTANTE RESUELTO (2026-08-10):** `upload_and_dispatch(lane_a, lane_b, time_sec, delta_time, salto17_tick)` implementado en `LotaGpuPipeline`. Flujo: `ResonantMatrix::crystals → GpuLatticeNode::from_lanes() → VRAM → compute shader → staging readback → DispatchResult { wave_values, portal_count, portal_indices }`. 4/4 tests pasando. Próximo: integrar en `main.rs` con `ResonantMatrix` real.
 
 ## Módulos Sentinel ya en Rust (confirmados, no tocar)
 Todos en `/home/jnovoas/Proyectos/sentinel/me-60os-core/src/`:
@@ -42,17 +43,11 @@ Todos en `/home/jnovoas/Proyectos/sentinel/me-60os-core/src/`:
 - `atlantean.rs` — `GpuController` controlador P, target 20ms (50 FPS).
 - `pai60_lib.rs` — `pai60_divide(numer: SPA, denominator: u32)` división exacta.
 
-## El eslabón faltante (siguiente paso inmediato)
-Implementar `upload_lattice_to_gpu(matrix: &ResonantMatrix)` en `LotaGpuPipeline` (`pipeline.rs`):
+## Próximo paso (eslabón faltante era upload_and_dispatch — ya resuelto 2026-08-10)
+Integrar `upload_and_dispatch` en `main.rs` con un `ResonantMatrix` real de Sentinel:
 ```rust
-matrix.crystals (Vec<IsochronousOscillator>)
-  → Vec<GpuOscillator> via GpuOscillator::from_oscillator()
-  → device.create_buffer_init() [wgpu::BufferUsages::STORAGE]
-  → bind_group (binding 0=uniforms, 1=Lane_A, 2=Lane_B)
-  → command_encoder.begin_compute_pass()
-  → dispatch_workgroups(ceil(node_count / 64), 1, 1)
-  → readback output_interference buffer
-  → game_state.portal_detected = result
+let result = pipeline.upload_and_dispatch(&lane_a, &lane_b, tick, time_sec, delta_time, salto17_tick)?;
+println!("Portales abiertos: {} en nodos {:?}", result.portal_count, result.portal_indices);
 ```
 
 ## Condición de portal (ya en el shader, no cambiar)

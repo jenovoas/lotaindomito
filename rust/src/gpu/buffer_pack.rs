@@ -5,11 +5,20 @@
 //! Convierte las estructuras de aritmética exacta S60 (`SPA`, `SVector3`, `IsochronousOscillator`)
 //! de `me60os_core` a layouts binarios alineados a 16 bytes (`#[repr(C)]`) compatibles con WebGPU / WGSL / Vulkan.
 //!
+//! ## Correspondencia de structs Rust ↔ WGSL
+//! | Rust              | WGSL            | Bytes |
+//! |-------------------|-----------------|-------|
+//! | `GpuSPA`          | `GpuSPA`        | 32    |
+//! | `GpuOscillator`   | `GpuOscillator` | 128   |
+//! | `GpuLatticeNode`  | `LatticeNode`   | 272   |
+//!
 //! Permite la transferencia directa de memoria compartida (POSIX SHM) a VRAM
 //! con cero-copia y sin pérdida de precisión sexagesimal en el pipeline de render/cómputo.
 
-use me60os_core::spa::SPA;
+#[allow(unused_imports)]
 use me60os_core::celestial::SVector3;
+
+use me60os_core::spa::SPA;
 use me60os_core::isochronous_oscillator::IsochronousOscillator;
 use bytemuck::{Pod, Zeroable};
 
@@ -87,15 +96,76 @@ impl GpuOscillator {
     }
 }
 
-/// Celda de Rejilla Líquida en RAM/VRAM (96 bytes).
-/// Representa un nodo de la rejilla con su posición espacial 3D y su oscilador de estado.
+/// Celda de Rejilla Líquida en RAM/VRAM (192 bytes).
+/// Representa un nodo con posición 3D y oscilador de estado (single-lane).
 #[repr(C)]
 #[derive(Debug, Clone, Copy, Pod, Zeroable)]
 pub struct GpuLatticeCell {
-    pub position: GpuVector3,      // 48 bytes
-    pub oscillator: GpuOscillator, // 64 bytes... ajustado con pad
+    pub position: GpuVector3,      // 96 bytes
+    pub oscillator: GpuOscillator, // 128 bytes
     pub id: u32,
     pub _pad: [u32; 3],
+}
+
+/// Nodo de Rejilla Dual-Lane para el compute shader `lattice_interference.wgsl` (272 bytes).
+///
+/// Mapea campo a campo con el struct `LatticeNode` del shader:
+/// ```wgsl
+/// struct LatticeNode {
+///     oscillator_lane_a: GpuOscillator,  // 128 bytes
+///     oscillator_lane_b: GpuOscillator,  // 128 bytes
+///     position_x: f32,                   //   4 bytes
+///     position_y: f32,                   //   4 bytes
+///     position_z: f32,                   //   4 bytes
+///     coherence_flag: u32,               //   4 bytes  ← escrito por GPU post-dispatch
+/// };
+/// ```
+/// El campo `coherence_flag` lo escribe la GPU: 1 = portal abierto (|amp_A − amp_B| < SCALE_0/50).
+#[repr(C)]
+#[derive(Debug, Clone, Copy, Pod, Zeroable)]
+pub struct GpuLatticeNode {
+    pub oscillator_lane_a: GpuOscillator, // 128 bytes — Lane A
+    pub oscillator_lane_b: GpuOscillator, // 128 bytes — Lane B
+    /// Posición X en unidades del mundo (f32, última milla de presentación).
+    pub position_x: f32,
+    /// Posición Y en unidades del mundo.
+    pub position_y: f32,
+    /// Posición Z en unidades del mundo.
+    pub position_z: f32,
+    /// Flag de coherencia escrito por la GPU. 0 = sin portal, 1 = portal abierto.
+    pub coherence_flag: u32,
+}
+
+impl GpuLatticeNode {
+    /// Construye un nodo dual-lane desde dos osciladores de Sentinel.
+    ///
+    /// # Parámetros
+    /// - `osc_a`: oscilador del carril A (Lane A de `ResonantMatrix`).
+    /// - `osc_b`: oscilador del carril B (Lane B de `ResonantMatrix`).
+    /// - `pos`: posición en el mundo (x, y, z) en f32 (conversión S60 → f32 permitida
+    ///   aquí porque es la última milla de presentación, no aritmética de juego).
+    pub fn from_lanes(
+        osc_a: &IsochronousOscillator,
+        osc_b: &IsochronousOscillator,
+        pos: (f32, f32, f32),
+    ) -> Self {
+        Self {
+            oscillator_lane_a: GpuOscillator::from_oscillator(osc_a),
+            oscillator_lane_b: GpuOscillator::from_oscillator(osc_b),
+            position_x: pos.0,
+            position_y: pos.1,
+            position_z: pos.2,
+            coherence_flag: 0, // la GPU lo sobreescribe en el dispatch
+        }
+    }
+
+    /// Construye un nodo dual-lane con posición en origen (útil para tests y nodos sin coordenada).
+    pub fn from_lanes_default_pos(
+        osc_a: &IsochronousOscillator,
+        osc_b: &IsochronousOscillator,
+    ) -> Self {
+        Self::from_lanes(osc_a, osc_b, (0.0, 0.0, 0.0))
+    }
 }
 
 #[cfg(test)]
@@ -106,5 +176,30 @@ mod tests {
     fn test_gpu_spa_alignment() {
         assert_eq!(std::mem::size_of::<GpuSPA>(), 32);
         assert_eq!(std::mem::size_of::<GpuVector3>(), 96);
+    }
+
+    #[test]
+    fn test_gpu_oscillator_size() {
+        // 4 x GpuSPA (32 bytes cada uno) = 128 bytes
+        assert_eq!(std::mem::size_of::<GpuOscillator>(), 128);
+    }
+
+    #[test]
+    fn test_gpu_lattice_node_size() {
+        // Debe coincidir exactamente con LatticeNode del shader WGSL:
+        // 128 (lane_a) + 128 (lane_b) + 4 + 4 + 4 + 4 = 272 bytes
+        assert_eq!(std::mem::size_of::<GpuLatticeNode>(), 272);
+    }
+
+    #[test]
+    fn test_gpu_lattice_node_from_lanes() {
+        use me60os_core::isochronous_oscillator::IsochronousOscillator;
+        let osc_a = IsochronousOscillator::new("lane_a");
+        let osc_b = IsochronousOscillator::new("lane_b");
+        let node = GpuLatticeNode::from_lanes(&osc_a, &osc_b, (1.0, 2.0, 3.0));
+        assert_eq!(node.coherence_flag, 0, "coherence_flag debe iniciar en 0");
+        assert_eq!(node.position_x, 1.0);
+        assert_eq!(node.position_y, 2.0);
+        assert_eq!(node.position_z, 3.0);
     }
 }
