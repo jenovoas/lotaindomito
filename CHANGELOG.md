@@ -60,3 +60,35 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 - Integrado el prototipo Stitch de la clienta como maqueta navegable en el sitio. (`f6d7e19`)
 - Montado el sitio cliente (`index.html`) y el pipeline `render-docs.py`. (`b749d0a`, `93ec6cd`)
 - Commit inicial del proyecto. (`23deb74`)
+
+### Concepto y diseño (continuación)
+- Diseñado el sistema multi-moneda de minerales cobre/oro/estaño (D-016 propuesta):
+  reemplaza al Carboncillo como moneda única; cada mineral tiene identidad narrativa
+  propia, valor relativo (1 estaño = 100 oro = 10.000 cobre), se gana por acciones
+  diferenciadas y es transferible/truequeable/comercianteable. Refuerza D-014 con
+  tres vías nuevas (misiones World Event, comercio multi-moneda, subastas reales).
+  Nuevo análisis en `_analisis/23_sistema_monedas_minerales.md`. (entrada sin SHA: pendiente del commit de los docs modificados)
+- Diseñadas las subastas digitales de cosas reales con pago en minerales (D-017 propuesta):
+  el juego cobra 5-10% de comisión; objetos subastables son productos/servicios
+  del comercio local; pago únicamente en minerales; sistema de escrow + reputación
+  bilateral + resolución de disputas manual. Convierte al juego en marketplace
+  soberano y refuerza D-014. Nuevo análisis en `_analisis/24_subastas_reales.md`.
+  (entrada sin SHA: pendiente del commit de los docs modificados)
+- Diseñado el ML externo para análisis de comportamiento: servicio Python (scikit-learn,
+  XGBoost, Prophet) que consume vistas materializadas de solo-lectura de la DB,
+  entrega dashboards para Fabiola/Municipio/comercio sobre tres dimensiones
+  (comercial, social, turística). Justifica gasto municipal con datos reales.
+  Nuevo análisis en `_analisis/22_ml_analytics_d014.md`. (entrada sin SHA)
+
+### Piloto A (web — teléfono)
+- GDD actualizado con nuevo sistema económico (§4 multi-moneda), rangos redefinidos (§5),
+  HUD multi-moneda (§7), MVP reescrito (§8) y tres secciones nuevas: World Events (§10),
+  Subastas digitales (§11) y ML externo (§12). Decisiones D-016 y D-017 registradas
+  en `docs/decisiones.md`. (entrada sin SHA)
+
+### Infra y documentación
+- Corregidos bugs de caracteres chinos mezclados con español en `_analisis/20-24`
+  (10 instancias) — bug de generación que mezclaba caracteres chinos con texto en español.
+- Actualizadas referencias a Carboncillos → minerales en `MEMORY.md`, `docs/estado.md`,
+  `_analisis/20_loop_jugador_dia_a_dia.md` y `_analisis/21_world_events_d014.md`.
+- (entradas sin SHA: pendiente del commit)

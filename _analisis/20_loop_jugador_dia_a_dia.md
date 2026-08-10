@@ -63,7 +63,7 @@ Estructura **fija de 5 tramos**, ejecutada en 60-300 s. Es la unidad atómica de
 | **Trigger** | 0-15 s | Vibración + banner: *"Estás en el Chiflón del Diablo. Toca para descubrir."* | Geofencing cliente (Turf.js). Sin texto antes del tap. |
 | **Contexto** | 15-60 s | Mapa mini + avatar del personaje histórico + 2-3 frases de diálogo + audio opcional | Sin scrolls. Sin muros de texto. ≤30 palabras en pantalla. |
 | **Acción** | 60-180 s | Minijuego táctil corto (QTE, hidden object, trivia) o escaneo de cámara | Pre-cargado. Cero loading entre tramos. |
-| **Recompensa** | 180-240 s | +Carboncillos, +XP, animación de insignia, *"Has rescatado un fragmento del carbón."* | Siempre gana algo. Nunca "casi". |
+| **Recompensa** | 180-240 s | +cobre (o +oro según evento), +XP, animación de insignia, *"Has rescatado un fragmento del carbón."* | Siempre gana algo. Nunca "casi". |
 | **Próximo** | 240-300 s | *"La próxima zona está a 320 m al sur."* Mini-mapa con ruta | Nunca terminar sin dirección. La pantalla siempre cierra con un "hacé X". |
 
 ### 2.1 Reglas del tramo Acción (clave para que entre en 1-5 min)
@@ -124,6 +124,30 @@ Cuando los dos carriles de la lattice convergen (`|amp_A - amp_B| < SCALE_0 / 50
 - **Anuncio anticipado** (5-15 min antes), pero el marcador **no aparece en el mapa** hasta cerca de la hora.
 - El **Calendario del Cielo SÍ los lista** con horario exacto → el turista planifica su visita alrededor.
 - Cada evento tiene un **"ya pasó"** claro en el pasaporte — el jugador sabe qué se perdió, sin ansiedad retroactiva.
+
+### 3.6 World Events — sincronización con fechas reales
+
+Los cuatro tipos de arriba son **driver atmosférico** (modulan cuándo y dónde aparecen los NPCs del enjambre SOMA). Hay una capa encima, los **World Events**, que se sincronizan con **fechas reales del calendario** (festividades nacionales, aniversarios locales, temporadas comerciales, efemérides del comercio).
+
+**Diferencia clave:**
+
+| Capa | Driver | Duración |
+|---|---|---|
+| Eventos del cielo (§3.1-3.5) | Cielo, hora, clima, lattice S60 | Minutos a horas |
+| **World Events** | **Fecha real del calendario** | **1-3 días (turista de paso)** |
+
+**Mecánica de World Event** (resumen):
+
+1. **Trigger por fecha real.** Sentinel o un calendario curado detecta la fecha → activa el World Event 24-48 h antes.
+2. **Temática del juego.** NPCs exclusivas del evento (vestidas con la temática), diálogos contextualizados, decoraciones de mapa, audio ambiental.
+3. **Misiones exclusivas con REQUIRE físico al comercio local.** El turista debe salir del teléfono y entrar al comercio real para completar la cadena. Ejemplos: "Visita 3 locales con comida típica asociada, escanea el QR en cada uno" → insignia exclusiva + cupón real.
+4. **Recompensas exclusivas con caducidad real.** Insignia única (no se obtiene después, estilo WoW), título de avatar, cupón real en comercio asociado (restaurant, café, completo, etc.).
+5. **NPCs exclusivas que caminan por el mapa.** Las NPCs del evento no son fijas — deambulan por una zona predefinida, creando micro-carreras de caza de 1-5 min. Modelo de movimiento: ruta fija en piloto, S60-driven en fase 1.
+6. **Anuncio cross-channel.** Calendario del Cielo público + push 24-48 h antes + push 5-15 min antes + afiche QR en el comercio asociado.
+
+**Por qué importa para D-014:** los World Events convierten el comercio local de "destino opcional" a "parte del evento mismo". Coordinan oferta (comercio) con demanda (turista) en fechas sincronizadas.
+
+**Diseño completo en** [`_analisis/21_world_events_d014.md`](21_world_events_d014.md) — incluye catálogo de eventos reales verificables (Fiestas Patrias, San Juan, Día del Patrimonio, temporada de ballenas, etc.), mecánica detallada de los 5 componentes, modelos de movimiento de NPCs, mecánica de cupones, decisiones de diseño abiertas, e implicaciones para el piloto de 30 días.
 
 ---
 
