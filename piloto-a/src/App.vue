@@ -4,9 +4,13 @@ import MapaLota from './components/MapaLota.vue'
 
 <template>
   <main class="app">
-    <h1 class="titulo">Lota Indómito</h1>
-    <p class="subtitulo">Guardianes de la Cuenca — Piloto A</p>
-    <MapaLota />
+    <header class="cabecera">
+      <h1 class="titulo">Lota Indómito</h1>
+      <p class="subtitulo">Guardianes de la Cuenca — Piloto A</p>
+    </header>
+    <div class="mapa-wrapper">
+      <MapaLota />
+    </div>
   </main>
 </template>
 
@@ -17,16 +21,33 @@ import MapaLota from './components/MapaLota.vue'
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   font-family: system-ui, sans-serif;
   background: #0d1117;
   color: #e6edf3;
+}
+
+#app {
+  height: 100%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  width: 100vw;
+}
+
+.mapa-wrapper {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  width: 100%;
+}
+
+.cabecera {
+  flex-shrink: 0;
 }
 
 .titulo {

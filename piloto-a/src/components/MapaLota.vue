@@ -1,27 +1,47 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { Map, NavigationControl, Marker, Popup } from 'maplibre-gl'
+import { Map, NavigationControl, Popup, type LngLatLike } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
+import { point as turfPoint, polygon as turfPolygon } from '@turf/turf'
+import zonasData from '../data/zonas-lota.json'
 
-// Coordenadas de las 5 zonas patrimoniales del piloto
-const ZONAS = [
-  { id: 1, nombre: 'Chiflón del Diablo', lng: -72.99, lat: -37.15, desc: 'Mina de carbón, Monumento Nacional' },
-  { id: 2, nombre: 'Parque de Lota', lng: -73.01, lat: -37.09, desc: 'Parque Isidora Cousiño' },
-  { id: 3, nombre: 'Pabellón 83', lng: -73.00, lat: -37.14, desc: 'Arquitectura industrial obrera' },
-  { id: 4, nombre: 'Teatro de Lota', lng: -73.01, lat: -37.10, desc: 'Patrimonio cultural urbano' },
-  { id: 5, nombre: 'Costa / Oficios de Mar', lng: -73.02, lat: -37.11, desc: 'Patrimonio inmaterial del borde mar' },
-]
+interface ZonaOSM {
+  id: number
+  name: string
+  tags: { historic?: string; tourism?: string; leisure?: string; natural?: string }
+  coords: Array<{ lat: number; lon: number }>
+}
+
+const zonas = (zonasData as { zonas: ZonaOSM[]; count: number; fuente: string }).zonas
 
 const mapContainer = ref<HTMLElement | null>(null)
-const zonaSeleccionada = ref<number | null>(null)
+const zonaActiva = ref<string | null>(null)
 let map: Map | null = null
 
 onMounted(() => {
   if (!mapContainer.value) return
 
+  // Construir GeoJSON con polígonos de las zonas patrimoniales
+  const features = zonas
+    .filter((z) => z.coords.length >= 3)
+    .map((z) => ({
+      type: 'Feature' as const,
+      id: z.id,
+      properties: { name: z.name, tags: z.tags },
+      geometry: {
+        type: 'Polygon' as const,
+        coordinates: [[...z.coords.map((c): [number, number] => [c.lon, c.lat]), [z.coords[0]!.lon, z.coords[0]!.lat]]],
+      },
+    }))
+
+  const zonasGeoJSON = {
+    type: 'FeatureCollection' as const,
+    features,
+  }
+
   map = new Map({
     container: mapContainer.value,
-    // Estilo básico sin necesidad de API key (OSM raster)
     style: {
       version: 8,
       sources: {
@@ -29,39 +49,78 @@ onMounted(() => {
           type: 'raster',
           tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
           tileSize: 256,
-          attribution: '© OpenStreetMap',
+          attribution: '© OpenStreetMap contributors',
         },
       },
-      layers: [
-        {
-          id: 'osm-tiles',
-          type: 'raster',
-          source: 'osm',
-        },
-      ],
+      layers: [{ id: 'osm-tiles', type: 'raster', source: 'osm' }],
     },
-    center: [-73.01, -37.12], // Centro de Lota
+    center: [-73.16, -37.08],
     zoom: 13,
   })
 
   map.addControl(new NavigationControl(), 'top-right')
 
   map.on('load', () => {
-    // Agregar marcadores por cada zona
-    ZONAS.forEach((zona) => {
-      const marker = new Marker({ color: '#3FE6C0' })
-        .setLngLat([zona.lng, zona.lat])
-        .setPopup(
-          new Popup({ offset: 25 }).setHTML(
-            `<h3>${zona.nombre}</h3><p>${zona.desc}</p>`
-          )
-        )
-        .addTo(map!)
+    if (!map) return
 
-      marker.getElement().addEventListener('click', () => {
-        zonaSeleccionada.value = zona.id
-      })
+    // Capa de polígonos patrimoniales (verde translúcido)
+    map.addSource('zonas-patrimoniales', { type: 'geojson', data: zonasGeoJSON })
+
+    map.addLayer({
+      id: 'zonas-fill',
+      type: 'fill',
+      source: 'zonas-patrimoniales',
+      paint: {
+        'fill-color': '#3FE6C0',
+        'fill-opacity': 0.25,
+      },
     })
+
+    map.addLayer({
+      id: 'zonas-outline',
+      type: 'line',
+      source: 'zonas-patrimoniales',
+      paint: {
+        'line-color': '#3FE6C0',
+        'line-width': 2,
+      },
+    })
+
+    // Popup al hacer click en una zona
+    map.on('click', 'zonas-fill', (e) => {
+      if (!map || !e.features?.[0]) return
+      const feature = e.features[0]
+      const name = feature.properties?.name ?? 'Sin nombre'
+      const tags = JSON.stringify(feature.properties?.tags ?? {})
+      new Popup({ offset: 12, closeButton: true })
+        .setLngLat(e.lngLat as LngLatLike)
+        .setHTML(`<h3>${name}</h3><p style="font-size:0.8em;color:#8b949e">${tags}</p>`)
+        .addTo(map)
+      zonaActiva.value = name
+    })
+
+    // Cambiar cursor al pasar sobre una zona
+    map.on('mouseenter', 'zonas-fill', () => {
+      if (map) map.getCanvas().style.cursor = 'pointer'
+    })
+    map.on('mouseleave', 'zonas-fill', () => {
+      if (map) map.getCanvas().style.cursor = ''
+    })
+
+    // Demo de geofencing: promedio de vértices cae dentro del polígono de Chiflón
+    const chiflon = zonas.find((z) => z.name.includes('Chiflón'))
+    if (chiflon && chiflon.coords.length >= 3) {
+      const coords: [number, number][] = chiflon.coords.map((c) => [c.lon, c.lat])
+      const poly = turfPolygon([[...coords, coords[0]!]])
+      const avgLng = coords.reduce((s, c) => s + c[0], 0) / coords.length
+      const avgLat = coords.reduce((s, c) => s + c[1], 0) / coords.length
+      const pt = turfPoint([avgLng, avgLat])
+      const inside = booleanPointInPolygon(pt, poly)
+      console.log(`[geofencing] ${chiflon.name}: promedio de vértices dentro = ${inside}`)
+    }
+
+    // Forzar resize tras layout estable
+    setTimeout(() => map?.resize(), 100)
   })
 })
 
@@ -73,11 +132,20 @@ onUnmounted(() => {
 <template>
   <div class="mapa-container">
     <div ref="mapContainer" class="mapa"></div>
-    <aside v-if="zonaSeleccionada" class="panel-zona">
-      <button class="cerrar" @click="zonaSeleccionada = null">✕</button>
-      <h2>{{ ZONAS.find(z => z.id === zonaSeleccionada)?.nombre }}</h2>
-      <p>{{ ZONAS.find(z => z.id === zonaSeleccionada)?.desc }}</p>
-      <p class="hint">Misión del piloto: próximamente</p>
+    <aside v-if="zonaActiva" class="panel-zona">
+      <button class="cerrar" @click="zonaActiva = null">✕</button>
+      <h2>{{ zonaActiva }}</h2>
+      <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-10)</p>
+      <p class="hint">Geofencing listo — entrando a esta zona se activa la misión.</p>
+    </aside>
+    <aside class="panel-zonas">
+      <h3>Zonas patrimoniales</h3>
+      <ul>
+        <li v-for="z in zonas" :key="z.id" @click="zonaActiva = z.name">
+          {{ z.name }}
+        </li>
+      </ul>
+      <p class="count">{{ zonas.length }} zonas · fuente OSM</p>
     </aside>
   </div>
 </template>
@@ -86,35 +154,89 @@ onUnmounted(() => {
 .mapa-container {
   flex: 1;
   position: relative;
-  display: flex;
-}
-
-.mapa {
-  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
   height: 100%;
 }
 
-.panel-zona {
+.mapa {
   position: absolute;
-  right: 1rem;
-  bottom: 2rem;
-  width: 280px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-zona,
+.panel-zonas {
+  position: absolute;
   background: #161b22;
   border: 1px solid #30363d;
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  color: #c9d1d9;
+}
+
+.panel-zona {
+  right: 1rem;
+  bottom: 2rem;
+  width: 280px;
+}
+
+.panel-zonas {
+  left: 1rem;
+  top: 1rem;
+  width: 260px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.panel-zonas h3 {
+  font-size: 1rem;
+  color: #3FE6C0;
+  margin-bottom: 0.5rem;
+}
+
+.panel-zonas ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panel-zonas li {
+  padding: 0.4rem 0.6rem;
+  margin: 2px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.panel-zonas li:hover {
+  background: #21262d;
+  color: #3FE6C0;
+}
+
+.panel-zonas .count {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: #6e7681;
 }
 
 .panel-zona h2 {
   font-size: 1.1rem;
   color: #3FE6C0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .panel-zona p {
   font-size: 0.85rem;
   color: #8b949e;
+}
+
+.panel-zona .origen {
+  font-size: 0.7rem;
+  color: #6e7681;
 }
 
 .panel-zona .hint {
