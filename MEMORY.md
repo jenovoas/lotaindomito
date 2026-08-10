@@ -6,7 +6,7 @@ Este archivo es la memoria de inicio de sesión rápida. Cualquier IA que lo lea
 - **Nombre:** Lota Indómito
 - **Tipo:** Juego tipo Pokémon GO ambientado en Lota, Chile.
 - **Desarrollador:** Jaime Novoa Sepúlveda (INTERLOCUTOR). 
-- **Cliente:** Fabiola (postulación a fondo público, 10M CLP).
+- **Cliente:** cliente (postulación a fondos públicos, [monto retirado]).
 - **Repositorio:** `/home/jnovoas/Proyectos/LotaIndomito/`
 - **Sentinel (framework matemático base):** `/home/jnovoas/Proyectos/sentinel/me-60os-core/`
 
@@ -51,7 +51,7 @@ Todos en `/home/jnovoas/Proyectos/sentinel/me-60os-core/src/`:
 - **Concepto:** evento real (cielo/hora) decide qué pasa → enjambre SOMA de NPCs simples y vivos → el jugador los caza por geolocalización en el teléfono (PWA) → encuentro en RA (gafas Meta, préstamo en sitio) que reconstruye la historia e imágenes reales de Lota. Costura de baja latencia vía carriles de la lattice. Etapa 2: avisos de comercio en RA + circuito de minerales (cobre/oro/estaño) → autofinanciamiento.
 - **Expansión regional:** Lota es la prueba de concepto; el modelo se expande a Curanilahue, Lebu, Arauco y Concepción (corredor patrimonial de la zona del carbón). El motor es agnóstico de comuna: cada una aporta su contenido. Modelo regional escalable y autofinanciable por comuna.
 - **Entregable de INTERLOCUTOR (~30 días):** un piloto / diseño de concepto que demuestra el diferenciador central. NO el juego completo. La fase 1 arranca después.
-- **La postulación al fondo es dominio de Fabiola.** INTERLOCUTOR no se mete en su postulación. Los docs de fondo (`_analisis/08_carta_gantt_*`, `_analisis/09_presupuesto_*`, `_analisis/11_borrador_*`, `docs/propuesta-fondo.md`) son material de ella.
+- **La postulación al fondo es dominio de cliente.** INTERLOCUTOR no se mete en su postulación. Los docs de fondo (`_analisis/08_CARTA_GANTT_*`, `_analisis/09_presupuesto_*`, `_analisis/11_borrador_*`, `[doc retirado]`) son material de ella.
 - **Capacidad:** INTERLOCUTOR programa desde los 9 años, autor de Sentinel, construye sistemas complejos rápido. NO recortar alcance por defecto ni tratarlo como primerizo.
 - **Piloto B (motor/Sentinel) es el CENTRO del concepto, NO R&D congelado.** El teléfono (PWA, Piloto A) es la capa accesible; el motor es el diferenciador.
 

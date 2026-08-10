@@ -59,7 +59,7 @@ Pokémon GO está construido sobre **S2 Geometry** (Google). Divide la esfera te
 - **Biomas/zonas temáticas** que cambian qué aparece → mapea directo a las zonas patrimoniales de Lota (mina, costa, pabellones, parque).
 - **Combate/interacción corta** (75 s) para juego en la calle → las misiones de Lota deben ser breves y de una mano.
 - **Modo pasivo/asíncrono** (algo progresa con la app cerrada) → idea para etapa 2.
-- **Contenido puesto por la comunidad/curadores** (Wayfarer) → Fabiola + municipio como curadores de zonas.
+- **Contenido puesto por la comunidad/curadores** (Wayfarer) → cliente + municipio como curadores de zonas.
 
 ### 1.3 LBG fuera de Niantic
 
@@ -211,7 +211,7 @@ Para "reconstruir la historia e imágenes reales de Lota" en RA, hay que digital
 - Para el **encuentro RA inmersivo** (ver el Chiflón operativo), **3D Gaussian Splatting** es la técnica moderna: captura el sitio real con fotos/video (incluso dron o teléfono) y renderiza en tiempo real en las Quest.
 - Para **personajes** (Isidora, El Ciego), fotogrametría de objetos/actores o modelado 3D tradicional + rigging.
 - Pipeline sugerido: **fotogrametría para la base geométrica fiel + 3DGS para la capa inmersiva de alta fidelidad visual**. Esto es un diferenciador técnico real para la propuesta.
-- **Dependencia de contenido:** la fidelidad depende del material histórico (fotos de archivo, planos, investigación) — eso lo aporta Fabiola + archivos/CMN.
+- **Dependencia de contenido:** la fidelidad depende del material histórico (fotos de archivo, planos, investigación) — eso lo aporta cliente + archivos/CMN.
 
 *Fuentes:* isprs-archives.copernicus.org (Photogrammetry and 3DGS for CH; comparative evaluation), mdpi.com (NeRF vs Photogrammetry, GS mesh extraction from churches), sciencedirect.com.
 

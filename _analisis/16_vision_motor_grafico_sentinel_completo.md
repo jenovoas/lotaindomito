@@ -9,7 +9,7 @@
 
 | Proyecto | Fin | Tecnología |
 |---|---|---|
-| **Lota Indómito** | Juego cultural tipo Pokémon GO para clienta Fabiola (postulación a fondo público) | Inyecta Sentinel completo en v1 |
+| **Lota Indómito** | Juego cultural tipo Pokémon GO para clienta cliente (postulación a fondos públicos) | Inyecta Sentinel completo en v1 |
 | **Sentinel** | Framework matemático S60 + lattice dual-carril + fonones + superradiancia + compresión fractal | Reutilizable en otros casos |
 
 **Decisión:** no separar. Sentinel se mete DENTRO de Lota Indómito desde v1, no es overkill si el rendimiento lo amerita.

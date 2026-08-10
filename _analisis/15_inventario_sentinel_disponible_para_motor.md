@@ -8,7 +8,7 @@
 
 ## 1. Contexto del proyecto Lota Indómito y de Sentinel
 
-**Lota Indómito.** Juego tipo Pokémon GO ambientado en Lota, Chile. Postulación a fondo público por **10M CLP**. Cliente: **Fabiola**. Plazo: **3 semanas hasta deadline** de entrega de la propuesta. La promesa de producto es una experiencia geolocalizada de captura y exploración en el borde costero de Lota, con énfasis en jugabilidad móvil, narrativa local y dinámica comunitaria en tiempo real.
+**Lota Indómito.** Juego tipo Pokémon GO ambientado en Lota, Chile. Postulación a fondo público por **[monto retirado]**. Cliente: **cliente**. Plazo: **3 semanas hasta deadline** de entrega de la propuesta. La promesa de producto es una experiencia geolocalizada de captura y exploración en el borde costero de Lota, con énfasis en jugabilidad móvil, narrativa local y dinámica comunitaria en tiempo real.
 
 **Sentinel (S60).** Framework matemático escrito en Rust, ubicado en `~/Proyectos/sentinel/me-60os-core`. Su propiedad central: **es 100% libre de `float`**, validado en runtime por 100k iteraciones. Implementa el sistema S60 (`SPA` = S60 Positional Arithmetic), donde cada número se representa como un vector de `i64` con escala sexagesimal `60^4`. Su runtime es **isomorfo a física real** — la misma aritmética produce los mismos resultados en CPU, GPU (vía pack/unpack explícito) y simulación numérica.
 

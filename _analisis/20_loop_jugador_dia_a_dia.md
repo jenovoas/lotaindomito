@@ -194,7 +194,7 @@ El piloto debe demostrar **una corrida completa del loop de visita**, no un día
 | Ítem | Alcance piloto | Justificación |
 |---|---|---|
 | **Zonas** | 1 zona (Parque de Lota o Chiflón del Diablo) | La más rica culturalmente. Suficiente para demostrar el loop sin dispersión. |
-| **Evento del cielo en vivo** | 1 evento, ejecutado durante la demo a Fabiola | Es el momento mágico de la urgencia. Sin él, no se ve el diferenciador. |
+| **Evento del cielo en vivo** | 1 evento, ejecutado durante la demo a cliente | Es el momento mágico de la urgencia. Sin él, no se ve el diferenciador. |
 | **Calendario del Cielo** | Simulado para 30 días, con datos sintéticos de Sentinel | Demuestra que la mecánica es repetible, no un one-shot. |
 | **Pasaporte público** | URL compartible, render público | Muestra efecto red. Cualquiera puede ver el pasaporte de otro sin instalar la app. |
 | **Comercio local** | 1 comercio real con canje de Carboncillos (aunque sea simulado en maqueta) | Demuestra D-014 de un plumazo: el juego guía al turista al comercio. |

@@ -282,7 +282,7 @@ Para el entregable de la postulación al fondo se construirá un demostrador web
 
 **Catálogo de eventos reales (no fabricada):**
 - **Nacionales / regionales con fecha fija**: Fiestas Patrias (18-19 sept), Día del Patrimonio (último dom mayo), San Juan (24 jun), Temporada de ballenas (julio-octubre).
-- **Locales de Lota** (fechas requieren input de Fabiola/Municipio): aniversario de Lota, semana del carbón, festividades costumbristas del borde costero, fiesta patronal.
+- **Locales de Lota** (fechas requieren input de cliente/Municipio): aniversario de Lota, semana del carbón, festividades costumbristas del borde costero, fiesta patronal.
 - **Comerciales** (curados): temporadas de productos (pan de mina, mariscos, sardina, empanadas), temporada alta/baja de turismo, aperturas de locales asociados.
 
 ---
@@ -315,7 +315,7 @@ Para el entregable de la postulación al fondo se construirá un demostrador web
 
 ## 12. ML externo para análisis de comportamiento
 
-> **Diseño conceptual (2026-08-10).** Servicio de ML externo que consume directamente la base de datos del juego (PostgreSQL + PostGIS), entrena modelos sobre comportamiento de usuarios y entrega dashboards accionables para Fabiola, Municipios y comercio local. Diseño completo en [`_analisis/22_ml_analytics_d014.md`](../_analisis/22_ml_analytics_d014.md).
+> **Diseño conceptual (2026-08-10).** Servicio de ML externo que consume directamente la base de datos del juego (PostgreSQL + PostGIS), entrena modelos sobre comportamiento de usuarios y entrega dashboards accionables para cliente, Municipios y comercio local. Diseño completo en [`_analisis/22_ml_analytics_d014.md`](../_analisis/22_ml_analytics_d014.md).
 
 **Tesis:** el juego no es solo una experiencia para turistas. Es un **sensor** que produce datos accionables sobre tres dimensiones:
 

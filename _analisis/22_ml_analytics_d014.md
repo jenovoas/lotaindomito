@@ -4,7 +4,7 @@
 > **Fecha:** 2026-08-10.
 > **Destinatario:** INTERLOCUTOR (Jaime), para discusión antes de bajar a mecánica.
 > **Encuadre:** D-014 (turismo + comercio local, motor/Sentinel como centro) + D-006 (PostgreSQL + PostGIS como backend) + D-007 (Vue 3 PWA cliente) + D-016 propuesta (sistema multi-moneda de minerales, ver [`_analisis/23_sistema_monedas_minerales.md`](23_sistema_monedas_minerales.md)).
-> **Decisión propuesta:** montar un **servicio de ML externo** que consume directamente la base de datos del juego, entrena modelos sobre comportamiento de usuarios, predice tendencias y entrega **dashboards accionables** para Fabiola, Municipios y comercio local.
+> **Decisión propuesta:** montar un **servicio de ML externo** que consume directamente la base de datos del juego, entrena modelos sobre comportamiento de usuarios, predice tendencias y entrega **dashboards accionables** para cliente, Municipios y comercio local.
 
 ---
 
@@ -187,7 +187,7 @@ Para que el ML tenga material, hay que recolectar desde el día 1. El piloto deb
                 ▼                                ▼
 ┌──────────────────────────────────────────────────────────────┐
 │  Dashboard Web (estático o app liviana)                      │
-│  ├── Vista Fabiola: KPIs globales, salud del juego           │
+│  ├── Vista cliente: KPIs globales, salud del juego           │
 │  ├── Vista Municipio: heatmaps, demografía, estacionalidad   │
 │  ├── Vista Comercio: ROI por evento, minerales recibidos     │
 │  └── Vista INTERLOCUTOR: comportamiento, retención, fraude   │
@@ -212,7 +212,7 @@ El piloto NO entrena modelos complejos. Sí puede:
 | **Instrumentación** | Implementar los 16 eventos definidos en §5. Backend mínimo para recibirlos y almacenarlos. |
 | **Vistas materializadas** | 2-3 vistas básicas: `events_per_user_per_day`, `commerce_coupon_redemption`, `visits_per_zone_per_hour`. |
 | **Dashboard estático** | Una página web simple que muestra las 3 vistas. Refresh manual. |
-| **Reporte manual** | Un PDF mensual con las 3 dimensiones (comercial, social, turística) que se entrega a Fabiola y Municipio. |
+| **Reporte manual** | Un PDF mensual con las 3 dimensiones (comercial, social, turística) que se entrega a cliente y Municipio. |
 | **1 modelo simple** | Predicción de retención D+1 con regresión logística (con datos sintéticos si no hay suficientes reales). |
 
 **Lo que se difiere a fase 1:** todos los modelos priorizados en §4.2 y §4.3.
@@ -266,13 +266,13 @@ Para validar que el sistema está dando valor:
 
 3. **¿Quién opera el servicio de ML?**
    - INTERLOCUTOR mismo.
-   - Fabiola contratando a un data scientist.
+   - cliente contratando a un data scientist.
    - Servicio externo contratado.
    - **Recomendación:** INTERLOCUTOR para piloto, decidir para fase 1.
 
 4. **¿El dashboard es público o restringido?**
    - Versión pública (anonimizada) para Municipio y Comercio.
-   - Versión privada con más detalle para INTERLOCUTOR/Fabiola.
+   - Versión privada con más detalle para INTERLOCUTOR/cliente.
    - **Recomendación:** dos versiones.
 
 5. **¿Los datos del Municipio se entregan en tiempo real o como reporte mensual?**
@@ -293,4 +293,4 @@ Para validar que el sistema está dando valor:
 - **D-006:** `docs/decisiones.md` — PostgreSQL + PostGIS como backend, fuente de datos del ML.
 - **D-007:** `docs/decisiones.md` — Vue 3 PWA como cliente; emite los eventos que el ML consume.
 - **D-014:** `docs/decisiones.md` — el ML refuerza D-014 al entregar datos accionables para Municipios.
-- **Postulación al fondo:** `_analisis/11_borrador_propuesta_fondo.md` — el ML es un argumento de venta adicional para el Municipio.
+- **Postulación al fondo:** `[doc retirado]` — el ML es un argumento de venta adicional para el Municipio.

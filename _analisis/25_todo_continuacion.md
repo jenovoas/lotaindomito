@@ -29,7 +29,7 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 ### D-016 · Sistema multi-moneda cobre/oro/estaño — **PROPUESTA**
 - Diseño completo en [`_analisis/23_sistema_monedas_minerales.md`](23_sistema_monedas_minerales.md).
 - Requiere OK explícito de INTERLOCUTOR para reemplazar Carboncillo formalmente.
-- Si se aprueba: propagar a otros docs (`propuesta-fondo.md` es dominio de Fabiola — verificar alcance), implementar wallet en Piloto A.
+- Si se aprueba: propagar a otros docs (`propuesta-fondo.md` es dominio de cliente — verificar alcance), implementar wallet en Piloto A.
 
 ### D-017 · Subastas digitales de cosas reales — **PROPUESTA**
 - Diseño completo en [`_analisis/24_subastas_reales.md`](24_subastas_reales.md).
@@ -97,15 +97,15 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 - [ ] Integración del motor con el PWA cliente.
 
 ### Material para el fondo
-- [ ] `_analisis/11_borrador_propuesta_fondo.md` — actualizar con D-016 y D-017 si se aprueban.
-- [ ] `_analisis/09_presupuesto_referencial.md` — ajustar al alcance MVP real.
-- [ ] `_analisis/08_carta_gantt_3_semanas.md` — ajustar al cronograma real.
+- [ ] `[doc retirado]` — actualizar con D-016 y D-017 si se aprueban.
+- [ ] `[doc retirado]` — ajustar al alcance MVP real.
+- [ ] `_analisis/08_CARTA_GANTT_3_semanas.md` — ajustar al cronograma real.
 
-> **Nota del proyecto:** el material de fondo (`_analisis/08_*`, `_analisis/09_*`, `_analisis/11_*`, `docs/propuesta-fondo.md`) es **dominio de Fabiola**. INTERLOCUTOR no se mete en la postulación; INTERLOCUTOR prepara el proyecto y su diseño.
+> **Nota del proyecto:** el material de fondo (`_analisis/08_*`, `_analisis/09_*`, `_analisis/11_*`, `[doc retirado]`) es **dominio de cliente**. INTERLOCUTOR no se mete en la postulación; INTERLOCUTOR prepara el proyecto y su diseño.
 
 ## 6. Input requerido de terceros
 
-### Fabiola / Municipio
+### cliente / Municipio
 - Fechas exactas de festividades locales de Lota (aniversario, semana del carbón, fiesta patronal).
 - Selección de 1 comercio real para el piloto (cupones QR, canje de minerales).
 - Validación del modelo de autofinanciamiento (D-014).
@@ -113,7 +113,7 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 ### INTERLOCUTOR (decisiones de arquitectura)
 - Aprobar D-016 y D-017 formalmente.
 - Resolver las 21 decisiones de diseño abiertas (lista en §4).
-- Definir operador del servicio de ML (¿él mismo, Fabiola, externo?).
+- Definir operador del servicio de ML (¿él mismo, cliente, externo?).
 - Decidir si DB va en servidor fan o nube.
 
 ## 7. Pitch consolidado para el fondo

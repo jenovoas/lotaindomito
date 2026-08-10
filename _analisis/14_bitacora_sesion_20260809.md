@@ -3,7 +3,7 @@
 **Sesión:** Hermes, modelo opencode-pro vía omniroute
 **Proyecto:** Lota Indómito
 **Operador:** Jaime (INTERLOCUTOR, autor del framework Sentinel)
-**Cliente (Fabiola):** pendiente de decisión de stack
+**Cliente (cliente):** pendiente de decisión de stack
 **Fecha:** 2026-08-09
 
 ---
@@ -14,7 +14,7 @@
 
 - **Mensaje 1 (usuario):** "Hola, yo aqui armando el proyecto de un cliente nuevo me ayudas? Tengo que analizarlo todo, sobre todo las tecnologías que voy usar, aun no lo tengo bien claro"
 - **Acción:** Leí README.md, concepto-juego.md, decisiones.md, estado.md, audios_cliente.md, cotejo_audis_vs_prototipo.md, propuesta_tecnica_stack_osm.md, analisis_tecnologias_disponibles.md, navegacion_estelar.md.
-- **Diagnóstico inicial:** Identifiqué contradicciones en docs (Vue/Svelte vs React en framework, MVP 3D vs MVP lean, etc.), propuse menú de opciones para Fabiola (A web vs B Rust/Bevy).
+- **Diagnóstico inicial:** Identifiqué contradicciones en docs (Vue/Svelte vs React en framework, MVP 3D vs MVP lean, etc.), propuse menú de opciones para cliente (A web vs B Rust/Bevy).
 
 ### Fase 2: Iteración de stack
 
@@ -81,11 +81,11 @@
 | D-002 | preexistente | Memoria operativa en `docs/` separada | INTERLOCUTOR explícito |
 | D-003 | preexistente | Español chileno obligatorio | Pedido 5+ veces |
 | D-003 | preexistente | Event Engine celestial (I+D en su momento) | Idea conceptual |
-| D-004 | 2026-08-09 | Entregable = propuesta + maqueta + demo frontend | Audios de CLIENTA |
-| D-005 | 2026-08-09 | Piloto lean (doc 04), sin 3D | MVP 3D no calza en 10M CLP |
+| D-004 | 2026-08-09 | Entregable = propuesta + maqueta + demo frontend | Audios de cliente |
+| D-005 | 2026-08-09 | Piloto lean (doc 04), sin 3D | MVP 3D no calza en [monto retirado] |
 | D-006 | 2026-08-09 | Backend Fase 1 = Python FastAPI | Velocidad de desarrollo |
 | D-007 | 2026-08-09 | Frontend = React 18 + Vite + TypeScript | Análisis comparativo |
-| D-008 | 2026-08-09 | El stack lo elige Fabiola de un menú | Decisión de la clienta |
+| D-008 | 2026-08-09 | El stack lo elige cliente de un menú | Decisión de la clienta |
 | D-009 | 2026-08-09 | Autorización celestial en Lota Indómito | INTERLOCUTOR es autor |
 | D-010 | 2026-08-09 | Lota Indómito integra módulos S60 de Sentinel | Cliente de Sentinel |
 | D-010-A | 2026-08-09 | Módulos Sentinel identificados para el juego | "utilizaré varios módulos" |
@@ -93,7 +93,7 @@
 | P-001 | preexistente | Alcance del MVP vs Stitch | Pendiente |
 | P-002 | preexistente | Stack open-source self-hosted | OSM gratis vs Google de pago |
 | P-003 | 2026-08-09 | Qué entregar al fondo — CERRADO | D-004 |
-| P-004 | 2026-08-09 | Fabiola elige Opción A vs B | Pendiente decisión CLIENTA |
+| P-004 | 2026-08-09 | cliente elige Opción A vs B | Pendiente decisión cliente |
 
 ---
 
@@ -162,7 +162,7 @@ Conflicto previo (no resuelto): `_analisis/04_propuesta_tecnica_stack_osm.md` fu
 - `docs/_render/render-docs.py` (Jaime)
 - `docs/concepto-juego.md` (Jaime)
 - `docs/decisiones.md` (esta sesión: D-004 a D-010 + D-010-A + P-003 cerrado + P-004 documentado)
-- `docs/estado.md` (esta sesión: Fabiola registrada + 3 skills oficiales + 5 lecciones aprendidas)
+- `docs/estado.md` (esta sesión: cliente registrada + 3 skills oficiales + 5 lecciones aprendidas)
 
 ### Borrado (`D`)
 
@@ -179,10 +179,10 @@ Conflicto previo (no resuelto): `_analisis/04_propuesta_tecnica_stack_osm.md` fu
 - `_analisis/07_propuesta_arquitectura_servidor_rust_juego.md`
 
 **Míos:**
-- `_analisis/08_carta_gantt_3_semanas.md`
-- `_analisis/09_presupuesto_referencial.md`
-- `_analisis/10_opciones_tecnologicas_para_clienta.md` (antes `06_*`)
-- `_analisis/11_borrador_propuesta_fondo.md` (antes `07_*`)
+- `_analisis/08_CARTA_GANTT_3_semanas.md`
+- `[doc retirado]`
+- `[doc retirado]` (antes `06_*`)
+- `[doc retirado]` (antes `07_*`)
 - `_analisis/12_inputs_pendientes_de_interlocutor.md` (centraliza 3 preguntas)
 - `_analisis/13_resumen_sesion_20260809.md` (resumen ejecutivo)
 - `_analisis/14_bitacora_sesion_20260809.md` (este archivo)
@@ -205,7 +205,7 @@ Conflicto previo (no resuelto): `_analisis/04_propuesta_tecnica_stack_osm.md` fu
 
 6. **El reloj isocrónico de Sentinel es el sincronizador maestro** entre mundo real y mundo digital. Tick del juego subordinado.
 
-7. **No especular contenido bloqueado por input de terceros** (Fabiola, INTERLOCUTOR). Centralizar pendientes y esperar confirmación.
+7. **No especular contenido bloqueado por input de terceros** (cliente, INTERLOCUTOR). Centralizar pendientes y esperar confirmación.
 
 8. **Renombrar archivos para evitar colisión de numeración** cuando el upstream publica en slots ya usados.
 
@@ -221,13 +221,13 @@ Centralizadas en `_analisis/12_inputs_pendientes_de_interlocutor.md`:
 |---|---|---|---|
 | 1 | SOMA vs Redis Pub/Sub — ¿conviven o uno reemplaza al otro? | INTERLOCUTOR | ✅ **RESUELTA 2026-08-09** — convivencia SOMA + Redis Pub/Sub (provisional, revisar con testing) |
 | 2 | Roles específicos de módulos MVP en el juego (4 sub-preguntas) | INTERLOCUTOR | Pendiente |
-| 3 | Opción A (web progresiva) vs Opción B (Rust/lota-server) | Fabiola | Pendiente |
+| 3 | Opción A (web progresiva) vs Opción B (Rust/lota-server) | cliente | Pendiente |
 
 **Cómo se desbloquea:**
 
-1. ✅ Pregunta 1 resuelta (2026-08-09). Propagación aplicada a `docs/decisiones.md` D-010-A y `_analisis/11_borrador_propuesta_fondo.md` sección 4.2.
-2. INTERLOCUTOR responde Pregunta 2 cuando pueda (sin esperar a Fabiola).
-3. Fabiola elige Opción A o B.
+1. ✅ Pregunta 1 resuelta (2026-08-09). Propagación aplicada a `docs/decisiones.md` D-010-A y `[doc retirado]` sección 4.2.
+2. INTERLOCUTOR responde Pregunta 2 cuando pueda (sin esperar a cliente).
+3. cliente elige Opción A o B.
 4. Con las respuestas 2 y 3, ejecutar `bash _scripts/propagar_respuestas_pendientes.sh roles` y `bash _scripts/propagar_respuestas_pendientes.sh pila A` (o `B`).
 5. Después de propagadas todas las respuestas, ejecutar `bash _scripts/archivar_sesion_20260809.sh` para mover `_analisis/12_*` y `_analisis/13_*` a `_analisis/archive/2026-08-09/`.
 

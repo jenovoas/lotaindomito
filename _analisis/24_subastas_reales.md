@@ -165,11 +165,11 @@ El usuario eligió tres restricciones que delimitan el alcance:
 Si el comprador abre disputa:
 
 1. **Plazo de 7 días** desde la apertura.
-2. **El equipo de Fabiola / INTERLOCUTOR** media.
+2. **El equipo de cliente / INTERLOCUTOR** media.
 3. **Evidencia:** fotos del producto, comunicación, tracking de envío.
 4. **Resolución:** escrow se libera al vendedor, se devuelve al comprador, o se reparte.
 
-**Complejidad operativa:** Fabiola/INTERLOCUTOR debe tener un canal de soporte. Esto es operacional, no técnico.
+**Complejidad operativa:** cliente/INTERLOCUTOR debe tener un canal de soporte. Esto es operacional, no técnico.
 
 ---
 
@@ -279,7 +279,7 @@ Esa propuesta es difícil de rechazar para un Municipio.
 ### 11.3 Sobre reputación y disputas
 
 6. **¿Quién media las disputas?**
-   - Fabiola/INTERLOCUTOR inicialmente. Escalar a equipo dedicado si crece.
+   - cliente/INTERLOCUTOR inicialmente. Escalar a equipo dedicado si crece.
 7. **¿Sistema de arbitraje automático por ML?**
    - Posible en fase 2. MVP requiere humano en el loop.
 

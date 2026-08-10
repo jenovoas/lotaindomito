@@ -13,7 +13,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 | **Vigentes** (encuadran el proyecto hoy) | [D-006](#d-006--servidor-fase-1--python-fastapi), [D-007](#d-007--interfaz--vue-3--typescript), [D-011](#d-011--camino-c-confirmado--motor-propio-s60--pipeline-gpu-activo-2026-08-09), [D-012](#d-012--arquitectura-de-integracin-sentinel--gpu-confirmada-2026-08-09), [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da) |
 | **Propuestas** (pendientes de aprobación) | [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10) |
 | **Operativas** (reglas y procedimientos) | [D-001](#d-001--sync-bidireccional-con-drive-para-lotaindomito), [D-002](#d-002--transcripcin-local-con-faster-whisper), [D-003](#d-003--espaol-chileno-obligatorio-en-redaccin) |
-| **Históricas** (contexto de módulos y decisiones viejas) | [D-002](#d-002--memoria-operativa-en-docs-separada-de-_analisis), [D-003](#d-003--event-engine-ejemplo-celestialrs--sincronizacin-eventos-digitales--reales), [D-004](#d-004--entregable-para-el-fondo--propuesta--maqueta--demo-de-interfaz), [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-fabiola-de-un-men-de-opciones), [D-009](#d-009--autorizacin-de-uso-de-celestialrspy-en-lota-indmito), [D-010](#d-010--lota-indmito-integra-mdulos-matemticos-del-core-s60-de-sentinel-celestial-como-caso-de-uso), [D-010-A](#d-010-a--mdulos-del-framework-sentinel-identificados-para-integrar-al-juego-rol-especfico-propuesto-pendiente-confirmacin), [D-013](#d-013--dos-pilotos-en-paralelo-motor-propio-vs-tecnologa-de-mercado-2026-08-10) |
+| **Históricas** (contexto de módulos y decisiones viejas) | [D-002](#d-002--memoria-operativa-en-docs-separada-de-_analisis), [D-003](#d-003--event-engine-ejemplo-celestialrs--sincronizacin-eventos-digitales--reales), [D-004](#d-004--entregable-para-el-fondo--propuesta--maqueta--demo-de-interfaz), [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-cliente-de-un-men-de-opciones), [D-009](#d-009--autorizacin-de-uso-de-celestialrspy-en-lota-indmito), [D-010](#d-010--lota-indmito-integra-mdulos-matemticos-del-core-s60-de-sentinel-celestial-como-caso-de-uso), [D-010-A](#d-010-a--mdulos-del-framework-sentinel-identificados-para-integrar-al-juego-rol-especfico-propuesto-pendiente-confirmacin), [D-013](#d-013--dos-pilotos-en-paralelo-motor-propio-vs-tecnologa-de-mercado-2026-08-10) |
 
 ### Por dominio
 
@@ -21,7 +21,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 |---|---|
 | **Concepto / diseño del juego** | [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da), [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10) |
 | **Motor / Piloto B (Sentinel S60)** | [D-009](#d-009--autorizacin-de-uso-de-celestialrspy-en-lota-indmito), [D-010](#d-010--lota-indmito-integra-mdulos-matemticos-del-core-s60-de-sentinel-celestial-como-caso-de-uso), [D-010-A](#d-010-a--mdulos-del-framework-sentinel-identificados-para-integrar-al-juego-rol-especfico-propuesto-pendiente-confirmacin), [D-011](#d-011--camino-c-confirmado--motor-propio-s60--pipeline-gpu-activo-2026-08-09), [D-012](#d-012--arquitectura-de-integracin-sentinel--gpu-confirmada-2026-08-09), [D-013](#d-013--dos-pilotos-en-paralelo-motor-propio-vs-tecnologa-de-mercado-2026-08-10) |
-| **Piloto A (frontend PWA)** | [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-007](#d-007--interfaz--vue-3--typescript), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-fabiola-de-un-men-de-opciones) |
+| **Piloto A (frontend PWA)** | [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-007](#d-007--interfaz--vue-3--typescript), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-cliente-de-un-men-de-opciones) |
 | **Backend / infra** | [D-001](#d-001--sync-bidireccional-con-drive-para-lotaindomito), [D-006](#d-006--servidor-fase-1--python-fastapi) |
 | **Operación y reglas del proyecto** | [D-002](#d-002--transcripcin-local-con-faster-whisper), [D-002](#d-002--memoria-operativa-en-docs-separada-de-_analisis), [D-003](#d-003--espaol-chileno-obligatorio-en-redaccin), [D-003](#d-003--event-engine-ejemplo-celestialrs--sincronizacin-eventos-digitales--reales), [D-004](#d-004--entregable-para-el-fondo--propuesta--maqueta--demo-de-interfaz) |
 
@@ -41,7 +41,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
   - `rclone copy` inicial (subida segura, sin borrado).
   - `rclone bisync` autocurable con systemd user service.
   - `inotifywait -t 300` para sync casi instantáneo + pull periódico cada 5 min.
-- **Razón:** la clienta (CLIENTA) sube archivos (correcciones, audios, fotos) y revisa avances sin tener que aprenderse nada.
+- **Razón:** la clienta (cliente) sube archivos (correcciones, audios, fotos) y revisa avances sin tener que aprenderse nada.
 - **Filtros activos:** excluye `.ogg`, `.venv`, `node_modules`, `.next`, `__pycache__`, `.git`, `.hermes/cache`, y la carpeta `stitch_*` (es estática y pesa).
 - **Reversible:** sí. `systemctl --user stop lota-indomito-live.service` y se apaga.
 - **Estado actual (2026-08-09):** operativo, 18 archivos sincronizados, prueba en vivo con `.probe.txt` exitosa.
@@ -76,23 +76,23 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 
 ### D-004 · Entregable para el fondo = propuesta + maqueta + demo de interfaz
 - **Decisión:** lo que se entrega a fines de agosto es la propuesta escrita (memoria, alcance, presupuesto, Carta Gantt) + el prototipo Stitch como maqueta navegable + una demo jugable solo de interfaz (sin servidor).
-- **Razón:** los audios de CLIENTA apuntan a "presentar algo sólido en una etapa bien primaria". Con 3 semanas hasta el cierre, un producto corriendo con servidor no es realista ni necesario para postular.
+- **Razón:** los audios de cliente apuntan a "presentar algo sólido en una etapa bien primaria". Con 3 semanas hasta el cierre, un producto corriendo con servidor no es realista ni necesario para postular.
 - **Contraparte analizada:** MVP corriendo con servidor completo (rechazado — consume las 3 semanas en código y no deja tiempo para la propuesta escrita, que es lo que evalúa el fondo).
 - **Reversible:** sí. Si el fondo exige producto funcional, la demo de interfaz es la base del piloto.
 
 ### D-005 · Alcance del piloto = lean (doc 04), sin 3D ni minijuegos
-- **Decisión:** si se gana el fondo, el MVP a construir con los 10M CLP es el del doc 04: mapa + 3-5 POIs + check-in (foto/QR) + insignias + reportes ciudadanos + panel municipal. Three.js/R3F, personajes 3D, minijuegos y Carboncillos con canje comercial quedan para fase 2.
-- **Razón:** el MVP del GDD (mapa 3D + 2 personajes + 2 minijuegos + pasaporte) es un build de 2-3 meses que no calza en 10M CLP. El piloto lean sí calza en 3-4 semanas de desarrollo.
+- **Decisión:** si se gana el fondo, el MVP a construir con los [monto retirado] es el del doc 04: mapa + 3-5 POIs + check-in (foto/QR) + insignias + reportes ciudadanos + panel municipal. Three.js/R3F, personajes 3D, minijuegos y Carboncillos con canje comercial quedan para fase 2.
+- **Razón:** el MVP del GDD (mapa 3D + 2 personajes + 2 minijuegos + pasaporte) es un build de 2-3 meses que no calza en [monto retirado]. El piloto lean sí calza en 3-4 semanas de desarrollo.
 - **Contraparte analizada:** MVP del GDD completo (rechazado para esta etapa — se retoma si se adjudica el Fondo del Patrimonio de 15-20M).
 - **Nota:** la sección 8 del GDD (`docs/concepto-juego.md`) describe el MVP 3D y queda como visión de fase 2; INTERLOCUTOR la está editando.
-- **Estado (2026-08-09, tarde):** congelada — esta configuración pasa a ser la **Opción A** del menú para Fabiola (D-008). Pendiente de su elección.
+- **Estado (2026-08-09, tarde):** congelada — esta configuración pasa a ser la **Opción A** del menú para cliente (D-008). Pendiente de su elección.
 
 ### D-006 · Servidor Fase 1 = Python FastAPI
 - **Decisión:** el servidor del piloto se escribe en Python con FastAPI + Pydantic (OpenAPI/Swagger automático).
 - **Razón:** velocidad de desarrollo con plazo apretado; validación automática de datos geográficos y reportes.
 - **Contraparte analizada:** Node.js Fastify + TypeScript (alternativa viable, un solo lenguaje de interfaz y servidor — se descarta por ahora pero no se quema).
 - **Reversible:** sí, antes de escribir el servidor.
-- **Estado (2026-08-09, tarde):** congelada — forma parte de la **Opción A** del menú para Fabiola (D-008). Si Fabiola elige la Opción B, el servidor pasa a ser Rust (Axum + PostGIS).
+- **Estado (2026-08-09, tarde):** congelada — forma parte de la **Opción A** del menú para cliente (D-008). Si cliente elige la Opción B, el servidor pasa a ser Rust (Axum + PostGIS).
 
 ### D-007 · Interfaz = Vue 3 + TypeScript
 - **Decisión:** la app (y la demo de postulación) se construye con Vue 3 + TypeScript.
@@ -102,13 +102,13 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 
 ---
 
-### D-008 · La pila técnica del juego la elige Fabiola de un menú de opciones
-- **Decisión:** preparar documento con opciones tecnológicas para que Fabiola (CLIENTA) elija. Configuración actual del menú:
+### D-008 · La pila técnica del juego la elige cliente de un menú de opciones
+- **Decisión:** preparar documento con opciones tecnológicas para que cliente (cliente) elija. Configuración actual del menú:
   - **Opción A — Aplicación web progresiva:** la de los docs 04/05 y decisiones D-005..D-007 (React + MapLibre + FastAPI + PostGIS; GPS en celulares desde el día uno).
   - **Opción B — Videojuego Rust multiplataforma + servidor propio:** motor Bevy (ejecutable de escritorio Win/Mac/Linux + versión WASM en la página web), servidor Rust (Axum + PostgreSQL/PostGIS), modo virtual (teletransporte) para la demo; GPS real en celulares en fase 2.
-- **Razón:** INTERLOCUTOR (2026-08-09): "al menos esa tiene que ser una de las opciones que podemos darle a elegir a Fabiola". La pila técnica es decisión de la clienta, no solo técnica.
-- **Contraparte analizada:** decidir la pila técnica solo técnicamente y presentar una única opción (rechazado — Fabiola decide qué producto quiere).
-- **Documento:** `_analisis/10_opciones_tecnologicas_para_clienta.md`.
+- **Razón:** INTERLOCUTOR (2026-08-09): "al menos esa tiene que ser una de las opciones que podemos darle a elegir a cliente". La pila técnica es decisión de la clienta, no solo técnica.
+- **Contraparte analizada:** decidir la pila técnica solo técnicamente y presentar una única opción (rechazado — cliente decide qué producto quiere).
+- **Documento:** `[doc retirado]`.
 
 ---
 
@@ -147,7 +147,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
   - Reutilizar el módulo de efemérides (mecánica Kepleriana + trigonometría esférica) del core S60, en Rust, respetando protocolo Yatra (sin float en el core).
   - Si se requiere catálogo soberano de Estrellas Reales en Rust, migrar `SovereignAstrolabe` de Python a Rust (manteniendo pureza Yatra).
   - El Event Engine en vivo (qué Estrella Real está visible sobre Lota AHORA) es el entregable diferenciador para el fondo.
-- **Lo que se decide a futuro** (post-adjudicación, según interés de Fabiola):
+- **Lo que se decide a futuro** (post-adjudicación, según interés de cliente):
   - Mecánica opcional de avistamiento de Estrellas Reales en la Ruta Costera nocturna usando cámara del celular (fase 2).
   - Catálogo ampliado (más estrellas, cuerpos del sistema solar, eventos de alineación) si el proyecto crece.
 - **Estado del upstream:** Sentinel implementado, en producción, financiado (7 daemons activos en Fan). Lota Indómito es cliente de Sentinel: aplica los módulos del core.
@@ -193,16 +193,16 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - Confirmación de los roles específicos propuestos por INTERLOCUTOR (puede refinarlos o cambiarlos).
 - Qué módulos entran en el MVP (3-4 semanas, demo de postulación al fondo) y qué queda para fases posteriores — propuesto arriba pero requiere confirmación.
 - Benchmarks de cada módulo bajo carga de juego (muchos usuarios, baja latencia, persistencia de eventos celestes).
-- Cómo se relacionan estos módulos con la opción de stack elegida por Fabiola (P-004: Opción A PWA vs Opción B Rust).
+- Cómo se relacionan estos módulos con la opción de stack elegida por cliente (P-004: Opción A PWA vs Opción B Rust).
 - **R&D abierto:** (ninguno al 2026-08-09 — ver ítems resueltos abajo)
 - **(RESUELTO 2026-08-09) Coexistencia de buses (SOMA vs Redis Pub/Sub):** INTERLOCUTOR decidió "que convivan hasta que podamos hacer testing y estudiar el mejor". SOMA = dispatch interno coherente con pentaresonancia (eventos celestes, fases día/noche, misiones rítmicas); Redis Pub/Sub + Streams = transporte cliente↔servidor y entre instancias de `lota-server` (posiciones 64 Hz, deltas Carboncillos, chat, reportes, tareas asíncronas). Convivencia provisional — revisar cuando haya datos de testing bajo carga real. Ver `_analisis/12_inputs_pendientes_de_interlocutor.md` pregunta 1.
-- **(RESUELTO 2026-08-09) Coexistencia de clocks:** el `IsochronousClock` 41.77 Hz de Sentinel es el **reloj maestro** que sincroniza mundo real y mundo digital con exactitud matemática (base-60, sin drift) y baja latencia. El tick loop del juego a 64 Hz (`lota-server`) corre subordinado al reloj maestro, alineándose en el Salto-17 cada 68 ticks de Sentinel (≈ 1.6 s por fase de cambio de hora real). Ver `_analisis/11_borrador_propuesta_fondo.md` sección 4.2.
+- **(RESUELTO 2026-08-09) Coexistencia de clocks:** el `IsochronousClock` 41.77 Hz de Sentinel es el **reloj maestro** que sincroniza mundo real y mundo digital con exactitud matemática (base-60, sin drift) y baja latencia. El tick loop del juego a 64 Hz (`lota-server`) corre subordinado al reloj maestro, alineándose en el Salto-17 cada 68 ticks de Sentinel (≈ 1.6 s por fase de cambio de hora real). Ver `[doc retirado]` sección 4.2.
 
 **Referencias cruzadas actualizadas (2026-08-09):**
 - `_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md` — investigación de motores Rust (Bevy, WGPU, Fyrox, Macroquad) + arquitectura de servidor dedicado (UDP/QUIC, ECS, R-Tree con `rstar`, H3 con `h3o`, 64-128 Hz tick loop).
 - `_analisis/07_propuesta_arquitectura_servidor_rust_juego.md` — propuesta detallada de `lota-server` (tokio+axum+QUIC+R-Tree+Redis Pub/Sub+PostgreSQL+PostGIS+Bevy cliente) y matriz de componentes reutilizables del ecosistema Sentinel (mycnet-daemon, mycnet-connect, SOMA, mycnet-core S60/utils).
 
-**Pendiente:** confirmación de INTERLOCUTOR sobre roles propuestos y módulos MVP antes de avanzar en `_analisis/10_opciones_tecnologicas_para_clienta.md`, `_analisis/11_borrador_propuesta_fondo.md` (sección 4 tecnología), `_analisis/08_carta_gantt_3_semanas.md` y `_analisis/09_presupuesto_referencial.md` con esos roles.
+**Pendiente:** confirmación de INTERLOCUTOR sobre roles propuestos y módulos MVP antes de avanzar en `[doc retirado]`, `[doc retirado]` (sección 4 tecnología), `_analisis/08_CARTA_GANTT_3_semanas.md` y `[doc retirado]` con esos roles.
 
 ---
 
@@ -258,7 +258,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Cierre:** D-004 — propuesta escrita + maqueta Stitch + demo jugable sin servidor completo.
 - **Lectura de los audios (confirmada):** "presentar algo sólido en una etapa bien primaria".
 
-### P-004 · Fabiola elige la pila técnica (Opción A vs Opción B)
+### P-004 · cliente elige la pila técnica (Opción A vs Opción B)
 - **Estado:** CERRADO (2026-08-10) — reemplazado por D-013.
 - **Cierre:** INTERLOCUTOR decide evaluar dos pilotos en paralelo. La decisión técnica es del responsable técnico, no de la clienta.
 
@@ -268,8 +268,8 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Decisión:** ejecutar dos pilotos paralelos con el mismo contenido (5 zonas, misiones, personajes, reportes, estadísticas) para evaluar cuál es la versión definitiva.
   - **Piloto A — Tecnología de mercado:** PWA con Vue 3 + TypeScript + MapLibre + OpenStreetMap + FastAPI. GPS real en celular desde el primer día.
   - **Piloto B — Motor gráfico propio:** Rust + wgpu (Vulkan/WebGPU) + Sentinel S60 + Axum. Control total, sincronización con cielo real.
-- **Razón:** la decisión técnica es del responsable técnico (INTERLOCUTOR), no de la clienta. Se le quita la carga a Fabiola y se evalúa con datos reales. Ambos pilotos comparten contenido: la evaluación es de experiencia y viabilidad técnica.
-- **Contraparte analizada:** pedir a Fabiola que elija entre A y B (rechazado — es preguntarle algo que no maneja y que no es su responsabilidad).
+- **Razón:** la decisión técnica es del responsable técnico (INTERLOCUTOR), no de la clienta. Se le quita la carga a cliente y se evalúa con datos reales. Ambos pilotos comparten contenido: la evaluación es de experiencia y viabilidad técnica.
+- **Contraparte analizada:** pedir a cliente que elija entre A y B (rechazado — es preguntarle algo que no maneja y que no es su responsabilidad).
 - **Piloto B ya tiene el eslabón resuelto:** `upload_and_dispatch` implementado y probado (4/4 tests, commit `de42f61`).
 - **Reversible:** sí. La evaluación decide cuál pasa a ser la versión del piloto para el fondo.
 - **Estado (2026-08-10):** reinterpretado por D-014 (corregida) — Piloto A y Piloto B no son alternativas en competencia sino **capas de un mismo sistema**: teléfono (Piloto A, capa accesible) + motor/Sentinel (Piloto B, el diferenciador) + RA (capa de encuentro). El motor NO está congelado.
@@ -288,7 +288,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
   1. **Evento real → juego.** Eventos de cielo y hora (`celestial.rs` + `IsochronousClock` de Sentinel) deciden qué está activo en cada momento. Sincronización de baja latencia vía los carriles separados de la lattice (`dual_lane.rs`).
   2. **NPCs vivos y simples.** Enjambre SOMA de NPCs livianos: deambulan dentro de su zona, máquina de estados simple, aparecen por evento real. Sin IA pesada — trucos de RPG de toda la vida, deterministas y reproducibles en S60. Cada NPC es un agente SOMA barato; el enjambre los coordina.
   3. **La caza en el teléfono.** El jugador busca al NPC que se mueve, por geolocalización. PWA accesible en cualquier teléfono (stack Piloto A: Vue 3 + MapLibre + Turf). Es la capa masiva.
-  4. **Encuentro en RA que reconstruye la historia real.** En el punto de encuentro, gafas de RA (Meta Quest 3/3S, préstamo en sitio) reconstruyen la historia y las imágenes reales de Lota: el Chiflón operativo, los mineros, el pabellón como era. Es el corazón patrimonial. La fidelidad depende del material histórico (contenido de Fabiola + archivos / CMN).
+  4. **Encuentro en RA que reconstruye la historia real.** En el punto de encuentro, gafas de RA (Meta Quest 3/3S, préstamo en sitio) reconstruyen la historia y las imágenes reales de Lota: el Chiflón operativo, los mineros, el pabellón como era. Es el corazón patrimonial. La fidelidad depende del material histórico (contenido de cliente + archivos / CMN).
   5. **Dos niveles de dispositivo.** Teléfono (propio, universal: caza + lógica) + gafas RA (prestadas en sitio: encuentro). La costura entre niveles es la sincronización de baja latencia (teléfono ↔ lota-server + SOMA ↔ gafas).
 
 - **Etapa 2 (hoja de ruta y modelo económico):**
@@ -301,7 +301,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Entregable de los próximos ~30 días:** un **piloto / diseño de concepto** que demuestra el diferenciador central (evento real → NPC vivo → caza → encuentro), NO el juego completo. La fase 1 arranca después.
 - **Capacidad (no recortar por defecto):** INTERLOCUTOR programa desde los 9 años, es autor de Sentinel y construye sistemas complejos en poco tiempo. No aplicar supuestos de "desarrollador primerizo" ni simplificar alcance por reflejo.
 - **Piloto B (motor / Sentinel):** es el **centro** del concepto, NO R&D congelado. El motor y los módulos Sentinel (SOMA, dual-lane, celestial, lattice) son el diferenciador. Ya tiene demo funcional (`upload_and_dispatch` integrado en `main.rs`, commits `de42f61` + `1f5e3f`).
-- **Dominios:** la postulación al fondo (presupuesto, avales, propuesta escrita, Carta Gantt) es **dominio de Fabiola**. INTERLOCUTOR prepara el proyecto y su diseño. No intervenir en la postulación.
+- **Dominios:** la postulación al fondo (presupuesto, avales, propuesta escrita, Carta Gantt) es **dominio de cliente**. INTERLOCUTOR prepara el proyecto y su diseño. No intervenir en la postulación.
 - **Razón:** INTERLOCUTOR (2026-08-10): el concepto es "el mundo real maneja el juego", con NPCs simples del enjambre SOMA, caza en el teléfono, encuentro RA que reconstruye la historia real, y una etapa 2 de comercio que lo autofinancia. "La idea del proyecto es potenciar el turismo de la zona para revivir el comercio."
 - **Reversible:** sí; el alcance del piloto de concepto se ajusta según qué demuestra mejor el diferenciador.
 

@@ -125,7 +125,7 @@ El comercio recibe minerales como **crédito de juego**. Decisión clave: **¿c�
 
 | Modelo | Pro | Contra |
 |---|---|---|
-| **Acumulación → liquidación mensual** | Simple para el comercio | Costo de tesorería para INTERLOCUTOR/Fabiola |
+| **Acumulación → liquidación mensual** | Simple para el comercio | Costo de tesorería para INTERLOCUTOR/cliente |
 | **Cashback inmediato en CLP** | Sin riesgo para el comercio | Requiere capital de trabajo |
 | **Canjes internos** (producto por mineral) | Simple, sin dinero de por medio | Limita flexibilidad |
 
@@ -155,7 +155,7 @@ Estas son las decisiones que estructuran el sistema. Cada una requiere OK explí
 
 2. **¿Quién define el ratio?**
    - Sentinel automático.
-   - INTERLOCUTOR/Fabiola manual.
+   - INTERLOCUTOR/cliente manual.
    - Híbrido.
    - **Recomendación:** INTERLOCUTOR manual para piloto, Sentinel automático para fase 1.
 

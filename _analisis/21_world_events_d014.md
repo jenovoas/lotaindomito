@@ -53,7 +53,7 @@ Los World Events **usan** el calendario del cielo como infraestructura de anunci
 - **Temporada de ballenas** (julio-octubre, costa del Biobío). Regional.
 - **Año Nuevo** (1 enero). Bajo turismo en Lota — evaluar si activar evento o no.
 
-### 3.2 Locales de Lota (categorías — fechas exactas requieren input de Fabiola/Municipio)
+### 3.2 Locales de Lota (categorías — fechas exactas requieren input de cliente/Municipio)
 
 - Aniversario de Lota (fundación).
 - Semana de la industria del carbón.
@@ -61,7 +61,7 @@ Los World Events **usan** el calendario del cielo como infraestructura de anunci
 - Fiesta patronal de la parroquia local.
 - Apertura de temporada de caletas / sardina / mariscos.
 
-### 3.3 Comerciales (curados por Fabiola / Municipio / comercio local)
+### 3.3 Comerciales (curados por cliente / Municipio / comercio local)
 
 - Temporadas de productos: pan de mina, mariscos, sardina, empanadas.
 - Temporada alta / baja de turismo (verano, invierno, semana santa).
@@ -171,7 +171,7 @@ La recompensa principal del World Event es el **cupón real en comercio asociado
 | Artesanía local | 10% off en producto seleccionado | Cupón QR |
 | Librería / souvenir | Postales + descuento | Cupón QR |
 
-**Decisión abierta:** la categoría puede extenderse a "cosas así" — cualquier comercio asociado que se inscriba al World Event puede proponer su recompensa. El CMS o el contrato con Fabiola/Municipio define la lista.
+**Decisión abierta:** la categoría puede extenderse a "cosas así" — cualquier comercio asociado que se inscriba al World Event puede proponer su recompensa. El CMS o el contrato con cliente/Municipio define la lista.
 
 ### 6.1 Geocerca vs cupón digital libre
 
@@ -197,7 +197,7 @@ La recompensa principal del World Event es el **cupón real en comercio asociado
 | Opción | Pro | Contra |
 |---|---|---|
 | **Inscripción abierta por formulario** | Escalable, el comercio se auto-selecciona | Requiere backend, validación |
-| **Curación por Fabiola/Municipio** | Control de calidad, alianza estratégica | Escala limitada |
+| **Curación por cliente/Municipio** | Control de calidad, alianza estratégica | Escala limitada |
 | **Combo: abierta + curada** | Lo mejor de ambos | Más complejo |
 
 **Recomendación:** curación para el piloto; abierta con validación para fase 1.
@@ -224,7 +224,7 @@ Antes de bajar a mecánica o persistir, estas decisiones estructuran todo lo dem
 
 1. **¿Quién opera el calendario de World Events?**
    - Sentinel automático con efemérides hardcodeadas (solo fechas nacionales).
-   - Curación humana (Fabiola/Municipio cargan fechas locales y comerciales).
+   - Curación humana (cliente/Municipio cargan fechas locales y comerciales).
    - Mixto: nacionales automáticas + locales/comerciales curadas. *(recomendado)*
 
 2. **¿Los World Events son solo en Lota o también en Curanilahue / Lebu / Arauco / Concepción desde el día 1?**
@@ -262,7 +262,7 @@ El piloto debería demostrar **un World Event mínimo**, no el sistema completo.
 
 - **Día del Patrimonio** (si la fecha cae dentro de los 30 días).
 - **Aniversario de Lota** (si la fecha cae dentro de los 30 días).
-- Una **festividad local** que Fabiola/Municipio curen (ej. apertura de temporada, semana del carbón).
+- Una **festividad local** que cliente/Municipio curen (ej. apertura de temporada, semana del carbón).
 
 **Si ninguno cae en los 30 días:** demo simulada con datos sintéticos (igual que el Calendario del Cielo se simula para 30 días en `20_loop_jugador_dia_a_dia.md` §5).
 
@@ -280,7 +280,7 @@ El piloto debería demostrar **un World Event mínimo**, no el sistema completo.
 
 ### 9.3 Por qué esto vale para la postulación al fondo
 
-El pitch a Fabiola / al fondo pasa de *"el juego detecta el cielo"* a *"el juego se sincroniza con la realidad, coordina flujos turísticos hacia el comercio en fechas reales, y el World Event es la prueba de que el modelo D-014 escala a nivel de comuna"*. Esa es la historia de portfolio que vale 10M CLP — y el piloto lo demuestra en una demo de 5 minutos.
+El pitch a cliente / al fondo pasa de *"el juego detecta el cielo"* a *"el juego se sincroniza con la realidad, coordina flujos turísticos hacia el comercio en fechas reales, y el World Event es la prueba de que el modelo D-014 escala a nivel de comuna"*. Esa es la historia de portfolio que vale [monto retirado] — y el piloto lo demuestra en una demo de 5 minutos.
 
 ---
 

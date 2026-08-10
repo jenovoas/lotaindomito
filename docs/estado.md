@@ -8,8 +8,8 @@
 ## 1. Quién es quién
 
 - **INTERLOCUTOR (tú)**: encargado técnico, interlocutor de la clienta.
-- **CLIENTA (Fabiola)**: clienta. Postula a fondos públicos para turismo cultural en Lota (Chile).
-- **Audios de CLIENTA**: 9 audios de WhatsApp del 2026-08-07, transcritos en `_analisis/transcripciones/`.
+- **cliente (cliente)**: clienta. Postula a fondos públicos para turismo cultural en Lota (Chile).
+- **Audios de cliente**: 9 audios de WhatsApp del 2026-08-07, transcritos en `_analisis/transcripciones/`.
 
 ---
 
@@ -64,7 +64,7 @@ LotaIndomito/
 **Decidido (2026-08-09):** sync bidireccional con `drive:/LotaIndomito` (o nombre equivalente), usando `rclone bisync` + `inotifywait` + systemd user service.
 
 - Mismo patrón que `micellia`. Ver skill `backup/rclone-drive-sync/`.
-- **Caso de uso:** CLIENTA (clienta) sube archivos (correcciones, audios, fotos, documentos) a la carpeta Drive. La sync los baja a esta carpeta local en ≤5 min.
+- **Caso de uso:** cliente (clienta) sube archivos (correcciones, audios, fotos, documentos) a la carpeta Drive. La sync los baja a esta carpeta local en ≤5 min.
 - Equivalentemente, lo que yo guarde aquí aparece en Drive y ella lo ve.
 - **Pendiente:** aún no se ha configurado. Esperar OK explícito de INTERLOCUTOR para `rclone bisync --resync` inicial.
 
@@ -117,7 +117,7 @@ find . -type f \( -name "*.md" -o -name "*.txt" -o -name "*.py" \) ! -path "*/tr
 - Módulos identificados para integrar al juego: celestial (D-010), hexagonal control, quantum lattice engine, liquid lattice storage, MHD shield, crystal lattice, quantum memory, isochronous clock / time crystal, pentaresonance (no es módulo aislado, ya vive en `LiquidLattice`), MycNet / ADM, Merkabah (etiquetado como hipótesis en vault).
 - Ver D-010 y D-010-A en `decisiones.md` para el detalle y las fuentes.
 
-### 9.3 Inputs pendientes de INTERLOCUTOR y de Fabiola (centralizado)
+### 9.3 Inputs pendientes de INTERLOCUTOR y de cliente (centralizado)
 
 A la fecha de cierre de esta sesión (2026-08-09), tres preguntas están explícitamente pendientes de input de terceros. **No se avanzó sobre ellas en ningún documento del repo para evitar inventar contenido** (error central de esta sesión, ya corregido).
 
@@ -131,18 +131,18 @@ A la fecha de cierre de esta sesión (2026-08-09), tres preguntas están explíc
 |---|---|---|
 | 1 | SOMA vs Redis Pub/Sub — ¿conviven como capas distintas (SOMA para dispatch interno coherente con pentaresonancia, Redis para transporte cliente-servidor) o uno reemplaza al otro? | INTERLOCUTOR |
 | 2 | Roles específicos de módulos MVP en el juego — confirmación o refinamiento de la propuesta en D-010-A | INTERLOCUTOR |
-| 3 | Opción A (aplicación web progresiva) vs Opción B (videojuego Rust + servidor propio `lota-server`) | Fabiola |
+| 3 | Opción A (aplicación web progresiva) vs Opción B (videojuego Rust + servidor propio `lota-server`) | cliente |
 
 **Tareas bloqueadas por cada pregunta:**
 
-- Pregunta 1: cerrar coherentemente `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 sobre buses, y el bloque "R&D abierto" en D-010-A.
-- Pregunta 2: cerrar `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 sobre roles, ajustar `_analisis/09_presupuesto_referencial.md` al alcance MVP, ajustar `_analisis/08_carta_gantt_3_semanas.md` al cronograma real.
-- Pregunta 3: cerrar `P-004` en `docs/decisiones.md`, ajustar `_analisis/10_opciones_tecnologicas_para_clienta.md` a la opción única elegida por Fabiola.
+- Pregunta 1: cerrar coherentemente `[doc retirado]` sección 4.2 sobre buses, y el bloque "R&D abierto" en D-010-A.
+- Pregunta 2: cerrar `[doc retirado]` sección 4.2 sobre roles, ajustar `[doc retirado]` al alcance MVP, ajustar `_analisis/08_CARTA_GANTT_3_semanas.md` al cronograma real.
+- Pregunta 3: cerrar `P-004` en `docs/decisiones.md`, ajustar `[doc retirado]` a la opción única elegida por cliente.
 
 **Notas de avance parcial durante la sesión 2026-08-09:**
 
 - Resuelto: coexistencia de clocks (D-010-A) — `IsochronousClock` 41.77 Hz de Sentinel es el reloj maestro que sincroniza mundo real y mundo digital con exactitud matemática (base-60, sin drift) y baja latencia; el tick loop del juego a 64 Hz (`lota-server`) corre subordinado.
-- Documentos coherentes con el upstream: `_analisis/10_opciones_tecnologicas_para_clienta.md` y `_analisis/11_borrador_propuesta_fondo.md` sección 4.2 ya referencian explícitamente la arquitectura `lota-server` (`_analisis/07_propuesta_arquitectura_servidor_rust_juego.md`) y la investigación de motores Rust (`_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md`).
+- Documentos coherentes con el upstream: `[doc retirado]` y `[doc retirado]` sección 4.2 ya referencian explícitamente la arquitectura `lota-server` (`_analisis/07_propuesta_arquitectura_servidor_rust_juego.md`) y la investigación de motores Rust (`_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md`).
 - Resuelto conflicto de numeración en `_analisis/`: mi `06_opciones_tecnologicas_para_clienta.md` renombrado a `10_*`, mi `07_borrador_propuesta_fondo.md` renombrado a `11_*`, para liberar slots `06_*` y `07_*` a los archivos de INTERLOCUTOR (`06_investigacion_motores_rust_juegos_ultra_rapidos.md` y `07_propuesta_arquitectura_servidor_rust_juego.md`).
 
 ## 10. Motor GPU — estado del eslabón faltante (2026-08-10)
@@ -183,7 +183,7 @@ reporte de portales. 4/4 tests pasando. **Piloto B es el centro del concepto (D-
 El juego es el medio: patrimonio + jugabilidad llevan turistas a la comuna, el juego los
 guía por las zonas y el comercio, el comercio revive y **autofinancia** la plataforma.
 
-**Encuadre vigente:** la postulación al fondo es dominio de Fabiola. INTERLOCUTOR prepara
+**Encuadre vigente:** la postulación al fondo es dominio de cliente. INTERLOCUTOR prepara
 el proyecto y su diseño: un **piloto / diseño de concepto** en ~30 días que demuestra el
 diferenciador central. NO el juego completo. La fase 1 arranca después.
 

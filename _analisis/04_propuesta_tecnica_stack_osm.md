@@ -2,7 +2,7 @@
 **Pila de código abierto autoalojada + alternativa Google Maps Platform**
 
 **Fecha:** 2026-08-09
-**Destino:** CLIENTA + Municipio / CMN (para postulación a fondos)
+**Destino:** cliente + Municipio / CMN (para postulación a fondos)
 
 ---
 
@@ -154,7 +154,7 @@ Esto es lo que **sí** se construye en el piloto. Lo demás queda para fase 2.
 
 ### 6.2 Costos de desarrollo (3-4 semanas)
 
-Esta parte se discute en la sección de propuesta económica con CLIENTA. Para contexto, un proyecto de este tamaño típicamente requiere:
+Esta parte se discute en la sección de propuesta económica con cliente. Para contexto, un proyecto de este tamaño típicamente requiere:
 
 - 1 desarrollador de servidor senior de tiempo completo × 3 semanas.
 - 1 desarrollador de interfaz × 3 semanas.
@@ -175,7 +175,7 @@ Esta parte se discute en la sección de propuesta económica con CLIENTA. Para c
 
 ---
 
-## 8. Próximos pasos para CLIENTA
+## 8. Próximos pasos para cliente
 
 1. **Confirmar elección de stack** (Opción A o B).
 2. **Definir lista de 3-5 zonas turísticas prioritarias** para el MVP.
