@@ -231,7 +231,16 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 - **Lectura de los audios (confirmada):** "presentar algo sólido en una etapa bien primaria".
 
 ### P-004 · Fabiola elige la pila técnica (Opción A vs Opción B)
-- **Estado:** abierto.
-- **Documento:** `_analisis/10_opciones_tecnologicas_para_clienta.md`.
-- **Hay que decidir:** app web PWA (Opción A) o videojuego Rust multiplataforma con servidor propio (Opción B). Ver D-008.
-- **Inputs pendientes centralizados:** `_analisis/12_inputs_pendientes_de_interlocutor.md` consolida las tres preguntas abiertas (esta P-004 + R&D buses + roles MVP en `D-010-A`). Bloquea cierre coherente de `_analisis/11_borrador_propuesta_fondo.md` sección 4, `_analisis/08_carta_gantt_3_semanas.md` y `_analisis/09_presupuesto_referencial.md`.
+- **Estado:** CERRADO (2026-08-10) — reemplazado por D-013.
+- **Cierre:** INTERLOCUTOR decide evaluar dos pilotos en paralelo. La decisión técnica es del responsable técnico, no de la clienta.
+
+---
+
+### D-013 · Dos pilotos en paralelo: motor propio vs tecnología de mercado (2026-08-10)
+- **Decisión:** ejecutar dos pilotos paralelos con el mismo contenido (5 zonas, misiones, personajes, reportes, estadísticas) para evaluar cuál es la versión definitiva.
+  - **Piloto A — Tecnología de mercado:** PWA con React + Vite + TypeScript + MapLibre + OpenStreetMap + FastAPI. GPS real en celular desde el primer día.
+  - **Piloto B — Motor gráfico propio:** Rust + wgpu (Vulkan/WebGPU) + Sentinel S60 + Axum. Control total, sincronización con cielo real.
+- **Razón:** la decisión técnica es del responsable técnico (INTERLOCUTOR), no de la clienta. Se le quita la carga a Fabiola y se evalúa con datos reales. Ambos pilotos comparten contenido: la evaluación es de experiencia y viabilidad técnica.
+- **Contraparte analizada:** pedir a Fabiola que elija entre A y B (rechazado — es preguntarle algo que no maneja y que no es su responsabilidad).
+- **Piloto B ya tiene el eslabón resuelto:** `upload_and_dispatch` implementado y probado (4/4 tests, commit `de42f61`).
+- **Reversible:** sí. La evaluación decide cuál pasa a ser la versión del piloto para el fondo.
