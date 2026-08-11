@@ -53,6 +53,17 @@ Todos en `/home/jnovoas/Proyectos/sentinel/me-60os-core/src/`:
 - **Piloto B (motor/Sentinel) es el CENTRO del concepto.** El teléfono (PWA, Piloto A) es la capa accesible; el motor es el diferenciador.
 - **Capacidad:** INTERLOCUTOR es senior, autor de Sentinel, construye sistemas complejos rápido. NO recortar alcance por defecto ni tratarlo como primerizo.
 
+## WEB PÚBLICA Y DEPLOY (2026-08-11) — ESTADO ACTUAL
+- **URL:** https://pinguinoseguro.cl/lotaindomito/ (subruta de pinguinoseguro.cl; NO hay dominio propio todavía).
+- **Repo público:** https://github.com/jenovoas/lotaindomito (jenovoas/lotaindomito). Es la vitrina de desarrollo real para Fabiola — siempre visible en nav/footer.
+- **Flujo de deploy:** commit + push a main → el fan (`ssh fan`) hace `git pull --rebase` cada 1 min (timer `lotaindomito-pull.timer`) → corre `docs/_render/render-docs.py` que regenera los HTML de docs.
+- **Landing:** `index.html` — dark industrial (turquesa #65dabc / dorado #D4AF37 / melocotón #F4A261), escena three.js (lattice hexagonal + portal + partículas, movida a la izquierda en desktop), capa de cristal para legibilidad, secciones: hero, proyecto, cómo funciona, IMPACTO SOCIAL (función social: turismo/comercio/datos/comunidad), pilotos A/B, galería prototipo (mockups teléfono), documentos. Logo SVG hexagonal en nav + menú hamburguesa móvil.
+- **Navbar ÚNICA compartida:** fragmento `docs/_render/nav.html` (con placeholder {BASE}) → render-docs.py lo inyecta en TODOS los docs generados. `index.html`, `prototipo-stitch.html` y los docs usan la misma navbar (logo SVG, links, hamburguesa, GitHub). Al agregar una sección al nav: actualizar index.html Y nav.html (mismo orden).
+- **prototipo-stitch.html:** visor de 52 pantallas Stitch (header viejo reemplazado por navbar nueva; el nav de categorías es `.cats`).
+- **HTML generados (docs/*.html, README.html) están en .gitignore** — se regeneran en el fan con cada pull. Lo versionado es el generador (render-docs.py + nav.html).
+- **PENDIENTE:** el §6.5 "Superpoder del Sistema" (traducción para stakeholders) se PERDIÓ en la limpieza de Atlas (working tree restaurado). La propuesta tiene §1-§28 sin §6.5. Hay que re-escribirlo o recuperarlo de sesión anterior.
+- **Regla dura:** NUNCA montos de dinero en docs del proyecto (son de la clienta). Limpiar solo líneas de Fabiola, NO eliminar documentos completos.
+
 ## Motor GPU (Piloto B) — estado: demo funcional, centro del concepto
 - Eslabón faltante RESUELTO e INTEGRADO: `upload_and_dispatch` en `pipeline.rs` + integrado en `main.rs` con `ResonantMatrix` real de Sentinel (commits `de42f61`, `1f5e3f`). 4/4 tests pasando.
 - El binario `lota-server` corre el ciclo completo: lattice dual-lane 91 nodos → VRAM → compute shader → readback → reporte de portales.
