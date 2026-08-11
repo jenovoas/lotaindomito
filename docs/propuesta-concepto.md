@@ -553,4 +553,48 @@ Con 4 a 6 World Events por año (según el calendario documentado en `_analisis/
 
 ---
 
-<!-- §5 Diferenciador técnico y soberano → Bloque B tarea 6 -->
+## §5 Diferenciador técnico y soberano
+
+### §5.1 Soberanía matemática: Sentinel S60 sin floats
+
+La diferenciación central de Lota Indómito nace en la capa matemática. El stack Sentinel S60 opera con **aritmética en base-60 y cero operaciones en coma flotante en CPU**. El crate `me-60os-core/src/lib.rs` tiene lints `forbid(clippy::float_arithmetic)`, `forbid(clippy::float_cmp)`, `forbid(clippy::cast_possible_truncation)` y `forbid(clippy::cast_precision_loss)`. Esto no es preferencia académica. Es una decisión operativa que se valida en compile-time: cualquier código que introduzca un `f32` o `f64` falla la compilación antes de llegar a runtime.
+
+**Determinismo.** La misma entrada produce la misma salida, siempre. Esto importa en un mundo compartido donde el estado de física, celestial y lattice corre en servidor y se sincroniza con el cliente. Con aritmética flotante, dos máquinas con el mismo input pueden divergir por errores de redondeo acumulados. Con S60, cliente y servidor producen el mismo resultado bit a bit. El documento `_analisis/15_inventario_sentinel_disponible_para_motor.md` §3 lo describe como la promesa de isomorfismo con la física real: el motor es isomorfo a la realidad que modela.
+
+**Cero deriva de fase.** En un sistema con pentaresonancia, doble carril y corrección cada 68 ticks, la deriva acumulada de la aritmética flotante corrompería el estado del juego después de horas de operación continua. El módulo `qhc.rs` de Sentinel implementa el patrón QHC `10;5,6,5` con corrección cada 68 ticks y un intervalo de corrección de 0.7 milisegundos. Ese intervalo no sirve si el cómputo que lo rodea tiene errores de redondeo silenciosos. S60 elimina esa clase de error desde la base.
+
+**Validación empírica.** El vault de Jaime documenta en `PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md` el experimento EXP-015, validado en `sentinel_bench.rs`. El benchmark Rust contra Python muestra 23.6 veces menos memoria por nodo y 3000 veces más rendimiento de procesamiento: 120 millones de nodos por segundo en Rust versus 0.04 millones en Python. Eso no es un microbenchmark sintético; es el throughput real del lattice sobre el que corre el juego.
+
+**El ejemplo Kepler.** El módulo `celestial.rs` resuelve mecánica orbital newtoniana en S60 puro. Las fórmulas de Kepler (ε = v²/2 − μ/r, a = −μ/(2ε), e = √(1 + 2εh²/μ²), T = 2π√(a³/μ)) operan sin redondeo flotante. El juego que sincroniza su estado con eventos celestes reales no puede permitirse que la posición calculada de la Luna o de las Estrellas Reales diverja del cielo real después de una semana de operación. Eso es lo que la decisión D-010 protege.
+
+### §5.2 Soberanía de infraestructura: sin Google, sin plataformas externas
+
+Lota Indómito no usa Google Maps Platform, Google Analytics, Firebase ni ningún servicio de una corporación extranjera. No es una limitación. Es una ventaja operativa y un rasgo de diseño deliberado.
+
+**Costo.** OpenStreetMap con Nominatim autoalojado, OSRM para cálculo de rutas y tileserver-gl para los cuadrantes del mapa cuesta entre 15 y 25 dólares mensuales por un VPS en proveedores como Hetzner o DigitalOcean. Google Maps Platform parte en 100 a 275 dólares mensuales en su plan inicial, según el volumen de solicitudes. La diferencia de 75 a 250 dólares por mes queda en la plataforma como margen de comisión para el comercio. El documento `_analisis/04_propuesta_tecnica_stack_osm.md` §6 documenta ambos escenarios con las cifras exactas.
+
+**Independencia.** Ningún proveedor externo dicta los términos de uso, cambia los precios unilateralmente ni extrae datos de uso de los usuarios. El Municipio no depende de una corporación para operar su propia herramienta. La MEMORIA del proyecto (MEMORY.md §0) registra esta decisión como compromiso explícito del encuadre vigente D-014.
+
+**OSM es suficiente para Lota.** Los tiles de OpenStreetMap, la geocodificación por Nominatim y el cálculo de rutas por OSRM cubren todo lo que el juego necesita en materia de mapas. La investigación en `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md` §5 confirma que el ecosistema de mapas abiertos tiene cobertura funcional para aplicaciones de turismo patrimonial a escala comunal. La opción soberana no es un compromiso con tecnología inferior; es una solución completa que cubre el alcance real del proyecto.
+
+**La plataforma no necesita nada de Google.** No usa los servicios de IA de Google, no tiene analytics de terceros, no requiere identidad federada de ninguna corporación. El comercio local opera con cupones QR (sin Webpay, sin MercadoPago). El turista que visita Lota puede jugar con la billetera multi-moneda de minerales sin haber ingresado un número de tarjeta en ningún lado. El motor corre en GPU propia con una NVIDIA GTX 1050 y Vulkan, con proyección de migrar a GPU de servidor cuando el volumen lo justifique. Todo es autohospedado.
+
+**Consecuencia operativa.** Si Google desapareciera mañana, la plataforma sigue funcionando. Si Nominatim requiere mantenimiento, se mantiene. Si OSRM necesita ajuste, se ajusta. No hay un tercero cuya decisión pueda interrumpir el servicio. Eso es soberanía.
+
+### §5.3 Escalabilidad regional: el corredor Arauco como modelo replicable
+
+Lota es la prueba de concepto. El corredor patrimonial de la zona del carbón — Curanilahue, Lebu, Arauco y Concepción — es la zona natural de expansión. El documento de decisiones D-014 (§expansión regional) establece la visión con claridad: el concepto es agnóstico de comuna, cada localidad aporta su contenido sobre el mismo motor, y el modelo de autofinanciamiento se replica de forma independiente en cada una.
+
+**El motor es agnóstico de comuna.** La lattice, la billetera multi-moneda, el sistema de subastas, el enjambre SOMA de NPCs, la sincronización con eventos del cielo y el doble carril de corrección. Todo eso es compartido. Lo que cada comuna aporta es contenido: sus zonas, sus personajes, su historia, su comercio. La estructura de datos no cambia; solo se alimenta con información local. El documento `_analisis/25_todo_continuacion.md` §7 lo resume como modelo de infraestructura pública replicable.
+
+**Concepción es el embudo de volumen.** Es la ciudad más grande del corredor, con alto flujo turístico natural y llegada a los medios de comunicación regionales. Cuando la propuesta quiere visibilidad, Concepción la da. Las comunas patrimoniales — Curanilahue con su mina, Lebu con su costa, Arauco con su historia — son la experiencia. El jugador no hace turismo en Concepción; hace turismo en la zona del carbón y pasa por Concepción como punto de entrada.
+
+**Autofinanciamiento por comuna.** Cada comuna tiene sus comercios que pagan comisión por los cupones y las subastas. La plataforma no extrae valor de una comuna para subsidiar otra. El modelo económico opera en circuito cerrado dentro de cada territorio. La propuesta `_analisis/04_propuesta_tecnica_stack_osm.md` documenta cómo la comisión de 5 a 10 por ciento sobre transacciones reales financia el presupuesto operativo. Ese flujo se repite en cada comuna sin depender de transferscentralizadas.
+
+**Para Fabiola esto significa:** el piloto de Lota es una plantilla. Otras comunas del corredor pueden adoptarlo con un costo incremental bajo. No necesitan construir infraestructura desde cero; heredan el motor, el lattice, la billetera y el sistema de subastas. Solo necesitan trabajo de contenido: levantar sus zonas, vincular sus personajes, convidar a sus comercios. El documento `_analisis/25_todo_continuacion.md` §7 identifica este patrón como la tesis central del proyecto para la propuesta al fondo. Lota Indómito no es un proyecto para una comuna; es una infraestructura pública patrimonial replicable en la zona del carbón.
+
+El diferenciador de Lota Indómito no es la estética visual, que cualquier equipo podría replicar. Es la soberanía de la capa matemática (S60 sin floats, determinismo verificable, 3000 veces más rendimiento que alternativas), la soberanía de la infraestructura (cero dependencias de corporaciones externas, costos operativos que permiten autofinanciamiento real) y la soberanía del modelo regional (motor agnóstico, contenido communal, replicabilidad sin extracción). Estas tres soberanías juntas hacen que el proyecto sea defendible en el tiempo, replicable en el territorio y coherente con el propósito público de reactivar el comercio local a través del turismo patrimonial.
+
+---
+
+<!-- §6 Lo que NO es el proyecto → Bloque B tarea 7 -->
