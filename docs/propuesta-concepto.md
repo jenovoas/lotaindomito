@@ -2177,3 +2177,109 @@ Los World Events son el mecanismo que convierte el modelo de turista de paso en 
 ---
 
 <!-- §16 Por qué expansión regional corredor Arauco → Bloque D tarea 17 -->
+
+## §16 Por qué expansión regional corredor Arauco
+
+La expansión a todo el corredor Arauco no es un plan separado del proyecto. Es el siguiente paso
+natural de una arquitectura que ya está diseñada para ser agnóstica de comuna. Esta sección
+explica por qué el corredor funciona como un sistema y por qué Lota es solo el principio.
+
+### §16.1 Concepción como embudo de volumen
+
+Concepción es la ciudad más grande del corredor carbonero, con más de 200.000 habitantes, y
+actúa como capital regional de la Provincia del Biobío. Es la puerta de entrada natural para
+cualquier turista que visite la zona por razones generales: negocios, universidad, o turismo
+urbano. Desde allí, Lota Indómito aparece como una excursión atractiva a solo 40 kilómetros
+al sur.
+
+El modelo de expansión funciona como un embudo de volumen. Concepción aporta el flujo
+principal de turistas, que llegan por motivos ajenos al patrimonio carbonero pero que,
+una vez en la ciudad, descubren la posibilidad de hacer un paseo de un día a Lota, Coronel
+y otras comunas del corredor. La infraestructura ya existe: transporte, alojamiento,
+restaurantes, vida cultural. El costo marginal de agregar Lota como destino es bajo, y el
+juego transforma ese paseo casual en una experiencia con objetivo, con progreso y con
+incentivo a regresar.
+
+Para el proyecto, Concepción es donde el embudo comienza a funcionar. El marketing y el
+ onboarding, se dirige el primer contacto desde allí. Una vez que el jugador llega a Lota
+y vive la experiencia, el corredor se abre solo.
+
+**Patrón de mercado.** Los juegos geolocalizados de alto volumen (Pokémon GO, Ingress)
+funcionan porque las ciudades grandes generan tráfico constante que satura las zonas
+cercanas. Los jugadores descubren puntos de interés cercanos por estar ya en la ciudad, no
+por buscar específicamente el punto. Este patrón aplica directo al corredor: Concepción
+genera el tráfico; Lota y las comunas patrimoniales entregan la razón para quedarse.
+(_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md_).
+
+El encuadre vigente del proyecto ya lo registra: "Concepción es el embudo de volumen; las
+comunas patrimoniales, la experiencia" (_docs/estado.md_ §11).
+
+### §16.2 Curanilahue, Lebu y Arauco como la experiencia
+
+Curanilahue, Lebu y Arauco son comunas más pequeñas, con poblaciones de entre 30.000 y
+50.000 habitantes cada una, pero cada una tiene identidad carbonífera propia. Curanilahue
+tiene la comuna de Pinares con sus piques mineros. Lebu conserva el puerto de exportación
+de carbón a vapor. Arauco tiene su centro histórico ligado a la actividad extractiva. Juntas
+conforman el patrimonio real de la zona.
+
+Estas comunas son la experiencia. Cuando el turista llega desde Concepción, visita una o más
+de ellas como parte de su recorrido por el corredor. El juego se activa localmente en cada
+comuna: los personajes de Lota se activan en Lota, los de Lebu en Lebu, los de Arauco en
+Arauco. El jugador no nota la diferencia técnica; solo percibe que en cada lugar hay
+historia que contar y comercio que visitar.
+
+El diseño clave del motor S60 es que es agnóstico de comuna. La lattice, la wallet
+multi-moneda, el sistema de subastas y el motor de World Events funcionan igual en cualquier
+comuna. Lo que cambia es el contenido local: las zonas, los personajes, la narrativa, el
+comercio. La estructura de datos se replica; el contenido se personaliza.
+
+Esto significa que, una vez que Lota funciona, agregar Curanilahue es una tarea de carga de
+contenido, no una tarea de arquitectura. El motor es compartido; el contenido es local. No
+hay que reescribir la lógica de juego para cada comuna. No hay que modificar el servidor.
+Solo hay que poblar las tablas de zonas, personajes e inventarios comerciales de la nueva
+comuna. (_docs/decisiones.md_ D-014).
+
+La separación entre motor compartido y contenido local es lo que hace que el proyecto no sea
+una solución a medida para Lota, sino una plataforma para el corredor entero. Eso cambia
+la conversación con cada municipio: no se ofrece un desarrollo nuevo, se ofrece acceso a
+infraestructura ya construida.
+
+### §16.3 Concepción como embudo más comunas como experiencia igual a modelo replicable
+
+El modelo de expansión es claro: embudo de alto volumen más experiencia distribuida.
+Concepción entrega el flujo de turistas; las comunas entregan la experiencia diferenciada.
+Juntas forman una red regional que es más que la suma de sus partes.
+
+Para el Municipio y las asociaciones de comercio de cada comuna, esto tiene implicancia
+directa: Lota Indómito no es competencia por la atención del turista. Es un amplificador del
+turismo en todo el corredor. El turista que viene a Lota por el juego también visitará
+Coronel por su herencia hullera, Lebu por la historia de su puerto carbonero, y Arauco por
+su patrimonio edificado. El flujo no se divide; se acumula.
+
+El modelo de autofinanciamiento se replica por comuna. Cada comuna tiene su propio comercio
+que paga comisión. La plataforma no extrae valor de una comuna para subsidiar otra. Cada
+comuna es financieramente independiente dentro del modelo. Si una comuna tiene comercios
+interesados, el circuito cierra localmente. No hay transferencia cruzada de ingresos.
+
+Para la sostenibilidad de largo plazo: el proyecto no es un desarrollo puntual para Lota.
+Es infraestructura regional que otras comunas pueden adoptar con un costo incremental bajo,
+porque el motor, el servidor y el despliegue son compartidos. El piloto de Lota es la
+prueba de concepto. El corredor Arauco es la escala. (_docs/decisiones.md_ D-014).
+
+El modelo de plataforma, no de solución a medida, es lo que hace que el proyecto sea
+defendible frente a futuras comunas y ante cualquier fondo o institución que evalúe su
+viabilidad. No se pide financiamiento para repetir el trabajo en cada comuna. Se pide para
+extender una infraestructura ya operativa.
+
+El modelo de expansión regional no es un plan separado que se activa después del piloto.
+Está integrado en el diseño desde el día uno. El mismo motor que corre en Lota corre en
+Curanilahue, en Lebu y en Arauco sin ninguna modificación. La misma estructura de datos,
+la misma lógica de negocio, el mismo despliegue. El único trabajo por comuna es el
+contenido: zonas, personajes, historia y lista de comercio. Eso es una operación de
+contenido, no una operación de ingeniería. Y eso es lo que hace que el proyecto sea
+defendible en el largo plazo. No es una solución a medida para una comuna. Es una
+plataforma para el corredor carbonero de Arauco.
+
+---
+
+<!-- §17 Por qué autosustentable por comercio, no por SaaS → Bloque D tarea 18 -->
