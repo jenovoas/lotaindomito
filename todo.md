@@ -18,7 +18,7 @@ Tareas detectadas en el escaneo del repo. Referencias cruzadas a docs y código 
 - §7 "Próximos pasos" lista `upload_and_dispatch` como pendiente, pero está implementado (commit `de42f61` + integración `b1f5e3f`).
 
 ### Doc — `docs/propuesta-fondo.md` — verificación pendiente
-- §8 sigue diciendo "dos pilotos en competencia". D-014 los redefine como capas del mismo sistema, no competencia. Incoherencia si Fabiola lo lee. Verificar si el commit `e7b868c` ("asentar D-014 y alinear todos los docs") lo actualizó o quedó pendiente.
+- §8 sigue diciendo "dos pilotos en competencia". D-014 los redefine como capas del mismo sistema, no competencia. Incoherencia si la clienta lo lee. Verificar si el commit `e7b868c` ("asentar D-014 y alinear todos los docs") lo actualizó o quedó pendiente.
 
 ### Piloto B (motor propio, Rust + wgpu + Sentinel)
 - NPCs del enjambre SOMA — `soma_orchestrator.rs` y `soma_worker.rs` son para agentes IA, no para NPCs de RPG. Falta worker liviano (FSM simple, determinista). Doc 19 §6 confirma: FSM basta.

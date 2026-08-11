@@ -11,12 +11,12 @@ Diseño, especificación y plan de desarrollo por etapas
 **Estado del proyecto:** concepto cerrado, especificación completa, plan de desarrollo por etapas
 
 **Audiencia:** Municipio de Lota, CMN, instituciones patrimoniales, comerciantes locales,
-empresas co-financiadoras, Fabiola (clienta) y quien ella indique
+empresas co-financiadoras, la clienta (clienta) y quien ella indique
 
 **Nota sobre el alcance de este documento:** lo que sigue es la propuesta de concepto
 del proyecto Lota Indómito. No es una propuesta de postulación a fondo específico.
 Este documento describe lo que el proyecto ES y puede servir como material de soporte
-técnico y diseño para lo que Fabiola decida hacer con él.
+técnico y diseño para lo que la clienta decida hacer con él.
 
 ---
 
@@ -86,7 +86,7 @@ juego completo. La fase 1 arranca después de la maqueta.
 
 La postulación a fondos públicos es dominio de la clienta. El diseño del
 proyecto es dominio del responsable técnico. La decisión de cómo usar este
-documento en una postulación es de Fabiola.
+documento en una postulación es de la clienta.
 
 ---
 
@@ -94,10 +94,10 @@ documento en una postulación es de Fabiola.
 
 Este documento es la propuesta de concepto del proyecto Lota Indómito.
 No es una propuesta de postulación a fondo específico. Es el material
-técnico y de diseño que describe lo que el proyecto ES, y que Fabiola puede
+técnico y de diseño que describe lo que el proyecto ES, y que la clienta puede
 usar como soporte en lo que ella decida hacer con él.
 
-La postulación a fondos públicos es domino de Fabiola. Este documento
+La postulación a fondos públicos es domino de la clienta. Este documento
 describe el proyecto, no a qué fondo va ni cómo se estructura la postulación.
 
 El documento cubre cinco partes:
@@ -157,7 +157,7 @@ con `rclone bisync`.
 |---|---|
 | Estado del documento | Primera versión completa, 2026-08-10 |
 | Responsable técnico | Jaime Novoa Sepúlveda |
-| Clienta | Fabiola (operadora de la postulación a fondos) |
+| Clienta | la clienta (operadora de la postulación a fondos) |
 | Licencia | Apache 2.0 + Cláusula No Comercial (D-009) |
 | Encuadre vigente | D-014, `docs/decisiones.md` §14 |
 
@@ -591,7 +591,7 @@ Lota es la prueba de concepto. El corredor patrimonial de la zona del carbón �
 
 **Autofinanciamiento por comuna.** Cada comuna tiene sus comercios que pagan comisión por los cupones y las subastas. La plataforma no extrae valor de una comuna para subsidiar otra. El modelo económico opera en circuito cerrado dentro de cada territorio. La propuesta `_analisis/04_propuesta_tecnica_stack_osm.md` documenta cómo la comisión de 5 a 10 por ciento sobre transacciones reales financia el presupuesto operativo. Ese flujo se repite en cada comuna sin depender de transferscentralizadas.
 
-**Para Fabiola esto significa:** el piloto de Lota es una plantilla. Otras comunas del corredor pueden adoptarlo con un costo incremental bajo. No necesitan construir infraestructura desde cero; heredan el motor, el lattice, la billetera y el sistema de subastas. Solo necesitan trabajo de contenido: levantar sus zonas, vincular sus personajes, convidar a sus comercios. El documento `_analisis/25_todo_continuacion.md` §7 identifica este patrón como la tesis central del proyecto para la propuesta al fondo. Lota Indómito no es un proyecto para una comuna; es una infraestructura pública patrimonial replicable en la zona del carbón.
+**Para la clienta esto significa:** el piloto de Lota es una plantilla. Otras comunas del corredor pueden adoptarlo con un costo incremental bajo. No necesitan construir infraestructura desde cero; heredan el motor, el lattice, la billetera y el sistema de subastas. Solo necesitan trabajo de contenido: levantar sus zonas, vincular sus personajes, convidar a sus comercios. El documento `_analisis/25_todo_continuacion.md` §7 identifica este patrón como la tesis central del proyecto para la propuesta al fondo. Lota Indómito no es un proyecto para una comuna; es una infraestructura pública patrimonial replicable en la zona del carbón.
 
 El diferenciador de Lota Indómito no es la estética visual, que cualquier equipo podría replicar. Es la soberanía de la capa matemática (S60 sin floats, determinismo verificable, 3000 veces más rendimiento que alternativas), la soberanía de la infraestructura (cero dependencias de corporaciones externas, costos operativos que permiten autofinanciamiento real) y la soberanía del modelo regional (motor agnóstico, contenido communal, replicabilidad sin extracción). Estas tres soberanías juntas hacen que el proyecto sea defendible en el tiempo, replicable en el territorio y coherente con el propósito público de reactivar el comercio local a través del turismo patrimonial.
 
@@ -615,7 +615,7 @@ Las plataformas SaaS cobran por usuario o por transacción. Lota Indómito cobra
 
 ### §6.4 No es una postulación a un fondo específico
 
-Este documento es un concepto de diseño del proyecto, no una postulación. Identificar el fondo adecuado y redactar la propuesta de postulación es dominio de Fabiola (D-004). El documento describe qué es el proyecto en su identidad propia. Múltiples fondos podrían usar este mismo documento como base; la postulación es un vehículo posterior, no el contenido central.
+Este documento es un concepto de diseño del proyecto, no una postulación. Identificar el fondo adecuado y redactar la propuesta de postulación es dominio de la clienta (D-004). El documento describe qué es el proyecto en su identidad propia. Múltiples fondos podrían usar este mismo documento como base; la postulación es un vehículo posterior, no el contenido central.
 
 ### §6.5 No es un proyecto genérico ni simplificado para encajar en bases
 
@@ -1705,9 +1705,9 @@ continua con `rclone bisync` disparada por un servicio user de systemd.
 La carpeta raíz en Drive es `LotaIndómito/`. Dentro de ella se organizan
 subcarpetas según el tipo de contenido:
 
-- `audios/` recibe las notas de voz de WhatsApp que envía Fabiola durante el
+- `audios/` recibe las notas de voz de WhatsApp que envía la clienta durante el
   desarrollo. Estos archivos son demasiado pesados para versionarlos en git.
-- `correcciones/` es donde Fabiola sube los comentarios, correcciones y documentos
+- `correcciones/` es donde la clienta sube los comentarios, correcciones y documentos
   que llegan durante la revisión de la propuesta.
 - `docs/` almacena documentación adicional del proyecto que no tiene sentido
   mantener versionada en git.
@@ -1715,7 +1715,7 @@ subcarpetas según el tipo de contenido:
 Los filtros de rclone excluyen `.ogg`, `.venv`, `node_modules`, `.next`,
 `__pycache__`, `.git`, `.hermes/cache` y la carpeta `stitch_*` (contenido
 estático y pesado que ya está versionado en git). La sincronización permite que
-Fabiola suba audios, fotos y documentos sin depender de un canal externo, y
+la clienta suba audios, fotos y documentos sin depender de un canal externo, y
 que el equipo acceda a la versión más reciente de cualquier archivo del proyecto.
 
 El comando inicial `rclone bisync --resync` requiere autorización explícita de
@@ -1753,10 +1753,10 @@ prueba de liveness a nivel de aplicación. Si la verificación de liveness falla
 tres veces consecutivas, se dispara una alerta al correo de Jaime
 (ver `docs/estado.md` §6 y `MEMORY.md` §0).
 
-### §12.3 Plan de migración cuando Fabiola compre dominio propio
+### §12.3 Plan de migración cuando la clienta compre dominio propio
 
 El despliegue actual en `pinguinoseguro.cl/lotaindomito/` es el entorno Piloto.
-Está diseñado para ser reemplazado cuando Fabiola adquiera un dominio propio
+Está diseñado para ser reemplazado cuando la clienta adquiera un dominio propio
 para el lanzamiento en producción (probablemente algo como `lotaindomito.cl` o
 similar, por definir). La migración es directa:
 
@@ -2826,7 +2826,7 @@ El Piloto 0 termina cuando se cumplen los cuatro criterios de salida. Estos crit
 
 **Criterio 1 — Deploy estable:** el `lota-server` corre de forma continua durante 7 días sin cortes ni crashes. La supervisión de liveness se hace mediante el endpoint `GET /api/v1/health`. Cuando la verificación de liveness falla 3 veces seguidas, se envía una alerta al correo de Jaime. Si en 7 días no hay alerta, este criterio pasa.
 
-**Criterio 2 — 1 usuario externo navega:** al menos un turista que no es Jaime, no es Fabiola y no es nadie del equipo descarga la PWA desde el navegador, abre la app, y completa al menos una micro-sesión (entra a una zona, completa una misión). Este criterio valida que el onboarding funciona para alguien sin contexto, que el geofencing responde correctamente en un dispositivo real, y que las mecánicas de micro-sesión son comprensibles sin instrucciones externas.
+**Criterio 2 — 1 usuario externo navega:** al menos un turista que no es Jaime, no es la clienta y no es nadie del equipo descarga la PWA desde el navegador, abre la app, y completa al menos una micro-sesión (entra a una zona, completa una misión). Este criterio valida que el onboarding funciona para alguien sin contexto, que el geofencing responde correctamente en un dispositivo real, y que las mecánicas de micro-sesión son comprensibles sin instrucciones externas.
 
 **Criterio 3 — 1 World Event ejecutado:** el World Event curated para el piloto (Fiestas Patrias demo u otro que se ajuste al calendario disponible) se ejecuta exitosamente. Los NPCs exclusivos de la zona se activan, las misiones específicas del evento se desbloquean, y los cupones del evento se emiten. Este criterio valida que el estado celeste del mundo real (Sentinel) se traduce correctamente en una respuesta dentro del juego.
 
@@ -3002,7 +3002,7 @@ La Etapa 4 se consolidará con éxito al cumplir con los siguientes umbrales ope
 
 > En línea con la norma internacional ISO 31000 para la gestión de riesgos, se presenta una matriz detallada con los riesgos técnicos, operativos y regulatorios identificados para el despliegue del proyecto. Cada riesgo cuenta con una ponderación cualitativa y medidas concretas de mitigación para reducir su probabilidad o impacto.
 
-El objetivo de esta matriz no es ocultar las complejidades del proyecto, sino entregar visibilidad clara al Municipio, a Fabiola y a los evaluadores del fondo sobre cómo se administrarán las contingencias críticas a lo largo de las fases de desarrollo.
+El objetivo de esta matriz no es ocultar las complejidades del proyecto, sino entregar visibilidad clara al Municipio, a la clienta y a los evaluadores del fondo sobre cómo se administrarán las contingencias críticas a lo largo de las fases de desarrollo.
 
 ### §25.1 Matriz de Riesgos del Proyecto
 

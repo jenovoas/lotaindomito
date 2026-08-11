@@ -89,7 +89,7 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
   (entrada sin SHA: pendiente del commit de los docs modificados)
 - Diseñado el ML externo para análisis de comportamiento: servicio Python (scikit-learn,
   XGBoost, Prophet) que consume vistas materializadas de solo-lectura de la DB,
-  entrega dashboards para Fabiola/Municipio/comercio sobre tres dimensiones
+  entrega dashboards para la clienta, el Municipio y el comercio sobre tres dimensiones
   (comercial, social, turística). Justifica gasto municipal con datos reales.
   Nuevo análisis en `_analisis/22_ml_analytics_d014.md`. (entrada sin SHA)
 

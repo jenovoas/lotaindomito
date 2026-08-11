@@ -107,6 +107,7 @@ Thumbs.db
 
 # --- WhatsApp (audios originales del cliente, pesados) ---
 whatsapp/
+_cliente_fabiola_original/
 
 # --- OS ---
 .Trash-*
