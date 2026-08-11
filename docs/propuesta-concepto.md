@@ -2743,4 +2743,99 @@ El proceso de regression testing after incident genera un backlog de coverage ga
 
 ---
 
-<!-- §20 Etapa 0 — Piloto de concepto → Bloque E tarea 21 -->
+<!-- §20 Etapa 0 — Piloto de concepto — Bloque E tarea 21 -->
+
+## §20 Etapa 0 — Piloto de concepto
+
+### §20.1 Alcance del Piloto de concepto
+
+El Piloto 0 (Piloto de concepto) es un entregable de 30 días que demuestra el diferenciador central del proyecto: la conexión entre eventos reales del mundo y la experiencia del juego. No es el juego completo; es la slice vertical que prueba que el modelo completo funciona. Esta slice abarca desde el estado celeste (Sentinel, decisión D-010) y los NPCs que responden a eventos astronómicos reales, hasta el canje de cupones que conecta al jugador con el comercio local. El Piloto 0 es la evidencia concreta para el Municipio, el CMN, los comercios potenciales y los futuros inversores de que el modelo funciona en la práctica.
+
+El alcance del Piloto 0 es deliberadamente acotado:
+
+- **1 zona activa:** se selecciona 1 de las 5 zonas de Lota (Chiflón del Diablo o Parque de Lota, según la disponibilidad de polígonos OSM y la facilidad de acceso).
+- **1 personaje histórico:** 1 de los 4 personajes definidos en el GDD.
+- **1 World Event demo:** se ejecuta en tiempo real con fecha y hora astronómica real (Sentinel genera el estado celeste; el juego reacciona).
+- **1 comercio asociado:** 1 comercio local real de Lota que ha aceptado participar y cuyo local está en la zona del piloto.
+
+Lo que queda fuera del Piloto 0 (se diseña, se planifica, pero no se implementa):
+
+- Múltiples zonas (se definen las 5, se implementa 1).
+- Múltiples World Events (se diseña el sistema, se ejecuta 1 demo).
+- Múltiples personajes históricos (se diseña el sistema de personajes, se implementa 1).
+- El sistema multi-moneda en producción (se simula con 1 mineral de prueba).
+- El sistema de subastas (solo se diseña, demo limitado del mecanismo de oferta).
+- El encuentro de realidad aumentada con gafas Meta Quest (solo se diseña la experiencia; no se implementa código RA).
+- La expansión del corredor patrimonial hacia Curanilahue, Lebu, Arauco y Concepción (se documenta como roadmap).
+
+El Piloto 0 no es el juego completo. Es la prueba de que el diseño del juego funciona. Si esta slice falla, el juego completo no tiene sentido. Si pasa, el camino hacia el juego completo está justificado. Ver encuadre vigente en `docs/estado.md` §11.
+
+### §20.2 Despliegue en pinguinoseguro.cl/lotaindomito
+
+El Piloto 0 se despliega en `pinguinoseguro.cl/lotaindomito/`, un subdirectorio en el dominio de Jaime. Este subdirectorio es la URL pública del piloto: cualquier persona con el enlace puede acceder a la PWA desde su navegador.
+
+El despliegue vive en el servidor VPS fan (`157.254.174.40`, según `MEMORY.md` §0). En esa máquina operan en paralelo Sentinel (los daemons de tiempo real), el servidor del juego (`lota-server`), los activos estáticos de la PWA, la base de datos PostgreSQL, y el sync bidireccional con Google Drive mediante `rclone bisync`. Toda la infraestructura del piloto cabe en un solo servidor.
+
+El routing de solicitudes lo maneja `nginx` en ese mismo servidor. La configuración distribuye el tráfico de la siguiente manera:
+
+- Las solicitudes a `/lotaindomito/` que no son para assets estáticos se envían al proceso `lota-server` (FastAPI).
+- Las solicitudes a `/lotaindomito/static/` se atienden directamente por `nginx`, sirviendo los archivos del build de la PWA.
+- Las solicitudes a `/osm/nominatim/`, `/osm/osrm/` y `/osm/tiles/` se reenvían a los sub-servicios de OpenStreetMap que también corren localmente en el VPS.
+
+El certificado HTTPS se gestiona con Let's Encrypt y se renueva automáticamente. No hay configuración manual de SSL.
+
+La PWA es instalable en Android y iOS. El navegador muestra el prompt de instalación cuando se cumplen las condiciones estándar (manifest.json válido, service worker registrado, conexión segura). El jugador puede instalar el juego como una app más en su teléfono sin pasar por una tienda de aplicaciones. Ver `docs/estado.md` §6 para el detalle de la sincronización con Drive y §11 para el encuadre del piloto.
+
+### §20.3 Eventos anónimos instrumentados
+
+El Piloto 0 instrumenta 16 eventos que se capturan desde la PWA y se almacenan en PostgreSQL. Estos eventos son el material de entrada para el servicio de ML definido en `_analisis/22_ml_analytics_d014.md`. El piloto no entrena modelos (eso corresponde a la fase 1), pero sí deja la instrumentación funcionando desde el día 1 para que la fase 1 tenga datos reales.
+
+Los 16 eventos se agrupan en tres dimensiones:
+
+**Eventos del turista (8):**
+
+- `user_session_start`: el jugador abre la PWA.
+- `user_session_end`: el jugador cierra o abandona la sesión.
+- `poi_visit`: el jugador entra en una zona delimitada por geofencing.
+- `world_event_join`: el jugador se suma a un World Event activo.
+- `mission_complete`: el jugador completa una misión de la zona.
+- `world_event_complete`: el jugador termina un World Event.
+- `coupon_redeemed`: el jugador canjea un cupón QR en el comercio.
+- `passport_update`: se actualiza el pasaporte del jugador (porcentaje de completitud).
+
+**Eventos sociales (5):**
+
+- `transfer_sent`: el jugador envía un mineral a otro jugador.
+- `transfer_received`: el jugador recibe un mineral de otro.
+- `trade_offered`: se oferta un trueque.
+- `trade_accepted`: un trueque se acepta.
+- `gift_sent`: se envía un mineral como regalo con mensaje.
+
+**Eventos de comercio (4):**
+
+- `commerce_registered`: un comercio se registra en el sistema.
+- `coupon_issued`: se emite un cupón desde el comercio.
+- `coupon_used`: un cupón se canjea.
+- `commerce_mineral_received`: el comercio recibe un mineral del jugador.
+
+Cada evento lleva un `user_id` que es un UUID opaco generado en el dispositivo. No es un identificador real del jugador (no email, no teléfono). La identidad del jugador queda protegida desde el diseño. Los eventos se acumulan en buffer en la PWA y se envían al servidor cada 30 segundos en un batch. El servidor los almacena en PostgreSQL. El servicio de ML los lee de ahí en modo solo-lectura. El consentimiento del jugador es opt-in durante el onboarding de la PWA. El jugador puede revocar el consentimiento en cualquier momento desde la pantalla de configuración. Ver `_analisis/22_ml_analytics_d014.md` §5 para el diseño completo de la instrumentación.
+
+### §20.4 Criterios de salida del Piloto 0
+
+El Piloto 0 termina cuando se cumplen los cuatro criterios de salida. Estos criterios no son aspiracionales; son medibles. Si no se cumplen, el piloto no ha demostrado su hipótesis y se debe revisar el diseño antes de avanzar a la Etapa 1.
+
+**Criterio 1 — Deploy estable:** el `lota-server` corre de forma continua durante 7 días sin cortes ni crashes. La supervisión de liveness se hace mediante el endpoint `GET /api/v1/health`. Cuando la verificación de liveness falla 3 veces seguidas, se envía una alerta al correo de Jaime. Si en 7 días no hay alerta, este criterio pasa.
+
+**Criterio 2 — 1 usuario externo navega:** al menos un turista que no es Jaime, no es Fabiola y no es nadie del equipo descarga la PWA desde el navegador, abre la app, y completa al menos una micro-sesión (entra a una zona, completa una misión). Este criterio valida que el onboarding funciona para alguien sin contexto, que el geofencing responde correctamente en un dispositivo real, y que las mecánicas de micro-sesión son comprensibles sin instrucciones externas.
+
+**Criterio 3 — 1 World Event ejecutado:** el World Event curated para el piloto (Fiestas Patrias demo u otro que se ajuste al calendario disponible) se ejecuta exitosamente. Los NPCs exclusivos de la zona se activan, las misiones específicas del evento se desbloquean, y los cupones del evento se emiten. Este criterio valida que el estado celeste del mundo real (Sentinel) se traduce correctamente en una respuesta dentro del juego.
+
+**Criterio 4 — 1 cupón canjeado:** al menos un cupón QR se canjea en el comercio participante. El jugador lo muestra en el comercio, el encargado lo registra, y el mineral se transfiere. Este criterio valida el loop completo del cupón: generación, entrega al jugador, presentación, escaneo, redención y split de comisión para el comercio. Si el cupón nunca se canjea, el modelo de autofinanciamiento no tiene evidencia.
+
+Estos cuatro criterios juntos constituyen la prueba de que el diseño del proyecto funciona. No son sobre crecimiento ni sobre escala ni sobre ingresos. Son sobre demostrar que cada componente individual de la slice funciona: el servidor, la PWA, el World Event, el cupón. Cada uno por separado es una pregunta respondida. Juntos dicen que el modelo completo tiene sentido.
+
+El crecimiento viene después, en la Etapa 1 (Piloto B) y en la expansión hacia las cuatro zonas restantes y el corredor patrimonial.
+
+---
+
+<!-- §21 Etapa 1 — MVP → Bloque E tarea 22 -->
