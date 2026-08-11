@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lota Indómito — Prototipo Stitch</title>
+<title>Lota Indómito — El patrimonio de Lota, vivo en tus manos</title>
 <style>
 :root {
   --turquesa: #3FE6C0; --coral: #F5A285; --cobre: #D17A4F;
@@ -12,472 +12,81 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-       background: var(--bg); color: var(--text); }
-header { padding: 28px 40px; background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
-         border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(8px); }
-h1 { margin: 0; font-size: 24px; font-weight: 600; color: var(--turquesa); letter-spacing: -0.5px; }
-.subtitle { margin-top: 6px; font-size: 13px; color: var(--muted); }
-nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 40px;
-      background: #14181f; border-bottom: 1px solid var(--border); }
-nav a { color: var(--muted); text-decoration: none; font-size: 12px; padding: 6px 12px;
-        border-radius: 6px; transition: all 0.15s; border: 1px solid transparent; }
-nav a:hover { color: var(--turquesa); border-color: var(--border); background: var(--bg2); }
-main { padding: 28px 40px 80px; max-width: 1800px; margin: 0 auto; }
-section { margin-bottom: 48px; }
-h2 { font-size: 16px; font-weight: 600; color: var(--coral); margin: 0 0 16px;
-     padding-bottom: 8px; border-bottom: 1px solid var(--border); letter-spacing: -0.3px; }
-.count { color: var(--muted); font-weight: 400; font-size: 13px; margin-left: 8px; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.card { background: var(--bg2); border-radius: 8px; overflow: hidden; border: 1px solid var(--border);
-        transition: all 0.15s; display: block; text-decoration: none; color: inherit; position: relative; }
-.card:hover { border-color: var(--turquesa); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(63,230,192,0.1); }
-.card img { width: 100%; height: 200px; object-fit: cover; object-position: top; display: block;
-            background: #0a0c10; border-bottom: 1px solid var(--border); }
-.card .label { padding: 10px 14px; font-size: 12px; line-height: 1.4; min-height: 38px; }
-.card .name { color: var(--text); font-weight: 500; }
-.card .meta { color: var(--muted); font-size: 11px; margin-top: 4px; }
-.card.no-html { opacity: 0.6; }
-.card.no-html::after { content: "sin HTML"; position: absolute; top: 8px; right: 8px;
-                       background: var(--cobre); color: var(--bg); font-size: 10px; padding: 2px 6px;
-                       border-radius: 3px; font-weight: 600; }
-.docs-bar { padding: 20px 40px; background: var(--bg2); border-top: 1px solid var(--border); }
-.docs-bar a { color: var(--cobre); text-decoration: none; margin-right: 16px; font-size: 13px; }
-.docs-bar a:hover { color: var(--turquesa); }
+       background: var(--bg); color: var(--text); line-height: 1.6; }
+header { padding: 72px 40px 56px; text-align: center;
+         background: radial-gradient(ellipse at top, #1a2530 0%, var(--bg) 70%);
+         border-bottom: 1px solid var(--border); }
+h1 { margin: 0; font-size: 44px; font-weight: 700; color: var(--turquesa); letter-spacing: -0.5px; }
+.tagline { margin-top: 14px; font-size: 18px; color: var(--muted); max-width: 640px; margin-left: auto; margin-right: auto; }
+.badge { display: inline-block; margin-top: 20px; padding: 6px 16px; border-radius: 999px;
+         border: 1px solid var(--border); color: var(--coral); font-size: 12px; letter-spacing: 0.6px;
+         text-transform: uppercase; background: var(--bg2); }
+main { padding: 48px 40px 80px; max-width: 1100px; margin: 0 auto; }
+h2 { font-size: 22px; font-weight: 600; color: var(--coral); margin: 48px 0 16px; }
+h2:first-child { margin-top: 0; }
+p { color: var(--text); max-width: 780px; }
+.muted { color: var(--muted); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+.card { background: var(--bg2); border-radius: 10px; padding: 22px; border: 1px solid var(--border);
+        transition: all 0.15s; }
+.card h3 { margin: 0 0 8px; font-size: 16px; color: var(--turquesa); }
+.card p { margin: 0; font-size: 14px; color: var(--muted); }
+.flow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 24px; }
+.flow .step { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+              padding: 16px 20px; font-size: 14px; flex: 1; min-width: 180px; }
+.flow .step b { display: block; color: var(--turquesa); margin-bottom: 4px; }
+.flow .arrow { color: var(--cobre); font-size: 20px; }
+.docs { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.doc-link { display: block; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+            padding: 18px 20px; text-decoration: none; color: var(--text); transition: all 0.15s; }
+.doc-link:hover { border-color: var(--turquesa); transform: translateY(-2px); }
+.doc-link .t { font-weight: 600; color: var(--turquesa); }
+.doc-link .d { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.doc-link .arrow { color: var(--cobre); float: right; font-size: 18px; }
+footer { padding: 32px 40px; text-align: center; color: var(--muted); font-size: 13px;
+         border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
 <header>
-  <h1>Lota Indómito — Prototipo Stitch</h1>
-  <div class="subtitle">53 pantallas del prototipo del cliente · click para abrir el HTML de cada pantalla</div>
+  <div class="badge">Proyecto de patrimonio y turismo · Lota, Chile</div>
+  <h1>Lota Indómito</h1>
+  <div class="tagline">Un juego de calle que convierte el patrimonio carbonero de Lota en una aventura real: caminas, descubres, juegas y el comercio local revive.</div>
 </header>
-<nav><a href="#cat-0">Selección de modo y onboarding (5)</a><a href="#cat-1">Mapas interactivos (7)</a><a href="#cat-2">Rutas / itinerarios (5)</a><a href="#cat-3">Misiones (5)</a><a href="#cat-4">Monumentos y AR (8)</a><a href="#cat-5">Reportes y dashboards (4)</a><a href="#cat-6">Bitácoras y bóveda (6)</a><a href="#cat-7">Recompensas y canje (4)</a><a href="#cat-8">Diplomas (1)</a><a href="#cat-9">Modo familia (4)</a><a href="#cat-10">English versions (1)</a><a href="#cat-11">Otros (3)</a></nav>
+
 <main>
-<section id="cat-0">
-  <h2>Selección de modo y onboarding<span class="count">5 pantalla(s)</span></h2>
+  <h2>¿Qué es?</h2>
+  <p>Lota Indómito es un juego geolocalizado para teléfono, tipo Pokémon GO, ambientado en la historia real del carbón. El jugador recorre las calles y zonas históricas de la comuna, descubre a personajes del pasado —Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero—, completa misiones, recolecta minerales del juego y sube de rango.</p>
+  <p class="muted">El mundo real maneja el juego: los eventos del cielo determinan qué personajes y recompensas están activos, y las festividades reales de Lota activan eventos especiales que llevan visitantes a la calle.</p>
+
+  <h2>Cómo funciona</h2>
+  <div class="flow">
+    <div class="step"><b>1 · Evento real</b>El cielo, la hora y las festividades de Lota marcan el ritmo del juego.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>2 · El enjambre despierta</b>Personajes del pasado carbonero aparecen en las zonas patrimoniales.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>3 · Caza en la calle</b>El jugador los encuentra caminando por la comuna, guiado por su teléfono.</div>
+    <div class="arrow">→</div>
+    <div class="step"><b>4 · La historia se reconstruye</b>Cada encuentro revela la memoria real de Lota.</div>
+  </div>
+
+  <h2>Por qué es distinto</h2>
   <div class="grid">
-<a class="card" href="public/stitch/pasaporte_ind_mito_perfil/code.html" target="_blank">
-  <img src="public/stitch/pasaporte_ind_mito_perfil/screen.png" alt="Pasaporte ind mito perfil" loading="lazy">
-  <div class="label">
-    <div class="name">Pasaporte ind mito perfil</div>
-    <div class="meta">pasaporte_ind_mito_perfil</div>
+    <div class="card"><h3>El patrimonio es el juego</h3><p>No es una app turística más: es un juego con objetivos, recompensas y progreso real, que usa el territorio como tablero.</p></div>
+    <div class="card"><h3>Tecnología soberana</h3><p>Matemática y software propios, sin depender de servicios de mapas ni empresas extranjeras. Más barato de operar y a prueba de errores.</p></div>
+    <div class="card"><h3>El comercio se reactiva</h3><p>El comercio local participa del juego y se beneficia del flujo de visitantes que la experiencia genera.</p></div>
+    <div class="card"><h3>Expansión regional</h3><p>Lota es la prueba: el modelo se replica en Curanilahue, Lebu, Arauco y Concepción, el corredor patrimonial del carbón.</p></div>
   </div>
-</a>
-<a class="card" href="public/stitch/pasaporte_ind_mito_selector_mejorado/code.html" target="_blank">
-  <img src="public/stitch/pasaporte_ind_mito_selector_mejorado/screen.png" alt="Pasaporte ind mito selector mejorado" loading="lazy">
-  <div class="label">
-    <div class="name">Pasaporte ind mito selector mejorado</div>
-    <div class="meta">pasaporte_ind_mito_selector_mejorado</div>
+
+  <h2>Documentos del proyecto</h2>
+  <div class="docs">
+    <a class="doc-link" href="docs/resumen-ejecutivo.html"><span class="arrow">→</span><span class="t">Resumen ejecutivo</span><div class="d">Una página con lo esencial del proyecto.</div></a>
+    <a class="doc-link" href="docs/propuesta-concepto.html"><span class="arrow">→</span><span class="t">Propuesta de concepto</span><div class="d">Diseño, especificación y plan de desarrollo completo.</div></a>
+    <a class="doc-link" href="docs/concepto-juego.html"><span class="arrow">→</span><span class="t">Concepto del juego (GDD)</span><div class="d">El game design document: mecánicas, personajes, rutas.</div></a>
+    <a class="doc-link" href="prototipo-stitch.html"><span class="arrow">→</span><span class="t">Prototipo visual</span><div class="d">52 pantallas del prototipo de la experiencia.</div></a>
   </div>
-</a>
-<a class="card" href="public/stitch/passport_english_version/code.html" target="_blank">
-  <img src="public/stitch/passport_english_version/screen.png" alt="Passport english version" loading="lazy">
-  <div class="label">
-    <div class="name">Passport english version</div>
-    <div class="meta">passport_english_version</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/passport_language_selector_refinement/code.html" target="_blank">
-  <img src="public/stitch/passport_language_selector_refinement/screen.png" alt="Passport language selector refinement" loading="lazy">
-  <div class="label">
-    <div class="name">Passport language selector refinement</div>
-    <div class="meta">passport_language_selector_refinement</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/selecci_n_de_modo_lota_ind_mito/code.html" target="_blank">
-  <img src="public/stitch/selecci_n_de_modo_lota_ind_mito/screen.png" alt="Selecci n de modo lota ind mito" loading="lazy">
-  <div class="label">
-    <div class="name">Selecci n de modo lota ind mito</div>
-    <div class="meta">selecci_n_de_modo_lota_ind_mito</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-1">
-  <h2>Mapas interactivos<span class="count">7 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/mapa_de_lota_correcci_n_iconograf_a_parque/code.html" target="_blank">
-  <img src="public/stitch/mapa_de_lota_correcci_n_iconograf_a_parque/screen.png" alt="Mapa de lota correcci n iconograf a parque" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa de lota correcci n iconograf a parque</div>
-    <div class="meta">mapa_de_lota_correcci_n_iconograf_a_parque</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_de_lota_iconograf_a_de_monumentos_mejorada/code.html" target="_blank">
-  <img src="public/stitch/mapa_de_lota_iconograf_a_de_monumentos_mejorada/screen.png" alt="Mapa de lota iconograf a de monumentos mejorada" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa de lota iconograf a de monumentos mejorada</div>
-    <div class="meta">mapa_de_lota_iconograf_a_de_monumentos_mejorada</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_de_lota_iconograf_a_de_navegaci_n_mejorada/code.html" target="_blank">
-  <img src="public/stitch/mapa_de_lota_iconograf_a_de_navegaci_n_mejorada/screen.png" alt="Mapa de lota iconograf a de navegaci n mejorada" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa de lota iconograf a de navegaci n mejorada</div>
-    <div class="meta">mapa_de_lota_iconograf_a_de_navegaci_n_mejorada</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_general_de_la_comuna_de_lota/code.html" target="_blank">
-  <img src="public/stitch/mapa_general_de_la_comuna_de_lota/screen.png" alt="Mapa general de la comuna de lota" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa general de la comuna de lota</div>
-    <div class="meta">mapa_general_de_la_comuna_de_lota</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_interactivo_con_reportes_ciudadanos/code.html" target="_blank">
-  <img src="public/stitch/mapa_interactivo_con_reportes_ciudadanos/screen.png" alt="Mapa interactivo con reportes ciudadanos" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa interactivo con reportes ciudadanos</div>
-    <div class="meta">mapa_interactivo_con_reportes_ciudadanos</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_interactivo_de_rutas_e_hitos_lota_ind_mito/code.html" target="_blank">
-  <img src="public/stitch/mapa_interactivo_de_rutas_e_hitos_lota_ind_mito/screen.png" alt="Mapa interactivo de rutas e hitos lota ind mito" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa interactivo de rutas e hitos lota ind mito</div>
-    <div class="meta">mapa_interactivo_de_rutas_e_hitos_lota_ind_mito</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mapa_interactivo_y_misiones/code.html" target="_blank">
-  <img src="public/stitch/mapa_interactivo_y_misiones/screen.png" alt="Mapa interactivo y misiones" loading="lazy">
-  <div class="label">
-    <div class="name">Mapa interactivo y misiones</div>
-    <div class="meta">mapa_interactivo_y_misiones</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-2">
-  <h2>Rutas / itinerarios<span class="count">5 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/ruta_camina_lota_urbanismo_social/code.html" target="_blank">
-  <img src="public/stitch/ruta_camina_lota_urbanismo_social/screen.png" alt="Ruta camina lota urbanismo social" loading="lazy">
-  <div class="label">
-    <div class="name">Ruta camina lota urbanismo social</div>
-    <div class="meta">ruta_camina_lota_urbanismo_social</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/ruta_de_fuego_y_carb_n_gastronom_a_y_artesan_a/code.html" target="_blank">
-  <img src="public/stitch/ruta_de_fuego_y_carb_n_gastronom_a_y_artesan_a/screen.png" alt="Ruta de fuego y carb n gastronom a y artesan a" loading="lazy">
-  <div class="label">
-    <div class="name">Ruta de fuego y carb n gastronom a y artesan a</div>
-    <div class="meta">ruta_de_fuego_y_carb_n_gastronom_a_y_artesan_a</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/ruta_de_las_bodegas_log_stica_industrial/code.html" target="_blank">
-  <img src="public/stitch/ruta_de_las_bodegas_log_stica_industrial/screen.png" alt="Ruta de las bodegas log stica industrial" loading="lazy">
-  <div class="label">
-    <div class="name">Ruta de las bodegas log stica industrial</div>
-    <div class="meta">ruta_de_las_bodegas_log_stica_industrial</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/ruta_del_comercio_misiones_pyme/code.html" target="_blank">
-  <img src="public/stitch/ruta_del_comercio_misiones_pyme/screen.png" alt="Ruta del comercio misiones pyme" loading="lazy">
-  <div class="label">
-    <div class="name">Ruta del comercio misiones pyme</div>
-    <div class="meta">ruta_del_comercio_misiones_pyme</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/ruta_geositio_el_ge_logo_del_tiempo/code.html" target="_blank">
-  <img src="public/stitch/ruta_geositio_el_ge_logo_del_tiempo/screen.png" alt="Ruta geositio el ge logo del tiempo" loading="lazy">
-  <div class="label">
-    <div class="name">Ruta geositio el ge logo del tiempo</div>
-    <div class="meta">ruta_geositio_el_ge_logo_del_tiempo</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-3">
-  <h2>Misiones<span class="count">5 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/misi_n_amasando_pan_fuego_y_carb_n/code.html" target="_blank">
-  <img src="public/stitch/misi_n_amasando_pan_fuego_y_carb_n/screen.png" alt="Misi n amasando pan fuego y carb n" loading="lazy">
-  <div class="label">
-    <div class="name">Misi n amasando pan fuego y carb n</div>
-    <div class="meta">misi_n_amasando_pan_fuego_y_carb_n</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/misi_n_arquitecto_de_pabellones_ra/code.html" target="_blank">
-  <img src="public/stitch/misi_n_arquitecto_de_pabellones_ra/screen.png" alt="Misi n arquitecto de pabellones ra" loading="lazy">
-  <div class="label">
-    <div class="name">Misi n arquitecto de pabellones ra</div>
-    <div class="meta">misi_n_arquitecto_de_pabellones_ra</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/misi_n_cumplida_logro_de_familia/code.html" target="_blank">
-  <img src="public/stitch/misi_n_cumplida_logro_de_familia/screen.png" alt="Misi n cumplida logro de familia" loading="lazy">
-  <div class="label">
-    <div class="name">Misi n cumplida logro de familia</div>
-    <div class="meta">misi_n_cumplida_logro_de_familia</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/misi_n_familiar_desaf_o_colaborativo/code.html" target="_blank">
-  <img src="public/stitch/misi_n_familiar_desaf_o_colaborativo/screen.png" alt="Misi n familiar desaf o colaborativo" loading="lazy">
-  <div class="label">
-    <div class="name">Misi n familiar desaf o colaborativo</div>
-    <div class="meta">misi_n_familiar_desaf_o_colaborativo</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/misi_n_oficios_de_mar_chinchorreo/code.html" target="_blank">
-  <img src="public/stitch/misi_n_oficios_de_mar_chinchorreo/screen.png" alt="Misi n oficios de mar chinchorreo" loading="lazy">
-  <div class="label">
-    <div class="name">Misi n oficios de mar chinchorreo</div>
-    <div class="meta">misi_n_oficios_de_mar_chinchorreo</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-4">
-  <h2>Monumentos y AR<span class="count">8 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/encuentro_ar_el_ciego_de_la_mina/code.html" target="_blank">
-  <img src="public/stitch/encuentro_ar_el_ciego_de_la_mina/screen.png" alt="Encuentro ar el ciego de la mina" loading="lazy">
-  <div class="label">
-    <div class="name">Encuentro ar el ciego de la mina</div>
-    <div class="meta">encuentro_ar_el_ciego_de_la_mina</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/encuentro_ar_isidora_goyenechea/code.html" target="_blank">
-  <img src="public/stitch/encuentro_ar_isidora_goyenechea/screen.png" alt="Encuentro ar isidora goyenechea" loading="lazy">
-  <div class="label">
-    <div class="name">Encuentro ar isidora goyenechea</div>
-    <div class="meta">encuentro_ar_isidora_goyenechea</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumento_chifl_n_del_diablo/code.html" target="_blank">
-  <img src="public/stitch/monumento_chifl_n_del_diablo/screen.png" alt="Monumento chifl n del diablo" loading="lazy">
-  <div class="label">
-    <div class="name">Monumento chifl n del diablo</div>
-    <div class="meta">monumento_chifl_n_del_diablo</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumento_pabell_n_83/code.html" target="_blank">
-  <img src="public/stitch/monumento_pabell_n_83/screen.png" alt="Monumento pabell n 83" loading="lazy">
-  <div class="label">
-    <div class="name">Monumento pabell n 83</div>
-    <div class="meta">monumento_pabell_n_83</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumento_pabell_n_83_detalle/code.html" target="_blank">
-  <img src="public/stitch/monumento_pabell_n_83_detalle/screen.png" alt="Monumento pabell n 83 detalle" loading="lazy">
-  <div class="label">
-    <div class="name">Monumento pabell n 83 detalle</div>
-    <div class="meta">monumento_pabell_n_83_detalle</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumento_parque_de_lota/code.html" target="_blank">
-  <img src="public/stitch/monumento_parque_de_lota/screen.png" alt="Monumento parque de lota" loading="lazy">
-  <div class="label">
-    <div class="name">Monumento parque de lota</div>
-    <div class="meta">monumento_parque_de_lota</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumento_teatro_de_lota/code.html" target="_blank">
-  <img src="public/stitch/monumento_teatro_de_lota/screen.png" alt="Monumento teatro de lota" loading="lazy">
-  <div class="label">
-    <div class="name">Monumento teatro de lota</div>
-    <div class="meta">monumento_teatro_de_lota</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/monumentos_nacionales_modo_turista/code.html" target="_blank">
-  <img src="public/stitch/monumentos_nacionales_modo_turista/screen.png" alt="Monumentos nacionales modo turista" loading="lazy">
-  <div class="label">
-    <div class="name">Monumentos nacionales modo turista</div>
-    <div class="meta">monumentos_nacionales_modo_turista</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-5">
-  <h2>Reportes y dashboards<span class="count">4 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/dashboard_de_ciudadan_a_reportes_1/code.html" target="_blank">
-  <img src="public/stitch/dashboard_de_ciudadan_a_reportes_1/screen.png" alt="Dashboard de ciudadan a reportes 1" loading="lazy">
-  <div class="label">
-    <div class="name">Dashboard de ciudadan a reportes 1</div>
-    <div class="meta">dashboard_de_ciudadan_a_reportes_1</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/dashboard_de_ciudadan_a_reportes_2/code.html" target="_blank">
-  <img src="public/stitch/dashboard_de_ciudadan_a_reportes_2/screen.png" alt="Dashboard de ciudadan a reportes 2" loading="lazy">
-  <div class="label">
-    <div class="name">Dashboard de ciudadan a reportes 2</div>
-    <div class="meta">dashboard_de_ciudadan_a_reportes_2</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/dashboard_de_familia_el_clan_minero/code.html" target="_blank">
-  <img src="public/stitch/dashboard_de_familia_el_clan_minero/screen.png" alt="Dashboard de familia el clan minero" loading="lazy">
-  <div class="label">
-    <div class="name">Dashboard de familia el clan minero</div>
-    <div class="meta">dashboard_de_familia_el_clan_minero</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/family_dashboard_english_version/code.html" target="_blank">
-  <img src="public/stitch/family_dashboard_english_version/screen.png" alt="Family dashboard english version" loading="lazy">
-  <div class="label">
-    <div class="name">Family dashboard english version</div>
-    <div class="meta">family_dashboard_english_version</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-6">
-  <h2>Bitácoras y bóveda<span class="count">6 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/b_veda_de_beneficios_est_tica_de_fichas_mineras/code.html" target="_blank">
-  <img src="public/stitch/b_veda_de_beneficios_est_tica_de_fichas_mineras/screen.png" alt="B veda de beneficios est tica de fichas mineras" loading="lazy">
-  <div class="label">
-    <div class="name">B veda de beneficios est tica de fichas mineras</div>
-    <div class="meta">b_veda_de_beneficios_est_tica_de_fichas_mineras</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/b_veda_de_beneficios_recompensas_y_comercio/code.html" target="_blank">
-  <img src="public/stitch/b_veda_de_beneficios_recompensas_y_comercio/screen.png" alt="B veda de beneficios recompensas y comercio" loading="lazy">
-  <div class="label">
-    <div class="name">B veda de beneficios recompensas y comercio</div>
-    <div class="meta">b_veda_de_beneficios_recompensas_y_comercio</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/b_veda_de_diplomas_certificados/code.html" target="_blank">
-  <img src="public/stitch/b_veda_de_diplomas_certificados/screen.png" alt="B veda de diplomas certificados" loading="lazy">
-  <div class="label">
-    <div class="name">B veda de diplomas certificados</div>
-    <div class="meta">b_veda_de_diplomas_certificados</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/bit_cora_de_guardianes_colecci_n/code.html" target="_blank">
-  <img src="public/stitch/bit_cora_de_guardianes_colecci_n/screen.png" alt="Bit cora de guardianes colecci n" loading="lazy">
-  <div class="label">
-    <div class="name">Bit cora de guardianes colecci n</div>
-    <div class="meta">bit_cora_de_guardianes_colecci_n</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/bit_cora_de_oficios_mar/code.html" target="_blank">
-  <img src="public/stitch/bit_cora_de_oficios_mar/screen.png" alt="Bit cora de oficios mar" loading="lazy">
-  <div class="label">
-    <div class="name">Bit cora de oficios mar</div>
-    <div class="meta">bit_cora_de_oficios_mar</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/bit_cora_de_urbanismo_progreso/code.html" target="_blank">
-  <img src="public/stitch/bit_cora_de_urbanismo_progreso/screen.png" alt="Bit cora de urbanismo progreso" loading="lazy">
-  <div class="label">
-    <div class="name">Bit cora de urbanismo progreso</div>
-    <div class="meta">bit_cora_de_urbanismo_progreso</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-7">
-  <h2>Recompensas y canje<span class="count">4 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/canje_de_carboncillos_feria_de_lota/code.html" target="_blank">
-  <img src="public/stitch/canje_de_carboncillos_feria_de_lota/screen.png" alt="Canje de carboncillos feria de lota" loading="lazy">
-  <div class="label">
-    <div class="name">Canje de carboncillos feria de lota</div>
-    <div class="meta">canje_de_carboncillos_feria_de_lota</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/canje_exitoso_ficha_digital/code.html" target="_blank">
-  <img src="public/stitch/canje_exitoso_ficha_digital/screen.png" alt="Canje exitoso ficha digital" loading="lazy">
-  <div class="label">
-    <div class="name">Canje exitoso ficha digital</div>
-    <div class="meta">canje_exitoso_ficha_digital</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/detalle_de_ficha_de_recompensa/code.html" target="_blank">
-  <img src="public/stitch/detalle_de_ficha_de_recompensa/screen.png" alt="Detalle de ficha de recompensa" loading="lazy">
-  <div class="label">
-    <div class="name">Detalle de ficha de recompensa</div>
-    <div class="meta">detalle_de_ficha_de_recompensa</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/detalle_de_ficha_est_tica_met_lica_mejorada/code.html" target="_blank">
-  <img src="public/stitch/detalle_de_ficha_est_tica_met_lica_mejorada/screen.png" alt="Detalle de ficha est tica met lica mejorada" loading="lazy">
-  <div class="label">
-    <div class="name">Detalle de ficha est tica met lica mejorada</div>
-    <div class="meta">detalle_de_ficha_est_tica_met_lica_mejorada</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-8">
-  <h2>Diplomas<span class="count">1 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/detalle_de_diploma_guardian_of_the_mine/code.html" target="_blank">
-  <img src="public/stitch/detalle_de_diploma_guardian_of_the_mine/screen.png" alt="Detalle de diploma guardian of the mine" loading="lazy">
-  <div class="label">
-    <div class="name">Detalle de diploma guardian of the mine</div>
-    <div class="meta">detalle_de_diploma_guardian_of_the_mine</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-9">
-  <h2>Modo familia<span class="count">4 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/family_mode_english_version/code.html" target="_blank">
-  <img src="public/stitch/family_mode_english_version/screen.png" alt="Family mode english version" loading="lazy">
-  <div class="label">
-    <div class="name">Family mode english version</div>
-    <div class="meta">family_mode_english_version</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/mission_complete_english_version/code.html" target="_blank">
-  <img src="public/stitch/mission_complete_english_version/screen.png" alt="Mission complete english version" loading="lazy">
-  <div class="label">
-    <div class="name">Mission complete english version</div>
-    <div class="meta">mission_complete_english_version</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/modo_familia_selecci_n_de_roles/code.html" target="_blank">
-  <img src="public/stitch/modo_familia_selecci_n_de_roles/screen.png" alt="Modo familia selecci n de roles" loading="lazy">
-  <div class="label">
-    <div class="name">Modo familia selecci n de roles</div>
-    <div class="meta">modo_familia_selecci_n_de_roles</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/team_mission_english_version/code.html" target="_blank">
-  <img src="public/stitch/team_mission_english_version/screen.png" alt="Team mission english version" loading="lazy">
-  <div class="label">
-    <div class="name">Team mission english version</div>
-    <div class="meta">team_mission_english_version</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-10">
-  <h2>English versions<span class="count">1 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/map_english_version/code.html" target="_blank">
-  <img src="public/stitch/map_english_version/screen.png" alt="Map english version" loading="lazy">
-  <div class="label">
-    <div class="name">Map english version</div>
-    <div class="meta">map_english_version</div>
-  </div>
-</a></div>
-</section>
-<section id="cat-11">
-  <h2>Otros<span class="count">3 pantalla(s)</span></h2>
-  <div class="grid">
-<a class="card" href="public/stitch/captura_de_memoria_c_mara/code.html" target="_blank">
-  <img src="public/stitch/captura_de_memoria_c_mara/screen.png" alt="Captura de memoria c mara" loading="lazy">
-  <div class="label">
-    <div class="name">Captura de memoria c mara</div>
-    <div class="meta">captura_de_memoria_c_mara</div>
-  </div>
-</a>
-<a class="card" href="public/stitch/desaf_o_vig_a_del_golfo/code.html" target="_blank">
-  <img src="public/stitch/desaf_o_vig_a_del_golfo/screen.png" alt="Desaf o vig a del golfo" loading="lazy">
-  <div class="label">
-    <div class="name">Desaf o vig a del golfo</div>
-    <div class="meta">desaf_o_vig_a_del_golfo</div>
-  </div>
-</a>
-<a class="card no-html" href="public/stitch/professional_photography_of_a_traditional_stone_oven_in_lota_chile._glowing/screen.png" target="_blank">
-  <img src="public/stitch/professional_photography_of_a_traditional_stone_oven_in_lota_chile._glowing/screen.png" alt="Professional photography of a traditional stone oven in lota chile. glowing" loading="lazy">
-  <div class="label">
-    <div class="name">Professional photography of a traditional stone oven in lota chile. glowing</div>
-    <div class="meta">professional_photography_of_a_traditional_stone_oven_in_lota_chile._glowing</div>
-  </div>
-</a></div>
-</section></main>
-<div class="docs-bar">
-  <a href="docs/estado.html">Estado del proyecto</a>
-  <a href="docs/decisiones.html">Decisiones</a>
-  <a href="docs/procedimientos.html">Procedimientos</a>
-  <a href="_analisis/01_resumen_audios_cliente.html">Síntesis audios</a>
-  <a href="_analisis/02_cotejo_audis_vs_prototipo.html">Cliente vs prototipo</a>
-  <a href="_analisis/04_propuesta_tecnica_stack_osm.html">Propuesta técnica</a>
-</div>
+</main>
+
+<footer>Lota Indómito · Proyecto de patrimonio, turismo y tecnología · Lota, Región del Biobío, Chile</footer>
 </body>
 </html>

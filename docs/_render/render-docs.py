@@ -226,6 +226,8 @@ def main():
     root = Path(args.root).resolve()
 
     targets = [
+        ("docs/resumen-ejecutivo.md",   "docs/resumen-ejecutivo.html",   "Resumen ejecutivo"),
+        ("docs/propuesta-concepto.md", "docs/propuesta-concepto.html", "Propuesta de concepto"),
         ("docs/estado.md",          "docs/estado.html",          "Estado del proyecto"),
         ("docs/decisiones.md",      "docs/decisiones.html",      "Decisiones"),
         ("docs/procedimientos.md",  "docs/procedimientos.html",  "Procedimientos"),
