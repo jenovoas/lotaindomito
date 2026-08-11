@@ -9,19 +9,53 @@
   --turquesa: #3FE6C0; --coral: #F5A285; --cobre: #D17A4F;
   --bg: #0f1216; --bg2: #1a1f2a; --border: #2a3140;
   --text: #e6e9ef; --muted: #8a93a3;
+  --teal: #65dabc; --gold: #D4AF37; --peach: #F4A261;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+body { margin: 0; font-family: var(--sans);
        background: var(--bg); color: var(--text); }
-header { padding: 28px 40px; background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%);
-         border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(8px); }
 h1 { margin: 0; font-size: 24px; font-weight: 600; color: var(--turquesa); letter-spacing: -0.5px; }
 .subtitle { margin-top: 6px; font-size: 13px; color: var(--muted); }
-nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 40px;
-      background: #14181f; border-bottom: 1px solid var(--border); }
-nav a { color: var(--muted); text-decoration: none; font-size: 12px; padding: 6px 12px;
-        border-radius: 6px; transition: all 0.15s; border: 1px solid transparent; }
-nav a:hover { color: var(--turquesa); border-color: var(--border); background: var(--bg2); }
+.cats { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 40px;
+        background: #14181f; border-bottom: 1px solid var(--border); position: sticky; top: 65px; z-index: 90; }
+.cats a { color: var(--muted); text-decoration: none; font-size: 12px; padding: 6px 12px;
+          border-radius: 6px; transition: all 0.15s; border: 1px solid transparent; }
+.cats a:hover { color: var(--turquesa); border-color: var(--border); background: var(--bg2); }
+/* ─── navbar nueva (idéntica a index.html) ─── */
+nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 32px;
+      padding: 12px 40px; background: rgba(10,12,16,0.85); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border); }
+nav .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+nav .brand svg { display: block; }
+nav .brand .name { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--text); text-transform: uppercase; line-height: 1.1; }
+nav .brand .name span { color: var(--teal); }
+nav .brand .sub { font-family: var(--mono); font-size: 8.5px; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+nav .links { display: flex; gap: 6px; margin-left: auto; align-items: center; }
+nav .links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.6px;
+               padding: 8px 14px; border-radius: 8px; transition: color .15s, background .15s; }
+nav .links a:hover { color: var(--teal); background: rgba(101,218,188,0.08); }
+nav .links a.github { color: var(--gold); border: 1px solid rgba(212,175,55,0.35); background: rgba(212,175,55,0.06); }
+nav .links a.github:hover { background: rgba(212,175,55,0.14); color: #ffe9a0; }
+nav .hamb { display: none; margin-left: auto; background: none; border: 1px solid var(--border); border-radius: 8px;
+            width: 42px; height: 42px; cursor: pointer; position: relative; }
+nav .hamb span { position: absolute; left: 10px; right: 10px; height: 2px; background: var(--text); border-radius: 2px; transition: all .25s; }
+nav .hamb span:nth-child(1) { top: 14px; } nav .hamb span:nth-child(2) { top: 20px; } nav .hamb span:nth-child(3) { top: 26px; }
+nav.open .hamb span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+nav.open .hamb span:nth-child(2) { opacity: 0; }
+nav.open .hamb span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
+@media (max-width: 860px) {
+  nav { padding: 12px 20px; }
+  nav .hamb { display: block; }
+  nav .links { position: fixed; top: 67px; left: 0; right: 0; flex-direction: column; align-items: stretch;
+               gap: 4px; padding: 16px 20px 20px; background: rgba(10,12,16,0.97); backdrop-filter: blur(14px);
+               border-bottom: 1px solid var(--border); transform: translateY(-12px); opacity: 0; pointer-events: none;
+               transition: all .25s; }
+  nav.open .links { transform: none; opacity: 1; pointer-events: auto; }
+  nav .links a { padding: 12px 14px; font-size: 14px; }
+  .cats { top: 65px; padding: 10px 20px; }
+}
 main { padding: 28px 40px 80px; max-width: 1800px; margin: 0 auto; }
 section { margin-bottom: 48px; }
 h2 { font-size: 16px; font-weight: 600; color: var(--coral); margin: 0 0 16px;
@@ -46,11 +80,47 @@ h2 { font-size: 16px; font-weight: 600; color: var(--coral); margin: 0 0 16px;
 </style>
 </head>
 <body>
-<header>
-  <h1>Lota Indómito — Prototipo Stitch</h1>
-  <div class="subtitle">53 pantallas del prototipo del cliente · click para abrir el HTML de cada pantalla</div>
-</header>
-<nav><a href="#cat-0">Selección de modo y onboarding (5)</a><a href="#cat-1">Mapas interactivos (7)</a><a href="#cat-2">Rutas / itinerarios (5)</a><a href="#cat-3">Misiones (5)</a><a href="#cat-4">Monumentos y AR (8)</a><a href="#cat-5">Reportes y dashboards (4)</a><a href="#cat-6">Bitácoras y bóveda (6)</a><a href="#cat-7">Recompensas y canje (4)</a><a href="#cat-8">Diplomas (1)</a><a href="#cat-9">Modo familia (4)</a><a href="#cat-10">English versions (1)</a><a href="#cat-11">Otros (3)</a></nav>
+<nav id="mainnav">
+  <a class="brand" href="index.html">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- lattice hexagonal (3 nodos visibles + centro) -->
+      <polygon points="20,3 34.8,11.5 34.8,28.5 20,37 5.2,28.5 5.2,11.5" stroke="#232c3a" stroke-width="1.4"/>
+      <polygon points="20,9 30.4,15.3 30.4,24.7 20,31 9.6,24.7 9.6,15.3" stroke="#65dabc" stroke-width="1.1" stroke-opacity="0.5"/>
+      <!-- nodos de la lattice -->
+      <circle cx="20" cy="3" r="2.2" fill="#65dabc"/>
+      <circle cx="34.8" cy="11.5" r="2.2" fill="#65dabc"/>
+      <circle cx="34.8" cy="28.5" r="2.2" fill="#D4AF37"/>
+      <circle cx="20" cy="37" r="2.2" fill="#D4AF37"/>
+      <circle cx="5.2" cy="28.5" r="2.2" fill="#65dabc"/>
+      <circle cx="5.2" cy="11.5" r="2.2" fill="#65dabc"/>
+      <!-- cristal dorado central (el mineral) -->
+      <polygon points="20,13.5 26,17.5 26,24.5 20,28.5 14,24.5 14,17.5" fill="#D4AF37" fill-opacity="0.9"/>
+      <polygon points="20,13.5 26,17.5 20,21 14,17.5" fill="#ffe9a0" fill-opacity="0.7"/>
+      <!-- líneas de resonancia hacia el centro -->
+      <line x1="20" y1="3" x2="20" y2="13.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="34.8" y1="11.5" x2="26" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="34.8" y1="28.5" x2="26" y2="24.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="20" y1="37" x2="20" y2="28.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="5.2" y1="28.5" x2="14" y2="24.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="5.2" y1="11.5" x2="14" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+    </svg>
+    <span>
+      <span class="name">Lota<span>Indómito</span></span>
+      <span class="sub" style="display:block;">Patrimonio · Juego · Lota</span>
+    </span>
+  </a>
+  <div class="links">
+    <a href="index.html#proyecto">Proyecto</a>
+    <a href="index.html#como">Cómo funciona</a>
+    <a href="index.html#pilotos">Tecnología</a>
+    <a href="index.html#prototipo">Prototipo</a>
+    <a href="index.html#docs">Documentos</a>
+    <a class="github" href="https://github.com/jenovoas/lotaindomito" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+  <button class="hamb" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="cats"><a href="#cat-0">Selección de modo y onboarding (5)</a><a href="#cat-1">Mapas interactivos (7)</a><a href="#cat-2">Rutas / itinerarios (5)</a><a href="#cat-3">Misiones (5)</a><a href="#cat-4">Monumentos y AR (8)</a><a href="#cat-5">Reportes y dashboards (4)</a><a href="#cat-6">Bitácoras y bóveda (6)</a><a href="#cat-7">Recompensas y canje (4)</a><a href="#cat-8">Diplomas (1)</a><a href="#cat-9">Modo familia (4)</a><a href="#cat-10">English versions (1)</a><a href="#cat-11">Otros (3)</a></div>
 <main>
 <section id="cat-0">
   <h2>Selección de modo y onboarding<span class="count">5 pantalla(s)</span></h2>
@@ -479,5 +549,15 @@ h2 { font-size: 16px; font-weight: 600; color: var(--coral); margin: 0 0 16px;
   <a href="_analisis/02_cotejo_audis_vs_prototipo.html">Cliente vs prototipo</a>
   <a href="_analisis/04_propuesta_tecnica_stack_osm.html">Propuesta técnica</a>
 </div>
+
+<script>
+(function () {
+  var nav = document.getElementById("mainnav");
+  if (!nav) return;
+  var hamb = nav.querySelector(".hamb");
+  hamb.addEventListener("click", function () { nav.classList.toggle("open"); });
+  nav.querySelectorAll(".links a").forEach(function (a) { a.addEventListener("click", function () { nav.classList.remove("open"); }); });
+})();
+</script>
 </body>
 </html>

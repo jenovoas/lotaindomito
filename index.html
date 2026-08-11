@@ -72,6 +72,15 @@ nav.open .hamb span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
 /* ─────────── HERO ─────────── */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; padding: 120px 24px 80px; position: relative; }
+/* capa de cristal: oscurece el área del texto para legibilidad sobre la lattice */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+                background:
+                  radial-gradient(ellipse 560px 420px at 50% 46%, rgba(10,12,16,0.82) 0%, rgba(10,12,16,0.45) 55%, transparent 78%);
+                pointer-events: none; }
+@media (min-width: 861px) {
+  .hero::before { background:
+                  radial-gradient(ellipse 600px 460px at 52% 44%, rgba(10,12,16,0.85) 0%, rgba(10,12,16,0.5) 58%, transparent 80%); }
+}
 .hero .badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 18px; margin-bottom: 30px;
                border: 1px solid var(--line); border-radius: 999px; color: var(--gold);
                font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; background: rgba(18,22,29,0.7);
@@ -225,6 +234,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   <div class="links">
     <a href="#proyecto">Proyecto</a>
     <a href="#como">Cómo funciona</a>
+    <a href="#impacto">Impacto</a>
     <a href="#pilotos">Tecnología</a>
     <a href="#prototipo">Prototipo</a>
     <a href="#docs">Documentos</a>
@@ -271,6 +281,20 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     <div class="step reveal"><span class="num">03 / CAZA EN EL TELÉFONO</span><b>El jugador los encuentra</b><p>Guiado por su teléfono, el jugador camina por Lota hasta dar con ellos.</p></div>
     <div class="step reveal"><span class="num">04 / LA HISTORIA SE RECONSTRUYE</span><b>Cada encuentro revela memoria</b><p>Cada encuentro reconstruye la historia real de la comuna, pieza por pieza.</p></div>
   </div>
+</section>
+
+<!-- ═══════════ IMPACTO SOCIAL ═══════════ -->
+<section id="impacto" style="border-top:1px solid var(--line);">
+  <div class="section-label reveal">// Función social</div>
+  <h2 class="reveal">Un juego con propósito</h2>
+  <p class="lead reveal">Lota Indómito no es solo entretención: es una herramienta de desarrollo local. El juego convierte el patrimonio en un motivo real para caminar por Lota, y ese recorrido se traduce en turismo que llega, comercio que vende y comunidad que se reconoce en su historia.</p>
+  <div class="whatis-grid">
+    <div class="card reveal"><span class="ic">🧭</span><h3>Turismo que se queda</h3><p>El visitante que llega a ver el Chiflón o el Pabellón 83 encuentra un motivo más para recorrer la comuna: el juego lo guía por zonas, comercios y rincones que de otro modo pasaría de largo.</p><div class="stat">MÁS PERMANENCIA · MÁS RECORRIDO</div></div>
+    <div class="card reveal"><span class="ic">🏪</span><h3>Comercio que revive</h3><p>Los comercios locales participan del juego: canje de recompensas, ofertas y subastas convierten el flujo de jugadores en clientes reales. El comercio es el motor que sostiene la plataforma.</p><div class="stat">MODELO AUTOSUSTENTABLE</div></div>
+    <div class="card reveal"><span class="ic">📊</span><h3>Datos para la comuna</h3><p>El movimiento de los jugadores genera información de movilidad y afluencia que el municipio puede usar para planificar turismo, comercio y servicios — sin depender de plataformas externas.</p><div class="stat">SOBERANÍA DE DATOS</div></div>
+    <div class="card reveal"><span class="ic">🤝</span><h3>Comunidad con memoria</h3><p>Los personajes del pasado carbonero vuelven a la calle: el juego reencuentra a Lota con su propia historia y da a las nuevas generaciones una razón para conocerla.</p><div class="stat">IDENTIDAD PATRIMONIAL</div></div>
+  </div>
+  <p class="lead reveal" style="margin-top:34px;">El modelo es simple y medible: <strong>el juego lleva gente a la calle, la calle lleva gente al comercio, y el comercio sostiene la plataforma.</strong> Así, la inversión inicial en patrimonio se convierte en un circuito que se alimenta solo — y que puede replicarse en todo el corredor del carbón.</p>
 </section>
 
 <!-- ═══════════ PILOTOS ═══════════ -->
@@ -364,10 +388,15 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   const camZ = isMobile ? 16 : 13;
   const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
   camera.position.set(0, 2.4, camZ);
-  camera.lookAt(0, 0, 0);
+  // en desktop la cámara mira levemente a la izquierda (donde vive la lattice)
+  const lookX = isMobile ? 0 : -1.6;
+  camera.lookAt(lookX, 0, 0);
 
   // ── Lattice hexagonal resonante (densidad adaptativa) ──
   const group = new THREE.Group();
+  // en desktop la lattice vive a la izquierda para no tapar el texto centrado
+  const groupX = isMobile ? 0 : -2.6;
+  group.position.x = groupX;
   const nodeGeo = new THREE.SphereGeometry(0.14, 16, 16);
   const nodeMatA = new THREE.MeshBasicMaterial({ color: 0x65dabc, transparent: true, opacity: 0.85 });
   const nodeMatB = new THREE.MeshBasicMaterial({ color: 0xD4AF37, transparent: true, opacity: 0.85 });
@@ -425,7 +454,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   const glowMat = new THREE.MeshBasicMaterial({ color: 0x2A9D8F, transparent: true, opacity: 0, side: THREE.DoubleSide });
   const glow = new THREE.Mesh(glowGeo, glowMat);
   portalGroup.add(glow);
-  portalGroup.position.set(0, 0, -4.2);
+  portalGroup.position.set(groupX, 0, -4.2);
   portalGroup.rotation.x = Math.PI / 2.4;
   scene.add(portalGroup);
 
@@ -524,7 +553,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
       camera.position.x += (0 - camera.position.x) * 0.02;
       camera.position.y += (2.4 - camera.position.y) * 0.02;
     }
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(lookX, 0, 0);
 
     renderer.render(scene, camera);
   }
