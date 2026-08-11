@@ -4,89 +4,432 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lota Indómito — El patrimonio de Lota, vivo en tus manos</title>
+<meta name="description" content="Lota Indómito: juego geolocalizado que convierte el patrimonio carbonero de Lota en una aventura real. Camina, descubre, juega y el comercio local revive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
+/* ═══════════ SISTEMA DE DISEÑO — Lota Indómito ═══════════
+   Estética heredada del prototipo: dark industrial, acentos
+   turquesa/dorado/melocotón, títulos en mayúsculas, tarjetas con borde. */
 :root {
-  --turquesa: #3FE6C0; --coral: #F5A285; --cobre: #D17A4F;
-  --bg: #0f1216; --bg2: #1a1f2a; --border: #2a3140;
-  --text: #e6e9ef; --muted: #8a93a3;
+  --bg: #0a0c10;
+  --bg2: #12161d;
+  --bg3: #1a212b;
+  --line: #232c3a;
+  --text: #e8ecf3;
+  --muted: #93a0b4;
+  --teal: #65dabc;
+  --teal-dim: #2A9D8F;
+  --gold: #D4AF37;
+  --peach: #F4A261;
+  --coral: #E76F51;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
-* { box-sizing: border-box; }
-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-       background: var(--bg); color: var(--text); line-height: 1.6; }
-header { padding: 72px 40px 56px; text-align: center;
-         background: radial-gradient(ellipse at top, #1a2530 0%, var(--bg) 70%);
-         border-bottom: 1px solid var(--border); }
-h1 { margin: 0; font-size: 44px; font-weight: 700; color: var(--turquesa); letter-spacing: -0.5px; }
-.tagline { margin-top: 14px; font-size: 18px; color: var(--muted); max-width: 640px; margin-left: auto; margin-right: auto; }
-.badge { display: inline-block; margin-top: 20px; padding: 6px 16px; border-radius: 999px;
-         border: 1px solid var(--border); color: var(--coral); font-size: 12px; letter-spacing: 0.6px;
-         text-transform: uppercase; background: var(--bg2); }
-main { padding: 48px 40px 80px; max-width: 1100px; margin: 0 auto; }
-h2 { font-size: 22px; font-weight: 600; color: var(--coral); margin: 48px 0 16px; }
-h2:first-child { margin-top: 0; }
-p { color: var(--text); max-width: 780px; }
-.muted { color: var(--muted); }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
-.card { background: var(--bg2); border-radius: 10px; padding: 22px; border: 1px solid var(--border);
-        transition: all 0.15s; }
-.card h3 { margin: 0 0 8px; font-size: 16px; color: var(--turquesa); }
-.card p { margin: 0; font-size: 14px; color: var(--muted); }
-.flow { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 24px; }
-.flow .step { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-              padding: 16px 20px; font-size: 14px; flex: 1; min-width: 180px; }
-.flow .step b { display: block; color: var(--turquesa); margin-bottom: 4px; }
-.flow .arrow { color: var(--cobre); font-size: 20px; }
-.docs { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-.doc-link { display: block; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-            padding: 18px 20px; text-decoration: none; color: var(--text); transition: all 0.15s; }
-.doc-link:hover { border-color: var(--turquesa); transform: translateY(-2px); }
-.doc-link .t { font-weight: 600; color: var(--turquesa); }
-.doc-link .d { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.doc-link .arrow { color: var(--cobre); float: right; font-size: 18px; }
-footer { padding: 32px 40px; text-align: center; color: var(--muted); font-size: 13px;
-         border-top: 1px solid var(--border); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
+
+/* ─────────── THREE.JS CANVAS ─────────── */
+#scene3d { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.overlay { position: relative; z-index: 1; }
+
+/* ─────────── NAV ─────────── */
+nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 28px;
+      padding: 14px 40px; background: rgba(10,12,16,0.75); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line); }
+nav .logo { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--text); text-transform: uppercase; }
+nav .logo span { color: var(--teal); }
+nav .links { display: flex; gap: 22px; margin-left: auto; }
+nav a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.6px; transition: color .15s; }
+nav a:hover { color: var(--teal); }
+@media (max-width: 760px) { nav { padding: 12px 20px; } nav .links { display: none; } }
+
+/* ─────────── HERO ─────────── */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; padding: 120px 24px 80px; position: relative; }
+.hero .badge { display: inline-flex; align-items: center; gap: 9px; padding: 8px 18px; margin-bottom: 30px;
+               border: 1px solid var(--line); border-radius: 999px; color: var(--gold);
+               font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; background: rgba(18,22,29,0.7);
+               backdrop-filter: blur(6px); }
+.hero .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
+                    box-shadow: 0 0 12px var(--teal); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.hero h1 { font-size: clamp(52px, 9vw, 110px); font-weight: 700; letter-spacing: 6px; text-transform: uppercase; line-height: 0.95;
+           background: linear-gradient(180deg, #ffffff 20%, var(--teal) 130%);
+           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 .gold { background: linear-gradient(180deg, #ffe9a0, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .tagline { margin: 28px auto 0; max-width: 640px; font-size: clamp(16px, 2.4vw, 20px); color: var(--muted); }
+.hero .coords { margin-top: 26px; font-family: var(--mono); font-size: 12px; color: #4a5568; letter-spacing: 1.5px; }
+.hero .cta { margin-top: 44px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 16px 34px; border-radius: 10px; text-decoration: none; font-weight: 700;
+       font-size: 14px; letter-spacing: 1px; text-transform: uppercase; transition: transform .15s, box-shadow .15s, background .15s; cursor: pointer; }
+.btn:hover { transform: translateY(-3px); }
+.btn-primary { background: var(--peach); color: #10131a; box-shadow: 0 8px 30px rgba(244,162,97,0.3); }
+.btn-primary:hover { box-shadow: 0 14px 44px rgba(244,162,97,0.45); }
+.btn-ghost { border: 1px solid var(--line); color: var(--text); background: rgba(18,22,29,0.6); backdrop-filter: blur(6px); }
+.btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+.hero .scroll-hint { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+                     font-family: var(--mono); font-size: 11px; letter-spacing: 3px; color: #4a5568; text-transform: uppercase; }
+.hero .scroll-hint::after { content: ""; display: block; width: 1px; height: 42px; margin: 12px auto 0;
+                            background: linear-gradient(180deg, var(--teal), transparent); animation: drip 2s infinite; }
+@keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 60% { transform: scaleY(1); transform-origin: top; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* ─────────── SECCIONES ─────────── */
+section { padding: 110px 40px; max-width: 1180px; margin: 0 auto; }
+.section-label { font-family: var(--mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+h2 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 22px; line-height: 1.1; }
+.lead { color: var(--muted); max-width: 780px; font-size: 17px; }
+.lead strong { color: var(--text); }
+
+/* reveal on scroll */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ─────────── QUÉ ES ─────────── */
+.whatis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-top: 44px; }
+.card { background: rgba(26,33,43,0.6); border: 1px solid var(--line); border-radius: 16px; padding: 28px;
+        backdrop-filter: blur(8px); transition: border-color .2s, transform .2s, box-shadow .2s; }
+.card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 18px 48px rgba(101,218,188,0.08); }
+.card .ic { font-size: 26px; margin-bottom: 16px; display: block; }
+.card h3 { font-size: 15px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+.card p { font-size: 14px; color: var(--muted); }
+.card .stat { font-family: var(--mono); font-size: 11px; color: #556072; margin-top: 14px; letter-spacing: 1px; }
+
+/* ─────────── CÓMO FUNCIONA ─────────── */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 44px; }
+.step { background: rgba(26,33,43,0.6); border: 1px solid var(--line); border-radius: 16px; padding: 26px; position: relative;
+        overflow: hidden; transition: border-color .2s, transform .2s; }
+.step:hover { border-color: var(--gold); transform: translateY(-4px); }
+.step::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+                background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity .3s; }
+.step:hover::before { opacity: 1; }
+.step .num { font-family: var(--mono); font-size: 12px; color: var(--gold); letter-spacing: 2.5px; margin-bottom: 12px; display: block; }
+.step b { display: block; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+.step p { font-size: 13.5px; color: var(--muted); }
+
+/* ─────────── PILOTOS ─────────── */
+.pilotos { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 44px; }
+.piloto { border: 1px solid var(--line); border-radius: 18px; padding: 34px; position: relative; overflow: hidden;
+          background: linear-gradient(160deg, rgba(26,33,43,0.8), rgba(18,22,29,0.6)); backdrop-filter: blur(8px); }
+.piloto::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%;
+                 filter: blur(90px); opacity: 0.12; top: -120px; right: -120px; }
+.piloto.a::after { background: var(--teal); }
+.piloto.b::after { background: var(--gold); }
+.piloto .tag { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 2.5px;
+               padding: 5px 12px; border-radius: 6px; margin-bottom: 18px; }
+.piloto.a .tag { background: rgba(101,218,188,0.12); color: var(--teal); border: 1px solid rgba(101,218,188,0.3); }
+.piloto.b .tag { background: rgba(212,175,55,0.12); color: var(--gold); border: 1px solid rgba(212,175,55,0.3); }
+.piloto h3 { font-size: 21px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+.piloto p { font-size: 14.5px; color: var(--muted); margin-bottom: 16px; }
+.piloto ul { list-style: none; }
+.piloto li { font-size: 13.5px; color: var(--muted); padding: 7px 0; border-bottom: 1px dashed var(--line); display: flex; gap: 10px; }
+.piloto li::before { content: "▸"; color: var(--teal); }
+.piloto.b li::before { color: var(--gold); }
+.piloto .mono { font-family: var(--mono); font-size: 11.5px; color: #556072; margin-top: 18px; letter-spacing: 0.5px; }
+@media (max-width: 900px) { .pilotos { grid-template-columns: 1fr; } }
+
+/* ─────────── GALERÍA — MOCKUPS TELÉFONO ─────────── */
+.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px 22px; margin-top: 54px; }
+.phone { display: block; text-decoration: none; position: relative; perspective: 1000px; }
+.phone .frame { border: 2px solid #2c3546; border-radius: 28px; background: #0c0f14; padding: 10px;
+                box-shadow: 0 24px 60px rgba(0,0,0,0.5); transition: transform .35s ease, border-color .35s; transform-style: preserve-3d; }
+.phone:hover .frame { transform: translateY(-10px) rotateX(6deg); border-color: var(--teal); }
+.phone img { width: 100%; height: 420px; object-fit: cover; object-position: top; display: block;
+             border-radius: 19px; filter: grayscale(20%) contrast(1.06); transition: filter .3s; }
+.phone:hover img { filter: none; }
+.phone .cap { padding: 14px 6px 0; text-align: center; }
+.phone .cap b { font-size: 12.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text); display: block; }
+.phone .cap span { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+
+/* ─────────── DOCUMENTOS ─────────── */
+.docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; margin-top: 44px; }
+.doc { display: block; background: rgba(18,22,29,0.7); border: 1px solid var(--line); border-radius: 16px; padding: 24px 26px;
+       text-decoration: none; color: var(--text); backdrop-filter: blur(8px); transition: border-color .2s, transform .2s; }
+.doc:hover { border-color: var(--gold); transform: translateY(-4px); }
+.doc .t { font-weight: 700; font-size: 16px; letter-spacing: 0.8px; display: flex; justify-content: space-between; align-items: center; }
+.doc .t .arrow { color: var(--gold); font-size: 20px; transition: transform .2s; }
+.doc:hover .t .arrow { transform: translateX(6px); }
+.doc .d { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+/* ─────────── FOOTER ─────────── */
+footer { border-top: 1px solid var(--line); padding: 48px 40px; text-align: center; color: #4a5568;
+         font-size: 12.5px; letter-spacing: 1px; position: relative; z-index: 1; }
+footer .mono { font-family: var(--mono); color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="badge">Proyecto de patrimonio y turismo · Lota, Chile</div>
-  <h1>Lota Indómito</h1>
-  <div class="tagline">Un juego de calle que convierte el patrimonio carbonero de Lota en una aventura real: caminas, descubres, juegas y el comercio local revive.</div>
+
+<canvas id="scene3d"></canvas>
+<div class="overlay">
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="logo">Lota<span>Indómito</span></div>
+  <div class="links">
+    <a href="#proyecto">Proyecto</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#pilotos">Tecnología</a>
+    <a href="#prototipo">Prototipo</a>
+    <a href="#docs">Documentos</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="badge"><span class="dot"></span> Proyecto de patrimonio y turismo · Lota, Chile</div>
+  <h1>Lota <span class="gold">Indómito</span></h1>
+  <p class="tagline">Un juego de calle que convierte el patrimonio carbonero de Lota en una aventura real: caminas, descubres, juegas — y el comercio local revive.</p>
+  <div class="coords">LAT: -37.0907 · LNG: -73.1614 · REGIÓN DEL BIOBÍO</div>
+  <div class="cta">
+    <a class="btn btn-primary" href="docs/resumen-ejecutivo.html">Resumen ejecutivo</a>
+    <a class="btn btn-ghost" href="#prototipo">Ver el prototipo</a>
+  </div>
+  <div class="scroll-hint">Desliza</div>
 </header>
 
-<main>
-  <h2>¿Qué es?</h2>
-  <p>Lota Indómito es un juego geolocalizado para teléfono, tipo Pokémon GO, ambientado en la historia real del carbón. El jugador recorre las calles y zonas históricas de la comuna, descubre a personajes del pasado —Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero—, completa misiones, recolecta minerales del juego y sube de rango.</p>
-  <p class="muted">El mundo real maneja el juego: los eventos del cielo determinan qué personajes y recompensas están activos, y las festividades reales de Lota activan eventos especiales que llevan visitantes a la calle.</p>
+<!-- ═══════════ QUÉ ES ═══════════ -->
+<section id="proyecto">
+  <div class="section-label reveal">// El proyecto</div>
+  <h2 class="reveal">El patrimonio es el juego</h2>
+  <p class="lead reveal">Lota Indómito es un juego geolocalizado para teléfono, tipo <strong>Pokémon GO</strong>, ambientado en la historia real del carbón. El jugador recorre las calles y zonas históricas de la comuna, descubre a los personajes del pasado carbonero, completa misiones, recolecta minerales del juego y sube de rango.</p>
+  <p class="lead reveal" style="margin-top:16px;">El mundo real maneja el juego: los <strong>eventos del cielo</strong> determinan qué personajes y recompensas están activos en cada momento, y las <strong>festividades reales de Lota</strong> activan eventos especiales que llevan visitantes a la calle.</p>
+  <div class="whatis-grid">
+    <div class="card reveal"><span class="ic">⛏️</span><h3>Personajes históricos</h3><p>Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero: cuatro figuras reales del pasado carbonero, vivas en el juego.</p><div class="stat">4 PERSONAJES · GDD §2</div></div>
+    <div class="card reveal"><span class="ic">🪙</span><h3>Economía de minerales</h3><p>Cobre, oro y estaño con identidad propia: se ganan por acciones diferenciadas y son transferibles entre jugadores.</p><div class="stat">MULTI-MONEDA · D-016</div></div>
+    <div class="card reveal"><span class="ic">🌍</span><h3>Eventos reales</h3><p>Festividades y estaciones sincronizan el juego con el calendario de Lota, coordinando flujos turísticos hacia el comercio local.</p><div class="stat">WORLD EVENTS · D-014</div></div>
+    <div class="card reveal"><span class="ic">🏪</span><h3>El comercio revive</h3><p>El comercio local participa del juego y se beneficia del flujo de visitantes que la experiencia genera. El proyecto se autofinancia.</p><div class="stat">ETAPA 2 · MODELO SOSTENIBLE</div></div>
+  </div>
+</section>
 
-  <h2>Cómo funciona</h2>
+<!-- ═══════════ CÓMO FUNCIONA ═══════════ -->
+<section id="como" style="border-top:1px solid var(--line);">
+  <div class="section-label reveal">// La experiencia</div>
+  <h2 class="reveal">Cómo funciona</h2>
   <div class="flow">
-    <div class="step"><b>1 · Evento real</b>El cielo, la hora y las festividades de Lota marcan el ritmo del juego.</div>
-    <div class="arrow">→</div>
-    <div class="step"><b>2 · El enjambre despierta</b>Personajes del pasado carbonero aparecen en las zonas patrimoniales.</div>
-    <div class="arrow">→</div>
-    <div class="step"><b>3 · Caza en la calle</b>El jugador los encuentra caminando por la comuna, guiado por su teléfono.</div>
-    <div class="arrow">→</div>
-    <div class="step"><b>4 · La historia se reconstruye</b>Cada encuentro revela la memoria real de Lota.</div>
+    <div class="step reveal"><span class="num">01 / EVENTO REAL</span><b>El cielo marca el ritmo</b><p>La hora, las estaciones y las festividades de Lota determinan qué está activo en el juego.</p></div>
+    <div class="step reveal"><span class="num">02 / EL ENJAMBRE DESPIERTA</span><b>Personajes en la calle</b><p>Los personajes del pasado carbonero aparecen en las zonas patrimoniales de la comuna.</p></div>
+    <div class="step reveal"><span class="num">03 / CAZA EN EL TELÉFONO</span><b>El jugador los encuentra</b><p>Guiado por su teléfono, el jugador camina por Lota hasta dar con ellos.</p></div>
+    <div class="step reveal"><span class="num">04 / LA HISTORIA SE RECONSTRUYE</span><b>Cada encuentro revela memoria</b><p>Cada encuentro reconstruye la historia real de la comuna, pieza por pieza.</p></div>
   </div>
+</section>
 
-  <h2>Por qué es distinto</h2>
-  <div class="grid">
-    <div class="card"><h3>El patrimonio es el juego</h3><p>No es una app turística más: es un juego con objetivos, recompensas y progreso real, que usa el territorio como tablero.</p></div>
-    <div class="card"><h3>Tecnología soberana</h3><p>Matemática y software propios, sin depender de servicios de mapas ni empresas extranjeras. Más barato de operar y a prueba de errores.</p></div>
-    <div class="card"><h3>El comercio se reactiva</h3><p>El comercio local participa del juego y se beneficia del flujo de visitantes que la experiencia genera.</p></div>
-    <div class="card"><h3>Expansión regional</h3><p>Lota es la prueba: el modelo se replica en Curanilahue, Lebu, Arauco y Concepción, el corredor patrimonial del carbón.</p></div>
+<!-- ═══════════ PILOTOS ═══════════ -->
+<section id="pilotos" style="border-top:1px solid var(--line);">
+  <div class="section-label reveal">// La tecnología</div>
+  <h2 class="reveal">Dos capas, un mismo sistema</h2>
+  <p class="lead reveal">El concepto se construye en dos capas complementarias — el teléfono y el motor — que son parte del mismo sistema, no alternativas.</p>
+  <div class="pilotos">
+    <div class="piloto a reveal">
+      <span class="tag">CAPA A · TELÉFONO</span>
+      <h3>Piloto A — PWA</h3>
+      <p>La ventana de observación: el mapa, las zonas patrimoniales y el geofencing viven en el teléfono del jugador.</p>
+      <ul>
+        <li>Vue 3 + TypeScript + MapLibre</li>
+        <li>Geofencing en el cliente con Turf.js</li>
+        <li>Mapas OpenStreetMap, sin Google</li>
+        <li>Funciona offline en terreno</li>
+      </ul>
+      <div class="mono">piloto-a/ · PWA INSTALABLE</div>
+    </div>
+    <div class="piloto b reveal">
+      <span class="tag">CAPA B · MOTOR — EL CENTRO</span>
+      <h3>Piloto B — Motor S60</h3>
+      <p>El corazón del concepto: matemática soberana que calcula el cielo, los eventos y los portales sin depender de nadie.</p>
+      <ul>
+        <li>Rust + wgpu + aritmética base 60 (S60)</li>
+        <li>0 floats: precisión exacta, sin truncamientos</li>
+        <li>Pipeline GPU sobre Vulkan (GTX 1050)</li>
+        <li>Lattice resonante + memoria compartida</li>
+      </ul>
+      <div class="mono">rust/ · lota_engine · SENTINEL S60</div>
+    </div>
   </div>
+</section>
 
-  <h2>Documentos del proyecto</h2>
-  <div class="docs">
-    <a class="doc-link" href="docs/resumen-ejecutivo.html"><span class="arrow">→</span><span class="t">Resumen ejecutivo</span><div class="d">Una página con lo esencial del proyecto.</div></a>
-    <a class="doc-link" href="docs/propuesta-concepto.html"><span class="arrow">→</span><span class="t">Propuesta de concepto</span><div class="d">Diseño, especificación y plan de desarrollo completo.</div></a>
-    <a class="doc-link" href="docs/concepto-juego.html"><span class="arrow">→</span><span class="t">Concepto del juego (GDD)</span><div class="d">El game design document: mecánicas, personajes, rutas.</div></a>
-    <a class="doc-link" href="prototipo-stitch.html"><span class="arrow">→</span><span class="t">Prototipo visual</span><div class="d">52 pantallas del prototipo de la experiencia.</div></a>
+<!-- ═══════════ GALERÍA PROTOTIPO ═══════════ -->
+<section id="prototipo" style="border-top:1px solid var(--line);">
+  <div class="section-label reveal">// Prototipo visual</div>
+  <h2 class="reveal">Así se ve la experiencia</h2>
+  <p class="lead reveal">52 pantallas del prototipo de la experiencia: el pasaporte, el mapa de la comuna, los encuentros, el canje en el comercio y los reportes ciudadanos.</p>
+  <div class="galeria">
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/pasaporte_ind_mito_perfil/screen.png" alt="Pasaporte Indómito — perfil del jugador" loading="lazy"></div><div class="cap"><b>Pasaporte Indómito</b><span>Perfil y progreso</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/mapa_general_de_la_comuna_de_lota/screen.png" alt="Mapa general de la comuna de Lota" loading="lazy"></div><div class="cap"><b>Mapa de la comuna</b><span>Zonas patrimoniales</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/encuentro_ar_el_ciego_de_la_mina/screen.png" alt="Encuentro en RA con El Ciego de la Mina" loading="lazy"></div><div class="cap"><b>Encuentro RA</b><span>El Ciego de la Mina</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/encuentro_ar_isidora_goyenechea/screen.png" alt="Encuentro en RA con Isidora Goyenechea" loading="lazy"></div><div class="cap"><b>Encuentro RA</b><span>Isidora Goyenechea</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/canje_de_carboncillos_feria_de_lota/screen.png" alt="Canje de carboncillos en la Feria de Lota" loading="lazy"></div><div class="cap"><b>Canje en el comercio</b><span>Feria de Lota</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/b_veda_de_diplomas_certificados/screen.png" alt="Bóveda de diplomas y certificados" loading="lazy"></div><div class="cap"><b>Bóveda de diplomas</b><span>Logros y certificados</span></div></a>
+    <a class="phone reveal" href="prototipo-stitch.html"><div class="frame"><img src="public/stitch/dashboard_de_ciudadan_a_reportes_1/screen.png" alt="Dashboard de reportes ciudadanos" loading="lazy"></div><div class="cap"><b>Reportes ciudadanos</b><span>Dashboard municipal</span></div></a>
   </div>
-</main>
+  <p style="margin-top:34px;" class="reveal"><a class="btn btn-ghost" href="prototipo-stitch.html">Ver las 52 pantallas →</a></p>
+</section>
 
-<footer>Lota Indómito · Proyecto de patrimonio, turismo y tecnología · Lota, Región del Biobío, Chile</footer>
+<!-- ═══════════ DOCUMENTOS ═══════════ -->
+<section id="docs" style="border-top:1px solid var(--line);">
+  <div class="section-label reveal">// Documentación</div>
+  <h2 class="reveal">Documentos del proyecto</h2>
+  <div class="docs-grid">
+    <a class="doc reveal" href="docs/resumen-ejecutivo.html"><span class="t">Resumen ejecutivo <span class="arrow">→</span></span><span class="d">Una página con lo esencial del proyecto, en lenguaje humano.</span></a>
+    <a class="doc reveal" href="docs/propuesta-concepto.html"><span class="t">Propuesta de concepto <span class="arrow">→</span></span><span class="d">Diseño, especificación y plan de desarrollo por etapas (28 secciones).</span></a>
+    <a class="doc reveal" href="docs/concepto-juego.html"><span class="t">Concepto del juego (GDD) <span class="arrow">→</span></span><span class="d">El game design document: mecánicas, personajes, rutas y sistemas.</span></a>
+    <a class="doc reveal" href="docs/decisiones.html"><span class="t">Decisiones de diseño <span class="arrow">→</span></span><span class="d">D-001 a D-017: el registro de decisiones del proyecto.</span></a>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div>LOTA INDÓMITO · PROYECTO DE PATRIMONIO, TURISMO Y TECNOLOGÍA</div>
+  <div style="margin-top:10px;" class="mono">LOTA · REGIÓN DEL BIOBÍO · CHILE</div>
+</footer>
+
+</div>
+
+<!-- ═══════════ THREE.JS — LATTICE RESONANTE ═══════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canvas = document.getElementById("scene3d");
+  if (prefersReduced || !window.THREE) { canvas.style.display = "none"; return; }
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 200);
+  camera.position.set(0, 2.4, 13);
+  camera.lookAt(0, 0, 0);
+
+  // ── Lattice hexagonal resonante (3 capas, 19 nodos por capa) ──
+  const group = new THREE.Group();
+  const nodeGeo = new THREE.SphereGeometry(0.14, 16, 16);
+  const nodeMatA = new THREE.MeshBasicMaterial({ color: 0x65dabc, transparent: true, opacity: 0.85 });
+  const nodeMatB = new THREE.MeshBasicMaterial({ color: 0xD4AF37, transparent: true, opacity: 0.85 });
+  const nodes = [];
+  const layers = 3, ringCount = 7;
+  for (let l = 0; l < layers; l++) {
+    const y = (l - 1) * 1.5;
+    // centro
+    addNode(0, y, 0, nodeMatA);
+    for (let r = 1; r <= 2; r++) {
+      const n = r === 1 ? 6 : 12;
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + (l % 2) * (Math.PI / n);
+        addNode(Math.cos(a) * r * 1.25, y, Math.sin(a) * r * 1.25, r === 1 ? nodeMatA : nodeMatB);
+      }
+    }
+  }
+  function addNode(x, y, z, mat) {
+    const m = new THREE.Mesh(nodeGeo, mat);
+    m.position.set(x, y, z);
+    group.add(m);
+    nodes.push({ mesh: m, base: { x, y, z }, phase: Math.random() * Math.PI * 2 });
+  }
+  // conexiones entre capas (columnas verticales)
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x2A9D8F, transparent: true, opacity: 0.35 });
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i].mesh.position, b = nodes[j].mesh.position;
+      const d = Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+      if (d < 1.6) {
+        const g = new THREE.BufferGeometry().setFromPoints([a.clone(), b.clone()]);
+        group.add(new THREE.Line(g, lineMat));
+      }
+    }
+  }
+  scene.add(group);
+
+  // ── Partículas de energía ──
+  const pCount = 700;
+  const pGeo = new THREE.BufferGeometry();
+  const pos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount * 3; i++) pos[i] = (Math.random() - 0.5) * 30;
+  pGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const pMat = new THREE.PointsMaterial({ color: 0x93a0b4, size: 0.045, transparent: true, opacity: 0.55 });
+  const particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
+
+  // ── Portal: anillo que aparece y se desvanece cíclicamente ──
+  const portalGroup = new THREE.Group();
+  const ringGeo = new THREE.TorusGeometry(1.9, 0.06, 12, 64);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x65dabc, transparent: true, opacity: 0 });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  portalGroup.add(ring);
+  const glowGeo = new THREE.RingGeometry(1.55, 1.95, 64);
+  const glowMat = new THREE.MeshBasicMaterial({ color: 0x2A9D8F, transparent: true, opacity: 0, side: THREE.DoubleSide });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  portalGroup.add(glow);
+  portalGroup.position.set(0, 0, -4.2);
+  portalGroup.rotation.x = Math.PI / 2.4;
+  scene.add(portalGroup);
+
+  const mouse = { x: 0, y: 0 };
+  window.addEventListener("mousemove", (e) => {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+  });
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.01;
+
+    // vibración resonante de los nodos (amplitud por fase)
+    nodes.forEach((n, i) => {
+      const s = 1 + Math.sin(t * 3 + n.phase) * 0.18;
+      n.mesh.scale.set(s, s, s);
+    });
+
+    // rotación lenta de la lattice
+    group.rotation.y = t * 0.12;
+    group.rotation.x = Math.sin(t * 0.2) * 0.12;
+
+    // partículas derivan
+    const pp = particles.geometry.attributes.position;
+    for (let i = 1; i < pp.count * 3; i += 3) {
+      pp.array[i] += Math.sin(t + i) * 0.002;
+    }
+    pp.needsUpdate = true;
+
+    // portal: ciclo de apertura
+    const cycle = (Math.sin(t * 0.7) + 1) / 2; // 0..1
+    ringMat.opacity = cycle * 0.9;
+    glowMat.opacity = cycle * 0.25;
+    const sc = 0.6 + cycle * 0.8;
+    ring.scale.set(sc, sc, sc);
+    glow.scale.set(sc, sc, sc);
+    portalGroup.rotation.z += 0.01;
+
+    // parallax con el mouse
+    camera.position.x += (mouse.x * 1.4 - camera.position.x) * 0.04;
+    camera.position.y += (2.4 - mouse.y * 0.9 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ── reveal on scroll ──
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+})();
+</script>
 </body>
 </html>
