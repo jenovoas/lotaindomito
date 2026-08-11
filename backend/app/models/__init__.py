@@ -14,3 +14,5 @@ class Base(DeclarativeBase):
 from app.models.zona import Zona  # noqa: E402
 from app.models.user import User  # noqa: E402
 from app.models.wallet import WalletTransaction  # noqa: E402
+from app.models.user_location import UserLocation  # noqa: E402
+from app.models.npc import NPC  # noqa: E402

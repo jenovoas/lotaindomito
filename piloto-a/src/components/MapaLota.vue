@@ -5,6 +5,8 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import { point as turfPoint, polygon as turfPolygon } from '@turf/turf'
 import zonasData from '../data/zonas-lota.json'
+import { useGeofenceStore } from '@/stores/geofence'
+import { useGeolocation } from '@/composables/useGeolocation'
 
 interface ZonaOSM {
   id: number
@@ -16,7 +18,8 @@ interface ZonaOSM {
 const zonas = (zonasData as { zonas: ZonaOSM[]; count: number; fuente: string }).zonas
 
 const mapContainer = ref<HTMLElement | null>(null)
-const zonaActiva = ref<string | null>(null)
+const geofence = useGeofenceStore()
+const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
 let map: Map | null = null
 
 onMounted(() => {
@@ -96,7 +99,6 @@ onMounted(() => {
         .setLngLat(e.lngLat as LngLatLike)
         .setHTML(`<h3>${name}</h3><p style="font-size:0.8em;color:#8b949e">${tags}</p>`)
         .addTo(map)
-      zonaActiva.value = name
     })
 
     // Cambiar cursor al pasar sobre una zona
@@ -105,6 +107,13 @@ onMounted(() => {
     })
     map.on('mouseleave', 'zonas-fill', () => {
       if (map) map.getCanvas().style.cursor = ''
+    })
+
+    // Teletransporte virtual al hacer click en el mapa
+    map.on('click', (e) => {
+      if (geofence.isVirtualMode) {
+        teleport(e.lngLat.lat, e.lngLat.lng)
+      }
     })
 
     // Demo de geofencing: promedio de vértices cae dentro del polígono de Chiflón
@@ -132,16 +141,27 @@ onUnmounted(() => {
 <template>
   <div class="mapa-container">
     <div ref="mapContainer" class="mapa"></div>
-    <aside v-if="zonaActiva" class="panel-zona">
-      <button class="cerrar" @click="zonaActiva = null">✕</button>
-      <h2>{{ zonaActiva }}</h2>
+
+    <!-- Banner: GPS no disponible -->
+    <div v-if="!gpsAvailable" class="banner banner-gps">
+      GPS no disponible, modo manual activado
+    </div>
+
+    <!-- Banner: dentro de una zona -->
+    <div v-if="geofence.zonaActiva?.entered" class="banner banner-zona">
+      Estás en {{ geofence.zonaActiva.zona_name }}
+    </div>
+
+    <aside v-if="geofence.zonaActiva" class="panel-zona">
+      <button class="cerrar" @click="geofence.zonaActiva = null">✕</button>
+      <h2>{{ geofence.zonaActiva.zona_name }}</h2>
       <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-10)</p>
       <p class="hint">Geofencing listo — entrando a esta zona se activa la misión.</p>
     </aside>
     <aside class="panel-zonas">
       <h3>Zonas patrimoniales</h3>
       <ul>
-        <li v-for="z in zonas" :key="z.id" @click="zonaActiva = z.name">
+        <li v-for="z in zonas" :key="z.id">
           {{ z.name }}
         </li>
       </ul>
@@ -167,6 +187,31 @@ onUnmounted(() => {
   height: 100%;
 }
 
+.banner {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.banner-gps {
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #e6e9ef;
+}
+
+.banner-zona {
+  background: #3fe6c0;
+  color: #0f1216;
+}
+
 .panel-zona,
 .panel-zonas {
   position: absolute;
@@ -186,9 +231,9 @@ onUnmounted(() => {
 
 .panel-zonas {
   left: 1rem;
-  top: 1rem;
+  top: 6rem;
   width: 260px;
-  max-height: calc(100vh - 2rem);
+  max-height: calc(100vh - 8rem);
   overflow-y: auto;
 }
 
@@ -208,7 +253,6 @@ onUnmounted(() => {
   padding: 0.4rem 0.6rem;
   margin: 2px 0;
   border-radius: 4px;
-  cursor: pointer;
   font-size: 0.85rem;
 }
 
