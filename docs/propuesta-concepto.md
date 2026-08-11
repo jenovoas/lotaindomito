@@ -1646,4 +1646,50 @@ El motor no se puede reemplazar por un motor de juego generico porque el determi
 
 ---
 
-<!-- §11 ML externo → Bloque C tarea 12 -->
+## §11 ML externo
+
+### §11.1 El servicio ML externo: arquitectura Python
+
+El servicio ML corre como proceso Python independiente, separado del proceso de lota-server. Esta separacion es mandatoria por tres razones:
+
+1. **Incompatibilidad de runtime.** El servicio ML utiliza scikit-learn, XGBoost, Prophet, NetworkX y GeoPandas, todas librerias que operan con floats de punto flotante de Python. El motor S60 de Sentinel tiene `forbid(clippy::float_arithmetic)` activo; coexistencia en el mismo proceso es imposible.
+
+2. **Decoupling de latencia.** El servicio ML ejecuta en modo batch, no en tiempo real. Lee de vistas materializadas de PostgreSQL cada 5 minutos. Esto desacopla la latencia de inferencia ML de la latencia del juego.
+
+3. **Statelessness.** El servicio ML es stateless. Puede reiniciarse, escalarse horizontalmente o pausarse sin afectar la operacion del juego.
+
+Stack tecnologico: Python 3.12, scikit-learn 1.4, XGBoost 2.0, Prophet 1.1, NetworkX 3.2, GeoPandas 0.14, SQLAlchemy 2.0. La infraestructura corre en el mismo fan VPS que lota-server, compartiendo la conexion PostgreSQL pero con credenciales de solo lectura. Un cron job ejecuta el servicio cada 5 minutos durante horario operativo (08:00 a 22:00) y cada hora en horario nocturno.
+
+(Ver `_analisis/22_ml_analytics_d014.md` §1, §6, §8.)
+
+### §11.2 Tres dimensiones de analisis: comercial, social, turistica
+
+El servicio ML produce analisis en tres dimensiones independientes:
+
+**Comercial.** Metricas orientadas al comercio local: cupones emitidos versus canjeados por comercio y por World Event; ROI por World Event incluyendo totales de emision, canje, volumen de tickets y ticket promedio por cupon; desglose de cupones por tipo de mineral (cobre, oro, estaño); y comparacion cruzada entre comercios para identificar cuáles sobresalen en eventos específicos, informacion útil para que las asociaciones de comercio coordinen con el Municipio.
+
+**Social.** Metricas de comunidad: frecuencia de transferencias P2P por usuario y tipo de mineral; grafo de red que muestra quién transfiere a quién mediante metricas de centralidad de NetworkX como betweenness y closeness; patrones de trueque por tipo de mineral; y deteccion de anomalías que señala usuarios que reciben muchas transferencias sin realizar micro-sesiones o viceversa.
+
+**Turistica.** Metricas para el Municipio: mapas de calor de visitacion por zona, hora y dia de la semana; analisis de rutas típicas entre zonas; metricas de retencion D+1, D+7, D+30 por cohorte de turistas; y patrones estacionales que correlacionan con Fiestas Patrias, San Juan, Aniversario de Lota, temporada ballenera y picos de demanda.
+
+(Ver `_analisis/22_ml_analytics_d014.md` §3.)
+
+### §11.3 Privacidad desde el diseño y cumplimiento Ley 19.628
+
+La arquitectura de privacidad opera en multiples capas.
+
+El servicio ML no accede a la identidad real de los usuarios. El user_id es un UUID generado del lado del cliente; la correspondencia entre UUID e identidad real reside en la tabla users de lota-server, inaccesible para el servicio ML.
+
+Las vistas materializadas que consume el servicio ML contienen únicamente datos pre-agregados: conteos, promedios y metricas anonimas. Un compromiso del servicio no permitiria extraer comportamientos individuales.
+
+En cuanto al cumplimiento normativo, el diseño cumple con la Ley 19.628 de proteccion de datos personales. La recoleccion requiere consentimiento explicito durante el onboarding, revocable en cualquier momento. Los identificadores son UUID sin vinculacion a datos personales. El Municipio accede unicamente a datos agregados. Se minimizan los datos recopilados a los 16 eventos definidos en `_analisis/22 §5`. Los eventos se retienen por 24 meses y luego se agregan permanentemente.
+
+El aviso de privacidad se presenta durante el onboarding y esta disponible en la configuracion de la cuenta.
+
+(Ver `_analisis/22_ml_analytics_d014.md` §8 y `docs/estado.md`.)
+
+El servicio ML es la diferencia entre un juego que produce datos y un juego que produce datos útiles para el interes publico. La misma corriente de eventos que alimenta la economia del juego produce los mapas de calor que el Municipio usa para planificar inversion en infraestructura, las metricas de ROI que las asociaciones de comercio usan para coordinarse entre si, y los datos de retencion que demuestran que el modelo de autofinanciamiento funciona. La arquitectura de privacidad asegura que esta utilidad de datos no se logra a costa de la privacidad de los jugadores. El servicio ML es una herramienta de infraestructura publica, no una herramienta de vigilancia.
+
+---
+
+<!-- §12 Sync y operación → Bloque C tarea 13 -->
