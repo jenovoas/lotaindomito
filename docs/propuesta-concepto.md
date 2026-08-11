@@ -283,7 +283,7 @@ Gancho narrativo: El Ciego de la Mina encarna la sabiduría del trabajador que c
 
 **La Chinchorrera Mayor**
 
-Nombre e identificación: La Chinchorrera Mayor, figura representativa de las mujeres del borde costero de Lota que practicaban la extracción de mariscos en las rocas y transmitían orally los oficios del mar de generación en generación.
+Nombre e identificación: La Chinchorrera Mayor, figura representativa de las mujeres del borde costero de Lota que practicaban la extracción de mariscos en las rocas y transmitían oralmente los oficios del mar de generación en generación.
 
 Zona: La Caleta y el borde costero. Su territorio natural es la franja donde la tierra se encuentra con el mar, donde la vida de los trabajadores del mar se desarrollaba fuera del horario de la mina.
 
@@ -1692,4 +1692,99 @@ El servicio ML es la diferencia entre un juego que produce datos y un juego que 
 
 ---
 
-<!-- §12 Sync y operación → Bloque C tarea 13 -->
+## §12 Sync y operación
+
+### §12.1 rclone bisync con Google Drive
+
+La sincronización bidireccional con Google Drive permite que el repositorio local
+(`/home/jnovoas/Proyectos/LotaIndomito/`) y la carpeta de Drive mantengan el
+mismo contenido sin intervención manual. El patrón es idéntico al usado en el
+proyecto `micellia`: primero una copia inicial con `rclone copy` y luego operación
+continua con `rclone bisync` disparada por un servicio user de systemd.
+
+La carpeta raíz en Drive es `LotaIndómito/`. Dentro de ella se organizan
+subcarpetas según el tipo de contenido:
+
+- `audios/` recibe las notas de voz de WhatsApp que envía Fabiola durante el
+  desarrollo. Estos archivos son demasiado pesados para versionarlos en git.
+- `correcciones/` es donde Fabiola sube los comentarios, correcciones y documentos
+  que llegan durante la revisión de la propuesta.
+- `docs/` almacena documentación adicional del proyecto que no tiene sentido
+  mantener versionada en git.
+
+Los filtros de rclone excluyen `.ogg`, `.venv`, `node_modules`, `.next`,
+`__pycache__`, `.git`, `.hermes/cache` y la carpeta `stitch_*` (contenido
+estático y pesado que ya está versionado en git). La sincronización permite que
+Fabiola suba audios, fotos y documentos sin depender de un canal externo, y
+que el equipo acceda a la versión más reciente de cualquier archivo del proyecto.
+
+El comando inicial `rclone bisync --resync` requiere autorización explícita de
+Jaime antes de ejecutarse, según la decisión D-001. Una vez que la carpeta
+remota tiene contenido real, el sistema funciona de manera automática. El estado
+actual es que D-001 ya está implementado y en operación, con 18 archivos
+sincronizados y el timer de systemd ejecutando la sync cada 5 minutos
+(ver `docs/estado.md` §6 y `MEMORY.md` §0).
+
+### §12.2 Deploy en pinguinoseguro.cl/lotaindomito
+
+El despliegue del piloto se realiza en el VPS fan de Jaime, accesible desde
+`pinguinoseguro.cl`. Este dominio resuelve al VPS fan en la dirección
+157.254.174.40 y cuenta con TLS gestionado por Let's Encrypt mediante certbot
+con renovación automática. El certificado se almacena en
+`/etc/letsencrypt/live/pinguinoseguro.cl/`.
+
+El acceso se configura como un virtual host basado en subruta:
+`pinguinoseguro.cl/lotaindomito/`. Nginx recibe las peticiones para esa ruta y
+las reenvía al proceso `lota-server`. Los assets estáticos de la PWA (generados
+con `npm run build` a partir de `piloto-a/`) se sirven directamente por nginx,
+sin pasar por `lota-server`, lo que mejora el rendimiento.
+
+El servicio `lota-server` se gestiona como daemon mediante un unit file de
+systemd en `~/.config/systemd/user/lota-server.service`. Esto permite inicio
+automático al arrancar el servidor y reinicio ante caídas. La base de datos
+PostgreSQL también reside en el mismo VPS, con conexión local. Se realiza un
+dump diario con `pg_dump` a un archivo local, y semanalmente se envía una copia
+a la carpeta de Drive sincronizada con rclone, de modo que el respaldo queda
+disponible sin costo adicional.
+
+El monitoreo cubre tres capas: logs de systemd para el proceso, `pgrep` para
+verificar que el daemon está vivo, y el endpoint `GET /api/v1/health` como
+prueba de liveness a nivel de aplicación. Si la verificación de liveness falla
+tres veces consecutivas, se dispara una alerta al correo de Jaime
+(ver `docs/estado.md` §6 y `MEMORY.md` §0).
+
+### §12.3 Plan de migración cuando Fabiola compre dominio propio
+
+El despliegue actual en `pinguinoseguro.cl/lotaindomito/` es el entorno Piloto.
+Está diseñado para ser reemplazado cuando Fabiola adquiera un dominio propio
+para el lanzamiento en producción (probablemente algo como `lotaindomito.cl` o
+similar, por definir). La migración es directa:
+
+1. El entorno actual sigue operando durante toda la transición, sirviendo el
+   mismo contenido en la nueva dirección.
+2. Se configura un virtual host adicional en nginx para el nuevo dominio.
+3. Se genera el certificado TLS del nuevo dominio mediante Let's Encrypt.
+4. Una vez que el nuevo dominio está estable y verificado, el acceso a
+   `pinguinoseguro.cl/lotaindomito/` se convierte en una redirección.
+5. Los registros DNS del subpath antiguo se pueden deprecar 6 meses después de que
+   el nuevo dominio esté operativo.
+
+La ventaja es que ni la PWA ni `lota-server` requieren cambios de código para
+migrar. La aplicación es agnóstica del dominio: lee la configuración desde
+variables de entorno o desde el archivo de configuración runtime. El sync de
+Drive con rclone continúa sin modificación alguna.
+
+(Ver `docs/estado.md` §6.)
+
+---
+
+La infraestructura operativa de Lota Indómito está diseñada deliberadamente para
+minimizar costos: todo se ejecuta en un VPS propio, sin servicios de terceros
+para hosting, bases de datos ni almacenamiento. La ruta de migración hacia un
+dominio propio es directa porque la aplicación no tiene dependencias con el
+nombre del dominio. El costo total durante la fase Piloto se estima entre 15 y
+25 USD mensuales, correspondiente únicamente al hosting del VPS.
+
+---
+
+<!-- §13 Por qué S60 → Bloque D tarea 14 -->
