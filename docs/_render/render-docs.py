@@ -282,6 +282,7 @@ def main():
     targets = [
         ("docs/resumen-ejecutivo.md",   "docs/resumen-ejecutivo.html",   "Resumen ejecutivo"),
         ("docs/propuesta-concepto.md", "docs/propuesta-concepto.html", "Propuesta de concepto"),
+        ("docs/propuesta-fondo.md",    "docs/propuesta-fondo.html",    "Propuesta para fondo"),
         ("docs/estado.md",          "docs/estado.html",          "Estado del proyecto"),
         ("docs/decisiones.md",      "docs/decisiones.html",      "Decisiones"),
         ("docs/procedimientos.md",  "docs/procedimientos.html",  "Procedimientos"),
@@ -291,6 +292,7 @@ def main():
         ("_analisis/05_analisis_tecnologias_disponibles.md", "_analisis/05_analisis_tecnologias_disponibles.html", "Análisis de tecnologías"),
         ("_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md", "_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.html", "Investigación juegos ultra rápidos Rust"),
         ("_analisis/07_propuesta_arquitectura_servidor_rust_juego.md", "_analisis/07_propuesta_arquitectura_servidor_rust_juego.html", "Propuesta arquitectura servidor dedicado Rust"),
+        ("_analisis/17_arquitectura_gpu_motor_lota.md", "_analisis/17_arquitectura_gpu_motor_lota.html", "Arquitectura del motor GPU (Piloto B)"),
         ("docs/concepto-juego.md",               "docs/concepto-juego.html",               "Concepto del juego (GDD)"),
     ]
 
