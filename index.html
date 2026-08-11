@@ -204,28 +204,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="mainnav">
   <a class="brand" href="#">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- lattice hexagonal (3 nodos visibles + centro) -->
-      <polygon points="20,3 34.8,11.5 34.8,28.5 20,37 5.2,28.5 5.2,11.5" stroke="#232c3a" stroke-width="1.4"/>
-      <polygon points="20,9 30.4,15.3 30.4,24.7 20,31 9.6,24.7 9.6,15.3" stroke="#65dabc" stroke-width="1.1" stroke-opacity="0.5"/>
-      <!-- nodos de la lattice -->
-      <circle cx="20" cy="3" r="2.2" fill="#65dabc"/>
-      <circle cx="34.8" cy="11.5" r="2.2" fill="#65dabc"/>
-      <circle cx="34.8" cy="28.5" r="2.2" fill="#D4AF37"/>
-      <circle cx="20" cy="37" r="2.2" fill="#D4AF37"/>
-      <circle cx="5.2" cy="28.5" r="2.2" fill="#65dabc"/>
-      <circle cx="5.2" cy="11.5" r="2.2" fill="#65dabc"/>
-      <!-- cristal dorado central (el mineral) -->
-      <polygon points="20,13.5 26,17.5 26,24.5 20,28.5 14,24.5 14,17.5" fill="#D4AF37" fill-opacity="0.9"/>
-      <polygon points="20,13.5 26,17.5 20,21 14,17.5" fill="#ffe9a0" fill-opacity="0.7"/>
-      <!-- líneas de resonancia hacia el centro -->
-      <line x1="20" y1="3" x2="20" y2="13.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
-      <line x1="34.8" y1="11.5" x2="26" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
-      <line x1="34.8" y1="28.5" x2="26" y2="24.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
-      <line x1="20" y1="37" x2="20" y2="28.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
-      <line x1="5.2" y1="28.5" x2="14" y2="24.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
-      <line x1="5.2" y1="11.5" x2="14" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
-    </svg>
+    <img src="public/nav_logo.jpg" alt="Lota Indómito Logo" style="width:40px;height:40px;border-radius:10px;border:1px solid var(--gold);object-fit:cover;">
     <span>
       <span class="name">Lota<span>Indómito</span></span>
       <span class="sub" style="display:block;">Patrimonio · Juego · Lota</span>
@@ -282,10 +261,38 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   <p class="lead reveal">Lota Indómito es un juego geolocalizado para teléfono, tipo <strong>Pokémon GO</strong>, ambientado en la historia real del carbón. El jugador recorre las calles y zonas históricas de la comuna, descubre a los personajes del pasado carbonero, completa misiones, recolecta minerales del juego y sube de rango.</p>
   <p class="lead reveal" style="margin-top:16px;">El mundo real maneja el juego: los <strong>eventos del cielo</strong> determinan qué personajes y recompensas están activos en cada momento, y las <strong>festividades reales de Lota</strong> activan eventos especiales que llevan visitantes a la calle.</p>
   <div class="whatis-grid">
-    <div class="card reveal"><span class="ic">⛏️</span><h3>Personajes históricos</h3><p>Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero: cuatro figuras reales del pasado carbonero, vivas en el juego.</p><div class="stat">4 PERSONAJES · GDD §2</div></div>
-    <div class="card reveal"><span class="ic">🪙</span><h3>Economía de minerales</h3><p>Cobre, oro y estaño con identidad propia: se ganan por acciones diferenciadas y son transferibles entre jugadores.</p><div class="stat">MULTI-MONEDA · D-016</div></div>
-    <div class="card reveal"><span class="ic">🌍</span><h3>Eventos reales</h3><p>Festividades y estaciones sincronizan el juego con el calendario de Lota, coordinando flujos turísticos hacia el comercio local.</p><div class="stat">WORLD EVENTS · D-014</div></div>
-    <div class="card reveal"><span class="ic">🏪</span><h3>El comercio revive</h3><p>El comercio local participa del juego y se beneficia del flujo de visitantes que la experiencia genera. El proyecto se autofinancia.</p><div class="stat">ETAPA 2 · MODELO SOSTENIBLE</div></div>
+    <div class="card reveal card-interactive" data-topic="personajes" style="cursor:pointer;">
+      <div style="width:100%;height:160px;overflow:hidden;border-radius:12px;margin-bottom:14px;border:1px solid var(--line);">
+        <img src="public/stitch/encuentro_ar_isidora_goyenechea/screen.png" alt="Personajes Históricos" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <h3>Personajes históricos 🔍</h3>
+      <p>Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero: cuatro figuras reales del pasado carbonero, vivas en el juego.</p>
+      <div class="stat">CLICK PARA VER DETALLE AR · GDD §2</div>
+    </div>
+    <div class="card reveal card-interactive" data-topic="minerales" style="cursor:pointer;">
+      <div style="width:100%;height:160px;overflow:hidden;border-radius:12px;margin-bottom:14px;border:1px solid var(--line);">
+        <img src="public/stitch/b_veda_de_beneficios_est_tica_de_fichas_mineras/screen.png" alt="Economía de Minerales" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <h3>Economía de minerales 🔍</h3>
+      <p>Cobre, oro y estaño con identidad propia: se ganan por acciones diferenciadas y se canjean en el comercio local de Lota.</p>
+      <div class="stat">CLICK PARA VER FICHAS · D-016</div>
+    </div>
+    <div class="card reveal card-interactive" data-topic="eventos" style="cursor:pointer;">
+      <div style="width:100%;height:160px;overflow:hidden;border-radius:12px;margin-bottom:14px;border:1px solid var(--line);">
+        <img src="public/stitch/mapa_de_lota_iconograf_a_de_monumentos_mejorada/screen.png" alt="Eventos Reales y Zonas" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <h3>Eventos reales & Zonas 🔍</h3>
+      <p>Festividades y estaciones sincronizan el juego con el calendario de Lota, coordinando flujos turísticos hacia el comercio local.</p>
+      <div class="stat">CLICK PARA VER MAPA · D-014</div>
+    </div>
+    <div class="card reveal card-interactive" data-topic="comercio" style="cursor:pointer;">
+      <div style="width:100%;height:160px;overflow:hidden;border-radius:12px;margin-bottom:14px;border:1px solid var(--line);">
+        <img src="public/stitch/canje_de_carboncillos_feria_de_lota/screen.png" alt="El Comercio Revive" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <h3>El comercio revive 🔍</h3>
+      <p>El comercio local participa del juego y se beneficia del flujo de visitantes que la experiencia genera. El proyecto se autofinancia.</p>
+      <div class="stat">CLICK PARA VER CANJE · MODELO</div>
+    </div>
   </div>
 </section>
 
@@ -624,23 +631,88 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   </div>
 </div>
 
+<!-- ═══════════ MODAL DETALLE CARDS ═══════════ -->
+<div class="modal-backdrop" id="topicModal">
+  <div class="modal-box" style="max-width:750px;height:auto;max-height:85vh;background:#12161d;border-color:var(--teal);">
+    <div class="modal-header">
+      <h3 id="topicModalTitle">Detalle de la Mecánica</h3>
+      <button class="modal-close" id="closeTopicModal">&times;</button>
+    </div>
+    <div style="padding:24px;overflow-y:auto;color:var(--text);" id="topicModalContent">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+</div>
+
 <script>
 (function() {
   const modal = document.getElementById("propuestaModal");
   const openBtn = document.getElementById("openPropuestaModal");
   const closeBtn = document.getElementById("closePropuestaModal");
 
-  if (openBtn && modal) {
-    openBtn.addEventListener("click", () => modal.classList.add("open"));
-  }
-  if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => modal.classList.remove("open"));
-  }
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("open");
+  if (openBtn && modal) openBtn.addEventListener("click", () => modal.classList.add("open"));
+  if (closeBtn && modal) closeBtn.addEventListener("click", () => modal.classList.remove("open"));
+  if (modal) modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+
+  // Topic Modal
+  const topicModal = document.getElementById("topicModal");
+  const closeTopicBtn = document.getElementById("closeTopicModal");
+  const topicTitle = document.getElementById("topicModalTitle");
+  const topicContent = document.getElementById("topicModalContent");
+
+  const topicsData = {
+    personajes: {
+      title: "⛏️ Personajes Históricos & Guías AR",
+      img: "public/stitch/encuentro_ar_isidora_goyenechea/screen.png",
+      desc: "Los guardianes de la cuenca (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero) emergen en los monumentos en Realidad Aumentada. Cada personaje posee su propio tema musical histórico compuesto para el juego, relatando misiones y memoria del carbón.",
+      btnText: "Ver Pantalla Completa en Stitch 🚀",
+      link: "prototipo-stitch.html"
+    },
+    minerales: {
+      title: "🪙 Economía de Minerales & Fichas Mineras",
+      img: "public/stitch/b_veda_de_beneficios_est_tica_de_fichas_mineras/screen.png",
+      desc: "Sistema multi-moneda soberano (Carboncillos, Cobre, Oro y Estaño). Los jugadores ganan fichas por recorrer zonas patrimoniales y resolver acertijos, las cuales pueden canjear en comercios adheridos de Lota.",
+      btnText: "Ver Bóveda de Fichas en Prototipo 🚀",
+      link: "prototipo-stitch.html"
+    },
+    eventos: {
+      title: "🌍 Eventos Reales & Mapa de Zonas",
+      img: "public/stitch/mapa_de_lota_iconograf_a_de_monumentos_mejorada/screen.png",
+      desc: "El mapa se sincroniza con el cielo real sobre Lota y el calendario de festividades de la comuna. Las 5 zonas patrimoniales (Chiflón del Diablo, Parque Isidora, Pabellón 83, Teatro y Costa) activan recompensas especiales.",
+      btnText: "Ver Mapa Interactivo de Lorena 🚀",
+      link: "prototipo-stitch.html"
+    },
+    comercio: {
+      title: "🏪 El Comercio Local Revive",
+      img: "public/stitch/canje_de_carboncillos_feria_de_lota/screen.png",
+      desc: "Los locatarios y pymes de Lota (Feria de Lota, restaurantes, artesanía) participan del juego. El flujo de jugadores se convierte en clientes reales al canjear Carboncillos por descuentos y ofertas.",
+      btnText: "Ver Pantalla de Canje Comercial 🚀",
+      link: "prototipo-stitch.html"
+    }
+  };
+
+  document.querySelectorAll(".card-interactive").forEach(card => {
+    card.addEventListener("click", () => {
+      const topicKey = card.getAttribute("data-topic");
+      const data = topicsData[topicKey];
+      if (data) {
+        topicTitle.innerText = data.title;
+        topicContent.innerHTML = `
+          <div style="width:100%;height:280px;overflow:hidden;border-radius:12px;margin-bottom:16px;border:1px solid var(--line);">
+            <img src="${data.img}" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <p style="font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:20px;">${data.desc}</p>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <a href="${data.link}" class="btn btn-primary" style="background:var(--teal);color:#10131a;font-size:13px;">${data.btnText}</a>
+          </div>
+        `;
+        topicModal.classList.add("open");
+      }
     });
-  }
+  });
+
+  if (closeTopicBtn) closeTopicBtn.addEventListener("click", () => topicModal.classList.remove("open"));
+  if (topicModal) topicModal.addEventListener("click", (e) => { if (e.target === topicModal) topicModal.classList.remove("open"); });
 })();
 </script>
 
