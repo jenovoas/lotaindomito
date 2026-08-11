@@ -454,3 +454,103 @@ El universo narrativo no es un adorno sobre el juego. Es el sustrato sobre el qu
 ---
 
 <!-- §4 Sistema económico → Bloque B tarea 5 -->
+
+## §4 Sistema económico
+
+El modelo económico de Lota Indómito se diseña desde una pregunta concreta: si el juego genera valor para el comercio local de Lota, ¿cómo captura ese valor la plataforma para cubrir sus costos operativos? La respuesta no es un modelo de suscripción ni un pay-to-win. Es una comisión sobre cada transacción real que el juego genera en el comercio local.
+
+### §4.1 La transacción como unidad económica
+
+El cobre y el oro no son tokens comprables con dinero real. Son medios de intercambio internos que nacen del juego y mueren en el comercio local. Un turista no paga para obtener minerales; los gana jugando. Los gasta en cupones QR que canjea en tiendas y restaurantes reales. El comercio local acepta los cupones, los reconcilia con el servidor, y el servidor descuenta una comisión de entre 5% y 10% según el tipo de transacción (según el rango documentado en `_analisis/21 §4.4` y `_analisis/23 §2`). La comisión es el revenue de la plataforma.
+
+Esta es la diferencia central con cualquier aplicación turística o gamificación genérica. El cupón QR no es un badge digital. Es un título de deuda del comercio local contra el turista, canjeable por un producto real. Sin ese nivel de concreción, el comercio no tiene incentivo real para participar y el modelo no se cierra.
+
+El diseño de la comisión sigue la lógica de Mercado Pago o Transbank: el comercio local acepta el cupón como forma de pago porque sabe que el servidor lo va a honrar. El servidor honra el cupón porque cobra la comisión antes de liberar los fondos. El turista recibe un descuento real o un producto real. Los tres ganan.
+
+La cadena completa: el juego otorga minerales al turista como recompensa por acción lúdica → el turista gasta minerales en un cupón QR en el comercio local → el comercio acepta el cupón → el servidor reconcilia la transacción → el servidor descuenta la comisión → el comercio recibe el saldo. El cobre y el oro circulan como moneda interna del ecosistema, anclados a transacciones reales en comercio real.
+
+### §4.1.1 Escenario micro-sesión detallada
+
+El siguiente recorrido describe una micro-sesión completa desde la perspectiva del turista:
+
+Un turista ingresa al Parque de Lota. El geofencing de la zona activa una vibración en su teléfono. Aparece el avatar de Isidora Goyenechea en la PWA con su línea de diálogo: "¡Cuánto tiempo, Explorador! El Pabellón espera tu visita. ¿Aceptas la misión?". El jugador acepta. Comienza un minijuego de 90 segundos, un QTE donde debe amasar masa de pan en el ritmo correcto. Si tiene éxito, obtiene 30 cobre y 1 XP.
+
+Los cinco tramos de la micro-sesión se distribuyen así: Trigger (15 segundos) + Contexto (45 segundos) + Acción (90 segundos) + Recompensa (60 segundos) + Próximo (30 segundos) = 240 segundos, es decir, 4 minutos en total. Al finalizar el primer día de juego, un jugador típico ha acumulado 200 cobre a través de 3 a 4 micro-sesiones. Gasta 50 cobre en la panadería del sector: el cupón QR aparece en su teléfono, lo escanea en el POS de la panadería, y el cupón se canjea por medio kilo de pan de mina.
+
+El flujo del cobre en esta transacción es: juego → wallet del jugador → cupón QR → aceptación del comercio local → reconciliación con el servidor → comisión futura. Esta es la unidad atómica del modelo económico. Sin esta unidad no hay reconciliación, sin reconciliación no hay comisión, sin comisión no hay plataforma.
+
+### §4.2 World Events como motor de oleadas comerciales
+
+Los World Events son la palanca que convierte la economía del cobre en un flujo comercial significativo. Un evento del cielo afecta la atmósfera del juego; un World Event sincroniza el juego entero con una fecha real y coordina oleadas de turistas hacia el comercio local durante fechas de alto impacto comercial.
+
+El diseño de los World Events se documenta en detalle en `_analisis/21`. Aquí interesa la mecánica económica. Cada World Event tiene tres componentes que generan transacción comercial directa:
+
+La primera es la misión temática que requiere la visita física a un comercio local. La misión "El Sabor del Carbón" de Fiestas Patrias obliga al jugador a visitar tres panaderías o restaurantes del sector y escanear un QR en cada uno. Cada escaneo es una transacción potencial. La segunda es la insignia exclusiva, que no se puede obtener fuera del evento (estilo WoW). La insignia genera FOMO legítimo y obliga al jugador a volver durante la ventana del evento. La tercera es el cupón real canjeable en comercio asociado, con un descuento de entre 10% y 15% según el tipo de comercio, como se documenta en `_analisis/21 §4.4`.
+
+El cupón tiene caducidad. La recomendación de diseño es de 30 a 60 días tras la obtención, lo que balancea la urgencia del cupón con la realidad del turista de paso. Para la insignia exclusiva la urgencia es máxima: si no se obtiene durante la ventana del evento, no vuelve. Eso es lo que genera el pico de tráfico comercial en las fechas clave.
+
+El calendario de World Events se opera con una lógica de planificación comercial. Las fechas nacionales (Fiestas Patrias, San Juan, Día del Patrimonio) son fijas y se programan con anticipación. Las fechas locales y comerciales se curan en coordinación con el Municipio y los comerciantes. El resultado es un calendario de entre 4 y 6 World Events por año, cada uno con entre 4 y 5 comercios asociados, según los parámetros documentados en `_analisis/21 §3`.
+
+### §4.2.1 Flujo detallado de Fiestas Patrias
+
+Dos semanas antes del evento, el calendario del cielo publica el World Event en la PWA del jugador: "Fiestas Patrias 2026: del 17 al 19 de septiembre. Doña Carmen la Empanadera aparecerá en el Parque". El 17 de septiembre, el orquestador SMOMA activa el NPC exclusivo Doña Carmen. Camina un radio de 200 metros alrededor del Parque de Lota.
+
+El jugador debe encontrarla. Para hacerlo, camina hacia la posición actual del NPC en el mapa. Si la distancia se cierra a menos de 20 metros, se dispara el encuentro y la misión asociada: "El Sabor del Carbón". La misión requiere visitar tres panaderías locales, escanear el QR en cada una y confirmar la visita. Al completar la misión, el jugador obtiene la insignia "Catador Patrio" (exclusiva, no obtenible después del evento), cobre y oro, más un cupón QR canjeable en Restaurant X con un descuento de entre 10% y 15% (dentro del rango documentado en `_analisis/21 §4.4`). El cupón caduca en 72 horas.
+
+Contrastado con el flujo de San Juan: ventana de evento más corta (24 a 48 horas), NPC diferente (El Ciego de la Mina en el Chiflón), misión diferente (llevar una foto del fuego al comercio asociado). Los World Events operan como oleadas de turistas en fechas que maximizan el peak revenue del comercio local. La coordinación de fechas no es accidental: es el núcleo del modelo D-014.
+
+### §4.3 Subastas y comercio de alto valor
+
+El estaño es la moneda del juego completo. Su obtención depende de la convergencia matemática de la lattice S60 de Sentinel, lo que lo convierte en el mineral más escaso del ecosistema. Esa escasez lo habilita como medio para transacciones de alto valor: subastas digitales de productos únicos del comercio local, títulos especiales de avatar, diplomas de honor descargables en PDF.
+
+El diseño de las subastas se implementa en dos etapas. La Etapa 0 (piloto) usa venta directa con precio fijo: el comprador paga inmediatamente, sin puja ni escrow. La Etapa 1 introduce el flujo completo de puja + escrow + reputación.
+
+### §4.3.1 Escenario completo de una subasta (Etapa 1)
+
+El escenario describe un ejemplo completo de una subasta en Etapa 1:
+
+Un restaurant local lista "Cena para dos con mariscos frescos" con un precio inicial de 500 cobre. Paso 1 (Vendedor lista): el dueño del restaurant carga descripción, fotos, precio inicial (500 cobre) y duración (3 días). Paso 2 (Puja abierta): los usuarios pujan en incrementos de 50 cobre. Tras 2 días, la puja más alta es de 1.200 cobre. Paso 3 (Cierre): gana el mejor postor. Paso 4 (Pago + escrow): los 1.200 cobre del ganador se mueven a escrow en la wallet del servidor (escrowed_amounts). Paso 5 (Entrega + confirmación): comprador y vendedor coordinan el retiro en el restaurant. El comprador abre la app y confirma la recepción. Paso 6 (Liberación): los 1.200 cobre se mueven desde escrow a la wallet del vendedor menos la comisión de 5% (60 cobre para productos según `_analisis/23 §2`) = 1.140 cobre. Paso 7 (Reputación): ambos dejan una calificación de 5 estrellas. La plataforma ganó 60 cobre en comisión por esta transacción.
+
+En la Etapa 0, la versión es venta directa con precio fijo (el comprador paga 1.200 cobre al vendedor inmediatamente, sin puja ni escrow). El sistema completo de puja + escrow + reputación llega en Etapa 1.
+
+### §4.4 Dashboards y métricas para tres actores
+
+El servicio de ML produce dashboards mensuales para tres actores: Municipio, comercio local e INTERLOCUTOR. El diseño del servicio se documenta en `_analisis/22`. Aquí interesa qué se mide y por qué importa para la sostenibilidad del modelo.
+
+El Municipio recibe heatmaps de visitación por zona × hora para los últimos 30 días. La información le permite entender dónde se concentran los turistas y cuándo, lo que justifica inversión en infraestructura y promoción. El comercio local recibe el ROI por World Event: cupones emitidos versus cupones canjeados, ticket promedio por comercio y tipo de cupón. INTERLOCUTOR recibe métricas de retención para la cohorte de turistas que participó en cada evento: D+1, D+7, D+30. Las métricas se derivan de los 16 eventos anónimos definidos en `_analisis/22 §5`. El servicio de ML no recolecta información de identificación personal; todo es seudónimo.
+
+### §4.4.1 Tres dashboards concretos (escenarios ilustrativos)
+
+Los tres dashboards se producen mensualmente. Los números que siguen son escenarios ilustrativos, no mediciones reales, hasta que el piloto genere datos suficientes.
+
+(a) **Dashboard del Municipio**: heatmaps de visitación por zona × hora para los últimos 30 días. El heatmap revela que el Chiflón del Diablo concentra visitas en horario de tarde (15:00 a 18:00), mientras que el Parque de Lota tiene un patrón bimodal (familias en la mañana, visitantes en la tarde). El Municipio usa esta información para decidir dónde instalar bancas, mejorar iluminación o coordinar horas de atención de comercio asociado.
+
+(b) **Dashboard del comercio**: ROI por World Event. Escenario ilustrativo para Fiestas Patrias: 320 cupones emitidos a través de 8 comercios, 287 cupones canjeados (la tasa de canje varía según el comercio y la fecha del evento), ticket promedio que varía según el tipo de comercio. El comercio usa esta información para decidir si le conviene participar en el siguiente evento y qué tipo de cupón ofrece.
+
+(c) **Dashboard de INTERLOCUTOR**: métricas de retención para la cohorte de turistas que visitó durante Fiestas Patrias 2026. Dentro del rango de entre 30% y 50% documentado en `_analisis/22 §3.3` para retención D+1 en sistemas de gamificación con recompensas reales, se proyecta una retención D+1 de entre X% y Y%, retención D+7 de entre X% y Z%, y retención D+30 de entre X% y W%. Las métricas exactas dependen del volumen de datos que genere el piloto.
+
+### §4.5 El circuito económico completo
+
+El modelo se cierra cuando se mira el circuito completo. El juego otorga minerales (cobre y oro) como recompensa por acción lúdica. El turista gasta esos minerales en cupones QR que canjea en comercio local. El comercio local acepta los cupones y registra la transacción. El servidor reconcilia la transacción y descuenta la comisión de entre 5% y 10% por transacción. El revenue de comisión financia la próxima iteración del juego. El juego vuelve a otorgar minerales. El circuito se cierra.
+
+```
+[Motor del juego]
+     ↓ otorga minerales (cobre/oro)
+[Wallet del turista]
+     ↓ gasta en cupón QR
+[Comercio local]
+     ↓ acepta cupón, registra transacción
+[Reconciliación con servidor]
+     ↓ comisión 5-10% por transacción
+[Revenue de comisión de la plataforma]
+     ↓ financia siguiente iteración del juego
+[Motor del juego]
+```
+
+La sostenibilidad económica del modelo depende de tres variables: volumen de transacciones, ticket promedio por transacción y tasa de comisión. Un evento de 3 días con 100 turistas activos genera entre 200 y 500 cupones canjeados, con un rango que depende del tipo de evento y del diseño de caducidad del cupón (30-60 días tras obtención según `_analisis/21 §4.4`). El ticket promedio por cupón oscila entre $X.XXX y $Y.YYY CLP según el tipo de comercio. El revenue de comisión por evento oscila entre 5% y 10% del volumen total del ticket.
+
+Con 4 a 6 World Events por año (según el calendario documentado en `_analisis/21 §3`) y entre 4 y 5 comercios participando cada uno, la plataforma puede sostener un presupuesto operativo significativo a partir de la comisión sola. Ese es el criterio que justifica la inversión pública en el proyecto.
+
+---
+
+<!-- §5 Diferenciador técnico y soberano → Bloque B tarea 6 -->
