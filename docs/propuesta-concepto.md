@@ -597,4 +597,38 @@ El diferenciador de Lota Indómito no es la estética visual, que cualquier equi
 
 ---
 
-<!-- §6 Lo que NO es el proyecto → Bloque B tarea 7 -->
+## §6 Lo que NO es el proyecto
+
+El proyecto tiene identidad propia. Eso significa que hay cosas que Lota Indómito no es, no fue diseñado para ser, y no será aunque la mesa de trabajo lo pida. Estas no son restricciones defensivas; son compromisos de diseño que protegen lo que el proyecto es.
+
+### §6.1 No es Pokémon GO
+
+Aunque las referencias a Pokémon GO son inevitables para explicar el formato de juego, Lota Indómito no es un producto global de Niantic ni pretende serlo. Es una plataforma patrimonial geo-RPG vinculada a la historia carbonífera de una comuna chilena específica. Los personajes NPC (Isidora, El Ciego, La Chinchorrera, El Palanquero) son figuras históricas reales. Las zonas (Chiflón del Diablo, Parque de Lota, Pabellón 83) son lugares reales. La matemática S60 es real y reproducible. El formato de juego es un vehículo, no un modelo de negocio copiado.
+
+### §6.2 No es una app turística genérica
+
+Una app turística convencional muestra puntos de interés estáticos con descripciones de texto fijo. Lota Indómito es dinámico: el mundo responde al cielo real sobre Lota, el comercio tiene acoplamiento en vivo, y los NPCs se mueven según condiciones reales. No necesita floats ni motores genéricos; necesita Sentinel S60 y determinismo. Eso lo hace más difícil de construir, pero también más fiel al lugar.
+
+### §6.3 No es un SaaS de turismo
+
+Las plataformas SaaS cobran por usuario o por transacción. Lota Indómito cobra al comercio local vía comisión, no al usuario. El usuario nunca paga por la plataforma. Este modelo fue rechazado explícitamente en D-014: el propósito público requiere que la barrera de entrada sea cero para quien visita Lota. Cobrar al usuario transforma el proyecto en producto, y eso no es lo que se está construyendo.
+
+### §6.4 No es una postulación a un fondo específico
+
+Este documento es un concepto de diseño del proyecto, no una postulación. Identificar el fondo adecuado y redactar la propuesta de postulación es dominio de Fabiola (D-004). El documento describe qué es el proyecto en su identidad propia. Múltiples fondos podrían usar este mismo documento como base; la postulación es un vehículo posterior, no el contenido central.
+
+### §6.5 No es un proyecto genérico ni simplificado para encajar en bases
+
+La identidad del proyecto (D-014, S60, corredor Arauco, multi-moneda, World Events) no está en negociación. Este documento debe leerse como Lota Indómito, no como una propuesta cultural genérica que happen to be en Lota. Jaime ha rechazado la simplificación del proyecto para hacerlo más digerible. Las 21 decisiones de diseño abiertas documentadas en `_analisis/25_todo_continuacion.md` §4 existen para la mesa de trabajo con Municipio y CMN; no se resuelven aquí simplificándolas en una sola respuesta.
+
+### §6.6 No es un proyecto aislado
+
+El piloto de Lota es una prueba de concepto para el modelo de corredor Arauco. El documento está estructurado para ser replicable en Curanilahue, Lebu, Arauco y Concepción con un costo incremental bajo. El motor es agnóstico de la comuna: no depende de Lota para funcionar, solo del contenido que cada comuna aporte. Si Lota Indómito solo sirviera para Lota y no pudiera extenderse, habría fallado en su propósito público.
+
+---
+
+Estos seis puntos no son muros. Son las paredes que sostienen el proyecto. Cualquiera que lea esta propuesta y piense que Lota Indómito es "solo" una app turística, "solo" un clon de Pokémon GO, o "solo" un SaaS con rostro patrimonial, está leyendo mal la arquitectura. El diferenciador no es la estética visual, que cualquier equipo podría copiar. Es la soberanía de la capa matemática (S60 sin floats, determinismo verificable), la soberanía de la infraestructura (cero dependencias corporativas), y la soberanía del modelo regional (motor agnóstico, contenido communal, replicabilidad sin extracción). Estas tres soberanías son lo que protege la identidad del proyecto en el tiempo.
+
+---
+
+<!-- §7 Arquitectura general + SOLID + ISO/IEC 5055 → Bloque C tarea 8 -->
