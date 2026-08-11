@@ -2282,4 +2282,92 @@ plataforma para el corredor carbonero de Arauco.
 
 ---
 
-<!-- §17 Por qué autosustentable por comercio, no por SaaS → Bloque D tarea 18 -->
+## §17 Por qué autosustentable por comercio, no por SaaS
+
+Lota Indómito no se financia como SaaS. No cobra suscripción a los usuarios,
+no cobra por puesto o transacción al turista, no cobra por funciones del juego.
+El modelo de autosustentabilidad por comercio local es una decisión de diseño,
+no una contingencia. Esta sección explica por qué el modelo de comisión
+es estructuralmente diferente de un SaaS y por qué el circuito económico
+cerrado es la razón por la que el proyecto puede presentarse como
+infraestructura pública, no como startup seeking venture capital.
+
+### §17.1 Por qué no es un SaaS: el modelo de revenue
+
+Una plataforma SaaS cobra al usuario o a la institución del usuario por acceso
+al software. El usuario es el cliente; los ingresos de la plataforma dependen
+de extraer valor del usuario. Da software y cobra por él.
+
+Lota Indómito rechaza explícitamente este modelo. La decisión D-014 establece
+que el turista que descarga la PWA y camina por Lota nunca paga por la experiencia
+(_docs/decisiones.md_ D-014). La plataforma no es un producto para el usuario.
+El usuario es beneficiario, no cliente.
+
+Los ingresos provienen del comercio local vía comisión sobre cupones redimidos
+y subastas completadas. El comercio paga porque la plataforma le trae turistas
+que gastan dinero en sus locales. La plataforma no cobra al usuario; comparte
+el valor que genera para el comercio.
+
+Este modelo es sostenible porque los ingresos de la plataforma escalan con el
+valor que entrega. Más turistas registrados en la plataforma implican más
+cupones redimidos y más comisión para la plataforma. Los ingresos crecen
+orgánicamente con el éxito del proyecto.
+
+El riesgo existe: si el flujo turístico es bajo, la comisión es baja y el
+presupuesto operativo de la plataforma se ajusta. La mitigación es el piloto:
+el modelo se valida en una comuna antes de escalar. El Municipio y la asociación
+de comercio local tienen incentivo directo en el éxito del proyecto porque sus
+propios ingresos dependen de él.
+
+La distinción con un SaaS es clara. Un SaaS extrae valor de los usuarios y les
+entrega software. Lota Indómito entrega valor al comercio y al Municipio, y ellos
+retroalimentan a la plataforma con una fracción de lo que reciben. La dirección
+del flujo económico está invertida respecto de un SaaS.
+
+(_docs/decisiones.md_ D-014; _analisis/04_propuesta_tecnica_stack_osm.md_ §6)
+
+### §17.2 El circuito cerrado que se autoalimenta
+
+El circuito económico opera en un ciclo cerrado:
+
+el turista descubre personajes en el mapa, las micro-sesiones le otorgan
+minerales, esos minerales se canjean en cupones del comercio local, los cupones
+se redimen en el comercio, la plataforma cobra comisión sobre lo redimido,
+la comisión financia la próxima iteración del juego.
+
+La plataforma no extrae valor hacia una empresa matriz, accionistas ni
+inversionistas externos. No hay accionistas. Lota Indómito es un proyecto de
+infraestructura pública, no una startup.
+
+Los costos operativos están vinculados al mantenimiento del VPS, al equipo de
+desarrollo, a la gestión de relaciones con el comercio y a los reportes para
+el Municipio. Según la estimación en §6 de la propuesta técnica, el costo
+mensual del VPS oscila entre 17 y 27 dólares estadounidenses en la opción de
+código abierto (_analisis/04_propuesta_tecnica_stack_osm.md_ §6). Los costos
+operativos crecen con la actividad, pero también los ingresos, porque la
+comisión se calcula como porcentaje de las transacciones del comercio.
+
+El punto de equilibrio depende del ticket promedio por cupón y de la tasa de
+comisión. Una estimación rough sugiere que un número pequeño de comercios
+activos es suficiente para cubrir los costos operativos mensuales del piloto.
+
+El camino de crecimiento es orgánico. A medida que más comercios participan,
+la comisión crece. La plataforma puede contratar más desarrolladores, ampliar
+zonas y expandirse a más comunas del corredor sin cambiar el modelo.
+El crecimiento no depende de rondas de inversión.
+
+La transparencia es estructural. El Municipio recibe reportes mensuales de
+cupones emitidos, cupones redimidos y comisión cobrada. Puede auditar las
+operaciones de la plataforma en cualquier momento. No hay caja negra.
+
+El modelo de autosustentabilidad por comercio es la base del carácter público
+del proyecto. Sin él, la plataforma dependería de financiamiento público
+continuo o de extraer valor de los usuarios. Con él, se convierte en
+infraestructura pública sostenible: mientras más sirve a la economía local,
+más gana para seguir sirviendo. El circuito cerrado es la razón por la que
+este proyecto puede presentarse como inversión pública y no como startup
+buscando capital de riesgo.
+
+---
+
+<!-- §18 Marco normativo → Bloque E tarea 19 -->
