@@ -1787,4 +1787,249 @@ nombre del dominio. El costo total durante la fase Piloto se estima entre 15 y
 
 ---
 
-<!-- §13 Por qué S60 → Bloque D tarea 14 -->
+## §13 Por qué S60, por qué memoria de cristal ultrarrápida, por qué sin floats
+
+La Parte II describió cómo funciona cada componente. Esta sección explica por qué el
+proyecto se construye de la manera en que lo hace, a nivel de fundamentos técnicos.
+Tres decisiones de diseñoistan de atrás hacia adelante todo lo demás: la ausencia de
+punto flotante, la memoria de cristal, y el kernel no-Markoviano. Ninguna de estas
+decisiones es casual, y ninguna se puede cambiar sin alterar las propiedades
+fundamentales del sistema.
+
+### §13.1 El problema que S60 resuelve: deriva de fase en simulaciones con floats
+
+La aritmética de punto flotante IEEE 754 es útil para la mayoría de las aplicaciones,
+pero tiene una propiedad que la hace inadecuada para simulación de largo aliento:
+acumula errores de redondeo. Los errores por operación son pequeños, típicamente
+1 ULP (1 parte en 2^52), pero se acumulan con cada operación. Una simulación que
+se ejecuta durante horas o dias de operación continua puede tener su estado dominado
+por error acumulado.
+
+Para un juego móvil tipico operando a 60 Hz, con un vector de estado de
+aproximadamente 100 floats, el error acumulativo después de 24 horas se estima
+entre 10^-6 y 10^-9 por coordenada. Para un juego donde el estado se reinicia en
+cada sesion, esto es aceptable. El usuario no percibe drift durante una sesion de
+30 minutos.
+
+Para Lota Indómito, el error acumulativo NO es aceptable por tres razones:
+
+El estado debe ser reproducible entre cliente y servidor. Si cliente y servidor
+divergen durante horas de operación, la sincronización falla de maneras que no se
+pueden reparar sin reiniciar la sesión. Esto es crítico porque el Piloto B usa el
+cristal como fuente de verdad compartida. Cualquier drift entre cristal-local
+(cliente GPU) y cristal-remoto (servidor) rompe la narrativa.
+
+El estado debe ser reproducible entre sesiones. Un turista que regresa a Lota el
+próximo mes espera el mismo estado celeste para la misma fecha y hora. El sistema de
+eventos del cielo (World Events, §10) alinea festividades y recompensas con el
+calendario real. Si el generador de eventos usa floats, el mismo timestamp producirá
+estados distintos en mayo y en septiembre. La experiencia del jugador depende de que
+el cálculo sea determinista.
+
+El estado debe ser auditable. Si un jugador reporta "mi insignia desapareció", el
+equipo de desarrollo debe poder reproducir exactamente el estado de ese momento
+a partir de los logs. Con floats, la reproducción depende del orden exacto de
+operaciones, que puede variar entre builds o versiones de runtime.
+
+El problema se amplifica por el diseño de correccion QHC de S60: la correccion cada
+68 ticks puede crear un ciclo de retroalimentación runaway si existe deriva. El
+error de punto flotante en el término de correccion se propaga a los siguientes
+68 ticks, donde se amplifica por otra corrección que incluye el valor con deriva.
+En lugar de corregir la deriva, el patron QHC con floats puede amplificarla.
+
+S60 elimina esta clase de error por diseño: la aritmética es exacta (base 60,
+entera, sin redondeo) y las correcciones se calculan sin floats. La sección §13.2
+explica cómo.
+
+Ver `me-60os-core/src/spa.rs`, `PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md`
+(EXP-015: FPU vs ALU S60 benchmark).
+
+### §13.2 Cómo S60 lo resuelve: aritmética entera base 60⁴
+
+S60 usa aritmética de enteros en base 60, escalada por SCALE_0 = 60⁴ = 12_960_000.
+Cada SPA es una tupla de 5 enteros i64 (signo, magnitud y tres componentes de
+precisión). El resultado es que cada operación (suma, resta, multiplicación,
+división) es exacta. No hay redondeo, no hay truncamiento, no hay pérdida de
+precisión. La misma entrada produce la misma salida, siempre, en cualquier
+plataforma que ejecute el código.
+
+Esta propiedad elimina por construcción la clase completa de errores de punto
+flotante. Cliente y servidor producen resultados idénticos para entradas idénticas,
+porque ambos usan la misma aritmética S60 sobre la misma representación base 60.
+La divergencia de punto flotante no existe aquí, ni en la primera ejecución ni en
+la milésima.
+
+La exclusión de floats está reforzada en tiempo de compilación. El archivo
+`me60os-core/src/lib.rs` tiene lints `forbid(clippy::float_arithmetic)` y
+`forbid(float_arithmetic)`. Cualquier código que introduzca un `f32` o `f64` falla
+la compilación. Esto convierte la eliminación de errores de punto flotante en una
+propiedad del sistema de tipos, no solo una convención. Un programador no puede
+introducir floats por descuido.
+
+La validación empírica está en `fpu_vs_pai_bench` (referenciado en
+`PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md`). El benchmark compara
+ejecuciones de 100k iteraciones en FPU Float64 versus S60 ALU. El resultado: FPU
+Float64 tiene aproximadamente 85.7% de iteraciones con truncamiento detectable.
+S60 ALU tiene 0%. La diferencia de precisión es de 2 órdenes de magnitud, no solo
+una diferencia de velocidad.
+
+La división es la operación más sutil. S60 maneja la división a través de la
+tabla de recíprocos PAI-60 (`me60os-core/src/pai60_lib.rs`), que precalcula el
+recíproco exacto para denominadores que son 5-smooth (es decir, cuyos únicos
+factores primos son 2, 3 y 5). Para denominadores que no son 5-smooth, la
+división recurre a un algoritmo exacto más costoso. La tabla PAI-60 es el núcleo
+que hace viable la aritmética exacta: cubre el caso común y delega el caso general
+a un algoritmo sin compromiso en precisión.
+
+Ver `me60os-core/src/spa.rs`, `me60os-core/src/pai60_lib.rs`.
+
+### §13.3 Memoria de cristal ultrarrápida: LiquidMemory + SHM POSIX
+
+El estado del juego que vive en una base de datos tradicional requiere una syscall
+por acceso. Cada micro-sesión (1 a 5 minutos) involucra múltiples lecturas y
+escrituras de estado. El overhead de syscall domina el presupuesto de latencia:
+una operación de base de datos puede tomar entre 100 y 1000 microsegundos, mientras
+que una lectura de memoria toma 100 nanosegundos o menos. Para un juego con estado
+celeste actualizado cada frame, la diferencia es de uno o dos órdenes de magnitud,
+lo que hace que el cuello de botella ya no sea el cálculo sino el acceso a datos.
+
+La solución: el estado vive en memoria compartida POSIX (SHM). El acceso es vía
+`mmap`, que es una operación sin syscall después del mapeo inicial. Las lecturas
+son a velocidad de memoria (nanosegundos), no a velocidad de base de datos
+(microsegundos). El archivo `me60os-core/src/liquid_memory.rs` implementa este
+subsistema.
+
+El diseño de doble canal es lo que hace a la memoria cristallográfica: los datos
+se almacenan simultáneamente en dos canales del cristal. El canal A almacena los
+datos como amplitud. El canal B almacena un hash como fase. Cuando el segmento
+SHM se desmappea (porque el SO lo reclama bajo presión de memoria), los datos
+siguen resonando en el cristal vía el canal B. Cuando el segmento SHM se
+remapea, los datos se restauran desde la resonancia del cristal. Esto diferencia
+al diseño de Lota Indómito de un simple caché: la memoria no solo es rápida,
+también es persistente por resonancia. El cristal no es metáfora; es un
+descriptor físico de cómo los datos sobreviven al unmapping del segmento.
+
+El SHM sobrevive a reinicios de proceso porque POSIX SHM es gestionado por el
+kernel. Una falla de energía o un pánico del kernel no pierden el segmento SHM;
+solo un reinicio completo del sistema lo hace. El canal dual de resonancia
+proporciona una capa adicional de resiliencia que sobrevive incluso al unmapping
+forzado del segmento.
+
+Para Lota Indómito esto significa: el turista que cierra la aplicación, cambia de
+teléfono o pierde la conexión puede continuar exactamente donde lo dejó. El
+estado del juego no está almacenado en su dispositivo (que puede perderse) ni en
+una base de datos remota (que puede ser lenta). Está almacenado en el cristal,
+accesible a velocidad de memoria desde cualquier dispositivo que pueda alcanzar
+al servidor. El saldo de la billetera, las insignias obtenidas, el progreso en
+cada minijuego: todo sobrevive al dispositivo.
+
+Los experimentos documentados en
+`PersonalVault/EXPERIMENTO_SALTO17_SHM_MEMORIA_CRISTALES.md` validaron este
+diseño.
+
+### §13.4 Kernel no-Markoviano en S60PID: auto-corrección por dinámica intrínseca
+
+Un controlador Markoviano (como PID) considera solo el error actual y el error
+anterior. En un sistema con perturbaciones estocásticas (ruido GPS, jitter de
+red), un controlador Markoviano acumula error que requiere una corrección fija cada
+N ticks. El patrón QHC corrige cada 68 ticks, lo que es overhead fijo. Funciona,
+pero deja espacio para mejora: la corrección se aplica por reloj, no por estado.
+
+La solución: un controlador no-Markoviano (el kernel) considera toda la historia
+de errores, ponderada por decaimiento exponencial. La función
+`update_with_history_internal` en `me60os-core/src/quantum_core.rs::S60PID`
+integra la historia con peso `kernel_alpha = 5/6` (en base 60), decaendo por un
+factor de 5/6 cada tick hacia atrás en la historia. El kernel no corrige por
+programa; corrige por memoria. Su corrección emerge de lo que el sistema recuerda.
+
+El resultado: la corrección emerge de la dinámica intrínseca del sistema, no de un
+programa de corrección externo fijo. La función `calculate_drift_correction`
+calcula la corrección basándose en la historia, reemplazando la corrección fija
+de 700 microsegundos del patrón QHC. El kernel decide cuándo y cuánto corregir,
+no un temporizador.
+
+La validación empírica está en `EXPERIMENTO_SALTO17_SHM_MEMORIA_CRISTALES.md`. El
+kernel logra 2.4% mejor rendimiento de E/S del cristal comparado con operación sin
+kernel. La mejora no está en la deriva de tick (que es ligeramente mayor con el
+kernel) sino en la estabilidad de las transiciones de canal en el cristal. Las
+transiciones de canal son donde el cristal pasa de leer a escribir o viceversa, y
+son el punto donde la coherencia del estado es más vulnerable.
+
+El tradeoff: el kernel incrementa el jitter de tick en una cantidad pequeña (de
+16.8-28.7 ms sin kernel a 17.3-30.6 ms con kernel), pero la E/S del cristal
+mejora 2.4%. El efecto neto es un sistema más estable a costo de tiempos de
+frame ligeramente más variables. Para un juego donde la estabilidad del estado
+celeste importa más que la consistencia del frame rate, el intercambio es
+favorable.
+
+El paper de referencia teórica es Nandi & Vitiello 2026 (arXiv:2606.30890) sobre
+el oscilador dual de Bateman y memoria no-Markoviana vía traza parcial. La
+reducción al sistema de control S60PID es una implementación proyecto-específica
+del marco teórico. El oscilador dual de Bateman modela un sistema cuántico abierto
+con memoria, y la traza parcial captura cómo la información se retiene o se pierde
+dependiendo del acoplamiento con el entorno. En S60, el cristal es el entorno
+y el kernel es el oscilador con memoria.
+
+Ver `me60os-core/src/quantum_core.rs::S60PID`,
+`PersonalVault/EXPERIMENTO_SALTO17_SHM_MEMORIA_CRISTALES.md`, arXiv:2606.30890.
+
+### §13.5 Lo que esto habilita para el proyecto
+
+Las tres propiedades, en conjunto, habilitan capacidades que ningún otro motor de
+juego puede ofrecer:
+
+**Reproducibilidad bit-a-bit:** la misma entrada produce la misma salida en
+cualquier hardware, cualquier ejecución, en cualquier momento. Un reporte de bug
+de un jugador puede ser reproducido exactamente por el equipo de desarrollo, sin
+tener que adivinar qué estado fue el correcto. El log es la verdad, no una
+aproximación. El equipo no necesita reconstruir el bug; necesita reproducirlo.
+
+**Operación sin deriva:** el juego puede ejecutarse continuamente sin corrupción
+de estado. Los jugadores pueden dejar la aplicación y volver después a exactamente
+el mismo estado de juego. El cristal retiene el estado sin drift, sin importar
+cuánto tiempo pase entre sesiones. Esta propiedad es la que hace viable la
+operación de largo aliento: un juego que puede funcionar meses sin reinicio,
+sin acumulación de error, sin pérdida de coherencia.
+
+**Continuidad entre dispositivos:** el estado vive en el cristal, no en el
+dispositivo. Cambiar de teléfono, limpiar la caché del navegador o perder el
+dispositivo no borra el progreso: ni el saldo de la billetera, ni las insignias
+obtenidas, ni los minijuegos completados. El cristal es la cuenta, no el teléfono.
+Esta propiedad es la que hace viable un juego pensado para turistas: el visitante
+llega, juega en su teléfono, y cuando regresa a Santiago o a cualquier otro lugar,
+su progreso está esperándolo en el cristal.
+
+**Auditoría para el Municipio:** el CMN y el Municipio pueden preguntar
+"¿qué pasó en este período?" y obtener una respuesta determinista, no una
+aproximación estadística. Cada transacción, cada evento celeste, cada
+recompensa otorgada está registrada binaria en el cristal y puede ser reconstruida
+bit-a-bit. Esta propiedad es la que hace viable el modelo de negocio: el Municipio
+puede verificar que las comisiones se calcularon correctamente, que los jugadores
+recibieron las recompensas que les correspondían, que el flujo turístico se alineó
+con los eventos programados.
+
+Estas propiedades no son características que se puedan agregar a un motor genérico.
+Emergen de las matemáticas específicas de S60, el diseño específico del cristal con
+su doble carril y sus canales duales, y la arquitectura SHM. Son propiedades
+estructurales, no accidentales. Se necesitan desde el diseño, no se pueden injertar
+después.
+
+Un motor genérico (Bevy, Godot, Unity, etc.) requeriría una reescritura masiva
+para lograr cualquiera de estas propiedades, y sacrificaría otras en el proceso.
+Bevy tiene ECS determinista solo si se evitan floats, pero la librería estándar
+de renderizado depende de floats. Godot tiene scripting en GDScript, que usa floats
+por defecto. Unity tiene el mismo problema: el motor subyacente es de punto
+flotante y no hay manera de forbidirlo a nivel de compilación.
+
+El análisis de costo-beneficio favorece usar S60 desde el inicio, incluso para
+el Piloto donde algunas de estas propiedades aún no están completamente
+ejercitadas. La razón es simple: retrofitar determinismo es más caro que
+construirlo desde el principio. Y una vez que el Piloto demuestre que el cristal
+funciona, la migración a Piloto B con el motor S60 será natural.
+
+Ver `_analisis/15_inventario_sentinel_disponible_para_motor.md` §3,
+`docs/decisiones.md` D-011.
+
+---
+
+<!-- §14 Por qué multi-moneda y no moneda única → Bloque D tarea 15 -->
