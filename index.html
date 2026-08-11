@@ -36,15 +36,38 @@ body { background: var(--bg); color: var(--text); font-family: var(--sans); line
 .overlay { position: relative; z-index: 1; }
 
 /* ─────────── NAV ─────────── */
-nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 28px;
-      padding: 14px 40px; background: rgba(10,12,16,0.75); backdrop-filter: blur(12px);
+nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 32px;
+      padding: 12px 40px; background: rgba(10,12,16,0.85); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line); }
-nav .logo { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--text); text-transform: uppercase; }
-nav .logo span { color: var(--teal); }
-nav .links { display: flex; gap: 22px; margin-left: auto; }
-nav a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.6px; transition: color .15s; }
-nav a:hover { color: var(--teal); }
-@media (max-width: 760px) { nav { padding: 12px 20px; } nav .links { display: none; } }
+nav .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+nav .brand svg { display: block; }
+nav .brand .name { font-weight: 700; font-size: 15px; letter-spacing: 3px; color: var(--text); text-transform: uppercase; line-height: 1.1; }
+nav .brand .name span { color: var(--teal); }
+nav .brand .sub { font-family: var(--mono); font-size: 8.5px; letter-spacing: 2.5px; color: var(--gold); text-transform: uppercase; }
+nav .links { display: flex; gap: 6px; margin-left: auto; align-items: center; }
+nav .links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.6px;
+               padding: 8px 14px; border-radius: 8px; transition: color .15s, background .15s; }
+nav .links a:hover { color: var(--teal); background: rgba(101,218,188,0.08); }
+nav .links a.github { color: var(--gold); border: 1px solid rgba(212,175,55,0.35); background: rgba(212,175,55,0.06); }
+nav .links a.github:hover { background: rgba(212,175,55,0.14); color: #ffe9a0; }
+/* hamburguesa móvil */
+nav .hamb { display: none; margin-left: auto; background: none; border: 1px solid var(--line); border-radius: 8px;
+            width: 42px; height: 42px; cursor: pointer; position: relative; }
+nav .hamb span { position: absolute; left: 10px; right: 10px; height: 2px; background: var(--text); border-radius: 2px; transition: all .25s; }
+nav .hamb span:nth-child(1) { top: 14px; } nav .hamb span:nth-child(2) { top: 20px; } nav .hamb span:nth-child(3) { top: 26px; }
+nav.open .hamb span:nth-child(1) { top: 20px; transform: rotate(45deg); }
+nav.open .hamb span:nth-child(2) { opacity: 0; }
+nav.open .hamb span:nth-child(3) { top: 20px; transform: rotate(-45deg); }
+@media (max-width: 860px) {
+  nav { padding: 12px 20px; }
+  nav .hamb { display: block; }
+  nav .links { position: fixed; top: 67px; left: 0; right: 0; flex-direction: column; align-items: stretch;
+               gap: 4px; padding: 16px 20px 20px; background: rgba(10,12,16,0.97); backdrop-filter: blur(14px);
+               border-bottom: 1px solid var(--line); transform: translateY(-12px); opacity: 0; pointer-events: none;
+               transition: all .25s; }
+  nav.open .links { transform: none; opacity: 1; pointer-events: auto; }
+  nav .links a { padding: 12px 14px; font-size: 14px; }
+}
 
 /* ─────────── HERO ─────────── */
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -170,16 +193,44 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 <div class="overlay">
 
 <!-- ═══════════ NAV ═══════════ -->
-<nav>
-  <div class="logo">Lota<span>Indómito</span></div>
+<nav id="mainnav">
+  <a class="brand" href="#">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- lattice hexagonal (3 nodos visibles + centro) -->
+      <polygon points="20,3 34.8,11.5 34.8,28.5 20,37 5.2,28.5 5.2,11.5" stroke="#232c3a" stroke-width="1.4"/>
+      <polygon points="20,9 30.4,15.3 30.4,24.7 20,31 9.6,24.7 9.6,15.3" stroke="#65dabc" stroke-width="1.1" stroke-opacity="0.5"/>
+      <!-- nodos de la lattice -->
+      <circle cx="20" cy="3" r="2.2" fill="#65dabc"/>
+      <circle cx="34.8" cy="11.5" r="2.2" fill="#65dabc"/>
+      <circle cx="34.8" cy="28.5" r="2.2" fill="#D4AF37"/>
+      <circle cx="20" cy="37" r="2.2" fill="#D4AF37"/>
+      <circle cx="5.2" cy="28.5" r="2.2" fill="#65dabc"/>
+      <circle cx="5.2" cy="11.5" r="2.2" fill="#65dabc"/>
+      <!-- cristal dorado central (el mineral) -->
+      <polygon points="20,13.5 26,17.5 26,24.5 20,28.5 14,24.5 14,17.5" fill="#D4AF37" fill-opacity="0.9"/>
+      <polygon points="20,13.5 26,17.5 20,21 14,17.5" fill="#ffe9a0" fill-opacity="0.7"/>
+      <!-- líneas de resonancia hacia el centro -->
+      <line x1="20" y1="3" x2="20" y2="13.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="34.8" y1="11.5" x2="26" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="34.8" y1="28.5" x2="26" y2="24.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="20" y1="37" x2="20" y2="28.5" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="5.2" y1="28.5" x2="14" y2="24.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+      <line x1="5.2" y1="11.5" x2="14" y2="17.5" stroke="#65dabc" stroke-opacity="0.35" stroke-width="0.8"/>
+    </svg>
+    <span>
+      <span class="name">Lota<span>Indómito</span></span>
+      <span class="sub" style="display:block;">Patrimonio · Juego · Lota</span>
+    </span>
+  </a>
   <div class="links">
     <a href="#proyecto">Proyecto</a>
     <a href="#como">Cómo funciona</a>
     <a href="#pilotos">Tecnología</a>
     <a href="#prototipo">Prototipo</a>
     <a href="#docs">Documentos</a>
-    <a href="https://github.com/jenovoas/lotaindomito" target="_blank" rel="noopener" style="color:var(--gold);">GitHub ↗</a>
+    <a class="github" href="https://github.com/jenovoas/lotaindomito" target="_blank" rel="noopener">GitHub ↗</a>
   </div>
+  <button class="hamb" aria-label="Abrir menú"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ═══════════ HERO ═══════════ -->
@@ -486,6 +537,14 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+})();
+
+// ── menú móvil ──
+(function () {
+  const nav = document.getElementById("mainnav");
+  const hamb = nav.querySelector(".hamb");
+  hamb.addEventListener("click", () => nav.classList.toggle("open"));
+  nav.querySelectorAll(".links a").forEach((a) => a.addEventListener("click", () => nav.classList.remove("open")));
 })();
 </script>
 </body>
