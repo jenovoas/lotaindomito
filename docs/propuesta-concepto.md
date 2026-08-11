@@ -2370,4 +2370,93 @@ buscando capital de riesgo.
 
 ---
 
-<!-- §18 Marco normativo → Bloque E tarea 19 -->
+## §18 Marco normativo
+
+### §18.1 El set normativo aplicado
+
+El proyecto se despliega sobre cinco normas ISO que estructuran los procesos de ingeniería, la
+calidad del software, la seguridad de la información, la gestión de riesgos y el diseño centrado
+en el usuario. Cada norma se aplica de manera operativa, no decorativa.
+
+**ISO/IEC 12207:2017** — *Systems and Software Engineering — Software Life Cycle Processes.*
+Define los procesos del ciclo de vida del software: adquisición, suministro, desarrollo,
+operación y mantenimiento. El proyecto mapea sus etapas a este modelo: Piloto A (desarrollo
+de la maqueta), Piloto B (motor GPU con Sentinel S60), Producción (lota-server) y Operación
+(post-fondo). Cada etapa tiene su proceso 12207 correspondiente.
+
+**ISO/IEC 25010:2011** — *Systems and Software Quality Requirements and Evaluation.*
+Define ocho características de calidad: aptitud funcional, eficiencia de desempeño,
+compatibilidad, usabilidad, fiabilidad, seguridad, mantenibilidad y portabilidad. Los
+objetivos de calidad del proyecto (§7.3, ISO/IEC 5055) y el plan de testing (§19) se
+alinean con estas características. En particular, el motor S60 elimina los flotantes
+(ningún NaN, ningún Infinity) y garantiza comportamiento determinista, lo que refuerza la
+fiabilidad y la portabilidad entre plataformas.
+
+**ISO/IEC 27001:2022** — *Information Security Management Systems.* Define los requisitos
+para un sistema de gestión de seguridad de la información (SGSI). El proyecto se alinea
+con sus controles en tres ejes: confidencialidad de los datos de jugador (Ley 19.628 sobre
+protección de datos personales en Chile), integridad del estado del juego (determinismo
+S60, cada tick produce un resultado único y reproducible) y disponibilidad de la
+plataforma (arquitectura de doble carril, Lane A y Lane B, que provee resiliencia ante
+fallas de hardware o red).
+
+**ISO 31000:2018** — *Risk Management.* Define principios, marco de referencia y proceso
+para la gestión de riesgos en cualquier organización. El registro de riesgos del proyecto
+(§25) se estructura según las cláusulas de la norma: identificar, analizar, evaluar,
+tratar, monitorear y comunicar. El kernel no-markoviano del motor S60 (corrección de
+drift) es la práctica técnica que materializa la cláusula de monitoreo continuo del riesgo
+de desviación temporal.
+
+**ISO 9241:2019** — *Ergonomics of Human-System Interaction.* Abarca la usabilidad, la
+accesibilidad y el diseño centrado en el ser humano. La accesibilidad de la PWA (§8.7,
+WCAG 2.1 Nivel AA) se alinea con la parte 210 de la norma (actividades de diseño
+centrado en el humano). El proyecto adopta los principios de diseño inclusivo como
+requisito, no como mejora futura.
+
+> Fuentes normativas citadas en `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md`;
+> marco de decisiones en `MEMORY.md` §0 y `docs/estado.md`.
+
+### §18.2 Alineamiento declarado, no certificado
+
+El proyecto adopta las normas ISO, mapea sus prácticas a ellas y rastrea la conformidad
+como parte de la disciplina de ingeniería. Esto es **alineamiento declarado**: una
+declaración de que las prácticas se ajustan al marco normativo, hecha por el propio
+equipo de desarrollo.
+
+El proyecto **no persigue certificación formal**. La certificación por un organismo
+acreditado (bajo la cláusula 8.2 de cada norma) requiere un proceso de auditoría
+independiente. Ese proceso toma entre 12 y 18 meses y cuesta desde decenas de miles
+de dólares, dependiendo del alcance y del organismo. El presupuesto del proyecto no
+incluye esa partida.
+
+La distinción importa por tres razones concretas:
+
+El alineamiento declarado es suficiente para los fines de esta propuesta. Justifica ante
+el Municipio y el CMN que la ingeniería segue estándares reconocidos. No se necesita
+el sello de un bureau de auditoría para demostrar que se trabaja con disciplina.
+
+Si en una etapa futura un contrato con una entidad pública exige certificación ISO 27001
+para el tratamiento de datos personales, el camino a la certificación está despejado.
+Las prácticas ya están en su lugar; la certificación requiere auditoría, no
+reingeniería. El proyecto puede iniciar el proceso de auditoría en cualquier momento
+sin modificar el código ni los procedimientos.
+
+La frontera entre alineamiento y certificación es explícita en la sección 1 de cada
+norma: ISO describe lo que hace una organización, no lo que verifica un auditor.
+La implementación es independiente de la verificación. El proyecto implementa;
+el auditor verifica. Ambas actividades son necesarias para la certificación y son
+mutuamente independientes.
+
+> Ver `MEMORY.md` §0 y `docs/estado.md` para el marco de decisión.
+
+El marco normativo no es decoración ni marketing. Es parte del contrato de ingeniería
+que el motor S60 y lota-server deben satisfacer. Cada norma tiene un ancla en el código:
+el compilador LBM garantiza ISO/IEC 25010 (sin flotantes, sin NaN, sin Infinity); la
+arquitectura de doble carril proporciona ISO/IEC 27001 (traza de auditoría en Lane A/B);
+el kernel no-markoviano proporciona ISO 31000 (corrección de drift). Las prácticas
+están en el código y el alineamiento es verificable por cualquier revisor que tenga las
+normas abiertas. Eso es lo que significa en la práctica "alineamiento declarado".
+
+---
+
+<!-- §19 Procesos de testing automatizado → Bloque E tarea 20 -->
