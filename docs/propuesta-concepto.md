@@ -249,4 +249,208 @@ El juego mantiene a los turistas volviendo a través de tres mecanismos concreto
 
 
 
-<!-- §3 Universo narrativo → Bloque B tarea 4 -->
+## §3 Universo narrativo
+
+El universo de Lota Indómito no es un escenario decorativo. Es un territorio vivo donde los personajes del pasado carbonero de la comuna caminan entre las mismas calles que el turista recorre hoy, donde cada ruta recupera un oficio o una zona que la memoria colectiva todavía conserva, y donde los minerales que el jugador acumula en su cartera tienen identidad propia, fuente propia y uso propio. Este sección describe los tres subsistemas que constituyen el universo narrativo: las cuatro figuras históricas, las ocho rutas temáticas patrimoniales, y las tres monedas minerales. Los tres se entrelazan sin arbitrariedad: los personajes habitan las rutas, las rutas son el territorio geográfico de esos personajes, y los minerales son el medio de intercambio que ata la experiencia lúdica al comercio real de la comuna.
+
+### §3.1 Las cuatro figuras históricas del carbón
+
+El enjambre de NPCs del juego se compose de cuatro figuras históricas vinculadas al patrimonio carbonero de Lota. Cada una tiene zona propia, condición celestial de activación propia, rol mecánico propio y un gancho narrativo que rescata una anécdota o un perfil real de la historia de la comuna. El diseño FSM de cuatro modos les da comportamiento reproducible y auditable, pero la identidad de cada una es irreductiblemente histórica.
+
+**Isidora Goyenechea**
+
+Nombre e identificación: Isidora Goyenechea, miembro de la familia que financió la construcción del Pabellón 83 y una de las figuras femeninas más influyentes del comercio y la filantropía lotrina del período carbonero.
+
+Zona: Parque de Lota. Su zona natural es el área verde que rodea el Pabellón, donde los oficios del cuidado y la sociabilidad pública encontraron su espacio durante la época dorada de la mina.
+
+Activación: Atardecer. El personaje se activa cuando el sol se aproxima al horizonte occidental. Esta condición alinea la experiencia con el turno de la tarde de los mineros, cuando la jornada de trabajo terminaba y la vida social del barrio se concentraba en el Parque.
+
+Rol mecánico: Guía a los jugadores por el Parque de Lota y les cuenta la historia de la familia que financió la construcción del Pabellón. Las misiones que entrega recompensan cobre. El encuentro con Isidora en el Parque es uno de los puntos de entrada del pasaporte digital.
+
+Gancho narrativo: Isidora Goyenechea representa la tradición de las familias que financiaron la infraestructura social de la comuna cuando la mina generaba riqueza. Su presencia en el Parque no es alegórica: es la memoria de una mujer que invirtió en el espacio público de su comunidad en una época donde eso era excepcional.
+
+**El Ciego de la Mina**
+
+Nombre e identificación: El Ciego de la Mina, figura legendaria del mineur veterano que recorría los piques y conocía cada veta, cada grieta y cada accidente del subterranean de Lota.
+
+Zona: Los Piques y el Chiflón del Diablo. Su territorio es el corazón subterráneo de la mina, los espacios que la geología y la extracción humana sculptaron bajo la comuna durante más de un siglo.
+
+Activación: Amanecer. El personaje aparece cuando el reloj marca las siete de la mañana, exactamente a la hora en que empezaba el turno de la mañana. Esta condición reproduce la rutina real del trabajador de la mina.
+
+Rol mecánico: Aparece en los Piques al amanecer. Las misiones que entrega recompensan cobre y, cuando coincide con un evento celestial activo, también oro. Su encuentro en el Chiflón es uno de los momentos de mayor carga patrimonial del juego.
+
+Gancho narrativo: El Ciego de la Mina encarna la sabiduría del trabajador que conoce su lugar de trabajo como la palma de su mano. Su ceguera es tanto metáfora de la oscuridad del pique como símbolo de los sentidos restantes agudizados por la oscuridad: el sonido del agua, el olor del carbón, la memoria del espacio.
+
+**La Chinchorrera Mayor**
+
+Nombre e identificación: La Chinchorrera Mayor, figura representativa de las mujeres del borde costero de Lota que practicaban la extracción de mariscos en las rocas y transmitían orally los oficios del mar de generación en generación.
+
+Zona: La Caleta y el borde costero. Su territorio natural es la franja donde la tierra se encuentra con el mar, donde la vida de los trabajadores del mar se desarrollaba fuera del horario de la mina.
+
+Activación: Anochecer. La Chinchorrera Mayor opera durante la ventana de actividad nocturna, aproximadamente noventa minutos a contar del anochecer. Su frecuencia aumenta durante la fase de luna nueva, cuando la oscuridad favorece la extracción nocturna de mariscos.
+
+Rol mecánico: Aparece en la Caleta al anochecer. Las misiones que entrega recompensan cobre. Su encuentro es el más esquivo del juego, diseñado para que el jugador que llega tarde a la Caleta vuelva con el gancho narrativo ya activo.
+
+Gancho narrativo: La Chinchorrera Mayor representa la tradición oral de las mujeres del borde costero, que transmitían los oficios del mar de generación en generación sin más registro que la palabra. Su figura corrige el sesgo masculino habitual en la narrativa minera y recupera una historia que el patrimonio escrito omitió sistemáticamente.
+
+**El Palanquero**
+
+Nombre e identificación: El Palanquero, el capataz del muelle y la zona portuaria de Lota que organizaba la carga y descarga de los minerales y los insumos de la minería durante la época del carbón.
+
+Zona: El borde costero, con énfasis en la zona del muelle. Su territorio es el punto donde el carbón sale de la mina hacia el mundo y los insumos llegan a la comuna.
+
+Activación: Luna llena. El personaje se vuelve visible durante la fase de luna llena, y su aparición coincide con las mareas altas que facilitaban las operaciones de carga y descarga en el puerto natural de Lota.
+
+Rol mecánico: Visible principalmente durante luna llena. Las misiones que entrega recompensan cobre y oro. Su aparición en el borde costero es uno de los eventos que incentivan al jugador a consultar el calendario del cielo y planificar su próxima visita.
+
+Gancho narrativo: El Palanquero representa la logística que hacía funcionar la industria del carbón. Sin él, el mineral no llegaba a los barcos; sin los barcos, la mina no tenía mercado. Su papel era anónimo pero indispensable, y su figura recupera la memoria del trabajo invisible que sostenía la economía de toda la comuna.
+
+### §3.2 Las ocho rutas temáticas patrimoniales
+
+Las ocho rutas temáticas de la comuna constituyen el tejido geográfico del universo de Lota Indómito. Cada ruta tiene zona propia, minijuego propio, recompensa propia y conexión propia con el comercio local. Las ocho rutas están diseñadas para que un visitante haga entre seis y diez micro-sesiones durante una visita de dos a cuatro horas, con una acción por micro-sesión que nunca supera los tres minutos de gameplay táctil.
+
+**Ruta Fuego y Carbón**
+
+Tema: El oficio del pan de mina y la vida doméstica de los mineros. Esta ruta atraviesa el sector de los hornos de barro y las panaderías históricas del centro de Lota.
+
+Zonas geográficas: Centro de Lota y entorno de los hornos de barro tradicionales. Los POIs incluyen las panaderías históricas donde se fabricaba el pan que los mineros llevaban al pique.
+
+Minijuego: Amasando Pan. Minijuego táctil de ritmo donde el jugador debe sobar, amasar y hornear el pan de mina en un horno de barro simulado. Duración estimada: noventa segundos.
+
+Recompensas: Cobre por cada pan completado. Insignia especial "Amasadora de Memorias" para quienes logran puntaje máximo en la ruta.
+
+Conexión con el comercio local: Panaderías del centro de Lota participan como destino de World Events y como puntos de entrega de cupones para el jugador que completó la ruta.
+
+**Ruta Geositio**
+
+Tema: La geología del carbón y la historia de la tierra que los mineros perforaron durante más de un siglo. Esta ruta comienza en el Geositio del Chiflón del Diablo.
+
+Zonas geográficas: Chiflón del Diablo, pique abandonado que sirve como entrada al subsystemo geológico y como punto de partida de la comprensión estratigráfica de la cuenca carbonera.
+
+Minijuego: El Geólogo del Tiempo. Puzle estratigráfico donde el jugador debe clasificar capas de carbón, fósiles y rocas según las eras geológicas correspondientes. Duración estimada: ciento veinte segundos.
+
+Recompensas: Cobre por cada puzle completado. Insignia "Geólogo del Tiempo" al cerrar la ruta.
+
+Conexión con el comercio local: Talleres de artesanía en piedra carbón y museos locales asociados a la ruta.
+
+**Ruta de las Bodegas**
+
+Tema: El inventario de las herramientas y los insumos de la minería. Las bodegas de las antiguas compañías carboneras almaceban todo lo que la mina necesitaba para funcionar.
+
+Zonas geográficas: Antiguas instalaciones de las compañías carboneras, ruinas industriales de las bodegas donde se guardaban herramientas, explosivos y repuestos.
+
+Minijuego: El Inventario del Carbón. Búsqueda de objetos tridimensionales ocultos entre las herramientas y los restos industriales. Duración estimada: noventa segundos.
+
+Recompensas: Cobre por cada objeto encontrado. Insignia "Inventariador" al completar la búsqueda en cada bodega.
+
+Conexión con el comercio local: Ferreterías y talleres mecánicos históricos de Lota asociados como destino para el jugador que completa la ruta.
+
+**Ruta del Comercio**
+
+Tema: El trueque y el comercio como alma de la economía lotrina. Esta ruta atraviesa los locales asociados del centro de Lota.
+
+Zonas geográficas: Centro de Lota y entorno de los locales comerciales asociados. Los POIs incluyen restaurants, cafés y completas que participan como asociados del juego.
+
+Minijuego: El Trueque Lota. Minijuego de gestión donde el jugador pratica el trueque de minerales con los puestos del comercio local. Duración estimada: sesenta segundos.
+
+Recompensas: Cobre y oro por cada trueque completado. La ruta rewarding oro es deliberada: el trueque recompensa la interacción con el comercio, que es el acto central del modelo económico del juego.
+
+Conexión con el comercio local: La ruta está diseñada directamente sobre los locales asociados. Cada POI de la ruta es un comercio real que acepta minerales del juego.
+
+**Camina Lota**
+
+Tema: La arquitectura de los pabellones y la memoria urbana de la comuna. Esta ruta empieza en el Pabellón 83 y la zona histórica que rodea el parque.
+
+Zonas geográficas: Pabellón 83, zona histórica del parque y entorno de los pabellones que fueron vivienda obrera durante la época de la mina.
+
+Minijuego: Arquitecto de Pabellones. El jugador superpone fotografías históricas sobre el paisaje actual y debe encuadrar exactamente el ángulo para reconstruir digitalmente el pabellón en tres dimensiones. Duración estimada: noventa segundos.
+
+Recompensas: Cobre por cada pabellón reconstruido. Insignia "Arquitecto de Pabellones" al cerrar la ruta.
+
+Conexión con el comercio local: Librerías históricas, imprentas y talleres de enmarcación asociados como puntos de entrega de diplomas y diplomas digitales.
+
+**Ruta Costera**
+
+Tema: El borde costero y la observación de la fauna marina. Esta ruta sigue la franja costera desde la Caleta hacia el sur.
+
+Zonas geográficas: Borde costero de Lota, desde la Caleta hasta los miradores del golfo. Los POIs incluyen los puntos de observación con vista al mar.
+
+Minijuego: Vigía del Golfo. Desafío de avistamiento con prismáticos virtuales donde el jugador debe identificar la fauna marina del golfo de Arauco. Duración estimada: sesenta segundos.
+
+Recompensas: Cobre por cada especie identificada correctamente. Insignia "Vigía del Golfo" al completar la ruta completa.
+
+Conexión con el comercio local: Restaurants de frutos del mar y caletas de pescadores asociados como destino para el jugador que completó la ruta.
+
+**Ruta Indómita**
+
+Tema: La flora nativa del Parque de Lota y la botánica del bosque valdiviano que sobrevive en el corazón de la comuna. Esta ruta atraviesa el Parque de Lota.
+
+Zonas geográficas: Parque de Lota, que conserva fragmentos del bosque valdiviano original y es uno de los pulmones verdes de la provincia de Arauco.
+
+Minijuego: Rastreador de la Flora. Trivia botánica interactiva donde el jugador debe identificar la flora nativa a partir de pistas visuales y textuales. Duración estimada: sesenta segundos.
+
+Recompensas: Cobre por cada planta correctamente identificada. Insignia "Rastreador de la Flora" al cerrar la ruta.
+
+Conexión con el comercio local: Viveros y jardines botánicos locales asociados como destino de cupones para el jugador que completó la ruta.
+
+**Oficios de Mar**
+
+Tema: La pesca artesanal y el oficio de las Chinchorreras. Esta ruta comienza en la Caleta de Lota.
+
+Zonas geográficas: Caleta de Lota y zona de los talleres de artesanía de la madera donde se construían las redes y las balsas artesanales.
+
+Minijuego: Chinchorreando en el Blanco. Minijuego de física donde el jugador debe ajustar la fuerza y la dirección del lanzamiento de la red de pesca artesanal. Duración estimada: noventa segundos.
+
+Recompensas: Cobre por cada lanzamiento exitoso. Insignia "Chinchorrero" al cerrar la ruta.
+
+Conexión con el comercio local: Caletas de pescadores y talleres de artesanía de la madera asociados como destino para el jugador que completó la ruta.
+
+### §3.3 Las tres monedas minerales
+
+El sistema económico del juego opera con tres minerales que funcionan como monedas con tipo de cambio relativo, transferibles entre usuarios y comercianteables en el comercio local de Lota. El diseño del sistema multi-moneda (D-016) convierte al juego en un ecosistema económico donde cada mineral tiene identidad propia, fuente de obtención propia y uso propio. Los ratios vigentes en el piloto son fijos: un oro equivale a cien cobre, y un estaño equivale a diez mil cobre o cien oro.
+
+**Cobre (Cu)**
+
+Símbolo: Cu. Ratio: una unidad, base del sistema. Rareza: común.
+
+Identidad narrativa: El metal del trueque honrado. Forjado en el calor del comercio de Lota. El cobre es el mineral cotidiano del juego, diseñado para que el jugador lo gane, lo gaste y lo vuelva a ganar en un ciclo corto que mantiene el flujo económico del comercio local activo.
+
+Cómo se gana: Micro-sesiones de POI fijo completadas, reportes ciudadanos validados, y todas las misiones regulares de las ocho rutas. Es el mineral que recompensa las acciones ordinarias del jugador sin requerir condiciones especiales.
+
+Cómo se usa: Transacciones cotidianas en los locales asociados del comercio de Lota, transferencias P2P entre jugadores, y personalización in-game de marcadores y marcos del pasaporte. El cobre es la moneda del comercio diario.
+
+Por qué cobre: El cobre es el metal del trabajo y del comercio diario. Usar cobre como moneda base del juego conecta la identidad lúdica con la identidad minera metálica de Chile, que es histórica y reconocible sin necesidad de inventar cifras de producción.
+
+**Oro (Au)**
+
+Símbolo: Au. Ratio: cien cobre. Rareza: media.
+
+Identidad narrativa: El metal del cielo. Aparece cuando la luna, el sol y la historia convergen. El oro es el mineral de los eventos celestiales, diseñado para que el jugador que consulta el calendario del cielo tenga una razón concreta para volver a Lota cuando hay un evento activo.
+
+Cómo se gana: Eventos del cielo, World Events temáticos y rutas completas de World Events. La fuente del oro es siempre un evento, no una acción repetible. Esto incentiva al jugador a planificar su visita alrededor del calendario celestial publicado con un año de anticipación.
+
+Cómo se usa: Recompensas de mayor valor en el comercio local, subastas digitales de productos premium del comercio, y personalización de alto nivel en el juego. El oro es la moneda de los momentos especiales.
+
+Por qué oro: El oro como metal del cielo tiene tradición en todas las culturas. En Lota Indómito, esta asociación es literal: el oro solo aparece cuando el cielo sobre la comuna produce un evento que coincide con la historia o la tradición de la zona. Es la moneda de la convergencia entre el cielo y la tierra.
+
+**Estaño (Sn)**
+
+Símbolo: Sn. Ratio: diez mil cobre, cien oro. Rareza: rara.
+
+Identidad narrativa: El metal de la convergencia. Solo aparece cuando los dos carriles del mundo se tocan. El estaño es el mineral de los portales S60, diseñado para que sea el mineral más escaso del juego y el que genera mayor deseo en los jugadores.
+
+Cómo se gana: Portales S60, que se abren cuando la convergencia de la lattice de Sentinel alcanza la condición matemática que activa el portal. También se obtiene al completar el pasaporte digital al cien por ciento y al alcanzar el rango máximo de Leyenda Indómita. La fuente del estaño es siempre un logro excepcional, no una acción cotidiana.
+
+Cómo se usa: Subastas digitales de productos únicos del comercio local, títulos especiales de avatar, diplomas de honor descargables en PDF, y cualquier transacción de alto valor dentro del ecosistema del juego. El estaño es la moneda del juego completo.
+
+Por qué estaño: El estaño es el mineral de la convergencia porque su obtención depende de la convergencia matemática de la lattice S60 de Sentinel. Es el mineral que solo aparece cuando los dos carriles del sistema se tocan en un punto exacto del espacio-tiempo, y esa condición es matemáticamente única y no reproducible. El diseño ata la rareza del estaño al diferenciador central del juego.
+
+### Cierre del universo narrativo
+
+Los tres subsistemas del universo narrativo no operan en paralelo sino en articulación. Los personajes habitan las rutas: Isidora camina por el Parque, El Ciego emerge del Pique al amanecer, La Chinchorrera aparece en la Caleta al anochecer, El Palanquero organiza la carga en el muelle durante luna llena. Las rutas son el territorio geográfico de esos personajes: cada zona de Lota tiene su figura, su minijuego y su recompensa. Los minerales son el medio de intercambio que ata la experiencia lúdica al comercio real: el cobre recompensa las acciones ordinarias y mantiene el flujo del comercio local activo, el oro recompensa los eventos del cielo y obliga al jugador a volver cuando hay una fecha importante en el calendario, el estaño recompensa la convergencia matemática y genera la escasez extrema que hace que el juego completo valga la pena.
+
+El universo narrativo no es un adorno sobre el juego. Es el sustrato sobre el que opera todo el modelo económico de Lota Indómito. Sin personajes con identidad y zona, no hay razón para caminar hacia un POI específico. Sin rutas que conecten POIs con minijuegos y recompensas, no hay loop de visita ni loop de retorno. Sin minerales con identidad propia, fuente propia y uso propio, no hay economía interna ni comercio local que cobrar comisión. Los tres subsistemas juntos son lo que convierte a Lota Indómito en una plataforma de reactivación comercial, no en una aplicación turística.
+
+---
+
+<!-- §4 Sistema económico → Bloque B tarea 5 -->
