@@ -945,4 +945,524 @@ La PWA es la superficie que el jugador ve y toca. Es deliberadamente simple: Vue
 
 ---
 
-<!-- §9 lota-server — backend y motor → Bloque C tarea 10 -->
+## §9 lota-server — backend y motor
+
+Lota-server es el componente de backend que orquesta todas las operaciones del juego.
+Recibe las solicitudes de la PWA, ejecuta la lógica de dominio, persiste los cambios en PostgreSQL,
+y proyecta el estado hacia el motor S60 en Piloto B.
+No contiene las matemáticas centrales del juego (esas residen en el motor S60),
+pero gestiona todos los aspectos operativos: autenticación, eventos del mundo,
+billetera, ingestion de eventos ML, e infraestructura OSM.
+Lota-server es el puente entre la experiencia del jugador y los datos del proyecto.
+
+### §9.1 Stack del backend: FastAPI + PostgreSQL + PostGIS
+
+El backend del Piloto A se construye sobre una pila moderna de Python
+que prioriza velocidad de desarrollo y corrección.
+La decisión D-006 documenta la elección de FastAPI como capa HTTP transitional para Piloto A;
+en Piloto B esta capa se reescribe en Rust (Axum o equivalente)
+para alinearse con el rendimiento y las convenciones del motor S60.
+La propuesta técnica en _analisis/04_propuesta_tecnica_stack_osm.md sección 3
+justifica la elección del stack Python para la etapa de prototipado,
+comparando alternativas de ORM y bases de datos
+y concluyendo que la combinación de FastAPI, SQLAlchemy y PostgreSQL
+ofrece la mejor relación entre velocidad de desarrollo y robustez operativa para un piloto.
+
+**FastAPI** es el framework web elegido para lota-server.
+FastAPI genera documentación OpenAPI/Swagger de forma automática
+a partir de las firmas de las rutas y los modelos Pydantic,
+lo que facilita la coordinación entre equipos y la validación temprana de contratos de API.
+El sistema de tipos de FastAPI, potenciado por Pydantic,
+intercepta payloads malformados en la frontera de la API
+antes de que alcancen la capa de dominio.
+Cada modelo Pydantic define los tipos esperados, los valores por defecto
+y las restricciones de rango; si un cliente envía un amount negativo o un user_id vacío,
+FastAPI responde con un error 422 antes de ejecutar cualquier código de dominio.
+La documentación interactiva de Swagger permite que los desarrolladores de la PWA
+exploren los endpoints, verifiquen los formatos de respuesta
+y generen clientes tipados sin necesidad de spec files manuales
+ni herramientas adicionales de generación de código.
+Esta capacidad de auto-documentación es especialmente valiosa durante el desarrollo paralelo
+de frontend y backend, ya que ambos equipos trabajan contra un contrato de API vivo
+que se actualiza automáticamente cuando se modifican los modelos.
+
+Pydantic es la biblioteca de validación que subyace a FastAPI.
+Define los esquemas de request y response con anotaciones de tipo de Python,
+lo que convierte la validación en una preocupación declarativa
+en lugar de código imperativo disperso.
+Cuando un payload llega a una ruta FastAPI, Pydantic lo coerce al tipo declarado,
+aplica las validaciones definidas (regex, rangos, enums),
+y popula el objeto del modelo; si la coerce falla,
+el error se devuelve al cliente con un mensaje descriptivo
+que indica exactamente qué campo falló y por qué.
+Esta estrategia reduce la cantidad de código de validación
+que los desarrolladores necesitan escribir y mantener,
+y elimina la clase de bugs donde un campo inesperado se ignora silenciosamente
+porque nadie esperaba ese formato en ese endpoint.
+
+**PostgreSQL 16** es la base de datos relacional que almacena todo el estado persistente del juego.
+PostgreSQL es la opción natural para un proyecto que requiere transacciones ACID,
+consultas complejas sobre datos de usuario,
+y un modelo de datos que evoluciona con cada etapa del proyecto.
+La decisión por PostgreSQL frente a alternativas como SQLite (para desarrollo local)
+o MongoDB se fundamenta en la madurez del ecosistema PostgreSQL,
+la disponibilidad de extensiones geoespaciales y de tipos JSON,
+y la familiaridad del equipo con el motor.
+PostgreSQL también ofrece Row Level Security (RLS),
+lo que permite definir políticas de acceso a nivel de fila en la base de datos,
+una capa adicional de seguridad que complementa la autenticación de la API.
+
+**PostGIS 3.4** extiende PostgreSQL con capacidades geoespaciales.
+PostGIS proporciona tipos geográficos nativos (POINT, LINESTRING, POLYGON, GEOMETRYCOLLECTION),
+indeksación espacial mediante R-tree sobre GiST (Generalized Search Tree),
+y un conjunto amplio de funciones de consulta espacial.
+Las más relevantes para el proyecto son ST_DWithin,
+que verifica si un punto está dentro de un radio dado de otro punto
+(usado para geofencing del lado del servidor),
+y ST_Contains,
+que verifica si una geometría contiene completamente a otra
+(usado para validar que un check-in cayó dentro de la zona esperada).
+Sin PostGIS, la validación de geofencing del lado del servidor requeriría
+cargar archivos GeoJSON en memoria y ejecutar algoritmos de punto-en-polígono en Python puro,
+lo cual es lento para polígonos complejos con cientos de vértices
+y consume memoria proporcional al número de zonas activas.
+Con PostGIS, la validación usa el índice GiST para filtrar candidatos en tiempo logarítmico
+y luego verifica solo los polígonos candidatos,
+lo que reduce el tiempo de query de segundos a milisegundos.
+
+La PWA, lota-server y el servicio de ML leen todos desde la misma instancia PostgreSQL.
+Esta arquitectura shared-database significa que no hay sincronización manual entre servicios:
+el servicio de ML consume materialized views que lota-server mantiene actualizadas
+con los últimos eventos de los jugadores,
+y el dashboard del Municipio lee las mismas tablas que la PWA,
+lo que garantiza consistencia entre lo que ve el jugador y lo que ve el Municipio.
+El patrón de materialized views es especialmente útil para el servicio de ML,
+que necesita acceso eficiente a datos agregados (como la frecuencia de check-ins por zona
+en la última semana) sin tener que ejecutar queries analíticas complejas
+sobre las tablas transaccionales.
+
+**SQLAlchemy 2.0** es el ORM que abstrae las consultas SQL.
+El directorio backend/ del proyecto contiene los modelos SQLAlchemy
+para las entidades principales: users (perfil y preferencias),
+sessions (tokens de autenticación),
+zones (polígonos y metadatos),
+world_events (calendario y estado de eventos),
+transactions (registro de movimientos de wallet),
+npcs (inventario y estado de personajes),
+y materialized views para consumo del servicio de ML.
+SQLAlchemy 2.0 soporta el modo async mediante el driver asyncpg,
+lo que permite a lota-server atender múltiples solicitudes concurrentes
+sin bloquear el event loop de Python.
+La ventaja de usar SQLAlchemy sobre raw SQL es doble:
+seguridad contra inyección (las consultas se construyen mediante el Expression Language,
+no mediante concatenación de strings)
+y portabilidad del código entre distintos motores de base de datos.
+El Expression Language de SQLAlchemy genera SQL correcto para PostgreSQL
+sin necesidad de escribir SQL manualmente,
+lo que reduce errores y facilita las pruebas con SQLite en desarrollo.
+
+**Alembic** gestiona las migraciones del esquema de base de datos.
+Cada cambio de esquema se registra como un archivo de migración numerado
+que puede aplicarse o revertirse de forma atómica.
+El esquema inicial del Piloto A tiene 8 tablas:
+users, sessions, zones, world_events, wallet_balances, wallet_transactions,
+wallet_coupons, npcs.
+La Etapa 1 agrega las tablas de subastas y cupones_redemption
+a medida que esas funcionalidades se implementan.
+Alembic mantiene un historial versionado de cada cambio,
+lo que permite desplegar migraciones progresivas en producción
+y revertir si algo falla.
+Antes de aplicar una migración en producción,
+se ejecuta primero en staging con datos de prueba
+para detectar problemas de rendimiento o pérdida de datos.
+El workflow de migración es:
+el desarrollador genera un archivo de migración con alembic revision --autogenerate,
+revisa el diff generado,
+aplica la migración localmente con alembic upgrade head,
+verifica que los tests pasan,
+y finalmente sube la migración al repositorio.
+En producción, las migraciones se aplican automáticamente
+como parte del pipeline de despliegue.
+
+El directorio backend/ del proyecto ya contiene el andamiaje FastAPI
+con las rutas base para autenticación
+(POST /api/v1/auth/register, POST /api/v1/auth/login, POST /api/v1/auth/refresh),
+zonas (GET /api/v1/zones, GET /api/v1/zones/{zone_id},
+POST /api/v1/zones/{zone_id}/checkin),
+wallet (GET /api/v1/wallet, POST /api/v1/wallet/transfer),
+y WebSocket para eventos (GET /api/v1/ws/events).
+La implementación completa de cada ruta con la lógica de dominio correspondiente
+es parte del trabajo de desarrollo del Piloto A.
+Las rutas están versionadas bajo /api/v1/ para permitir evolución de la API
+sin romper clientes existentes;
+cuando se introduzcan cambios que rompan compatibilidad,
+se creará una versión /api/v2/ mientras /api/v1/ permanece disponible
+para clientes legacy durante un período de transición.
+
+### §9.2 Motor de World Events: sincronización con festividades reales
+
+El motor de eventos del mundo es un proceso que corre como tarea periódica
+dentro de lota-server, implementado como una función async
+que se registra con el scheduler de FastAPI (APScheduler o el scheduler built-in de FastAPI).
+Cada 60 segundos, el motor consulta la tabla calendar
+en busca de eventos cuya columna starts_at caiga dentro de los próximos 5 minutos.
+Este intervalo de polling es lo suficientemente frecuente
+para activar eventos con precisión de minutos sin generar carga excesiva en la base de datos;
+el query sobre la tabla calendar con un índice en starts_at se ejecuta
+en menos de un milisegundo incluso con miles de eventos,
+lo que hace que el overhead del polling sea negligible
+frente al resto de las operaciones del servidor.
+
+Cuando un evento se activa, el motor ejecuta cuatro pasos en secuencia.
+Primero, publica el evento al orquestador SOMA mediante Redis Pub/Sub
+en el canal swarm:events:start, con un payload que incluye el event_id,
+el tipo de evento, las coordenadas del lugar, y la ventana horaria.
+Esto permite que los agentes de enjambre reciban la señal de activación
+y ajusten su comportamiento en consecuencia:
+si el evento es Fiestas Patrias, los agentes del enjambre elevan la prioridad
+de generación de contenido relacionado con empanadas y sidra,
+y la lattice activa los personajes temáticos de la fiesta.
+El payload de Pub/Sub está firmado con HMAC-SHA256
+para que los agentes puedan verificar la autenticidad del mensaje
+antes de actuar sobre él, lo que previene ataques de inyección de eventos falsos.
+Segundo, notifica a todos los clientes PWA conectados
+mediante WebSocket en la ruta /api/v1/ws/events,
+de modo que el calendario en la aplicación se actualice en tiempo real
+sin que el usuario necesite recargar la página ni hacer polling.
+El WebSocket usa el protocolo WAMP (Web Application Messaging Protocol)
+implementado sobre Autobahn|Python,
+lo que permite broadcast eficiente a miles de clientes simultáneos
+mediante el patrón pub/sub de WAMP.
+Tercero, activa el NPC específico del evento en la lattice.
+Por ejemplo, cuando se activa el evento de Fiestas Patrias,
+el NPC Doña Carmen la Empanadera se marca como disponible en la tabla de NPCs,
+lo que lo hace visible en la grilla de personajes de la PWA.
+La activación del NPC incluye la posición geográfica del personaje
+(que puede ser fija o dinámica según el tipo de evento)
+y la lista de diálogos asociados al evento.
+Cuarto, marca el evento como active en la tabla world_events
+y registra la hora de activación en started_at
+para que el dashboard del Municipio refleje el estado actual
+y el servicio de ML pueda calcular la duración real del evento.
+
+El calendario de eventos es curado por humanos, no generado automáticamente.
+El Municipio y las asociaciones de comercio local definen el calendario
+en colaboración con el equipo del proyecto.
+El Piloto A incluye una lista curada de festividades nacionales
+(Fiestas Patrias el 18 y 19 de septiembre,
+San Juan el 24 de junio,
+Día del Patrimonio en mayo)
+más eventos de origen local
+(aniversario de Lota el 15 de enero,
+semana del carbón en agosto,
+fundación del Museo del Carbón).
+La curaduría humana asegura que los eventos tengan relevancia cultural real
+y no parezcan generados algorítmicamente sin contexto,
+lo que es especialmente importante para la credibilidad del proyecto
+ante el CMN y las instituciones culturales.
+Cada evento en el calendario incluye metadatos enriquecidos:
+descripción del evento, organismo responsable, ubicación geográfica,
+NPCs asociados, cupones disponibles,
+y los criterios de completitud para el achievement de evento.
+Los eventos se crean y modifican mediante una interfaz de administración
+que valida que las fechas no se solapen de forma contradictoria
+y que los NPCs referenciados existan en la base de datos.
+
+Cuando un evento termina, el motor ejecuta la desactivación en orden inverso:
+desactiva el NPC asociado en la lattice
+(marca available = false en la tabla de NPCs
+y limpia los diálogos específicos del evento),
+genera eventos world_event_complete en el pipeline analítico
+para que el servicio de ML procese el impacto del evento
+(número de check-ins durante el evento, recursos ganados,
+feedback de los jugadores, duración real versus duración esperada),
+y expira los cupones específicos que tienen caduca
+dentro de la ventana del evento (marca status = expired en wallet_coupons).
+El motor de eventos no genera comportamiento de NPC;
+esa responsabilidad es del orquestador SOMA y la lattice.
+El motor solo activa y desactiva; el enjambre se encarga de todo lo demás.
+Si un evento se cancela antes de su fecha de inicio
+(por lluvia, decisión municipal, o cualquier otra causa),
+el motor puede recibir una señal de cancelación
+que desactiva cualquier preparación hecha
+sin ejecutar los pasos de terminación.
+
+El diseño detallado del motor de eventos está en _analisis/21_world_events_d014.md,
+secciones 3 a 5, donde se documenta la arquitectura del scheduler,
+los tipos de eventos soportados (festividades nacionales, eventos locales,
+eventos de comercio, eventos de storyline),
+y los criterios de priorización cuando múltiples eventos se solapan en el tiempo.
+
+### §9.3 Billetera multi-moneda: PostgreSQL y sincronización con SHM
+
+La billetera multi-moneda es el componente que gestiona los recursos del jugador.
+El proyecto define cuatro tipos de minerales, cada uno con semántica y restricciones distintas.
+Los Carboncillos (carbón) son el recurso primario de intercambio cotidiano entre jugadores;
+se generan mediante check-ins en zonas y se pierden al transferir.
+El Cobre (cu) permite comprar items en el store,
+incluyendo mejoras de avatar y cosméticos temáticos.
+El Estaño (sn) tiene un techo de almacenamiento que previene la acumulación infinita;
+cuando se alcanza el máximo, los Carboncillos adicionales se convierten en Cobre.
+El Oro (au) es el recurso más escaso, obtenido mediante logros excepcionales
+como completar todas las zonas de patrimonio o ganar un torneo semanal.
+Cada tipo de mineral tiene una iconografía distintiva en la UI de la wallet,
+y los valores se formatean con abreviaturas estándar de la tabla periódica
+para reforzar el contexto minero del juego
+y conectar visualmente con la historia de Lota como ciudad minera.
+
+El estado de la billetera se persiste en PostgreSQL en tres tablas normalizadas.
+wallet_balances almacena el saldo actual de cada recurso por usuario,
+con una fila por combinación de user_id y mineral_type.
+La tabla tiene índices compuestos en (user_id, mineral_type)
+para consultas de saldo rápido
+y un índice en updated_at para facilitar la auditoría de actividad reciente.
+La actualización de saldos usa optimistic locking:
+cada update incluye una condición WHERE balance = old_balance,
+y si la condición no se cumple (porque otro proceso modificó el saldo concurrentemente),
+la transacción se revierte y se reintenta con el nuevo saldo.
+wallet_transactions es una tabla de auditoría inmutable
+que registra cada movimiento financiero del juego:
+tipo de transacción (checkin_reward, transfer_sent, transfer_received,
+purchase, coupon_redeemed, npc_gift),
+mineral involucrado, monto, usuario origen, usuario destino,
+identificador de cupón si corresponde, y timestamp con zona horaria.
+La inmutabilidad de wallet_transactions es un principio de diseño:
+una vez insertada, una fila nunca se modifica ni se borra,
+lo que permite auditar el historial financiero completo de cualquier jugador
+en cualquier momento.
+Esta tabla es la base para la detección de anomalías por el servicio de ML:
+patrones como una ráfaga de transferencias a la misma cuenta
+o un saldo que aumenta sin transacciones correspondientes
+son señales de posibles abusos.
+wallet_coupons almacena los cupones canjeables con su QR code generado,
+fecha de expiración, estado actual (active, redeemed, expired),
+y referencia al comercio que emitió el cupón.
+Cada cupón tiene también un campo de redemption_count
+que registra cuántas veces se ha intentado canjear,
+lo que permite detectar intentos de doble gasto.
+
+En el Piloto A, PostgreSQL es la fuente única de verdad para la billetera.
+La PWA consume el endpoint GET /api/v1/wallet que devuelve un JSON
+con los saldos actuales, las últimas 10 transacciones ordenadas por fecha descendente,
+y los cupones activos del jugador.
+No existe sincronización con SHM en esta etapa
+porque el motor S60 aún no está operativo;
+todas las validaciones de reglas de juego se aplican en Python dentro de lota-server.
+La implementación de Piloto A sigue el patrón de una API RESTful síncrona:
+cuando la PWA envía una transferencia,
+lota-server valida las reglas de dominio,
+abre una transacción PostgreSQL,
+debit del origen, credit al destino,
+inserta el registro de auditoría,
+commitea, y responde al cliente.
+Si cualquier paso falla, la transacción se revierte automáticamente por PostgreSQL
+y el cliente recibe un error descriptivo.
+
+En el Piloto B, el estado de la billetera se refleja bidireccionalmente
+entre la LiquidMemory del motor S60 (SHM POSIX) y PostgreSQL.
+El motor S60 mantiene el saldo autoritativo;
+PostgreSQL almacena la misma información como proyección legible.
+Lota-server media entre ambos mundos:
+cuando ocurre una transacción, lota-server aplica la mutación al motor S60
+mediante un mensaje IPC sobre un socket Unix,
+el motor actualiza SHM de forma atómica,
+y luego lota-server proyecta el nuevo saldo a PostgreSQL
+para mantener la consistencia.
+Esta arquitectura permite que el motor S60 valide reglas de juego
+(límites de estaño, cooldowns de transferencia, condiciones de logros)
+en el mismo proceso donde ejecuta las matemáticas centrales,
+mientras PostgreSQL sirve como proyección legible para la PWA y el dashboard.
+Si el motor S60 no está disponible (por ejemplo, durante un reinicio),
+lota-server puede servir reads desde la proyección de PostgreSQL
+sin interrumpir el servicio.
+La consistencia entre SHM y PostgreSQL se verifica mediante checksums periódicas:
+cada 5 minutos, el motor S60 genera un hash SHA-256 de su estado de wallet
+y lo compara con un hash calculado desde PostgreSQL;
+si difieren, se genera una alerta para que el equipo investigue.
+
+Los códigos QR de los cupones se generan del lado del servidor
+usando una clave Ed25519 única por cupón.
+El QR codifica un payload firmado que contiene el cupon_id,
+el user_id, el mineral_type, el amount, y la fecha de expiración.
+La firma Ed25519 es verificable con la clave pública del servidor,
+lo que permite que la PWA valide la autenticidad de un cupón
+sin conexión a internet,
+requisito fundamental para canjear cupones en zonas rurales de Lota
+donde la cobertura es intermitente.
+El proceso de verificación offline usa la copia de la clave pública
+que se descarga cuando la PWA se sincroniza por última vez;
+si la clave ha rotado desde entonces,
+la verificación falla y se solicita una sincronización.
+La clave de firma se rota cada 30 días por razones de seguridad;
+la nueva clave se publica en el endpoint GET /api/v1/keys/coupons
+una semana antes de la expiración de la clave anterior
+para permitir que la PWA actualice su copia de claves públicas.
+
+La aplicación de reglas anti-abuso vive exclusivamente en lota-server
+y es innegociable del lado del cliente.
+Los límites diarios de transferencia (máximo 1000 Carboncillos por día a otros jugadores),
+el cooldown entre transferencias al mismo jugador
+(mínimo 5 minutos entre transferencias bilaterales),
+y el techo de estoc de Estaño (máximo 500 sn;
+lo que sobra se convierte en Cobre al rate de 10:1)
+se aplican en la capa de dominio antes de persistir cualquier transacción.
+La PWA puede mostrar estos límites al usuario como información contextual,
+pero la verificación autoritativa siempre reside en el servidor:
+un cliente que manipule los límites localmente no podrá consumar una transacción
+porque lota-server la rechazará con un código de error
+que indica la regla violada.
+El historial de rechazos por regla de anti-abuso se registra
+en una tabla analytics_rejections
+para que el equipo pueda analizar patrones de abuso
+y ajustar los límites si es necesario.
+
+El diseño completo del sistema de monedas y minerales está en
+_analisis/23_sistema_monedas_minerales.md, sección 3,
+donde se detallan los modelos de datos,
+los flujos de transacción entre jugadores y hacia NPCs,
+los rates de conversión entre minerales,
+y la estrategia de sincronización SHM/PostgreSQL para Piloto B.
+
+### §9.4 OpenStreetMap autoalojado: Nominatim + OSRM + tileserver-gl
+
+La infraestructura de mapas del proyecto se construye enteramente
+sobre herramientas de OpenStreetMap autoalojadas.
+Esta decisión elimina la dependencia de proveedores externos
+como Google Maps, Mapbox o Apple Maps,
+lo que reduce costos operativos,
+elimina riesgos de bloqueo por cambios de precio unilaterales,
+y protege la privacidad de los usuarios
+al no enviar datos de ubicación a terceros
+con modelos de negocio basados en publicidad o venta de datos.
+La decisión se documenta en _analisis/04_propuesta_tecnica_stack_osm.md,
+donde se comparan los costos y riesgos de tres escenarios:
+autoalojo completo (el elegido),
+uso de servicios públicos con cuota gratuita,
+y uso de servicios premium como Google Maps Platform.
+
+**Nominatim** es el geocodificador oficial de OpenStreetMap.
+El proyecto ejecuta su propia instancia de Nominatim
+alimentada con los datos de la región del Biobío,
+lo que incluye la comuna de Lota,
+los barrios históricos (Población Obrera, Colcura),
+los puntos de referencia del patrimonio carbonífero
+(Mina Chiflones del Boeing, Pabellones de la Población Obrera),
+y la red vial detallada de la zona.
+Nominatim expone una API HTTP compatible con la especificación de Nominatim Search API:
+acepta consultas en lenguaje natural
+(como "Mina Chiflones del Boeing, Lota")
+y devuelve resultados ordenados por relevancia
+con las coordenadas, el tipo de lugar (amenity, historic, tourism),
+y la dirección formateada.
+El geocodificador sirve dos propósitos en la PWA:
+la búsqueda de direcciones en la barra de navegación del mapa,
+y la resolución de nombres de zonas a geometrías para la curaduría de metadatos.
+La instancia local de Nominatim tiene tiempos de respuesta inferiores a 100 ms
+para consultas sobre la región del Biobío,
+comparado con los 200 a 500 ms de la instancia pública de Nominatim
+que tiene carga global y límites de rate estrictos.
+El build inicial de Nominatim con los datos del Biobío
+toma aproximadamente 4 horas en el VPS,
+y las actualizaciones semanales incrementales toman 15 a 30 minutos.
+
+**OSRM** es el motor de enrutamiento de OpenStreetMap.
+El proyecto ejecuta su propia instancia de OSRM para la región del Biobío
+con dos perfiles: pedestrian (peatón) y bicycle (bicicleta).
+El perfil pedestrian usa la red vial completa
+incluyendo senderos y escaleras,
+con velocidad promedio de 5 km/h y penalización de pendientes fuertes.
+El perfil bicycle usa la red vial filtrada
+para excluir escaleras y senderos demasiado angostos,
+con velocidad promedio de 15 km/h y consideración de elevación.
+OSRM responde consultas HTTP con la especificación OSRM API:
+recibe coordenadas de origen y destino,
+devuelve la ruta optimizada con distancia en metros,
+tiempo estimado en segundos,
+y una polyline codificada que MapLibre dibuja sobre el mapa.
+El enrutamiento se usa para dos funcionalidades principales en la PWA.
+Primero, las sugerencias de "próxima zona" en el bucle de micro-sesión:
+cuando el jugador está en una zona,
+OSRM calcula la ruta a las tres zonas más cercanas no visitadas en los últimos 7 días,
+y el juego sugiere la que tiene mejor relación distancia-tiempo.
+Segundo, la navegación asistida por comercio en la Etapa 1,
+donde el jugador puede iniciar navegación hacia un comercio participante
+que acepta cupones de descuento;
+la ruta se muestra superpuesta al mapa con la polyline devuelta por OSRM.
+
+**Tileserver-gl** sirve los vector tiles que MapLibre renderiza en la PWA.
+El proyecto ejecuta su propia instancia con un estilo cartográfico personalizado
+que es visualmente coherente con la identidad del proyecto.
+El estilo enfatiza los elementos del patrimonio carbonífero:
+minas activas y abandonadas se muestran con un ícono de pico,
+los pabellones históricos con un ícono de edificio victoriano,
+las caletas con redes de pesca estilizadas.
+Los puntos de interés genéricos (supermercados, bombas de bencina,
+cadenas de comida rápida)
+se desemphasizan (opacidad reducida al 50 por ciento)
+o se ocultan del zoom urbano para reducir ruido visual
+y mantener el foco en la experiencia patrimonial.
+La paleta de colores del mapa usa tonos que evocan la minería:
+verde musgo (#4a7c59) para áreas verdes,
+cobre oxidado (#b87333) para zonas urbanas,
+oro (#ffd700) para puntos de interés cultural.
+El estilo se define en un archivo JSON con la especificación de MapLibre Style,
+lo que permite iterar rápidamente sin necesidad de regenerar tiles;
+los cambios de estilo se reflejan inmediatamente en todos los clientes
+que carguen el mapa.
+
+Las razones para el autoalojo son pragmáticas
+y están alineadas con los principios del proyecto.
+El costo de licenciamiento es cero;
+solo se paga el hosting del VPS,
+aproximadamente 15 a 25 dólares mensuales por una instancia pequeña
+que sirve la región del Biobío.
+La independencia de terceros protege el proyecto
+de cambios de precio unilaterales como los que Google Maps implementó
+en 2018 y 2022,
+que forzaron a varias aplicaciones a reescribir su infraestructura de mapas o cerrar.
+La privacidad de los usuarios queda asegurada
+porque ningún proveedor externo extrae datos de ubicación;
+los logs del servidor solo registran las coordenadas de las consultas,
+no los identificadores de los usuarios,
+lo que hace imposible correlacionar consultas con jugadores específicos.
+La personalización cartográfica es completamente libre
+y no tiene topes de uso ni cargos adicionales por marca blanca.
+
+El stack OSM opera bajo el mismo virtual host nginx que lota-server,
+con sub-rutas diferenciadas para cada servicio.
+En el despliegue actual, el stack corre en el VPS fan (157.254.174.40),
+accesible mediante sub-dominios de pinguinoseguro.cl
+en las rutas /osm/nominatim/ (geocodificación),
+/osm/osrm/ (enrutamiento),
+y /osm/tiles/ (vector tiles).
+Cada servicio tiene su propio contenedor Docker con reinicio automático (policy always),
+lo que permite actualizar cada componente de forma independiente
+sin afectar los demás.
+Los datos de OSM para la región del Biobío se actualizan semanalmente
+mediante un proceso de importación incremental
+que aplica los changeset de la semana anterior al extracto ya cargado,
+lo que mantiene los datos sincronizados con la realidad del territorio
+sin necesidad de reconstruir el índice completo cada vez.
+
+El diseño técnico completo de la pila OSM está en
+_analisis/04_propuesta_tecnica_stack_osm.md, sección 3,
+donde se justifica la elección de cada componente,
+se documenta la arquitectura de despliegue con Docker Compose,
+se detallan los scripts de importación de datos,
+y se estiman los costos de hosting desglosados por servicio.
+
+Lota-server es el núcleo operativo de la plataforma.
+Recibe los comandos de la PWA, los aplica sobre la capa de dominio,
+los persiste en PostgreSQL, los proyecta hacia el motor S60 en Piloto B,
+y sirve los dashboards que el Municipio y el comercio usan
+para tomar decisiones de inversión patrimonial.
+No contiene las matemáticas centrales del juego;
+esas residen en el motor S60 y son competencia del equipo de Sentinel.
+Lota-server orquesta todos los aspectos operativos:
+autenticación, scheduling de eventos, gestión de billetera multi-moneda,
+ingestion de eventos ML, e infraestructura OSM.
+Es el puente entre la experiencia del jugador y los datos del proyecto.
+
+---
+
+<!-- §10 Motor GPU — Piloto B — CENTRO del concepto → Bloque C tarea 11 -->
