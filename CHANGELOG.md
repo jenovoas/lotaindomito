@@ -8,6 +8,19 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ---
 
+## 2026-08-11
+
+### Documentación y propuesta de concepto
+- **Propuesta de concepto del proyecto completada** (`docs/propuesta-concepto.md`, 3,161 líneas, ~60 págs). Documento técnico-diseño integral organizado en 5 partes y 28 secciones:
+  - **Parte I (Concepto):** Tesis (turismo + patrimonio + S60), diseño de concepto D-014, universo narrativo (4 figuras, 8 rutas, 3 minerales), sistema económico (D-016 multi-moneda, D-017 subastas, World Events, ML externo), diferenciador técnico (S60 sin floats, sin Google), lo que NO es el proyecto, superpoder del sistema.
+  - **Parte II (Especificación técnica):** Arquitectura en 5 capas + SOLID + ISO/IEC 5055, PWA Piloto A (Vue 3 + MapLibre + Turf.js + Pinia + 16 eventos ML), backend `lota-server` (FastAPI + PostGIS + OSM self-hosted), motor GPU Piloto B (Rust + wgpu + Sentinel S60 lattice 91 nodos), ML externo (Python, vistas materializadas, privacidad Ley 19.628), sync y operación (rclone bisync, deploy fan VPS).
+  - **Parte III (Fundamentación teórica):** Por qué S60 y memoria de cristal (sin deriva floats, LiquidMemory SHM), por qué multi-moneda ( rareza diferenciada, P2P, anti-inflación), por qué World Events (turista de paso vs racha diaria), por qué expansión regional (corredor Arauco), por qué autosustentable (comisión comercio vs SaaS).
+  - **Parte IV (Plan por etapas y testing):** Marco normativo ISO (12207, 25010, 27001, 31000, 9241 — alineamiento declarado), procesos de testing (pirámide 70/20/10, CI/CD, lints), Etapa 0 (Piloto de concepto 30 días), Etapa 1 (MVP + lote piloto público 100+ usuarios, decisión GPU real), Etapa 2 (Escala local + subastas D-017, RA Meta Quest 3, modo Familia), Etapa 3 (Expansión regional corredor Arauco), Etapa 4 (Operación continua 12 meses 1000+ usuarios, ITIL 4 diferido).
+  - **Parte V (Cierre):** Matriz de riesgos ISO 31000 (7 riesgos con mitigación), gestión de servicios ITIL 4 (en evaluación, 6 preguntas abiertas), las 21 decisiones de diseño abiertas con recomendación por doc, referencias cruzadas (docs, análisis 04..25, bóveda PersonalVault, módulos Sentinel `me-60os-core`).
+- Commits de entrega: `07664f4`, `9ac9ee5`, `e8202b2`.
+
+---
+
 ## 2026-08-10
 
 ### Concepto y diseño
