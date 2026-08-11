@@ -61,7 +61,7 @@ Todos en `/home/jnovoas/Proyectos/sentinel/me-60os-core/src/`:
 - **Navbar ÚNICA compartida:** fragmento `docs/_render/nav.html` (con placeholder {BASE}) → render-docs.py lo inyecta en TODOS los docs generados. `index.html`, `prototipo-stitch.html` y los docs usan la misma navbar (logo SVG, links, hamburguesa, GitHub). Al agregar una sección al nav: actualizar index.html Y nav.html (mismo orden).
 - **prototipo-stitch.html:** visor de 52 pantallas Stitch (header viejo reemplazado por navbar nueva; el nav de categorías es `.cats`).
 - **HTML generados (docs/*.html, README.html) están en .gitignore** — se regeneran en el fan con cada pull. Lo versionado es el generador (render-docs.py + nav.html).
-- **PENDIENTE:** el §6.5 "Superpoder del Sistema" (traducción para stakeholders) se PERDIÓ en la limpieza de Atlas (working tree restaurado). La propuesta tiene §1-§28 sin §6.5. Hay que re-escribirlo o recuperarlo de sesión anterior.
+- **PENDIENTE:** el §6.5 actual de la propuesta cierra el bloque "Lo que NO es el proyecto" con "No es un proyecto genérico ni simplificado para encajar en bases" (memoria anterior hablaba de un "Superpoder del Sistema" perdido; eso era nota obsoleta, ya corregida aquí).
 - **Regla dura:** NUNCA montos de dinero en docs del proyecto (son de la clienta). Limpiar solo líneas de Fabiola, NO eliminar documentos completos.
 
 ## Motor GPU (Piloto B) — estado: demo funcional, centro del concepto

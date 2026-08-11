@@ -102,12 +102,12 @@ Estas pantallas son la guía visual para el desarrollo del piloto.
 
 El juego se construye con tecnología de código abierto, sin depender de Google Maps ni de plataformas privadas que cobran por uso. Todo el mapa, la geolocalización y los datos viven en servidores propios del proyecto.
 
-**Se evaluarán dos pilotos en paralelo:**
+**Arquitectura en dos capas (D-014):**
 
-- **Piloto A — Tecnología de mercado:** aplicación web progresiva (PWA) con Vue 3 + MapLibre + OpenStreetMap + FastAPI. Corre en el navegador del celular desde el primer día, GPS real, rápida de construir.
-- **Piloto B — Motor gráfico propio:** videojuego construido en Rust con wgpu (Vulkan/WebGPU) y el framework matemático Sentinel S60. Permite control total de la experiencia y sincronización con el cielo real sobre Lota.
+- **Capa accesible (Piloto A):** PWA Vue 3 + MapLibre + OpenStreetMap + FastAPI. Corre en el celular desde el primer día, GPS real, rápida de construir.
+- **Capa diferenciadora (Piloto B):** motor gráfico propio en Rust con wgpu (Vulkan/WebGPU) y el framework matemático soberano Sentinel S60. Control total, sincronización con cielo real sobre Lota.
 
-Ambos pilotos comparten el mismo contenido: las 5 zonas, las misiones, los personajes, los reportes ciudadanos y las estadísticas municipales. La diferencia está en la experiencia del jugador. La evaluación técnica decide cuál es la versión definitiva.
+Ambas capas operan sobre el mismo contenido (5 zonas, misiones, personajes, reportes ciudadanos y estadísticas municipales). El motor es el diferenciador central del proyecto, no una alternativa en competencia.
 
 El proyecto aplica el framework matemático desarrollado por el responsable técnico (Jaime Novoa) llamado **Sentinel S60** — un sistema de cálculo de precisión que permite sincronizar el juego con eventos del cielo real sobre Lota (estrellas visibles, fase lunar, ciclos solares). Esto significa que el cielo del juego cambia con el cielo real del jugador: es un diferenciador único que ningún otro juego patrimonial ofrece.
 

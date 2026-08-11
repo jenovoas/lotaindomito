@@ -30,7 +30,7 @@ flowchart TD
     end
 
     subgraph Readback
-        I -->|pollster / async| C
+        I -->|tokio / async| C
         C -->|Actualización| A
     end
 ```
@@ -59,11 +59,11 @@ Todos los componentes residen en `/home/jnovoas/Proyectos/sentinel/me-60os-core/
 ## 4. Estructura Construida en Lota Engine (`rust/`)
 El motor en Rust está ubicado en `/home/jnovoas/Proyectos/LotaIndomito/rust/`.
 
-*   **`Cargo.toml`**: `lota_engine`. Dependencias configuradas: `me60os_core` (vía path a sentinel), `wgpu`, `bytemuck`, `anyhow`, `pollster`.
+*   **`Cargo.toml`**: `lota_engine`. Dependencias configuradas: `me60os_core` (vía path a sentinel), `wgpu`, `bytemuck`, `anyhow`, `tokio`.
 *   **`src/gpu/buffer_pack.rs`**: Define y ejecuta la conversión de los structs de S60 en distribuciones binarias (align/pack) aptas para la GPU.
     *   `GpuSPA` (32 bytes): `components: [i32; 4]`, `c4: i32`, `_pad0: i32`, `raw_lo: u32`, `raw_hi: i32`.
     *   `GpuVector3` (96 bytes): Tres `GpuSPA`.
-    *   `GpuOscillator` (64 bytes): Cuatro `GpuSPA` (frecuencia, amplitud, fase, amortiguación).
+    *   `GpuOscillator` (128 bytes): Cuatro `GpuSPA` (frecuencia, amplitud, fase, amortiguación).
     *   `GpuLatticeCell` (96+64+pad bytes): `GpuVector3` + `GpuOscillator` + `id: u32`.
     *   Aprobado el test unitario `test_gpu_spa_alignment` asegurando `size_of`.
 *   **`src/gpu/pipeline.rs`**:

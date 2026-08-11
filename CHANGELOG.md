@@ -10,6 +10,26 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ## 2026-08-11
 
+### Limpieza pre-demo (coherencia con D-014 y correcciones técnicas)
+- **`docs/propuesta-fondo.md` §8 alineado con D-014:** reemplazado el enunciado
+  "Se evaluarán dos pilotos en paralelo. La evaluación técnica decide cuál es la
+  versión definitiva" por "Arquitectura en dos capas (D-014)" — Piloto A (capa
+  accesible) + Piloto B (capa diferenciadora, motor soberano). El motor es el
+  diferenciador central, no una alternativa en competencia. D-013 queda como
+  decisión histórica reinterpretada por D-014.
+- **`_analisis/17_arquitectura_gpu_motor_lota.md` (3 correcciones de hecho):**
+  `pollster` → `tokio` (diagrama §2 y dependencias §4), `GpuOscillator (64 bytes)`
+  → `(128 bytes)` (§4). El eslabón `upload_and_dispatch` ya estaba marcado ✅ en §5/§7.
+- **`MEMORY.md`:** corregida nota obsoleta sobre §6.5 "Superpoder del Sistema"
+  perdido — el §6.5 actual ("No es un proyecto genérico ni simplificado") sí existe
+  en `propuesta-concepto.md` línea 620 y cierra bien el bloque "Lo que NO es".
+- Validación demo en vivo: `index.html`, `prototipo-stitch.html`,
+  `docs/propuesta-concepto.html`, `README.html` responden 200 en
+  https://pinguinoseguro.cl/lotaindomito/ con navbar única compartida.
+- Push a GitHub al día (HEAD `8fdc1f5` = `origin/main`).
+- Archivos de conflicto `propuesta-concepto.md.conflict1/2` se conservan como
+  evidencia histórica (decisión del INTERLOCUTOR).
+
 ### Documentación y propuesta de concepto
 - **Propuesta de concepto del proyecto completada** (`docs/propuesta-concepto.md`, 3,161 líneas, ~60 págs). Documento técnico-diseño integral organizado en 5 partes y 28 secciones:
   - **Parte I (Concepto):** Tesis (turismo + patrimonio + S60), diseño de concepto D-014, universo narrativo (4 figuras, 8 rutas, 3 minerales), sistema económico (D-016 multi-moneda, D-017 subastas, World Events, ML externo), diferenciador técnico (S60 sin floats, sin Google), lo que NO es el proyecto, superpoder del sistema.
