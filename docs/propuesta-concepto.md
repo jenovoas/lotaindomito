@@ -3121,27 +3121,20 @@ Las decisiones D-016 y D-017 representan actualmente propuestas de diseño técn
 | Código | Ruta del Archivo de Análisis | Foco de la Investigación |
 | :--- | :--- | :--- |
 | **A-04** | `_analisis/04_propuesta_tecnica_stack_osm.md` | Estructuración del stack autohospedado de OpenStreetMap con Nominatim y OSRM. |
-| **A-05** | `_analisis/05_modelo_financiero_sustentabilidad.md` | Simulación económica de sostenibilidad, costos del lote piloto y retorno para el comercio. |
-| **A-06** | `_analisis/06_estructura_datos_postgis.md` | Modelamiento de tablas espaciales, geocercas poligonales e indexación espacial de zonas. |
-| **A-07** | `_analisis/07_diseno_pwa_offline_first.md` | Estrategias de almacenamiento local (IndexedDB) para juego continuo sin conectividad de datos. |
-| **A-08** | `_analisis/08_reglamento_seguridad_turistas.md` | Protocolos de seguridad física para turistas en las misiones costeras de Lota. |
-| **A-09** | `_analisis/09_identidad_visual_paletas_lotinas.md` | Manual de marca, colores industriales del carbón, tipografía y assets gráficos recomendados. |
-| **A-10** | `_analisis/10_diseno_misiones_cronistas.md` | Diseño literario de diálogos, acertijos y narrativas para los personajes históricos. |
-| **A-11** | `_analisis/11_integracion_hardware_gafas_ra.md` | Estudio de factibilidad para arriendo e implementación técnica de gafas Meta Quest 3 en terreno. |
-| **A-12** | `_analisis/12_analisis_costos_vps_cloud.md` | Presupuesto detallado para el despliegue del lora-server en proveedores de infraestructura. |
-| **A-13** | `_analisis/13_arquitectura_api_fastapi.md` | Definición de endpoints de API para autenticación anónima, sincronización y canjes. |
-| **A-14** | `_analisis/14_modelado_matematico_s60.md` | Aplicación de aritmética base-60 a los sistemas de coordenadas temporales en Sentinel. |
-| **A-15** | `_analisis/15_protocolo_escrow_minerales.md` | Detalle del flujo seguro y transaccional del depósito en garantía para las subastas. |
-| **A-16** | `_analisis/16_evaluacion_cumplimiento_privacidad.md`| Análisis legal y técnico de conformidad con la Ley de Protección de Datos en Chile. |
-| **A-17** | `_analisis/17_estrategias_comunicacionales_municipio.md`| Plan de difusión pública, onboarding para adultos mayores y vinculación local. |
-| **A-18** | `_analisis/18_registro_bugs_maqueta_vue3.md` | Reporte técnico de errores detectados en la maqueta inicial PWA de MapLibre GL. |
-| **A-19** | `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md`| Referencias de software libre y proyectos globales exitosos de juego urbano. |
-| **A-20** | `_analisis/20_diseno_arquitectura_celeste.md` | Integración del Calendario del Cielo en el juego y su relación con los World Events. |
-| **A-21** | `_analisis/21_analisis_cohesion_comunitaria.md` | Métodos de análisis del tejido social y el impacto de los incentivos en Lota Alto y Bajo. |
-| **A-22** | `_analisis/22_ml_analytics_d014.md` | Diseño de la telemetría, segmentación analítica y paneles municipales de ML. |
-| **A-23** | `_analisis/23_modelos_de_moneda_abiertos.md` | Estudio detallado de la emisión de carboncillo, estaño, cobre y oro virtuales. |
-| **A-24** | `_analisis/24_subastas_reales.md` | Mecánica de subastas de bienes reales, comisiones y reputación sin transacciones CLP. |
-| **A-25** | `_analisis/25_todo_continuacion.md` | Lista de tareas pendientes y control de versiones para la continuidad del proyecto. |
+| **A-05** | `_analisis/05_analisis_tecnologias_disponibles.md` | Evaluación de tecnologías disponibles para el cliente PWA y el backend. |
+| **A-06** | `_analisis/06_investigacion_motores_rust_juegos_ultra_rapidos.md` | Análisis comparativo de motores gráficos en Rust para simulaciones de alta velocidad. |
+| **A-07** | `_analisis/07_propuesta_arquitectura_servidor_rust_juego.md` | Propuesta de arquitectura para el servidor de juego en Rust y su integración con Sentinel. |
+| **A-15** | `_analisis/15_inventario_sentinel_disponible_para_motor.md` | Inventario de módulos de Sentinel S60 disponibles para el motor GPU de Lota Indómito. |
+| **A-16** | `_analisis/16_vision_motor_grafico_sentinel_completo.md` | Visión arquitectónica completa del motor gráfico Sentinel y su modelo de simulación. |
+| **A-17** | `_analisis/17_arquitectura_gpu_motor_lota.md` | Arquitectura GPU del motor de Lota, shaders WGSL y pipeline de renderizado reticular. |
+| **A-18** | `_analisis/18_sesion_motor_gpu_memoria.md` | Diseño de la memoria de cristal ultrarrápida (LiquidMemory SHM) y persistencia sin floats. |
+| **A-19** | `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md` | Referencias de software libre y proyectos globales de juego urbano (Pokémon GO, Turf.js). |
+| **A-20** | `_analisis/20_loop_jugador_dia_a_dia.md` | Diseño del loop de visita del turista, anatomía de la micro-sesión (1-5 min) y vector de retorno. |
+| **A-21** | `_analisis/21_world_events_d014.md` | Diseño de los World Events (días temáticos), NPCs móviles, cupones QR e insignias exclusivas. |
+| **A-22** | `_analisis/22_ml_analytics_d014.md` | Servicio de ML externo en Python, vistas materializadas de solo-lectura y dashboards municipales. |
+| **A-23** | `_analisis/23_sistema_monedas_minerales.md` | Sistema multi-moneda (Cobre, Oro, Estaño) bajo D-016, ratios de cambio, emisión y wallet P2P. |
+| **A-24** | `_analisis/24_subastas_reales.md` | Mecánica de subastas de bienes reales (D-017), escrow, reputación bilateral y comisiones sin CLP. |
+| **A-25** | `_analisis/25_todo_continuacion.md` | Estado de continuidad, las 21 decisiones abiertas, trabajo pendiente y pitch consolidado. |
 
 ### §28.3 Bóveda de Jaime (PersonalVault)
 
@@ -3155,14 +3148,14 @@ Las decisiones D-016 y D-017 representan actualmente propuestas de diseño técn
 | Enjambre Soma | `PersonalVault/HISTORIA_ENJAMBRE_SOMA_REDIS_SENTINEL.md` | Sincronización en tiempo real de agentes virtuales basados en Redis y el core de Sentinel. |
 | Inventario de Runtime | `PersonalVault/INVENTARIO_VAULT_RUST_RUNTIME.md` | Librerías, crates matemáticos y dependencias de bajo nivel autorizadas para el motor. |
 
-### §28.4 Módulos de Sentinel (`me60os-core`)
+### §28.4 Módulos de Sentinel (`me-60os-core`)
 
 | Componente Técnico | Ruta del Archivo de Origen | Función en el Ecosistema |
 | :--- | :--- | :--- |
-| Núcleo de Simulación | `me60os-core/src/lib.rs` | Punto de entrada del core matemático, exportación de macros y traits de Sentinel. |
-| Aritmética Base-60 | `me60os-core/src/s60.rs` | Implementación del sistema sexagesimal s60 para cálculo espacial y temporal exacto. |
-| Memoria Compartida | `me60os-core/src/shm.rs` | Gestión de memoria compartida a bajo nivel, sincronización de hilos e IPC. |
-| Red de Simulación | `me60os-core/src/net.rs` | Protocolos de red livianos para transmisión en vivo del estado de los agentes en el lattice. |
-| Gestión del Tiempo | `me60os-core/src/time.rs` | Modelamiento exacto de ticks temporales y sincronización con el Calendario del Cielo. |
+| Núcleo de Simulación | `me-60os-core/src/lib.rs` | Punto de entrada del core matemático, exportación de macros y traits de Sentinel. |
+| Aritmética Base-60 | `me-60os-core/src/spa.rs` | Aritmética sexagesimal S60 (Base-60⁴) sin floats para cálculo espacial y temporal exacto. |
+| Matriz Resonante | `me-60os-core/src/resonant_matrix.rs` | Simulación de la lattice hexagonal de 91 nodos y propagación de estados. |
+| Memoria Líquida | `me-60os-core/src/liquid_memory.rs` | Persistencia en memoria compartida (SHM) de alta velocidad para la lattice S60. |
+| Latido Cuántico | `me-60os-core/src/qhc.rs` | Reloj isócrono isoentrópico (Quantum Heartbeat Clock) para la consistencia temporal. |
 
 > Ver `_analisis/25_todo_continuacion.md` §4 para la lista de control técnica del proyecto, y `PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md` para acceder al repositorio completo de experimentos.
