@@ -11,7 +11,7 @@
 # Comandos:
 #   buses  → Pregunta 1 (SOMA vs Redis Pub/Sub)
 #   roles  → Pregunta 2 (roles MVP módulos Sentinel)
-#   pila   → Pregunta 3 (Fabiola elige Opción A o B)
+#   pila   → Pregunta 3 (la clienta elige la opción)
 #   todo   → ejecutar los 3 en orden
 #
 # Requisito: leer _analisis/12_inputs_pendientes_de_interlocutor.md para
@@ -79,9 +79,9 @@ case "$accion" in
       echo "ERROR: opción debe ser A o B, recibí '$2'"
       exit 2
     fi
-    echo "→ Pregunta 3: Fabiola eligió Opción $opcion"
+    echo "→ Pregunta 3: la clienta eligió la opción $opcion"
     echo "  Después, abrir docs/decisiones.md P-004 y:"
-    echo "    - Cambiar 'abierto' por 'cerrado (fecha): Fabiola eligió Opción $opcion'."
+    echo "    - Cambiar 'abierto' por 'cerrado (fecha): la clienta eligió la opción $opcion'."
     echo "    - Marcar decisión en 'Decisiones tomadas'."
     echo "    - En _analisis/10_opciones_tecnologicas_para_clienta.md:"
     if [[ "$opcion" == "A" ]]; then
@@ -105,7 +105,7 @@ case "$accion" in
     bash "$0" roles
     echo
     echo "PASO 3: pila"
-    echo "  Antes de correr 'pila', Fabiola debe haber elegido (A o B)."
+    echo "  Antes de correr 'pila', la clienta debe haber elegido."
     echo "  Luego corre: bash $0 pila A  (o B)"
     ;;
   *)
