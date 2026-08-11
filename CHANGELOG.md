@@ -20,9 +20,9 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 - **`_analisis/17_arquitectura_gpu_motor_lota.md` (3 correcciones de hecho):**
   `pollster` → `tokio` (diagrama §2 y dependencias §4), `GpuOscillator (64 bytes)`
   → `(128 bytes)` (§4). El eslabón `upload_and_dispatch` ya estaba marcado ✅ en §5/§7.
-- **`MEMORY.md`:** corregida nota obsoleta sobre §6.5 "Superpoder del Sistema"
-  perdido — el §6.5 actual ("No es un proyecto genérico ni simplificado") sí existe
-  en `propuesta-concepto.md` línea 620 y cierra bien el bloque "Lo que NO es".
+- **`MEMORY.md`:** corregida nota obsoleta sobre §6.5 perdido — el §6.5 actual
+  ("No es un proyecto genérico ni simplificado") sí existe en `propuesta-concepto.md`
+  línea 620 y cierra bien el bloque "Lo que NO es".
 - Validación demo en vivo: `index.html`, `prototipo-stitch.html`,
   `docs/propuesta-concepto.html`, `README.html` responden 200 en
   https://pinguinoseguro.cl/lotaindomito/ con navbar única compartida.
@@ -32,7 +32,7 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ### Documentación y propuesta de concepto
 - **Propuesta de concepto del proyecto completada** (`docs/propuesta-concepto.md`, 3,161 líneas, ~60 págs). Documento técnico-diseño integral organizado en 5 partes y 28 secciones:
-  - **Parte I (Concepto):** Tesis (turismo + patrimonio + S60), diseño de concepto D-014, universo narrativo (4 figuras, 8 rutas, 3 minerales), sistema económico (D-016 multi-moneda, D-017 subastas, World Events, ML externo), diferenciador técnico (S60 sin floats, sin Google), lo que NO es el proyecto, superpoder del sistema.
+  - **Parte I (Concepto):** Tesis (turismo + patrimonio + S60), diseño de concepto D-014, universo narrativo (4 figuras, 8 rutas, 3 minerales), sistema económico (D-016 multi-moneda, D-017 subastas, World Events, ML externo), diferenciador técnico (S60 sin floats, sin Google), lo que NO es el proyecto.
   - **Parte II (Especificación técnica):** Arquitectura en 5 capas + SOLID + ISO/IEC 5055, PWA Piloto A (Vue 3 + MapLibre + Turf.js + Pinia + 16 eventos ML), backend `lota-server` (FastAPI + PostGIS + OSM self-hosted), motor GPU Piloto B (Rust + wgpu + Sentinel S60 lattice 91 nodos), ML externo (Python, vistas materializadas, privacidad Ley 19.628), sync y operación (rclone bisync, deploy fan VPS).
   - **Parte III (Fundamentación teórica):** Por qué S60 y memoria de cristal (sin deriva floats, LiquidMemory SHM), por qué multi-moneda ( rareza diferenciada, P2P, anti-inflación), por qué World Events (turista de paso vs racha diaria), por qué expansión regional (corredor Arauco), por qué autosustentable (comisión comercio vs SaaS).
   - **Parte IV (Plan por etapas y testing):** Marco normativo ISO (12207, 25010, 27001, 31000, 9241 — alineamiento declarado), procesos de testing (pirámide 70/20/10, CI/CD, lints), Etapa 0 (Piloto de concepto 30 días), Etapa 1 (MVP + lote piloto público 100+ usuarios, decisión GPU real), Etapa 2 (Escala local + subastas D-017, RA Meta Quest 3, modo Familia), Etapa 3 (Expansión regional corredor Arauco), Etapa 4 (Operación continua 12 meses 1000+ usuarios, ITIL 4 diferido).
