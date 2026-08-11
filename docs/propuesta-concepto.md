@@ -2032,4 +2032,93 @@ Ver `_analisis/15_inventario_sentinel_disponible_para_motor.md` §3,
 
 ---
 
-<!-- §14 Por qué multi-moneda y no moneda única → Bloque D tarea 15 -->
+## §14 Por qué multi-moneda y no moneda única (D-016)
+
+### §14.1 El problema de la moneda única en juegos geo-RPG
+
+Los geo-RPG tradicionales operan con una moneda única (oro, monedas, gemas). Todas las recompensas y todos los gastos se expresan en la misma unidad. Este modelo funciona para un juego de fantasía abstracto, pero fracasa cuando el juego pretende reflejar una identidad cultural concreta.
+
+El problema de diseño es que una moneda única no puede expresar la diferencia entre categorías de acción. Ganar la misma unidad por completar una micro-sesión mundana y por cerrar un portal S60 no transmite ninguna señal de rareza ni de esfuerzo. Desde la perspectiva económica del jugador, no existe razón para preferir una actividad sobre otra. El modelo económico se aplana: la única variable relevante es el tiempo invertido, no las decisiones tomadas.
+
+Este aplanamiento tiene consecuencias directas sobre el engagement. Cuando todo vale lo mismo, el jugador optimiza por volumen y no por significado. La propuesta de Lota Indómito pierde su fuerza si la economía del juego no es capaz de distinguir entre el trabajo cotidiano de un mineur y el evento extraordinario de un portal.
+
+Además, una moneda única ignora la identidad que el proyecto busca transmitir. El patrimonio minero-metalúrgico de Chile no puede expresarse a través de una unidad abstracta. La decisión D-014 sitúa el comercio local y la identidad minera en el centro del concepto; la moneda única es incompatible con esa dirección.
+
+Existe una diferencia fundamental entre ganar y lograr. Ganar cobre por cada POI completado es mecánico: se repite sin variación. Un jugador que camina 10 kilómetros en Lota y otro que camina 2 kilómetros acumulan cobre al mismo ritmo si hicieron el mismo número de micro-sesiones. El sistema no distingue entre esfuerzo vulgar y esfuerzo extraordinario. Lograr, en cambio, implica rarity: un portal S60 que ocurre una vez cada varias semanas no se puede repetir. Si el portal pagara la misma unidad que una micro-sesión, perdería su categoría.
+
+El geo-RPG tradicional resuelve este problema con mecánicas paralelas: rangos, insignias, trofeos. Pero esas capas existen fuera de la economía. En Lota Indómito, la economía ES la capa narrativa. El cobre que se guarda bajo el colchón en la casa de la abuela no es lo mismo que el cobre de la mina abandonada del Chiflón. El tipo de cambio interno del juego refleja esa diferencia.
+
+El modelo de moneda única tiene también un problema de señalización intergeneracional. Cuando un jugador veterano y un jugador nuevo se encuentran, no hay diferencia visible en sus wallets si ambos hicieron la misma cantidad de micro-sesiones. La economía no rewarded la experiencia ni la trayectoria. En cambio, un veterano con estaño en su wallet es reconocible inmediatamente: tiene un mineral que el nuevo jugador todavía no puede haber conseguido. Esto crea jerarquía natural sin necesidad de tablas de leaderboard, lo que refuerza el sentido de pertenencia y progresión.
+
+La moneda única también impide que el comercio local tenga opciones. Si todos los jugadores usan la misma unidad, el comercio no puede segmentar su oferta: no hay manera de atraer a jugadores casuales con productos distintos a los que atraen a jugadores hardcore. El multi-moneda permite que un comercio de café diseñe su menú mineral para el jugador casual, mientras que una galería de arte diseña su catálogo para el jugador que acumuló oro y estaño. Esta segmentación no es cosmética: tiene impacto directo en ingresos. Un comercio que sabe qué mineral acepta sabe qué tipo de jugador atrae. Esto permite diseñar promociones específicas para cada segmento.
+
+Ver `docs/concepto-juego.md` §4, `_analisis/23_sistema_monedas_minerales.md` §0.
+
+### §14.2 La solución: cobre, oro y estaño como capas de rareza
+
+El sistema multi-moneda resuelve el problema de señalización mediante tres minerales con capas de rareza diferenciadas. Cada mineral tiene una fuente, una función y una comunidad de uso distintas.
+
+**Cobre (Cu):** unidad base, común. Se gana en micro-sesiones, reportes ciudadanos y POIs completados. Se usa para el comercio diario: panadería, café, restaurant del día. Los pools de cobre son ilimitados; se generan por acciones mundanas y circulan en volumen alto. El cobre es la sangre de la economía: mueve rápido, tiene fricción baja y su abundancia lo hace accesible para cualquier jugador desde el primer día. Sin cobre funcional, el jugador no puede participar en el comercio local desde el inicio, lo que rompe el loop de D-014.
+
+**Oro (Au):** rareza media. Se gana en World Events completos y en eventos del cielo (astronómicos, climáticos, temporales). Se usa para comercio especial: restaurant con más categoría, artesanía, souvenirs premium, certificados. La oferta de oro es moderada; depende de que el jugador participe en eventos.
+
+**Estaño (Sn):** raro. Su única fuente es la convergencia de portales S60, cuando `|amp_A.raw - amp_B.raw| < SCALE_0/50`. Se usa para subastas de alto valor, artículos signature y diplomas de honor. El stock de estaño tiene un techo (~1.000 unidades en piloto, ajustable); si todo el estaño está en circulación, los portales deben producir más para compensar. El estaño es trofeo: quien lo tiene demuestra dominio del juego. Ningún otro geo-RPG del mercado tiene un mineral con fuente tan estrictamente condicionada a un evento técnico del motor.
+
+La jerarquía de señalización tiene una expresión directa en el comportamiento del jugador. El jugador que tiene estaño puede elegir: gastarlo en una subasta, guardarlo como prueba de logro, o convertirlo en oro (100 unidades) para usarlo en comercio. Esta opcionalidad es lo que hace que el estaño sea valioso como símbolo y como recurso. Sin esa opcionalidad, el estaño sería un trofeo decorativo; con ella, es un activo económico vivo.
+
+La tabla siguiente resume la economía de cada mineral:
+
+| Mineral | Fuente principal | Circulación | Comercio | Señal |
+|---|---|---|---|---|
+| Cobre | Micro-sesiones, reportes | Alta | Diario (panadería, café) | Esfuerzo mundano |
+| Oro | World Events, eventos del cielo | Media | Especial (restaurant, artesanía) | Participación activa |
+| Estaño | Portales S60 | Baja (~1.000 top) | Premium (subastas, diplomas) | Dominio del juego |
+
+El tipo de cambio fijo crea una Pirámide de Kaldor invertida: la base (cobre) es ancha y accesible, el pico (estaño) es angosto y exclusivo. Esto es lo opuesto a una moneda única, donde todos los jugadores están en el mismo nivel plano de la pirámide.
+
+El tipo de cambio fijo (1 estaño = 100 oro = 10.000 cobre) proporciona una referencia estable para toda la economía. Un jugador que tiene estaño puede compararlo con oro y cobre de manera predecible; el comercio puede fijar precios en cualquiera de los tres minerales.
+
+Los tres minerales refuerzan además la identidad minera metálica de Chile. El cobre es el metal patrio por excelencia: Chile es el mayor productor mundial de cobre y ese dato no es decorativo, es la base mineralógica sobre la que se construyó la economía del país durante más de un siglo. El oro es el metal universal del valor, conocido por cualquier jugador sin necesidad de contexto cultural. El estaño cierra la tríada como metal estratégico y escaso que no aparece en ningún otro geo-RPG del mercado, lo que convierte a Lota Indómito en el único juego del mundo donde el jugador puede tener estaño real de fuente jugable.
+
+La decisión de usar estaño y no plata como tercer mineral es intencional. La plata es común en sistemas monetarios ficticios; el estaño no lo es. Esto diferencia visualmente al juego y ata la rareza del mineral a la rareza técnica del portal S60, que es el diferenciador arquitectónico de Lota Indómito frente a cualquier competencia.
+
+Desde el punto de vista de la narrativa, los tres minerales cuentan una historia. El cobre es el trabajo de todos los días: el esfuerzo cotidiano del mineur, la jornada en el pique. El oro es el trabajo del cielo: los eventos que dependen de configuraciones astronómicas y climáticas que el jugador no controla pero puede anticipar. El estaño es el trabajo del destino: la convergencia de dos lattice en la GPU que no se puede predecir con exactitud y que recompensa solo a quien estaba en el lugar correcto en el momento correcto. Tres minerales, tres categorías de experiencia jugable.
+
+Esta narrativa se refuerza en la interfaz del jugador. El wallet muestra los tres minerales en columnas distintas con colores diferenciados (cobre: café, oro: dorado, estaño: gris plateado). Cuando el jugador abre su wallet, ve inmediatamente su composición de portafolio. Un jugador nuevo tiene solo cobre. Un jugador activo tiene cobre y oro. Un veterano con estaño es reconocible sin necesidad de abrir el detalle de su perfil. Esta visibilidad es diseño, no accidente.
+
+Ver `_analisis/23_sistema_monedas_minerales.md` §1-2.
+
+### §14.3 Mecanismos de interacción social: P2P, trueque y World Events
+
+El sistema multi-moneda habilita capas de interacción social que la moneda única impediría por completo.
+
+**Transferencia P2P:** los jugadores pueden enviar minerales entre sí. El flujo de cobre es de alto volumen y bajo valor (cultura de la propina). El flujo de oro es de volumen medio y valor medio (cultura del regalo significativo). El flujo de estaño es de bajo volumen y alto valor (cultura del logro compartido). Un jugador que recibió estaño de un portal puede elegir regalarlo a un amigo, vendérselo a otro, o guardarlo como trofeo. Cada decisión es información.
+
+**Trueque bilateral:** un jugador ofrece una mezcla de minerales a cambio de otra mezcla. La profundidad del mercado depende del flujo turístico local. Durante Fiestas Patrias, la tasa de trueque cambia drásticamente: todos tienen cobre de muchas micro-sesiones y quieren consolidarlo en oro antes de partir. Este patrón es predecible y reproducible: el operador puede anticipar ventanas de trueque alto y coordinar World Events que generen demanda de oro durante esos períodos. En temporada baja, cuando el flujo turístico baja, la demanda de oro también baja y el trueque se frena naturalmente. El mercado se autorregula por volumen turístico.
+
+**Regalos como mecanismo de comunidad.** Además de las transferencias comerciales, los minerales operan como vehículo de regalo social. Un jugador que tiene cobre acumulado puede enviarlo a un amigo nuevo que llegó a Lota sin recursos. Esto reduce la fricción de entrada del nuevo jugador y crea lazos de reciprocidad. El cobre es el medio natural para esto: es abundante y su pérdida no duele. Los regalos de oro tienen más peso emocional; los de estaño son eventos notables que se graban en la memoria colectiva del grupo de jugadores.
+
+**El evento del portal como creador de mercado.** El estaño no solo es raro; es tan raro que cuando aparece en una transferencia P2P, toda la comunidad lo nota. Un jugador que cierra un portal y decide vender su estaño en el mercado P2P genera un evento económico: hay oferta donde había solo demanda latente. Este dinamismo no existe en una moneda única, donde no hay distinción entre oferta de moneda común y oferta de moneda rara. El estaño crea un micro-mercado dentro del mercado cada vez que cambia de manos.
+
+**World Events como ciclos de mint y burn:** los World Events mintean cobre y oro (recompensas específicas del evento). El comercio local quema esos minerales mediante el canje de cupones QR. El flujo neto en el piloto es positivo (se mintea más cobre del que se quema en comisiones), lo que genera una inflación suave que el operador ajusta mediante la frecuencia de World Events. La destrucción de cobre por comisión es predecible: si la comisión es del 5% por cupón canjeado, el operador puede calcular exactamente cuánto cobre se destruye por ciclo y ajustar la emisión de eventos para mantener el poder adquisitivo del cobre estable. Este es un mecanismo de control que una moneda única no permite.
+
+El comercio local acepta los tres minerales a través del cupón QR. Cada local define su propio perfil: "acepto cobre y oro, no estaño". La tasa de cambio del comercio frente al juego se publica en el cupón y el jugador la ve antes de comprometerse. Esta transparencia es clave: el jugador puede comparar opciones antes de decidir dónde gastar. Durante Fiestas Patrias, la promoción puede ser "doble oro en consumos del restaurant X", lo que redistribuye oro hacia los locales temáticos del período.
+
+**El comercio como antorcha económica.** El modelo económico es intencionalmente lossy: no todo el cobre minteado se recupera por comisión. La comisión va a la plataforma; el cobre se destruye. Esto genera presión deflacionaria suave que evita que el cobre se devalúe masivamente. Simultáneamente, el flujo neto hacia el comercio local es positivo: los World Events mintean más cobre del que los locales queman en comisiones. La diferencia queda en la economía real del jugador, no en la plataforma.
+
+**La economía como herramienta de D-014.** Cuando un comercio local define "acepto cobre y oro", está tomando una decisión económica que tiene consecuencias directas en su tráfico. Un restaurant que acepta oro atrae jugadores que tienen oro guardado. Una panadería que solo acepta cobre atrae a jugadores casuales con cobre acumulado. El juego no fuerza al comercio a aceptar nada; les da herramientas para competir por el mineral que necesitan. Este es el mecanismo que convierte la economía del juego en motor de reactivación económica del comercio local de Lota, que es exactamente lo que D-014 propone.
+
+**Autorregulación de la economía.** El sistema incluye un mecanismo de suelo y techo: un NPC del juego (banco central) acepta compra y venta de cobre a ratio fijo. Esto evita que el cobre se deflacione completamente por destrucción de comisiones o que se inflccione sin control por sobre-emisión de World Events. El NPC da precio piso (compra mínima) y precio techo (venta máxima), lo que mantiene la volatilidad bajo control durante el piloto. En fase 1, el NPC puede retirarse gradualmente a medida que el comercio local absorba suficiente volumen para estabilizar el mercado por sí solo.
+
+La anti-inflación por destrucción de comisiones también protege al jugador. Si el cobre se inflcciona sin control, cada micro-sesión produce menos valor real y el jugador siente que su esfuerzo no vale la pena. La comisión quemada compensa la emisión de World Events para que el cobre mantenga poder adquisitivo. Este balance se ajusta con telemetría del piloto: si el cobre se devalúa demasiado rápido, menos World Events; si se deflcciona demasiado, más eventos.
+
+Ver `_analisis/23_sistema_monedas_minerales.md` §5.
+El sistema multi-moneda es la expresión técnica de la identidad D-014. El patrimonio minero-metalúrgico de Lota se convierte en moneda jugable; los World Events son el motor económico que la pone en circulación; el comercio local es el lugar donde esa moneda cobra valor real. Sin multi-moneda, la economía del juego es números abstractos; con ella, es el patrimonio carbonífero de Lota hecho jugable.
+
+La diferencia se nota en detalles concretos: cuando un jugador entra a una panadería de Lota y paga con cobre, está usando el mismo metal que los mineros de la Cuenca usaban en el siglo XIX. Cuando un cazador de portales recibe estaño, ese mineral es tan raro en el juego como lo era el estaño en la economía precolonial de Chile. La economía no es metáfora del patrimonio; es el patrimonio mismo, codificado en un sistema que el jugador puede tocar, gastar, regalar y truecar. El patrimonio carbonífero de Lota deja de ser un dato histórico y pasa a ser una decisión económica que el jugador toma cada vez que abre su wallet.
+
+Los controles anti-abuso completan el sistema. El límite diario de transferencia evita que el cobre se use como vehículo de lavado; el historial público permite auditoría comunitaria; la moderación manual para reportes de estafa protege a jugadores nuevos. El estaño, por su rareza extrema, tiene controles adicionales: ninguna transferencia de estaño es instantánea, todas requieren confirmación de ambos jugadores y un cooldown de 24 horas. Estos controles son visibles en la UI y refuerzan que el estaño no es una moneda más, es un activo que requiere decisión consciente.
+
+---
+
+<!-- §15 Por qué World Events y no misiones diarias → Bloque D tarea 16 -->
