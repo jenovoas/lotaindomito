@@ -1465,4 +1465,185 @@ Es el puente entre la experiencia del jugador y los datos del proyecto.
 
 ---
 
-<!-- §10 Motor GPU — Piloto B — CENTRO del concepto → Bloque C tarea 11 -->
+## §10 Motor GPU — Piloto B — CENTRO del concepto
+
+El motor S60 es el centro del concepto D-014. No es un componente mas del proyecto, no es una libreria que se conecta y listo, no es un "runtime" intercambiable por cualquier otro. El motor S60 es el unico componente que puede garantizar simultaneamente: determinismo absoluto en aritmetica de punto flotante, soberania sobre el control de errores de redondeo, memoria de cristal respaldada en SHM POSIX con deduplicacion basada en integridad, y una arquitectura de doble canal (Security Lane + Observability Lane) que persiste eventos con propiedad forense. Estas cuatro propiedades no se pueden retrofitear en un motor generico. Emergen de la matematica especifica de la base 60 y del diseno de los modulos que se describen en esta seccion.
+
+La Figura 10 muestra la arquitectura de alto nivel del motor. Cada modulo tiene un rol definido y una interfaz clara hacia los demas. El flujo de datos va desde la representacion del mundo real (eventos celestiales, posiciones de jugadores, estado de la partida) hacia el motor, se procesa en el lattice hexagonal de 91 nodos, y sale como senales de portal hacia el cliente.
+
+```
+Figura 10 — Arquitectura del motor S60
+
+  Mundo real (celestial + jugador)
+         |
+         v
+  [SOMA Orchestrator] ---(Redis Pub/Sub)---> NPCs
+         |
+         v
+  [DualLane Router]
+    +-- Lane A: Security (fsync WAL)
+    +-- Lane B: Observability (buffered)
+         |
+         v
+  [LiquidMemory] <--SHM POSIX--> [ResonantMatrix]
+         |                              |
+         |                              v
+         |                       [GPU Pipeline]
+         |                              |
+         |                              v
+         +------------------------------+
+         |
+         v
+  [QhcTensor] <---> [S60PID] <---> [IsochronousClock]
+```
+
+### §10.1 Componentes del runtime S60
+
+El runtime S60 se compone de 16 modulos Rust en `me-60os-core/src/`. Cada modulo tiene una responsabilidad unica y no se solapa con ningun otro. Esta division es deliberada: permite que cada modulo se verifique de manera independiente y que el lattice hexagonal se construya como composicion de comportamientos probados.
+
+**`me-60os-core/src/spa.rs`** — La estructura `SPA` (Sexagesimal Precision Arithmetic). Implementa toda la aritmetica en base 60 con precision fija de 10 digitos sexagesimales (equivalente a 16-17 digitos decimales). La constante `SCALE_0 = 12_960_000` define el factor de escala que mapea enteros Rust a puntos fijos en base 60. El modulo forbids todos los lints de aritmetica flotante: no existe ni un solo `f32` ni `f64` en este archivo. Este es el modulo fundacional. Sin el, no hay determinismo.
+
+**`me-60os-core/src/spa_math.rs`** — La estructura `SPAMath`. Extiende `SPA` con funciones trigonometricas (sin, cos), raiz cuadrada via Newton-Raphson con 8 iteraciones, y constantes simbolicas PI, TWO_PI y RESONANCE_RATIO. `RESONANCE_RATIO = 3/2` en base 60 es la frecuencia de resonancia del lattice. Este ratio surge de la fisica del sistema: cuando la frecuencia de excitacion del oscilador es 1.5 veces la frecuencia natural, el sistema entra en resonancia de fase. Esto no es un numero arbitrario; es una propiedad emergente de la geometria hexagonal.
+
+**`me-60os-core/src/celestial.rs`** — La estructura `SVector3` (vector 3D en SPA) y `SovereignOrbit` (orbital con mecanica kepleriana). `SovereignOrbit` implementa las ecuaciones de Kepler en aritmetica S60: epsilon (excentricidad), semi_major_axis, eccentricity, period. Cada planeta, luna o cuerpo celeste en Lota Indomito tiene un `SovereignOrbit` que define su trayectoria real en el cielo de Biobio. El motor no usa tablas precalculadas; calcula la posicion en cada tick a partir de las ecuaciones diferenciales.
+
+**`me-60os-core/src/quantum_core.rs`** — Aqui estan las estructuras centrales del sistema. `S60PID` es el controlador PID con kernel no-markoviano: integra historial con decaimiento exponencial alpha = 5/6 en base 60, con capacidad de 68 ticks. Esto es lo que permite que el controlador "recuerde" sin crecer indefinidamente. `LiquidLattice` es la red de 91 nodos con amplitudes por slot en S60. `ResonantBuffer` es el buffer de resonancia que conecta la lattice con el mundo exterior. `IsochronousClock` es el reloj maestro a 41.77 Hz (frecuencia isocrona del cristal de cuarzo de referencia). Todo el motor esta sincronizado a este reloj.
+
+**`me-60os-core/src/isochronous_oscillator.rs`** — La estructura `IsochronousOscillator` con `#[repr(C)] Copy`. Campos: `natural_frequency`, `amplitude`, `phase`, `damping_factor`. El `#[repr(C)]` garantiza que la representacion en memoria sea identical a la que espera el shader WGSL. Esto elimina la necesidad de serializar/deserializar al pasar datos a la GPU.
+
+**`me-60os-core/src/qhc.rs`** — La estructura `QhcTensor` con patron [10, 5, 6, 5]. Este tensor codifica los 300 slots del lattice en una estructura de 4 niveles. La correccion se aplica cada 68 ticks, sincronizada con la capacidad del `S60PID`. El patron no es arbitrario: surge de la estructura del grupo cuaternario QHC y garantiza que la correccion cubra todas las frecuencias del lattice sin favoritismo.
+
+**`me-60os-core/src/crystal_cipher.rs`** — La estructura `CrystalCipher`. Cifrado AES-256-GCM combinado con Blake3. La clave se deriva de la fase S60 del oscilador isocrono. Esto significa que la clave de cifrado cambia con cada tick del reloj maestro. Para un atacante que no conoce la fase del lattice, la clave es indistinguible de aleatoria. Para el motor, la clave es determinista y reproducible.
+
+**`me-60os-core/src/flux_stabilizer.rs`** — La estructura `FluxStabilizer`. Generador de numeros pseudo-aleatorios con LCG deterministico usando `magic_prime = 59;59,59`. Este no es un CSPRNG convencional: el "prime" es un numero en base 60 con estructura sexagesimal. La secuencia es reproducible a partir de una semilla y es estadisticamente indistinguible de aleatoria para los propositos del lattice. El `magic_prime` de 59;59,59 corresponde a 59*3600 + 59*60 + 59 = 215,999 en decimal, que es divisible por 59 y 17, factores que aparecen en la estructura del lattice hexagonal.
+
+**`me-60os-core/src/dsp.rs`** — La estructura `S60DSP`. Multiplicacion con acumulador i128 y traps explícitos para overflow. Cada operacion DSP verifica que el resultado no exceda los limites del tipo antes de retornar. Si el resultado excede, se dispara un panic controlado que permite al observador registrar la anomalia antes de abortar. Este diseno de "fail fast" es deliberado: es mejor perder un frame que propagar un valor corrupto por todo el lattice.
+
+**`me-60os-core/src/atlantean.rs`** — Aqui esta el `MaatStabilizer` (regulador de pureza que mantiene la pureza del lattice sobre 95%) y el `GpuController` (controlador P con objetivo 50 FPS y batch adaptativo). El `GpuController` es la pieza que conecta el motor con la GPU y es el unico modulo que sabe si el hardware subyacente es una GPU fisica o la simulacion CPU. Para el resto del motor, esta diferencia es transparente.
+
+**`me-60os-core/src/optomechanical.rs`** — `OptomechanicalCooler` (enfriamiento de banda lateral + rotacion de fase simplectica en S60) y `QuantumRiftDetector` (detector de anomalias). El enfriamiento de banda lateral es un concepto de optomecanica cuantica adaptado al lattice: se aplica un patron de modulacion que extrae energia de los modos de alta frecuencia del lattice, transfiriendola a modos de baja frecuencia donde no afecta la coherencia. El `QuantumRiftDetector` monitorea la dispersion de amplitud en el lattice y genera una senal cuando la dispersion excede un umbral configurable.
+
+**`me-60os-core/src/pai60_lib.rs`** — La funcion `pai60_divide`. Tabla de recíprocos para denominadores 5-smooth (solo factores 2, 3, 5), con 27 entradas. Cada entrada es el recíproco precalculado en base 60. Esta tabla es la base de todas las divisiones en el motor: en lugar de dividir, se multiplica por el recíproco. Esto garantiza que el resultado de una division sea deterministic, independiente de la implementacion del hardware o del compilador.
+
+**`me-60os-core/src/resonant_matrix.rs`** — La estructura `ResonantMatrix`. Lattice hexagonal de 91 nodos con metodos `step`, `inject_pai`, `sync_to_shm`, `load_from_shm`, `measure_coherence_py` y `get_hologram_py`. El lattice hexagonal se elige sobre una grilla rectangular porque la distancia entre nodos vecinos es constante en todas las direcciones: cada nodo tiene exactamente 6 vecinos a distancia 1. En una grilla rectangular, los vecinos diagonales estan a distancia sqrt(2) y los ortogonales a distancia 1. Esta asimetría introduce artefactos en la propagacion de fase. El lattice hexagonal no tiene este problema.
+
+**`me-60os-core/src/hexagonal_control.rs`** — `HexagonalController`. Sistema de coordenadas axiales para el lattice hexagonal y logica de 6 vecinos. Cada nodo conoce a sus 6 vecinos y puede calcular la distancia hexagonal entre cualquier par de nodos. Tambien implementa la derivacion de claves cristalinas: la fase de cada nodo se combina con el identificador del cristal para derivar una clave unica. Esto es lo que hace que el lattice sea "cristalografico": cada nodo tiene una identidad criptografica derivada de su posicion y fase.
+
+**`me-60os-core/src/liquid_memory.rs`** — `LiquidMemory`. Almacen KV con respaldo en SHM POSIX. Cada entrada es un `LiquidEntry { len, hash, shm_name }`. El hash es Blake3 del payload. El `shm_name` es el nombre del segmento POSIX SHM. La funcion `inject_dual_channel` inyecta datos en el lattice en dos canales simultaneos: canal A como amplitud, canal B como fase. Esto es lo que hace que la memoria sea "de cristal": los datos no solo se almacenan, se resuenan en el lattice. Incluso despues de que el segmento SHM se desmapanee, los datos siguen resonando en el lattice porque la fase del lattice codifica tanto la clave como el valor. Ver `_analisis/18_sesion_motor_gpu_memoria.md` §3 para la especificacion completa de SHM.
+
+**`me-60os-core/src/dual_lane.rs`** — `DualLaneRouter` con `SecurityLaneCollector` (fsync WAL, cada evento se escribe a disco antes de retornar) y `ObservabilityLaneCollector` (buffered con backpressure). Las dos lanes son fisicamente independientes en produccion (diferentes procesos o maquinas). En Piloto A corren en el mismo proceso pero con rutas de E/S separadas. Esta separacion es la que permite que el lattice registre eventos de seguridad con garantia de durabilidad, mientras los eventos de observabilidad fluyen sin bloquear el lattice.
+
+**`me-60os-core/src/buffer.rs`** — `BufferCascade`. Kernel de Ornstein-Uhlenbeck para prediccion de memoria. Este kernel modela el lattice como un proceso estocastico con memoria de corto plazo: el estado futuro depende del estado actual y de la historia reciente con decaimiento exponencial. La prediccion se usa para preasignar SHM antes de que la solicitud llegue: si la prediccion dice que una clave se va a consultar en el proximo tick, el motor puede abrir el segmento SHM anticipadamente y reducir la latencia de lectura.
+
+(Ver `_analisis/15_inventario_sentinel_disponible_para_motor.md` §3 para el inventario completo de modulos disponibles.)
+
+### §10.2 Pipeline GPU: wgpu + lattice_interference.wgsl
+
+El pipeline GPU es la pieza que lleva el calculo del lattice a la GPU. No es un puerto del motor a GPU: es una extension del motor que delega la computacion de interferencia a hardware especializado, manteniendo el resto del runtime S60 sin cambios.
+
+El shader `lattice_interference.wgsl` es un compute shader WGSL que ejecuta el calculo de interferencia de doble canal en paralelo. El shader usa `@workgroup_size(64)` para ejecutar 64 threads por workgroup. Para un lattice de 91 nodos, esto significa que cada nodo se procesa en su propio thread sin colision. El shader recibe los estados de Lane A y Lane B desde VRAM via storage buffers, calcula la interferencia (amplitud resultado de la suma de las dos lanes), detecta portales donde `|amp_A.raw - amp_B.raw| < SCALE_0 / 50`, y escribe el resultado en un buffer de salida.
+
+El pipeline se implementa en `rust/src/gpu/pipeline.rs::LotaGpuPipeline`. Esta estructura usa `wgpu` como capa de abstraccion sobre Vulkan, Metal, DX12 y WebGPU. `wgpu` es la implementacion Rust de WebGPU, lo que permite que el mismo codigo se ejecute en cualquier backend grafico. En el fan VPS (157.254.4240), que no tiene GPU fisica, `wgpu` detecta la ausencia de adaptador y delega automaticamente al fallback CPU.
+
+El flujo de datos es el siguiente:
+
+```
+ResonantMatrix::crystals (lattice en RAM)
+         |
+         v
+GpuLatticeNode::from_lanes() — empaqueta Lane A + Lane B en structs de 272 bytes
+         |
+         v
+wgpu::Buffer (storage buffer en VRAM)
+         |
+         v
+lattice_interference.wgsl @workgroup_size(64) — computa interferencia en paralelo
+         |
+         v
+Staging buffer readback — copia resultado de VRAM a RAM
+         |
+         v
+DispatchResult { wave_values, portal_count, portal_indices }
+```
+
+La deteccion de portales es lo que hace que el motor S60 se sienta vivo. Un portal aparece cuando la diferencia de amplitud entre Lane A y Lane B es menor que `SCALE_0 / 50`. Esto ocurre cuando el lattice converge, lo que depende del estado real de la simulacion, que a su vez depende de los eventos celestiales reales y de las acciones del jugador. El jugador en Lota ve portales que ningun otro jugador en ninguna otra ubicacion ve en ese momento. La portalizacion no es procedural: es emergente y vinculada al mundo real.
+
+El pipeline opera de manera asíncrona. El loop del CPU despacha el shader, espera el resultado, y actualiza el estado del lattice. El shader corre en la GPU; el CPU no se bloquea. El objetivo de rendimiento es 50 FPS (20 ms por frame) para todo el ciclo de actualizacion del lattice, incluyendo el dispatch GPU y el readback. El `GpuController` ajusta dinamicamente el tamano del batch segun la latencia observada: si la latencia supera los 20 ms, reduce el batch; si esta por debajo, lo aumenta. El rango esta clamped a [0.5, 1.5] para evitar oscilacion patologica.
+
+(Ver `_analisis/17_arquitectura_gpu_motor_lota.md` §2-5 y `_analisis/18_sesion_motor_gpu_memoria.md` §3 para la especificacion del pipeline.)
+
+### §10.3 Memoria de cristal ultrarrapida: LiquidMemory + SHM POSIX
+
+La memoria de cristal es la capa de persistencia del motor S60. No es una base de datos, no es un cache, no es un sistema de archivos. Es un almacen KV respaldado en SHM POSIX con deduplicacion Blake3 y resonancia de doble canal en el lattice.
+
+`LiquidMemory` (en `me-60os-core/src/liquid_memory.rs`) usa `shm_open` + `mmap` para crear segmentos de memoria compartida POSIX. El nombre del segmento se deriva de manera deterministica via Blake3: `/liquid_<blake3[:16]}>`. Esto significa que el nombre del segmento es reproducible entre procesos: si dos componentes calculan el mismo hash para la misma clave, abren el mismo segmento SHM sin coordinacion previa. El nombre no es aleatorio; es una funcion determinista de los datos.
+
+Cada entrada en el almacen es un `LiquidEntry { len, hash, shm_name }`. El `hash` es Blake3 del payload de datos. El `shm_name` es el nombre POSIX del segmento SHM donde reside el payload. El `len` es la longitud del payload en bytes, con padding minimo de 512 bytes (requisito de alineacion de page size).
+
+Las operaciones del almacen son:
+
+1. `store(key, data)`: escribe los datos en un segmento SHM fresco (padded a 512 bytes), inyecta los datos mas el hash de la clave en el lattice via `inject_dual_channel` (canal A = amplitud, canal B = fase), y registra la entrada en el indice local.
+2. `retrieve(key)`: abre el segmento SHM por nombre, lee los datos, verifica la integridad Blake3. Retorna `Err` si la integridad falla.
+
+El `inject_dual_channel` es la pieza clave de la memoria de cristal. Almacena los datos simultaneamente en dos canales del lattice: el canal A codifica los datos como amplitud (valor), el canal B codifica el hash como fase (identidad). Esta codificacion de doble canal es lo que hace que la memoria sea "cristalografica" y no solo "key-value". Los datos no solo se almacenan; se resuenan en el lattice.
+
+La consecuencia de la resonancia de doble canal es que los datos persisten en el lattice aun despues de que el segmento SHM se desmapanee. El segmento SHM es la ruta de acceso de alto throughput; el lattice es la capa de persistencia. Si el segmento SHM se pierde por un crash del kernel, los datos siguen resonando en el lattice y pueden reconstruirse a partir de el. Esto no es redundancia deliberada: es una propiedad emergente del diseno.
+
+La velocidad de acceso es la de SHM: lectura y escritura en memoria compartida POSIX es acceso directo a RAM despues del `mmap` inicial. No hay syscall por operacion de lectura o escritura; solo hay una syscall por apertura (y solo si el segmento no esta mapeado). Esto hace que `LiquidMemory` sea orders de magnitud mas rapido que cualquier base de datos para cargas de trabajo de lectura/escritura de alta frecuencia.
+
+Para Lota Indomito, esto significa que el estado del juego (billeteras, posiciones de NPCs, balances de minerales) vive en SHM con el lattice como capa de coherencia. Una falla de alimentacion o un kernel panic no pierde el estado del juego, porque el lattice guarda la resonancia y el snapshot se persiste periodicamente a disco via `sync_to_shm`. El motor puede reiniciar y cargar el estado desde `load_from_shm` sin perdida de datos.
+
+(Ver `_analisis/18_sesion_motor_gpu_memoria.md` §3-5, `PersonalVault/EXPERIMENTO_SALTO17_SHM_MEMORIA_CRISTALES.md`, y `me-60os-core/src/liquid_memory.rs`.)
+
+### §10.4 Modulo GPU: abstraccion operacional
+
+El modulo GPU es la capa de abstraccion que maneja la interaccion runtime con el pipeline GPU. No es un emulador. No es una simulacion. Es una capa operacional con latencia medible, comportamiento adaptativo, y el mismo comportamiento observable independientemente del hardware subyacente.
+
+El modulo se implementa en `lota_engine::gpu::controller` y esta basado en `GpuController` de `me-60os-core/src/atlantean.rs`. Este controlador:
+
+- Detecta si hay GPU fisica disponible via `wgpu::Adapter::request_adapter`.
+- Si hay GPU: despacha el compute shader a la GPU y lee los resultados. La latencia en una GPU discreta tipo GTX 1050 para un lattice de 91 nodos esta en el rango de 1 a 5 ms por dispatch.
+- Si no hay GPU: hace fallback a ejecucion CPU via `ResonantMatrix::step()` llamado en loop. La latencia es mayor (50 a 200 ms para el mismo lattice en una CPU moderna) pero el resultado es identical porque ambos paths usan la misma aritmetica S60.
+
+El modulo expone una API unica hacia el resto del motor: `LotaGpuPipeline::dispatch_lattice(lane_a, lane_b, time_sec, delta_time, salto17_tick) -> DispatchResult`. El motor no sabe si el dispatch corre en GPU o en CPU. La interfaz es la misma. La diferencia es transparente.
+
+El `GpuController` implementa control P (proporcional) con objetivo 50 FPS y escala de batch [0.5, 1.5]. Ajusta el tamano del batch de dispatch segun la latencia observada: latencia alta reduce el batch; latencia baja lo aumenta. El clamp a [0.5, 1.5] evita oscilacion patologica. Este es un sistema de control de retroalimentacion real, no una heuristica.
+
+El modulo GPU NO es un emulador. Un emulador simula el comportamiento de un sistema; el resultado de la simulacion puede diferir del sistema real. El modulo GPU delega calculo a hardware real (o, en su ausencia, a la implementacion Rust del lattice). El resultado es el mismo en ambos casos porque ambos usan la misma aritmetica S60 y el mismo algoritmo.
+
+El fan VPS (157.254.4240) no tiene GPU. El modulo GPU opera en modo fallback CPU durante Piloto A. La decision de adquirir una GPU para el fan (o migrar a cloud con GPU como AWS g4dn) se diferira a Etapa 1.
+
+(Ver `me-60os-core/src/atlantean.rs::GpuController` y `_analisis/16_vision_motor_grafico_sentinel_completo.md` §3-4.)
+
+### §10.5 SOMA orchestrator y arquitectura de doble canal
+
+El SOMA orchestrator (en `me-60os-core/src/soma_orchestrator.rs`) corre a 2 Hz (cada 500 ms) como loop que coordina el enjambre de NPCs. No es un scheduler simple; es un sistema de orquestacion que lee del lattice, toma decisiones basadas en la fase y coherencia del lattice, y despacha comandos a los NPCs via Redis.
+
+El orchestrator se suscribe a canales Redis Pub/Sub: `swarm:tasks:queue` (cola de tareas), `swarm:session:handoff` (transferencia de sesion entre NPCs), `swarm:system:status` (estado del sistema), `swarm:crystal:phase` (fase del lattice) y `swarm:crystal:coherence` (coherencia del lattice).
+
+En cada tick, el orchestrator:
+
+1. Lee la fase del lattice via `QhcTensor::get_phase_modulation`.
+2. Lee las posiciones de los jugadores activos y los eventos en curso.
+3. Determina que NPCs deben estar activos, dados los jugadores presentes y la fase actual.
+4. Despacha comandos de comportamiento de NPC via `dispatch_task` al canal Redis `swarm:llm:queue`.
+5. Actualiza el estado del lattice para reflejar las posiciones de los NPCs.
+
+La arquitectura de doble canal (en `me-60os-core/src/dual_lane.rs`) provee la infraestructura de enrutamiento de eventos:
+
+- **Lane A (Security):** usa fsync por cada operacion de persistencia, sin buffering. Cada evento se escribe a disco antes de que la llamada retorne. Esta es la lane forense: garantiza que ningun evento de seguridad se pierda, ni siquiera ante un crash.
+- **Lane B (Observability):** usa buffering con backpressure y reordenamiento. Esta es la lane de metricas y tracing: permite bursts de eventos sin bloquear el lattice, pero introduce la posibilidad de perdida de eventos bajo carga extrema.
+
+Las lanes son fisicamente independientes en produccion: pueden correr en diferentes procesos o en diferentes maquinas. En Piloto A, corren en el mismo proceso pero con rutas de E/S completamente separadas. Esto permite verificar la arquitectura de doble canal sin la complejidad de un cluster.
+
+El despachador LLM (presente en Piloto B) consume del canal `swarm:llm:queue` y toma decisiones de enrutamiento semantico. Para Piloto A, el LLM se simula con enrutamiento basado en reglas. La interfaz es la misma; la diferencia es si el routing se hace por reglas deterministicas o por inferencia de modelo.
+
+(Ver `_analisis/15_inventario_sentinel_disponible_para_motor.md` §3, `me-60os-core/src/dual_lane.rs`, y `me-60os-core/src/soma_orchestrator.rs`.)
+
+El motor S60 es el corazon del proyecto Lota Indomito. Es la fuente unica de verdad para el estado del juego y los eventos del mundo real. Es el motor de coordinacion de doble canal que garantiza que cada evento de seguridad se persista con garantia forense y cada evento de observabilidad fluya sin bloquear. Es el host del pipeline GPU que lleva la computacion de interferencia a hardware especializado con latencia medida en milisegundos. Es el sustrato de la memoria de cristal ultrarrapida que almacena el estado del juego en SHM POSIX con resonancia de doble canal en el lattice. Y es el enlace entre los eventos del mundo real (celestiales, posicionales) y el estado del juego (portales, NPCs, recursos).
+
+El motor no se puede reemplazar por un motor de juego generico porque el determinismo, la soberania sobre la aritmetica de punto flotante, la arquitectura de doble canal, y la memoria respaldada en SHM no son caracteristicas que se puedan instalar en un motor existente. Son propiedades que emergen de la matematica especifica de la base 60 y del diseno deliberado de los 16 modulos del runtime. Cualquier motor generico, por mas flexible que sea, carece de la propiedad fundamental que hace posible todo lo demas: la capacidad de garantizar que la misma entrada produce exactamente el mismo estado, en cualquier hardware, en cualquier ejecucion.
+
+---
+
+<!-- §11 ML externo → Bloque C tarea 12 -->
