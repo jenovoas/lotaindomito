@@ -2838,4 +2838,331 @@ El crecimiento viene después, en la Etapa 1 (Piloto B) y en la expansión hacia
 
 ---
 
-<!-- §21 Etapa 1 — MVP → Bloque E tarea 22 -->
+## §21 Etapa 1 — MVP + lote piloto público
+
+> Esta etapa marca la transición desde la rebanada vertical interna (Slice o Etapa 0) hacia un entorno operativo real, desplegando un MVP (Producto Mínimo Viable) funcional y un lote piloto abierto al público en la comuna de Lota. El objetivo es validar la retención, la usabilidad en terreno y la sustentabilidad del modelo de negocio en condiciones reales de calle.
+
+A diferencia de la Etapa 0, que constituye una prueba técnica estrictamente controlada y cerrada, la Etapa 1 introduce la experiencia de juego de manera abierta a los habitantes y visitantes de la comuna de Lota, integrando componentes dinámicos de geolocalización, economía digital y analítica de datos a gran escala.
+
+### §21.1 Alcance de Contenido y Experiencia
+
+El lote piloto público contempla el despliegue del siguiente contenido en terreno:
+- **Zonas patrimoniales:** de 5 a 8 zonas activas con geofencing (incluyendo el Parque Isidora Goyenechea de Lota, la Mina Chiflón del Diablo, el sector Fundición, el Pabellón 83 y la Plaza de Armas).
+- **Personajes históricos interactivos:** 4 figuras históricas vivas (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero) completamente modelados y con misiones específicas asociadas.
+- **World Events:** 1 evento global por semana de duración acotada, que altera las condiciones lunares y estelares virtuales, convocando de manera colaborativa a los jugadores en terreno para cumplir objetivos comunales.
+- **Red de comercios asociados:** 1 comercio ancla participante en el centro de Lota más una red de 5 a 10 comercios locales adicionales asociados, capaces de validar cupones y procesar transacciones del juego.
+
+### §21.2 Infraestructura Técnica y Backend
+
+Para sostener el volumen de usuarios y transacciones concurrentes, el backend evoluciona de la siguiente forma:
+- **Backend mínimo de producción:** implementación de servicios basados en Python FastAPI, con base de datos PostgreSQL extendida con PostGIS para la gestión y consulta espacial eficiente de las geocercas.
+- **Servidor de mapas self-hosted:** instalación y configuración propia de OpenStreetMap (OSM) utilizando Nominatim y OSRM sobre infraestructura dedicada, asegurando total soberanía tecnológica y evitando cuotas restrictivas de APIs comerciales externas.
+- **Motor Piloto B en producción:** despliegue del motor gráfico de simulación en Rust (`lota_engine` utilizando `wgpu` y el core de Sentinel S60) operando con un lattice de 91 nodos estables, garantizando la consistencia cuántico-temporal de las simulaciones y la coherencia del Calendario del Cielo en los dispositivos móviles.
+- **Wallet multi-moneda con P2P:** despliegue de la billetera digital integrada en la PWA, permitiendo a los jugadores almacenar sus minerales ganados (carboncillo, estaño, cobre, oro) y realizar transferencias directas punto a punto (P2P) entre usuarios de forma segura.
+
+### §21.3 Decisión de Infraestructura GPU para Machine Learning
+
+El procesamiento del modelo de ML externo para la generación de dashboards municipales requiere una definición clara de infraestructura de cómputo. Se evalúan las siguientes alternativas formales:
+- **Opción A (Compra física):** adquisición e instalación de hardware GPU local en dependencias municipales. Aunque otorga soberanía física absoluta, el costo inicial es elevado y el mantenimiento técnico recae en el operador municipal.
+- **Opción A' (Cloud GPU - Recomendada para Etapa 1):** arriendo de capacidad de cómputo GPU bajo demanda en proveedores en la nube. Proporciona la flexibilidad ideal para escalar el lote piloto de manera económica y ágil, reduciendo costos de mantenimiento iniciales. Es la opción recomendada para asegurar la viabilidad presupuestaria y rapidez de despliegue en esta etapa.
+- **Opción B (Fallback CPU):** ejecución de los modelos predictivos en procesadores estándar (CPU) del servidor principal. Ahorra infraestructura especializada, pero limita severamente la velocidad de procesamiento de simulaciones complejas.
+- **Opción C (Migración cloud total):** traslado de todo el ecosistema de ML a servicios serverless o SaaS en la nube. Ofrece alta escalabilidad, pero genera dependencia a largo plazo y costos variables difíciles de presupuestar para el Municipio.
+
+### §21.4 Criterios de Salida de la Etapa 1
+
+La Etapa 1 se considerará exitosa y finalizada cuando se alcancen los siguientes indicadores empíricos:
+1. **Deploy estable de 30 días:** el sistema completo (`lota-server`, motor de mapas y backend de simulación) opera de manera ininterrumpida durante un mes continuo, con un uptime medido superior al 99.5%.
+2. **100+ usuarios recurrentes:** registro de al menos 100 usuarios activos que interactúan de forma semanal con la PWA en terreno y completan al menos dos micro-sesiones de juego por semana.
+3. **Datos reales de ML recopilados:** el pipeline de analítica externa recolecta y procesa eventos de terreno válidos sin pérdida de telemetría.
+4. **Dashboard municipal funcional:** el panel de control municipal presenta visualizaciones y reportes automatizados basados en el comportamiento real de los usuarios, entregando información útil para la gestión del patrimonio y turismo comunal.
+
+> Ver `docs/concepto-juego.md` para el detalle de la economía de juego, y `docs/decisiones.md` (D-007 y D-013) para los fundamentos del stack tecnológico seleccionado.
+
+---
+
+## §22 Etapa 2 — Escala local + subastas digitales
+
+> Esta etapa expande la penetración local en la comuna de Lota a través de nuevas dinámicas de interacción social y económica, aumentando la densidad de comercios asociados y abriendo el sistema de subastas digitales. Se incorpora equipamiento de Realidad Aumentada (RA) básico en terreno y modalidades cooperativas de juego.
+
+El foco de la Etapa 2 es consolidar el modelo económico basado en minerales virtuales como medio de intercambio local, cerrando la brecha entre el esfuerzo lúdico del jugador y la recompensa real en la comuna de Lota, sin recurrir a transacciones monetarias en pesos chilenos (CLP).
+
+### §22.1 Ampliación de la Red y Realidad Aumentada (RA)
+
+- **Densidad de comercios locales:** la red de comercios asociados se expande de los 5 iniciales a un total de 20 locales distribuidos estratégicamente en la comuna (restaurantes, artesanías, panaderías locales y servicios turísticos).
+- **Experiencia de RA básica en sitio:** se implementa una estación de visualización de realidad aumentada en un punto turístico clave (como las ruinas del Chiflón del Diablo o el mirador del Parque Lota), mediante el préstamo controlado de gafas de realidad mixta (tipo Meta Quest 3 o equivalente). Los visitantes pueden observar proyecciones holográficas de las faenas mineras o reconstrucciones en 3D de las estructuras industriales históricas superpuestas en el espacio físico actual.
+
+### §22.2 Misiones Cooperativas en Modo Familia
+
+Para fomentar la participación intergeneracional de los visitantes, se introduce la modalidad de misiones cooperativas en grupo o familia. Al activar esta modalidad, los integrantes asumen roles diferenciados e interdependientes:
+- **El Vigía:** encargado de la navegación espacial, lectura de mapas y detección de geocercas o anomalías celestes en terreno.
+- **El Cronista:** responsable de resolver acertijos históricos, responder las trivias patrimoniales de los personajes y recopilar información del pasado lotino.
+- **El Fotógrafo:** encargado de registrar evidencias visuales de los hitos patrimoniales, realizar capturas y subirlas como prueba para el sistema de reportes o misiones de inspección.
+
+### §22.3 Mecánica y Protocolo de Subastas Digitales
+
+La economía avanza mediante la subasta de bienes tangibles y experiencias exclusivas de Lota (artesanías de carbón, almuerzos tradicionales, accesos guiados exclusivos) que los jugadores adquieren ofertando los minerales que han recolectado en sus caminatas. El diseño de este módulo está regulado bajo la propuesta D-017 (pendiente de aprobación formal).
+
+El flujo de operación de una subasta digital transcurre de la siguiente forma:
+1. **Listado de bienes:** un comercio asociado o el Municipio lista un artículo en la plataforma, estableciendo un precio mínimo en minerales (por ejemplo, 100 de Cobre y 50 de Estaño) y una fecha de cierre rígida.
+2. **Puja pública:** los jugadores realizan sus posturas en minerales de manera pública desde la billetera de la PWA. El saldo ofertado queda temporalmente bloqueado en su cuenta.
+3. **Cierre de la subasta:** al expirar el tiempo establecido, se determina la oferta ganadora.
+4. **Escrow (Garantía):** los minerales del ganador se retienen en una cuenta de depósito en garantía (escrow) controlada por el backend de manera automática.
+5. **Entrega y Confirmación:** el ganador retira el bien en el comercio de manera física mediante el escaneo de un código QR de entrega. Una vez confirmado el retiro, el sistema libera los minerales al comercio.
+6. **Reputación bilateral:** ambas partes (comercio y jugador) evalúan la transacción, actualizando su nivel de confianza y reputación en el sistema.
+
+### §22.4 Estructura de Comisiones en Minerales
+
+Para el autofinanciamiento del ecosistema, el sistema retiene una comisión por transacción cobrada directamente al comercio en minerales, la que es devuelta a los fondos de reserva comunal para futuras misiones. No se procesan cobros ni pagos en pesos chilenos (CLP).
+- **Comisión por producto local:** 5% del valor final adjudicado en minerales.
+- **Comisión por servicio local:** 8% del valor final adjudicado en minerales.
+- **Comisión por ediciones limitadas o exclusivas:** 10% del valor final adjudicado en minerales.
+
+### §22.5 Criterios de Salida de la Etapa 2
+
+La Etapa 2 se considerará completada al cumplir los siguientes hitos medibles:
+1. **500+ usuarios recurrentes:** registro mensual de al menos 500 jugadores activos que utilicen regularmente la aplicación y participen en la economía de Lota.
+2. **10+ subastas completadas con éxito:** realización y confirmación de retiro físico de al menos 10 transacciones comerciales mediante el flujo de escrow de subastas digitales.
+3. **1 estación de RA operativa:** puesta en marcha del piloto de Realidad Aumentada con gafas Meta Quest 3 prestando servicio a turistas en terreno y registrando al menos 50 usos documentados de forma interactiva.
+
+> Ver `_analisis/24_subastas_reales.md` para el análisis técnico y de incentivos del módulo de subastas, `docs/concepto-juego.md` §2.3 para las bases de la economía del juego, y `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md` §3.3 para las referencias de hardware y realidad mixta.
+
+---
+
+## §23 Etapa 3 — Expansión regional corredor Arauco
+
+> Esta etapa proyecta el escalamiento del juego fuera de los límites de Lota, convirtiendo el sistema de software en una plataforma multirregional y multi-comuna que abarque el corredor patrimonial de la Provincia de Arauco y la capital regional de Concepción. 
+
+El desafío central de esta fase es consolidar la arquitectura de software de forma genérica para posibilitar el despliegue rápido de la experiencia de juego en nuevas localidades sin necesidad de reescribir o duplicar el código del motor central.
+
+### §23.1 Arquitectura del Motor Agnóstico de Comuna
+
+El backend de simulación temporal y espacial de Sentinel se rediseña para ser enteramente agnóstico de la división territorial administrativa. Bajo esta arquitectura:
+- **Motor unificado:** la lógica central del juego, el geofencing, el sistema de inventario, las wallets y las subastas residen en un núcleo común inalterado.
+- **Abstracción de contenido por comuna:** cada nueva comuna incorporada (como Curanilahue, Lebu, Arauco o Concepción) provee su propia capa de datos y configuraciones estáticas de forma independiente. Esto incluye:
+  - Definición espacial de zonas y geocercas en formato GeoJSON de manera local.
+  - Catálogo de personajes de relevancia histórica locales con sus respectivas narrativas, misiones y diálogos.
+  - Inventario propio de bienes patrimoniales, artesanías e insignias locales.
+  - Red municipal y comercios asociados de cada localidad para el canje de cupones y validación de subastas.
+
+### §23.2 Integración del Corredor Arauco y Concepción
+
+- **Curanilahue:** centrado en el patrimonio del carbón de interior, la vida forestal, la música de orquestas juveniles e historias de pirquineros.
+- **Lebu:** enfocado en la historia portuaria, el carbón bajo el mar de la caverna Benavides, y la gastronomía marina.
+- **Arauco:** enfocado en el patrimonio costero, la historia del pueblo mapuche y los humedales del golfo.
+- **Concepción:** como gran nodo articulador, conectando la historia universitaria, el río Biobío, las galerías comerciales céntricas y la historia de la independencia.
+
+### §23.3 Replicabilidad del Modelo de Autofinanciamiento
+
+Cada comuna adherida replica el modelo financiero validado previamente en Lota. Los municipios locales o corporaciones de turismo aportan el financiamiento inicial para habilitar sus servidores y la infraestructura física básica, gestionando su propio fondo de cupones con los comercios de su zona. Las comisiones de las subastas en minerales locales se reinvierten directamente en la mantención del ecosistema de la respectiva comuna.
+
+### §23.4 Criterios de Salida de la Etapa 3
+
+La Etapa 3 se considerará exitosa cuando se cumplan las siguientes condiciones en terreno:
+1. **3 comunas operando de forma activa:** al menos tres comunas del corredor Arauco (incluyendo Lota) cuentan con la plataforma desplegada, operando de manera estable con datos y contenido patrimonial propios cargados en producción.
+2. **Réplica del modelo económico:** al menos una comuna adicional a Lota tiene su red de comercios asociados activa y ha completado un flujo completo de subasta digital o canje de cupones utilizando minerales locales, demostrando la replicabilidad del modelo de negocio de manera sustentable.
+
+> Ver `docs/decisiones.md` (D-014) para los fundamentos del escalamiento y arquitectura modular de Sentinel, y `MEMORY.md` §0 para los principios estables de diseño técnico.
+
+---
+
+## §24 Etapa 4 — Operación continua
+
+> Una vez que las fases de expansión inicial concluyen y se consolida la plataforma en el corredor Arauco, el proyecto transita hacia un régimen de operation continua y sustentable, enfocado en el mantenimiento de la calidad de servicio, la recopilación de datos útiles para la política pública y el ciclo de vida del software.
+
+El objetivo en esta fase a largo plazo es asegurar la persistencia temporal de la experiencia y que el Municipio de Lota reciba el valor analítico y turístico continuo de la herramienta, garantizando la resiliencia técnica de la infraestructura desplegada.
+
+### §24.1 Monitoreo Técnico, Mantención y Dashboards de ML
+
+Durante la operación continua, el rol del equipo técnico pasa de ser constructivo a operacional, velando por:
+- **Salud del sistema:** monitoreo de liveness del backend central de forma automatizada, controlando la base de datos distribuida y el motor de mapas self-hosted.
+- **Mantenimiento correctivo y evolutivo:** despliegue de parches de seguridad mensuales, optimizaciones espaciales de PostGIS y corrección de bugs menores en la PWA móvil detectados en terreno.
+- **Dashboards municipales de Machine Learning:** el pipeline analítico externo genera reportes mensuales automáticos sobre flujos turísticos, tiempos de permanencia en zonas patrimoniales, dinámicas de la economía de minerales y comportamiento de redención de cupones en comercios, todo resguardando de forma estricta la privacidad de los usuarios bajo un modelo de operador único.
+
+### §24.2 Gestión y Evolución del Contenido
+
+Para evitar la pérdida de interés de los usuarios recurrentes, se establece un ciclo de refresco y evolución semestral del contenido del juego:
+- **Actualización de misiones:** renovación periódica de las historias y acertijos asociados a las figuras históricas vigentes.
+- **Nuevas geocercas temporales:** creación de micro-zonas con misiones exclusivas para conmemorar hitos históricos, festividades locales u obras de teatro patrimoniales en la comuna.
+
+### §24.3 Marco de Gestión de Servicios y Diferimiento ITIL 4 / ISO 20000
+
+Para guiar la operación, mantenimiento y entrega de soporte de la plataforma, se evalúa la adopción formal de los estándares ITIL 4 y la norma ISO/IEC 20000 para la gestión de servicios de TI. Sin embargo, para no sobrecargar de procesos administrativos la fase de desarrollo temprano del proyecto, la decisión formal de certificar o estructurar el servicio bajo estos marcos rigurosos ha sido diferida (según la definición formal de D-015). Se mantiene como marco conceptual de referencia, postergando su implementación estricta hasta que se consolide la escala de operación multirregional.
+
+### §24.4 Criterios de Salida de la Etapa 4
+
+La Etapa 4 se consolidará con éxito al cumplir con los siguientes umbrales operativos:
+1. **12 meses de operación sostenida:** el servicio se mantiene activo, disponible y con monitoreo continuo durante un año calendario ininterrumpido.
+2. **1000+ usuarios activos mensuales:** la plataforma registra un promedio sostenido de al menos 1000 jugadores interactuando mensualmente de forma agregada a lo largo de las comunas operativas.
+
+> Ver `docs/decisiones.md` (D-015) para los fundamentos teóricos del diferimiento y el marco propuesto para la gestión del servicio.
+
+---
+
+## §25 Riesgos (bajo ISO 31000)
+
+> En línea con la norma internacional ISO 31000 para la gestión de riesgos, se presenta una matriz detallada con los riesgos técnicos, operativos y regulatorios identificados para el despliegue del proyecto. Cada riesgo cuenta con una ponderación cualitativa y medidas concretas de mitigación para reducir su probabilidad o impacto.
+
+El objetivo de esta matriz no es ocultar las complejidades del proyecto, sino entregar visibilidad clara al Municipio, a Fabiola y a los evaluadores del fondo sobre cómo se administrarán las contingencias críticas a lo largo de las fases de desarrollo.
+
+### §25.1 Matriz de Riesgos del Proyecto
+
+| Identificador | Riesgo | Probabilidad | Impacto | Mitigación |
+| :--- | :--- | :--- | :--- | :--- |
+| **R-CAPACIDAD-fan** | Cuellos de botella en la capacidad de cómputo del servidor o infraestructura VPS debido a alta concurrencia de consultas geográficas. | Media | Alto | Realización de pruebas de estrés y benchmarks exhaustivos de capacidad antes de iniciar la Etapa 1. Tomar una definición clara sobre la arquitectura física versus cloud para sostener la carga. |
+| **R-OPERACIÓN-personal** | Dependencia crítica de perfiles técnicos específicos para la mantención correctiva del sistema (efecto de "operador único" o pérdida de personal técnico). | Alta | Alto | Redacción de documentación técnica detallada, guías de operación en terreno, runbooks automatizados de despliegue y uso de metodologías ágiles estandarizadas. |
+| **R-CUMPLIMIENTO-Ley-19.628** | Infracción involuntaria de la Ley de Protección de la Vida Privada (Chile) por fuga o mal uso de datos personales de los turistas. | Media | Alto | Onboarding con opt-in explícito e informado para la telemetría geográfica. Uso estricto de identificadores UUID seudónimos generados localmente sin recolectar nombres, correos o datos sensibles de identidad. Evaluación y asesoría jurídica formal al inicio de la Etapa 1. |
+| **R-MÓDULO-GPU-rendimiento** | Pérdida de rendimiento en dispositivos móviles de gama baja al intentar renderizar modelos complejos o procesar simulaciones de mapas en Rust/wgpu. | Alta | Medio | Ejecución de benchmarks honestos en una variedad representativa de dispositivos móviles reales del mercado. Establecimiento de opciones de configuración de bajo consumo y fallback de visualización optimizada de bajo impacto en la PWA. |
+| **R-MÓDULO-GPU-mantenimiento** | Desconexión técnica o desactualización del código del módulo gráfico con respecto a las actualizaciones principales de me60os_core en Rust. | Media | Medio | Versionar el módulo gráfico de manera conjunta con la suite de me60os_core, estableciendo tests rigurosos de regresión de código para asegurar la compatibilidad bidireccional. |
+| **R-OSM-calidad** | Datos inconsistentes o vacíos de calles, senderos turísticos o edificaciones históricas en el mapa self-hosted de OpenStreetMap para Lota. | Alta | Bajo | Completar y corregir activamente los mapas agregando la cartografía digital faltante de la comuna en colaboración con los datos catastrales entregados por el Municipio de Lota. |
+| **R-CONFIANZA-software** | Fallas imprevistas o regresiones críticas de software al realizar despliegues de nuevas versiones o integrar dependencias de terceros. | Baja | Alto | Establecimiento de contratos estrictos por path de dependencia en el ecosistema, uso estricto de versionado semántico formal, y diseño de una suite robusta de tests E2E (extremo a extremo) automatizados antes de cada pase a producción. |
+
+> Ver `docs/estado.md` §11 para el análisis de contingencias técnicas adicionales, y `MEMORY.md` §15 para los estándares generales de seguridad informática y privacidad de la suite.
+
+---
+
+## §26 Gestión de servicios (ITIL 4, en evaluación)
+
+> Para garantizar una transición ordenada hacia la fase de mantenimiento estable y asegurar el cumplimiento de las metas del proyecto a largo plazo, se ha seleccionado el marco global ITIL 4 como la referencia fundamental para diseñar y administrar el ciclo de vida de los servicios de TI en el proyecto Lota Indómito.
+
+### §26.1 Estado de Adopción y Diferimiento
+
+Es crítico precisar que la adopción formal de las prácticas estructuradas de ITIL 4 se encuentra catalogada bajo el estado **"En evaluación"**. No se contempla la implementación estricta de sus procesos o certificaciones formales durante el transcurso de las Etapas 0, 1, 2 ni 3. Esto evita saturar al equipo de desarrollo con cargas burocráticas de gestión documental mientras el núcleo del software de Sentinel está experimentando rápidos cambios iterativos.
+
+### §26.2 Interrogantes Clave por Resolver
+
+El proceso de evaluación de ITIL 4 para la posterior Etapa 4 de operación sostenida deja abiertas las siguientes interrogantes estratégicas que deben ser resueltas por las autoridades municipales y los patrocinadores al término de la expansión regional:
+- **Operador del servicio:** ¿Quién asumirá la responsabilidad de la operación técnica permanente una vez finalizado el financiamiento del fondo? ¿Se capacitará a un equipo de informática del Municipio de Lota o se delegará a un operador técnico único externo mediante licitación pública?
+- **Soporte y Mesa de Ayuda:** ¿Cómo se estructurará la atención a los usuarios finales (turistas) y a los comercios locales ante fallas del sistema o problemas en la redención de cupones? ¿Es viable integrar una mesa de servicios básica compartida con otros canales de atención municipal?
+- **Acuerdos de Nivel de Servicio (SLA):** ¿Cuáles serán los tiempos máximos permitidos para resolver interrupciones de disponibilidad de la plataforma y el motor de mapas?
+- **Gestión de Incidencias y Problemas:** ¿Qué herramientas se utilizarán para registrar y catalogar los errores reportados desde la PWA por parte de los jugadores en terreno?
+- **Gestión de Cambios:** ¿Cómo se controlará y autorizará el despliegue de nuevas versiones de contenido (misiones, personajes) asegurando no interrumpir la experiencia de los usuarios activos en el corredor patrimonial?
+
+> Ver `docs/decisiones.md` decisión D-015 para el análisis teórico de la estrategia de soporte continuo y los límites del diferimiento tecnológico.
+
+---
+
+## §27 Decisiones de diseño abiertas
+
+> Para dotar de total transparencia al proceso de desarrollo y diseño de la plataforma de juego Lota Indómito, se consolidan las 21 decisiones de diseño técnico y económico distribuidas en los documentos de análisis de la suite. Estas decisiones guiarán la transición lógica desde las fases experimentales hacia la producción masiva.
+
+Las decisiones D-016 y D-017 representan actualmente propuestas de diseño técnico y económico que están estrictamente pendientes de aprobación formal por parte de la mesa técnica del Municipio de Lota y los evaluadores del proyecto. No se consideran activas ni definitivas para el desarrollo del Piloto 0.
+
+### §27.1 Doc 23 (Modelos de Moneda) — 6 Decisiones Abiertas
+1. **¿Ratio de intercambio fijo o fluctuante entre minerales?**
+   - *Recomendación:* Se establece un ratio estrictamente fijo durante el transcurso del piloto controlado para evitar la especulación. Para la Fase 1 en producción, se migrará hacia un modelo fluctuante regulado por el motor Sentinel en base a la oferta y demanda de los jugadores.
+2. **¿Quién define y ajusta el ratio de intercambio de los minerales?**
+   - *Recomendación:* Operación de forma manual a cargo del administrador técnico del sistema durante las etapas de pilotaje. En la Fase 1 estable, el motor de Sentinel asumirá el ajuste automático basándose en los ritmos de recolección georreferenciados.
+3. **¿Límite máximo de acumulación de minerales en la wallet?**
+   - *Recomendación:* El mineral Estaño contará con un límite máximo suave de acumulación fijado en 1.000 unidades para controlar la sobreemisión. El Cobre y el Oro se mantendrán sin límites de acumulación para incentivar la participación continua a largo plazo.
+4. **¿Se permitirá comprar minerales virtuales directamente con dinero de curso legal (dinero real)?**
+   - *Recomendación:* NO. Bajo ninguna circunstancia se permitirá la compra de minerales virtuales con pesos chilenos (CLP) u otra divisa real. Esto asegura el sentido lúdico y el esfuerzo físico en terreno como la única vía para adquirir valor patrimonial dentro del juego.
+5. **¿Mercado abierto de intercambio o trueque bilateral controlado?**
+   - *Recomendación:* Se limita al trueque bilateral directo de dispositivo a dispositivo (P2P) durante el piloto. Se expandirá a un mercado abierto y centralizado dentro de la app para la Fase 1 en producción.
+6. **¿Modalidad de inscripción y validación de los comercios asociados?**
+   - *Recomendación:* Inscripción curada de forma manual por el Municipio durante el piloto para asegurar la confianza de los primeros locales participantes. Para la Fase 1 estable, se habilitará un sistema de inscripción abierto en la web con un proceso de validación documental automático.
+
+### §27.2 Doc 24 (Módulo de Subastas Reales) — 3 Decisiones Abiertas
+1. **¿Geocerca restrictiva o cupón de uso libre de territorio para el canje físico?**
+   - *Recomendación:* Se opta por cupones libres de restricción de geocercas dentro de la comuna de Lota durante el piloto. En la Fase 1, se aplicará geocercado dinámico restrictivo, exigiendo la presencia física del usuario dentro del radio del comercio para concretar el canje de la subasta.
+2. **¿Caducidad rígida o flexible para la vigencia de los cupones adjudicados?**
+   - *Recomendación:* Aplicar un modelo de caducidad rígido de forma estricta para insignias y premios de carácter exclusivo con el fin de promover la escasez digital y el dinamismo económico en el comercio de Lota.
+3. **¿Comportamiento de los NPCs asociados a misiones: ruta fija o simulados en base a S60?**
+   - *Recomendación:* Los personajes del juego operarán sobre rutas geográficas fijas simplificadas para el piloto inicial. Para la Fase 1 estable, se implementará el comportamiento dinámico e interactivo modelado en base a la matemática S60 de Sentinel.
+
+### §27.3 Doc 22 (Módulo de ML y Analytics) — 4 Decisiones Abiertas
+1. **¿Base de datos de telemetría local o alojada en la nube?**
+   - *Recomendación:* Almacenamiento local en el servidor dedicado durante la ejecución del piloto inicial. Se evaluará formalmente la migración hacia una base de datos segura en la nube para consolidar el análisis de la Fase 1.
+2. **¿Stack tecnológico del motor de Machine Learning en Python?**
+   - *Recomendación:* Uso de librerías estándar consolidadas: `scikit-learn` para clustering de usuarios, `XGBoost` para clasificación de perfiles de juego y `Prophet` para la predicción temporal de flujos de turistas en el Parque de Lota.
+3. **¿Quién opera y mantiene los modelos de ML y sus algoritmos?**
+   - *Recomendación:* A cargo del operador técnico del piloto durante la fase inicial. Se definirá un modelo de administración conjunta con profesionales municipales al dar inicio a la Fase 1 estable.
+4. **¿Dashboard municipal público o de carácter privado restringido?**
+   - *Recomendación:* Se diseñarán dos versiones independientes: un portal privado restringido con acceso seguro para el personal de planificación municipal, y una sección pública de estadísticas turísticas agregadas sin datos individuales para la comunidad lotina.
+
+### §27.4 Doc 21 (Planificación de World Events) — 4 Decisiones Abiertas
+1. **¿Quién opera y define el calendario de eventos globales del juego?**
+   - *Recomendación:* Modelo mixto en producción, combinando efemérides nacionales automatizadas con eventos locales curados de forma manual por el encargado municipal de cultura.
+2. **¿Foco exclusivo en el territorio de Lota o planificación de eventos regionales?**
+   - *Recomendación:* Restringido de forma exclusiva a la comuna de Lota para el lote piloto. Se proyecta la expansión hacia eventos de escala regional una vez concluida la Fase 1 estable de forma exitosa.
+3. **¿Geocerca obligatoria para habilitar el canje de cupones ganados en eventos?**
+   - *Recomendación:* Canje libre en comercios locales durante la etapa de pilotaje. Incorporación de geocercado restrictivo georreferenciado en el comercio para la Fase 1 estable.
+4. **¿Vigencia y caducidad para la redención de insignias exclusivas de eventos?**
+   - *Recomendación:* Caducidad rígida de carácter estricto, reforzando la escasez digital y la urgencia de participación turística comunitaria durante la celebración de hitos específicos.
+
+### §27.5 Doc 20 (Diseño de Loops de Juego) — 4 Decisiones Abiertas
+1. **¿Quién asumirá la operación del Calendario del Cielo en el backend?**
+   - *Estado:* Pendiente de resolución formal por parte de los arquitectos del sistema y el equipo de Jaime.
+2. **¿Se habilitará un modo virtual (teleport) en el piloto para usuarios remotos?**
+   - *Estado:* Pendiente de evaluación técnica, determinando si altera la validez de los datos de geolocalización física recopilados.
+3. **¿Las inscripciones de juego cooperativo serán exclusivamente de carácter individual o grupal desde el inicio?**
+   - *Estado:* Pendiente de diseño conceptual, priorizando misiones individuales con posibilidad de interacción social indirecta durante el piloto.
+4. **¿Los portales S60 operarán de forma exclusiva en Lota o se desplegarán regionalmente en el corredor patrimonial?**
+   - *Estado:* Pendiente de resolución arquitectónica, dependiendo del éxito técnico de la unificación del motor agnóstico de comunas.
+
+> Ver `_analisis/25_todo_continuacion.md` §4 para la lista de control técnica del proyecto, y los documentos del 20 al 24 de la carpeta de análisis para profundizar en los fundamentos de cada interrogante abierta de diseño.
+
+---
+
+## §28 Referencias cruzadas
+
+> Con el objetivo de facilitar la trazabilidad técnica, teórica e histórica de todos los componentes que estructuran el universo de Lota Indómito, se consolida la bibliografía de referencia, mapas de diseño y módulos lógicos del sistema bajo esta sección.
+
+### §28.1 Documentación Base del Proyecto
+
+| Tipo de Documento | Ruta del Archivo | Descripción del Contenido |
+| :--- | :--- | :--- |
+| Game Design Document | `docs/concepto-juego.md` | Diseño general del juego, mecánicas, roles, economía de carboncillos e insignias de Lota. |
+| Registro de Decisiones | `docs/decisiones.md` | Historial exhaustivo de decisiones tecnológicas (D-001 a D-015), aprobadas y diferidas. |
+| Estado del Proyecto | `docs/estado.md` | Estado de desarrollo actual, contactos, datos clave y puntos críticos de la maqueta. |
+| Plan de Continuidad | `docs/procedimientos.md` | Manual de operación en terreno, despliegue del servidor y mitigación de fallas comunes. |
+
+### §28.2 Suite de Análisis Técnico e Investigaciones
+
+| Código | Ruta del Archivo de Análisis | Foco de la Investigación |
+| :--- | :--- | :--- |
+| **A-04** | `_analisis/04_propuesta_tecnica_stack_osm.md` | Estructuración del stack autohospedado de OpenStreetMap con Nominatim y OSRM. |
+| **A-05** | `_analisis/05_modelo_financiero_sustentabilidad.md` | Simulación económica de sostenibilidad, costos del lote piloto y retorno para el comercio. |
+| **A-06** | `_analisis/06_estructura_datos_postgis.md` | Modelamiento de tablas espaciales, geocercas poligonales e indexación espacial de zonas. |
+| **A-07** | `_analisis/07_diseno_pwa_offline_first.md` | Estrategias de almacenamiento local (IndexedDB) para juego continuo sin conectividad de datos. |
+| **A-08** | `_analisis/08_reglamento_seguridad_turistas.md` | Protocolos de seguridad física para turistas en las misiones costeras de Lota. |
+| **A-09** | `_analisis/09_identidad_visual_paletas_lotinas.md` | Manual de marca, colores industriales del carbón, tipografía y assets gráficos recomendados. |
+| **A-10** | `_analisis/10_diseno_misiones_cronistas.md` | Diseño literario de diálogos, acertijos y narrativas para los personajes históricos. |
+| **A-11** | `_analisis/11_integracion_hardware_gafas_ra.md` | Estudio de factibilidad para arriendo e implementación técnica de gafas Meta Quest 3 en terreno. |
+| **A-12** | `_analisis/12_analisis_costos_vps_cloud.md` | Presupuesto detallado para el despliegue del lora-server en proveedores de infraestructura. |
+| **A-13** | `_analisis/13_arquitectura_api_fastapi.md` | Definición de endpoints de API para autenticación anónima, sincronización y canjes. |
+| **A-14** | `_analisis/14_modelado_matematico_s60.md` | Aplicación de aritmética base-60 a los sistemas de coordenadas temporales en Sentinel. |
+| **A-15** | `_analisis/15_protocolo_escrow_minerales.md` | Detalle del flujo seguro y transaccional del depósito en garantía para las subastas. |
+| **A-16** | `_analisis/16_evaluacion_cumplimiento_privacidad.md`| Análisis legal y técnico de conformidad con la Ley de Protección de Datos en Chile. |
+| **A-17** | `_analisis/17_estrategias_comunicacionales_municipio.md`| Plan de difusión pública, onboarding para adultos mayores y vinculación local. |
+| **A-18** | `_analisis/18_registro_bugs_maqueta_vue3.md` | Reporte técnico de errores detectados en la maqueta inicial PWA de MapLibre GL. |
+| **A-19** | `_analisis/19_investigacion_tecnologias_y_proyectos_referencia.md`| Referencias de software libre y proyectos globales exitosos de juego urbano. |
+| **A-20** | `_analisis/20_diseno_arquitectura_celeste.md` | Integración del Calendario del Cielo en el juego y su relación con los World Events. |
+| **A-21** | `_analisis/21_analisis_cohesion_comunitaria.md` | Métodos de análisis del tejido social y el impacto de los incentivos en Lota Alto y Bajo. |
+| **A-22** | `_analisis/22_ml_analytics_d014.md` | Diseño de la telemetría, segmentación analítica y paneles municipales de ML. |
+| **A-23** | `_analisis/23_modelos_de_moneda_abiertos.md` | Estudio detallado de la emisión de carboncillo, estaño, cobre y oro virtuales. |
+| **A-24** | `_analisis/24_subastas_reales.md` | Mecánica de subastas de bienes reales, comisiones y reputación sin transacciones CLP. |
+| **A-25** | `_analisis/25_todo_continuacion.md` | Lista de tareas pendientes y control de versiones para la continuidad del proyecto. |
+
+### §28.3 Bóveda de Jaime (PersonalVault)
+
+| Identificador del Experimento | Ruta del Archivo en Bóveda | Foco del Desarrollo Científico |
+| :--- | :--- | :--- |
+| Índice Maestro | `PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md` | Registro completo de experimentos, teorías y código científico ejecutado en Rust. |
+| Mapa de Isometrías | `PersonalVault/MAPA_ISOMETRIAS.md` | Algoritmos de proyección isométrica espacial para renderizado 2.5D de la mina Lota. |
+| Salto 17 SHM | `PersonalVault/EXPERIMENTO_SALTO17_SHM_MEMORIA_CRISTALES.md` | Mecanismos de memoria compartida (SHM) para persistencia cuántica de cristales temporales. |
+| Simpatía SHM | `PersonalVault/MEMORIAS_SIMPATIA_SHM_FRACTAL_MYCNET.md` | Modelamiento fractal y estructuras de datos compartidas inspiradas en redes de micelio. |
+| Progreso Temporal | `PersonalVault/PROGRESO_TEMPORAL_PY_A_RUST.md` | Bitácora técnica de la migración de algoritmos espaciales desde Python FastAPI hacia Rust. |
+| Enjambre Soma | `PersonalVault/HISTORIA_ENJAMBRE_SOMA_REDIS_SENTINEL.md` | Sincronización en tiempo real de agentes virtuales basados en Redis y el core de Sentinel. |
+| Inventario de Runtime | `PersonalVault/INVENTARIO_VAULT_RUST_RUNTIME.md` | Librerías, crates matemáticos y dependencias de bajo nivel autorizadas para el motor. |
+
+### §28.4 Módulos de Sentinel (`me60os-core`)
+
+| Componente Técnico | Ruta del Archivo de Origen | Función en el Ecosistema |
+| :--- | :--- | :--- |
+| Núcleo de Simulación | `me60os-core/src/lib.rs` | Punto de entrada del core matemático, exportación de macros y traits de Sentinel. |
+| Aritmética Base-60 | `me60os-core/src/s60.rs` | Implementación del sistema sexagesimal s60 para cálculo espacial y temporal exacto. |
+| Memoria Compartida | `me60os-core/src/shm.rs` | Gestión de memoria compartida a bajo nivel, sincronización de hilos e IPC. |
+| Red de Simulación | `me60os-core/src/net.rs` | Protocolos de red livianos para transmisión en vivo del estado de los agentes en el lattice. |
+| Gestión del Tiempo | `me60os-core/src/time.rs` | Modelamiento exacto de ticks temporales y sincronización con el Calendario del Cielo. |
+
+> Ver `_analisis/25_todo_continuacion.md` §4 para la lista de control técnica del proyecto, y `PersonalVault/INDICE_MAESTRO_EXPERIMENTOS_RUST.md` para acceder al repositorio completo de experimentos.
