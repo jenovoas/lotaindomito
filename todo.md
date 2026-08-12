@@ -6,14 +6,14 @@ Tareas detectadas en el escaneo del repo. Referencias cruzadas a docs y código 
 
 ### Piloto A (teléfono, PWA Vue 3 + MapLibre)
 
-- Geofencing real con Turf.js (implementado en MapaLota.vue con lota_pois.geojson).
-- Wallet multi-moneda con UI (`WalletHUD.vue` existe, aún no sincroniza con backend).
-- Micro-sesiones de las 3 zonas: Chiflón del Diablo (✅ MicroSesionChiflon.vue), Parque Isidora (✅ MicroSesionIsidora.vue staged), Pabellón 83 (✅ MicroSesionPabellon.vue staged).
-- Instrumentación de 16 eventos anónimos para ML externo.
-- 1 World Event demo con fecha real + NPC exclusiva + insignia.
-- 1 comercio real con cupón QR multi-moneda.
-- 1 listing demo de venta en cobre.
-- URL pública del pasaporte.
+- ✅ Geofencing con Turf.js (`MapaLota.vue` + `lota_pois.geojson`, 41 POIs OSM).
+- ✅ Wallet multi-moneda (`WalletHUD.vue` + `wallet.ts` store con sync a backend FastAPI).
+- ✅ Micro-sesiones de las 3 zonas: Chiflón del Diablo, Parque Isidora, Pabellón 81.
+- ⬜ Instrumentación de 16 eventos anónimos para ML externo.
+- ⬜ 1 World Event demo con fecha real + NPC exclusiva + insignia.
+- ⬜ 1 comercio real con cupón QR multi-moneda (Pabellón: Panadería "El Minero" 15% desc.).
+- ⬜ 1 listing demo de venta en cobre (D-017 aprobada).
+- ⬜ URL pública del pasaporte digital.
 
 ### Piloto B (motor propio, Rust + wgpu + Sentinel)
 
@@ -26,7 +26,7 @@ Tareas detectadas en el escaneo del repo. Referencias cruzadas a docs y código 
 
 ### D-016 · Sistema multi-moneda — **APROBADA (2026-08-12)**
 - Cobre (Cu, base) / Oro (Au, 100 Cu) / Estaño (Sn, 10.000 Cu). Ratios fijos.
-- Reemplaza a Carboncillo. Wallet pendiente de materializar en backend.
+- Wallet backend ✅ (`backend/app/routers/wallet.py`) + frontend ✅ (`wallet.ts` + `WalletHUD.vue`).
 - Doc: `_analisis/23_sistema_monedas_minerales.md`.
 
 ### D-017 · Subastas digitales de cosas reales — **APROBADA (2026-08-12)**
