@@ -12,7 +12,7 @@ use std::sync::Arc;
 use axum::serve;
 use lota_engine::gpu::pipeline::LotaGpuPipeline;
 use lota_engine::npc::orchestrator::NpcOrchestrator;
-use lota_engine::server::{create_app, AppState};
+use lota_engine::server::{create_app, AppState, ServerEvent};
 use me60os_core::atlantean::GpuController;
 use me60os_core::resonant_matrix::ResonantMatrix;
 use me60os_core::spa::SPA;
@@ -95,13 +95,52 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Guardar resultado del dispatch para endpoints /dispatch y /portales.
     *app_state.last_dispatch.write().unwrap() = Some(result);
 
-    // ── 10. Lanzar tick loop NPCs en background ──
+    // ── 10. Lanzar tick loop NPCs y broadcast de eventos WS en background ──
     let tick_state = Arc::clone(&app_state);
     tokio::spawn(async move {
         let mut interval = tokio::time::interval(std::time::Duration::from_millis(1000));
+        let mut tick_count: u64 = 0;
+        let mut last_portal_count: u32 = 0;
+
         loop {
             interval.tick().await;
+            tick_count += 1;
             tick_state.orchestrator.write().unwrap().tick();
+
+            // Emitir lattice_tick cada 68 ticks (heartbeat Qhc / Salto-17)
+            if tick_count % 68 == 0 {
+                let sample = {
+                    let dispatch_guard = tick_state.last_dispatch.read().unwrap();
+                    dispatch_guard
+                        .as_ref()
+                        .map(|d| d.wave_values.iter().take(10).copied().collect::<Vec<f32>>())
+                        .unwrap_or_default()
+                };
+
+                let _ = tick_state.tx_events.send(ServerEvent::LatticeTick {
+                    tick: (tick_count % 0xFFFF_FFFF) as u32,
+                    node_count: 91,
+                    wave_value_sample: sample,
+                });
+            }
+
+            // Emitir portal_opened cuando se detecten portales y haya cambio
+            let (portal_count, indices) = {
+                let dispatch_guard = tick_state.last_dispatch.read().unwrap();
+                dispatch_guard
+                    .as_ref()
+                    .map(|d| (d.portal_count, d.portal_indices.clone()))
+                    .unwrap_or((0, vec![]))
+            };
+
+            if portal_count > 0 && portal_count != last_portal_count {
+                last_portal_count = portal_count;
+                let _ = tick_state.tx_events.send(ServerEvent::PortalOpened {
+                    indices,
+                    count: portal_count,
+                    tick: (tick_count % 0xFFFF_FFFF) as u32,
+                });
+            }
         }
     });
 

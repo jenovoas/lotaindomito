@@ -199,6 +199,12 @@ diferenciador central. NO el juego completo. La fase 1 arranca después.
   Arauco y Concepción (corredor patrimonial de la zona del carbón). El motor es agnóstico
   de comuna: cada una aporta su contenido. Modelo regional escalable.
 
+**Hitos recientes (2026-08-12):**
+- **Integración Piloto A ↔ Piloto B cerrada:** PWA Vue 3 (`piloto-a/`) se comunica directamente con `lota-server` (`rust/`) en puerto 8080.
+- **Wire format S60 con 5 componentes sexagesimales (D-018):** `/npcs` y WebSocket transmiten `lat_s60`/`lon_s60` como `[d, m, s, t, q]` enteros puros. Helper `s60-to-degrees.ts` con `BigInt` para conversión exacta en cliente.
+- **WebSocket /ws/events activo:** emisión de `lattice_tick` (cada 68 ticks) y `portal_opened` (cuando la GPU detecta portales).
+- **Demo Parque Isidora Cousiño:** polígono (zona_id 89121388) verificado con Turf en cliente. Al entrar a la zona, Isidora Goyenechea se renderiza como marcador en el mapa.
+
 | Ítem | Valor |
 |---|---|
 | Entregable ~30 días | Piloto / diseño de concepto que demuestra el diferenciador (evento real → NPC vivo → caza → encuentro) |
@@ -209,6 +215,3 @@ diferenciador central. NO el juego completo. La fase 1 arranca después.
 
 **Nota de capacidad:** INTERLOCUTOR programa desde los 9 años, autor de Sentinel,
 construye sistemas complejos rápido. No recortar alcance por defecto.
-
-**Pendiente inmediato:** definir la zona y el encuentro con que el piloto demuestra el
-diferenciador; obtener polígonos reales de las zonas de Lota (Overpass/OSM).

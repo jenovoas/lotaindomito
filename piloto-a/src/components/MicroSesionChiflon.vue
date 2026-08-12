@@ -47,7 +47,7 @@ function startGame() {
 
 function selectEra(era: Card['era']) {
   const currentCard = cards[currentCardIndex.value]
-  if (currentCard.era === era) {
+  if (currentCard?.era === era) {
     score.value++
     feedback.value = '¡Correcto! Clasificación geológica exacta.'
   } else {
@@ -105,7 +105,7 @@ onMounted(() => {
         </div>
 
         <div class="card-display">
-          <h4>{{ cards[currentCardIndex].name }}</h4>
+          <h4>{{ cards[currentCardIndex]?.name }}</h4>
           <p class="card-hint">¿A qué era geológica pertenece este hallazgo?</p>
         </div>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Map, NavigationControl, Popup, type LngLatLike } from 'maplibre-gl'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { Map, NavigationControl, Popup, Marker, type LngLatLike } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
 import { point as turfPoint, polygon as turfPolygon } from '@turf/turf'
@@ -8,6 +8,9 @@ import zonasData from '../data/zonas-lota.json'
 import { useGeofenceStore } from '@/stores/geofence'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useWalletStore } from '@/stores/wallet'
+import { useMobsStore } from '@/stores/mobs'
+import { useLatticeStore } from '@/stores/lattice'
+import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import MicroSesionChiflon from './MicroSesionChiflon.vue'
 
 interface ZonaOSM {
@@ -22,8 +25,11 @@ const zonas = (zonasData as { zonas: ZonaOSM[]; count: number; fuente: string })
 const mapContainer = ref<HTMLElement | null>(null)
 const geofence = useGeofenceStore()
 const walletStore = useWalletStore()
+const mobsStore = useMobsStore()
+const latticeStore = useLatticeStore()
 const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
 let map: Map | null = null
+let npcMarkers: Marker[] = []
 
 const showChiflonModal = ref(false)
 
@@ -32,8 +38,63 @@ function onMissionComplete(reward: { cobre: number; oro: number }) {
   walletStore.balance.oro += reward.oro
 }
 
+function updateNpcMarkers() {
+  if (!map) return
+  npcMarkers.forEach((m) => m.remove())
+  npcMarkers = []
+
+  for (const npc of mobsStore.mobsActivos) {
+    try {
+      const npcLat = s60ToDegrees(npc.lat_s60)
+      const npcLon = s60ToDegrees(npc.lon_s60)
+      const el = document.createElement('div')
+      el.className = 'npc-marker'
+      el.innerText = '👤 ' + npc.name
+      el.style.backgroundColor = '#161b22'
+      el.style.color = '#3FE6C0'
+      el.style.border = '2px solid #3FE6C0'
+      el.style.borderRadius = '12px'
+      el.style.padding = '4px 8px'
+      el.style.fontSize = '0.8rem'
+      el.style.fontWeight = 'bold'
+      el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.5)'
+      el.style.cursor = 'pointer'
+
+      const marker = new Marker({ element: el })
+        .setLngLat([npcLon, npcLat])
+        .addTo(map)
+
+      npcMarkers.push(marker)
+    } catch (e) {
+      console.warn('Coordenadas S60 inválidas para NPC', npc, e)
+    }
+  }
+}
+
+watch(
+  () => mobsStore.mobsActivos,
+  () => {
+    updateNpcMarkers()
+  },
+  { deep: true }
+)
+
+watch(
+  () => geofence.zonaActiva,
+  (nuevaZona) => {
+    if (nuevaZona?.entered && nuevaZona.zona_id) {
+      mobsStore.fetchNpcs(nuevaZona.zona_id)
+    } else {
+      mobsStore.clearMobs()
+      updateNpcMarkers()
+    }
+  }
+)
+
 onMounted(() => {
   if (!mapContainer.value) return
+
+  latticeStore.connect()
 
   // Construir GeoJSON con polígonos de las zonas patrimoniales
   const features = zonas
@@ -67,8 +128,8 @@ onMounted(() => {
       },
       layers: [{ id: 'osm-tiles', type: 'raster', source: 'osm' }],
     },
-    center: [-73.16, -37.08],
-    zoom: 13,
+    center: [-73.165, -37.089],
+    zoom: 15,
   })
 
   map.addControl(new NavigationControl(), 'top-right')
@@ -126,16 +187,16 @@ onMounted(() => {
       }
     })
 
-    // Demo de geofencing: promedio de vértices cae dentro del polígono de Chiflón
-    const chiflon = zonas.find((z) => z.name.includes('Chiflón'))
-    if (chiflon && chiflon.coords.length >= 3) {
-      const coords: [number, number][] = chiflon.coords.map((c) => [c.lon, c.lat])
+    // Demo de geofencing: promedio de vértices cae dentro del polígono del Parque Isidora
+    const isidora = zonas.find((z) => z.id === 89121388 || z.name.includes('Isidora'))
+    if (isidora && isidora.coords.length >= 3) {
+      const coords: [number, number][] = isidora.coords.map((c) => [c.lon, c.lat])
       const poly = turfPolygon([[...coords, coords[0]!]])
       const avgLng = coords.reduce((s, c) => s + c[0], 0) / coords.length
       const avgLat = coords.reduce((s, c) => s + c[1], 0) / coords.length
       const pt = turfPoint([avgLng, avgLat])
       const inside = booleanPointInPolygon(pt, poly)
-      console.log(`[geofencing] ${chiflon.name}: promedio de vértices dentro = ${inside}`)
+      console.log(`[geofencing] ${isidora.name}: promedio de vértices dentro = ${inside}`)
     }
 
     // Forzar resize tras layout estable
@@ -144,6 +205,8 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  latticeStore.disconnect()
+  npcMarkers.forEach((m) => m.remove())
   map?.remove()
 })
 </script>
@@ -162,13 +225,20 @@ onUnmounted(() => {
       Estás en {{ geofence.zonaActiva.zona_name }}
     </div>
 
+    <!-- Indicador de WebSocket Lattice -->
+    <div class="status-ws" :class="{ conectado: latticeStore.connected }">
+      Lattice WS: {{ latticeStore.connected ? `🟢 Tick #${latticeStore.lastTick ?? '-'}` : '🔴 Desconectado' }}
+    </div>
+
     <aside v-if="geofence.zonaActiva" class="panel-zona">
       <button class="cerrar" @click="geofence.zonaActiva = null">✕</button>
       <h2>{{ geofence.zonaActiva.zona_name }}</h2>
       <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-12)</p>
-      <p class="hint">Geofencing listo — entra a la mina para iniciar la misión histórica.</p>
+      <p class="hint">
+        {{ mobsStore.mobsActivos.length > 0 ? `NPC ${mobsStore.mobsActivos[0]?.name} detectada en la zona.` : 'Geofencing listo — entra al Parque Isidora para encontrar personajes históricos.' }}
+      </p>
       <button class="btn-mision" @click="showChiflonModal = true">
-        Iniciar Misión: El Ciego de la Mina
+        Iniciar Misión: Isidora y el Carbón
       </button>
     </aside>
 
@@ -229,6 +299,24 @@ onUnmounted(() => {
 .banner-zona {
   background: #3fe6c0;
   color: #0f1216;
+}
+
+.status-ws {
+  position: absolute;
+  top: 1rem;
+  right: 4rem;
+  background: #161b22;
+  border: 1px solid #30363d;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #8b949e;
+  z-index: 10;
+}
+
+.status-ws.conectado {
+  color: #3fe6c0;
+  border-color: #3fe6c0;
 }
 
 .panel-zona,
