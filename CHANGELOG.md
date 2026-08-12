@@ -8,6 +8,16 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ---
 
+## 2026-08-12
+
+### Implementación del Piloto de Demostración (Pasos 1, 2 y 3)
+- **Especificación del Piloto (Paso 1):** Creado [`docs/piloto_zonas_especificacion.md`](docs/piloto_zonas_especificacion.md) definiendo las 3 zonas clave de Lota Alto (Chiflón del Diablo, Parque Isidora Cousiño, Pabellón 83), el flujo de 5 tramos (4 min) de la micro-sesión y el gatillado de Portales Lattice S60.
+- **Geometría OSM (Paso 2):** Implementado [`_scripts/download_lota_osm.py`](_scripts/download_lota_osm.py) para consultar Overpass API y generado [`public/data/lota_pois.geojson`](public/data/lota_pois.geojson) con 41 POIs turísticos e históricos reales de Lota.
+- **Micro-sesión e Integración PWA (Paso 3):** Construido el componente [`piloto-a/src/components/MicroSesionChiflon.vue`](piloto-a/src/components/MicroSesionChiflon.vue) (diálogo con *El Ciego de la Mina*, minijuego de clasificación geológica y recompensa en Cobre), e integrado en [`MapaLota.vue`](piloto-a/src/components/MapaLota.vue) y [`App.vue`](piloto-a/src/App.vue) con sincronización de la billetera `WalletHUD`.
+- **Commit:** `7e9b395` con build limpia en Vue 3 (`npm run build-only`).
+
+---
+
 ## 2026-08-11
 
 ### Limpieza pre-demo (coherencia con D-014 y correcciones técnicas)
