@@ -34,7 +34,8 @@ Un juego que transforma el recorrido patrimonial en una experiencia interactiva:
 - El visitante abre el juego en su celular al llegar a Lota.
 - Camina por la ciudad y al entrar a una zona patrimonial el juego se activa.
 - Cada zona tiene una misión: descubrir un personaje histórico, resolver un acertijo, completar un recorrido.
-- Al completar misiones gana Carboncillos (puntos del juego), insignias y diplomas digitales.
+- Al completar misiones gana Minerales del juego (Cobre, Oro, Estaño), insignias y diplomas digitales.
+- Puede canjear sus minerales o participar en subastas digitales de productos y servicios reales del comercio local.
 - Puede reportar problemas (basura, derrumbe, seguridad) que llegan directamente al municipio.
 - El municipio y las instituciones patrimoniales reciben estadísticas: cuánta gente visita cada zona, qué rutas son las más recorridas, qué reportes se han enviado.
 
@@ -62,7 +63,8 @@ Los personajes históricos (Isidora Goyenechea, El Ciego de la Mina, La Chinchor
 |---|---|
 | Exploración | El jugador camina por Lota y el GPS detecta cuándo entra a una zona |
 | Misiones | Cada zona tiene una misión temática (acertijo, recorrido, foto) |
-| Carboncillos | Puntos del juego que se ganan al completar hitos |
+| Minerales (D-016) | Sistema multi-moneda (Cobre, Oro, Estaño) obtenido por acciones patrimoniales y eventos |
+| Subastas (D-017) | Subastas digitales de productos y experiencias reales del comercio local |
 | Insignias | Medallas por logros específicos (ej: "Ojo de Lince" por reportes) |
 | Diplomas | Certificado digital al completar un recorrido completo |
 | Reportes | Botón de reporte ciudadano (basura, peligro, infraestructura) |
@@ -91,7 +93,7 @@ El proyecto cuenta con 52 pantallas de referencia ya diseñadas (prototipo Stitc
 - Misiones por zona
 - Sistema de reportes ciudadanos
 - Dashboard de autoridades (mapa de calor de incidencias)
-- Canje de Carboncillos en feria
+- Bóveda de beneficios y subastas digitales de pymes locales
 - Bóveda de diplomas
 
 Estas pantallas son la guía visual para el desarrollo del piloto.
