@@ -124,7 +124,7 @@ Cada una de las 8 rutas temáticas de la comuna activa una mecánica de juego o 
 
 ## 4. Sistema de economía in-game (minerales)
 
-> **Diseño actualizado (2026-08-10, D-016 propuesta):** la moneda única **Carboncillo** (`₡`) se reemplaza por un **sistema multi-moneda de minerales** con tipo de cambio relativo, transferible entre usuarios y comercianteable en el comercio local. Esto refuerza D-014 (autofinanciamiento) y potencia la interacción social. Diseño completo en [`_analisis/23_sistema_monedas_minerales.md`](../_analisis/23_sistema_monedas_minerales.md).
+> **Diseño actualizado (2026-08-10, D-016 aprobada el 2026-08-12):** la moneda única **Carboncillo** (`₡`) se reemplaza por un **sistema multi-moneda de minerales** con tipo de cambio relativo, transferible entre usuarios y comercianteable en el comercio local. Esto refuerza D-014 (autofinanciamiento) y potencia la interacción social. Diseño completo en [`_analisis/23_sistema_monedas_minerales.md`](../_analisis/23_sistema_monedas_minerales.md).
 
 ### 4.1 Catálogo de minerales
 
@@ -289,7 +289,7 @@ Para el entregable de la postulación al fondo se construirá un demostrador web
 
 ## 11. Subastas digitales de cosas reales
 
-> **Diseño conceptual (2026-08-10, D-017 propuesta).** Sistema de subastas integrado al juego, donde los usuarios listan productos o servicios del comercio local para subastar, otros pujan usando únicamente minerales del juego (cobre, oro, estaño), el juego cobra una comisión y la entrega se coordina localmente en Lota. Diseño completo en [`_analisis/24_subastas_reales.md`](../_analisis/24_subastas_reales.md).
+> **Diseño conceptual (2026-08-10, D-017 aprobada el 2026-08-12).** Sistema de subastas integrado al juego, donde los usuarios listan productos o servicios del comercio local para subastar, otros pujan usando únicamente minerales del juego (cobre, oro, estaño), el juego cobra una comisión y la entrega se coordina localmente en Lota. Diseño completo en [`_analisis/24_subastas_reales.md`](../_analisis/24_subastas_reales.md).
 
 **Tesis:** convierte a Lota Indómito en **marketplace soberano**. Los minerales dejan de ser "puntos de juego" y pasan a tener poder adquisitivo real. Esto refuerza D-014 por una nueva vía (la comisión por subasta).
 
@@ -346,5 +346,5 @@ Para el entregable de la postulación al fondo se construirá un demostrador web
 - **Subastas digitales:** [`_analisis/24_subastas_reales.md`](../_analisis/24_subastas_reales.md)
 - **ML externo:** [`_analisis/22_ml_analytics_d014.md`](../_analisis/22_ml_analytics_d014.md)
 - **D-014 corregida (encuadre vigente):** [`docs/decisiones.md`](decisiones.md)
-- **D-016 propuesta (monedas minerales):** [`docs/decisiones.md`](decisiones.md)
-- **D-017 propuesta (subastas):** [`docs/decisiones.md`](decisiones.md)
+- **D-016 aprobada (monedas minerales):** [`docs/decisiones.md`](decisiones.md)
+- **D-017 aprobada (subastas):** [`docs/decisiones.md`](decisiones.md)

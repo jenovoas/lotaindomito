@@ -12,6 +12,8 @@ import { useMobsStore } from '@/stores/mobs'
 import { useLatticeStore } from '@/stores/lattice'
 import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import MicroSesionChiflon from './MicroSesionChiflon.vue'
+import MicroSesionIsidora from './MicroSesionIsidora.vue'
+import MicroSesionPabellon from './MicroSesionPabellon.vue'
 
 interface ZonaOSM {
   id: number
@@ -32,10 +34,12 @@ let map: Map | null = null
 let npcMarkers: Marker[] = []
 
 const showChiflonModal = ref(false)
+const showIsidoraModal = ref(false)
+const showPabellonModal = ref(false)
 
-function onMissionComplete(reward: { cobre: number; oro: number }) {
+function onMissionComplete(reward: { cobre: number; oro?: number }) {
   walletStore.balance.cobre += reward.cobre
-  walletStore.balance.oro += reward.oro
+  if (reward.oro) walletStore.balance.oro += reward.oro
 }
 
 function updateNpcMarkers() {
@@ -90,6 +94,27 @@ watch(
     }
   }
 )
+
+// Abre la micro-sesión correspondiente a una zona patrimonial.
+function abrirMision(zonaId: number | null, zonaName?: string | null) {
+  const name = zonaName || ''
+  // Chiflón del Diablo (Museo de Sitio / Chiflón)
+  if (zonaId === 480338029 || name.includes('Chiflón')) {
+    showChiflonModal.value = true
+    return
+  }
+  // Parque Isidora Cousiño
+  if (zonaId === 89121388 || name.includes('Isidora')) {
+    showIsidoraModal.value = true
+    return
+  }
+  // Pabellón 81 (zona 3 — reemplaza al Pabellón 83 de la spec original)
+  if ((zonaId && [12557447365].includes(zonaId)) || name.includes('Pabellón')) {
+    showPabellonModal.value = true
+    return
+  }
+  // Fallback: no abrir nada, la zona no tiene micro-sesión maquetada
+}
 
 onMounted(() => {
   if (!mapContainer.value) return
@@ -235,16 +260,26 @@ onUnmounted(() => {
       <h2>{{ geofence.zonaActiva.zona_name }}</h2>
       <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-12)</p>
       <p class="hint">
-        {{ mobsStore.mobsActivos.length > 0 ? `NPC ${mobsStore.mobsActivos[0]?.name} detectada en la zona.` : 'Geofencing listo — entra al Parque Isidora para encontrar personajes históricos.' }}
+        {{ mobsStore.mobsActivos.length > 0 ? `NPC ${mobsStore.mobsActivos[0]?.name} detectada en la zona.` : 'Geofencing listo — entra a una zona patrimonial para encontrar personajes históricos.' }}
       </p>
-      <button class="btn-mision" @click="showChiflonModal = true">
-        Iniciar Misión: Isidora y el Carbón
+      <button class="btn-mision" @click="abrirMision(geofence.zonaActiva.zona_id, geofence.zonaActiva.zona_name)">
+        Iniciar Misión: {{ geofence.zonaActiva.zona_name }}
       </button>
     </aside>
 
     <MicroSesionChiflon
       v-if="showChiflonModal"
       @close="showChiflonModal = false"
+      @complete="onMissionComplete"
+    />
+    <MicroSesionIsidora
+      v-if="showIsidoraModal"
+      @close="showIsidoraModal = false"
+      @complete="onMissionComplete"
+    />
+    <MicroSesionPabellon
+      v-if="showPabellonModal"
+      @close="showPabellonModal = false"
       @complete="onMissionComplete"
     />
     <aside class="panel-zonas">

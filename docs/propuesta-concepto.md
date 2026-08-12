@@ -46,7 +46,7 @@ para coordinar flujos turísticos hacia el comercio local. Los eventos del
 cielo calculados por Sentinel S60 (§2.4 del GDD) determinan qué personajes,
 portales y recompensas están activos en cada momento.
 
-El sistema de subastas digitales (D-017, propuesta vigente) integra al juego
+El sistema de subastas digitales (D-017) integra al juego
 un marketplace donde usuarios listan productos o servicios del comercio local
 de Lota para subastar, pagados exclusivamente con minerales del juego. El juego
 cobra comisión sobre cada operación.
@@ -135,7 +135,7 @@ proyecto se cita como referencia y no se duplica. Esto incluye:
 
 - El GDD en `docs/concepto-juego.md` (350 líneas, Game Design Document).
 - Las decisiones en `docs/decisiones.md` (D-014 es el encuadre vigente;
-  D-016 y D-017 son propuestas abiertas).
+  D-016 y D-017 son decisiones aprobadas).
 - Los análisis técnicos en `_analisis/` (sistema multi-moneda,
   subastas digitales, World Events, loop del jugador, ML externo).
 - Los módulos Rust de Sentinel integrados al juego (celestial,
@@ -2900,7 +2900,7 @@ Para fomentar la participación intergeneracional de los visitantes, se introduc
 
 ### §22.3 Mecánica y Protocolo de Subastas Digitales
 
-La economía avanza mediante la subasta de bienes tangibles y experiencias exclusivas de Lota (artesanías de carbón, almuerzos tradicionales, accesos guiados exclusivos) que los jugadores adquieren ofertando los minerales que han recolectado en sus caminatas. El diseño de este módulo está regulado bajo la propuesta D-017 (pendiente de aprobación formal).
+La economía avanza mediante la subasta de bienes tangibles y experiencias exclusivas de Lota (artesanías de carbón, almuerzos tradicionales, accesos guiados exclusivos) que los jugadores adquieren ofertando los minerales que han recolectado en sus caminatas. El diseño de este módulo está regulado por D-017 (aprobada el 2026-08-12).
 
 El flujo de operación de una subasta digital transcurre de la siguiente forma:
 1. **Listado de bienes:** un comercio asociado o el Municipio lista un artículo en la plataforma, estableciendo un precio mínimo en minerales (por ejemplo, 100 de Cobre y 50 de Estaño) y una fecha de cierre rígida.
@@ -3045,7 +3045,7 @@ El proceso de evaluación de ITIL 4 para la posterior Etapa 4 de operación sost
 
 > Para dotar de total transparencia al proceso de desarrollo y diseño de la plataforma de juego Lota Indómito, se consolidan las 21 decisiones de diseño técnico y económico distribuidas en los documentos de análisis de la suite. Estas decisiones guiarán la transición lógica desde las fases experimentales hacia la producción masiva.
 
-Las decisiones D-016 y D-017 representan actualmente propuestas de diseño técnico y económico que están estrictamente pendientes de aprobación formal por parte de la mesa técnica del Municipio de Lota y los evaluadores del proyecto. No se consideran activas ni definitivas para el desarrollo del Piloto 0.
+Las decisiones D-016 y D-017 fueron aprobadas el 2026-08-12. D-016 (sistema multi-moneda de minerales) y D-017 (subastas digitales con pago en minerales) son decisiones vigentes que guían el desarrollo del Piloto 0.
 
 ### §27.1 Doc 23 (Modelos de Moneda) — 6 Decisiones Abiertas
 1. **¿Ratio de intercambio fijo o fluctuante entre minerales?**

@@ -23,12 +23,16 @@ Para el piloto de demostración de 30 días se prioriza el eje patrimonial y tur
   - *Minijuego:* **"Rastreador de la Flora"** (trivia interactiva sobre especies nativas e introducidas del parque).
   - *Recompensa:* 30 Cobre (Cu) + 5 Oro (Au) (si hay evento de luz de atardecer).
 
-- **Zona 3: Pabellón 83 (Centro Cultural y Memoria Social)**
-  - *Coordenadas Ref:* `-37.0928, -73.1575`
+- **Zona 3: Pabellón 81 (Centro Cultural y Memoria Social)**
+  - *Coordenadas Ref:* `-37.0929, -73.1631` (POI real OSM, node/12557447365)
   - *Identidad:* Vivienda social minera, cultura e historia viva de la comunidad.
   - *Personaje Emblemático:* **El Palanquero / La Chinchorrera** (memoria colectiva).
   - *Minijuego:* **"Amasando Pan"** (QTE táctil de ritmo para amasar pan de mina).
   - *Recompensa:* 40 Cobre (Cu) + Cupón QR para Panadería/Café Local Asociado.
+  - *Nota:* OSM no tiene el Pabellón 83 como way nombrado. Se usa Pabellón
+    81 (POI confirmado en OSM) como zona 3 real. El polígono de geofencing es
+    una aproximación sintética de ~30×30m alrededor del punto OSM, a ser
+    reemplazada por el way real cuando se descargue de Overpass.
 
 ---
 

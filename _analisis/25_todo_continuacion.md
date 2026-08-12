@@ -24,17 +24,17 @@
 
 Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 
-## 3. Decisiones pendientes de aprobación
+## 3. Decisiones aprobadas (2026-08-12)
 
-### D-016 · Sistema multi-moneda cobre/oro/estaño — **PROPUESTA**
+> D-016 y D-017 fueron aprobadas formalmente por INTERLOCUTOR el **2026-08-12**. La sección 3 pasa de "pendientes de aprobación" a "aprobadas"; el trabajo que dependía de su OK ahora está habilitado para implementación.
+
+### D-016 · Sistema multi-moneda cobre/oro/estaño — **APROBADA (2026-08-12)**
 - Diseño completo en [`_analisis/23_sistema_monedas_minerales.md`](23_sistema_monedas_minerales.md).
-- Requiere OK explícito de INTERLOCUTOR para reemplazar Carboncillo formalmente.
-- Si se aprueba: propagar a otros docs (`propuesta-fondo.md` es dominio de cliente — verificar alcance), implementar wallet en Piloto A.
+- Reemplaza Carboncillo formalmente. Propagación a otros docs en curso (ver `todo.md`). Implementar wallet multi-moneda en Piloto A y backend.
 
-### D-017 · Subastas digitales de cosas reales — **PROPUESTA**
+### D-017 · Subastas digitales de cosas reales — **APROBADA (2026-08-12)**
 - Diseño completo en [`_analisis/24_subastas_reales.md`](24_subastas_reales.md).
-- Requiere OK explícito de INTERLOCUTOR.
-- Si se aprueba: diseñar backend, integrar con wallet multi-moneda, validar regulación chilena.
+- Aprobada la mecánica (sin pago en CLP). Diseñar backend de subastas, integrar con wallet multi-moneda, validar regulación chilena como paso de implementación.
 
 ## 4. Decisiones de diseño abiertas (por doc)
 
@@ -84,12 +84,10 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 - [ ] URL pública del pasaporte (efecto red).
 - [ ] Render HTML del sitio (`index.html` + `render-docs.py`).
 
-### Backend (NUEVO, no existe aún)
-- [ ] PostgreSQL + PostGIS (D-006).
-- [ ] Servicio de sincronización del wallet multi-moneda.
-- [ ] Servicio de subastas (cuando D-017 se apruebe).
-- [ ] Servicio de ML externo (cuando haya volumen).
+### Backend (FastAPI — Ya existe: PostgreSQL+PostGIS, geofencing, wallet, zonas; ver `backend/`)
 - [ ] Vistas materializadas para ML.
+- [ ] Servicio de subastas (D-017 aprobada — mecánica de pujas, escrow, reputación bilateral).
+- [ ] Servicio de ML externo (cuando haya volumen).
 
 ### Piloto B (motor GPU + Sentinel) — centro del concepto
 - [ ] Geofencing con R-Tree (`rstar`) — pendiente del concepto.
@@ -111,7 +109,6 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 - Validación del modelo de autofinanciamiento (D-014).
 
 ### INTERLOCUTOR (decisiones de arquitectura)
-- Aprobar D-016 y D-017 formalmente.
 - Resolver las 21 decisiones de diseño abiertas (lista en §4).
 - Definir operador del servicio de ML (¿él mismo, cliente, externo?).
 - Decidir si DB va en servidor fan o nube.
@@ -126,16 +123,15 @@ Esa propuesta es difícil de rechazar para un Municipio que busca reactivación 
 
 1. **Leer este archivo** (`_analisis/25_todo_continuacion.md`).
 2. Releer `MEMORY.md` (encuadre vigente D-014).
-3. Revisar `docs/decisiones.md` (D-014 a D-017).
-4. Si vas a aprobar D-016/D-017: hacerlo explícito antes de propagar más.
-5. Si vas a implementar Piloto A: empezar por el wallet multi-moneda.
-6. Si vas a implementar Piloto B: revisar [`_analisis/17_arquitectura_gpu_motor_lota.md`](17_arquitectura_gpu_motor_lota.md).
-7. Si vas a iterar concepto: retomar `docs/estado.md` §11.
+3. Revisar `docs/decisiones.md` (D-014 a D-018; D-016 y D-017 ya aprobadas el 2026-08-12).
+4. Si vas a implementar Piloto A: empezar por el wallet multi-moneda (D-016 aprobada).
+5. Si vas a implementar Piloto B: revisar [`_analisis/17_arquitectura_gpu_motor_lota.md`](17_arquitectura_gpu_motor_lota.md).
+6. Si vas a iterar concepto: retomar `docs/estado.md` §11.
 
 ## 9. Referencias cruzadas
 
 - **MEMORY.md** — encuadre vigente (D-014 corregida).
-- **docs/decisiones.md** — D-001 a D-017.
+- **docs/decisiones.md** — D-001 a D-018 (D-016 y D-017 aprobadas el 2026-08-12).
 - **docs/estado.md** — estado vivo del proyecto, sección 11 = workstream activo.
 - **docs/concepto-juego.md** — GDD actualizado.
 - **`_analisis/20_loop_jugador_dia_a_dia.md`** — loop del turista.
