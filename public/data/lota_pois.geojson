@@ -1,0 +1,887 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1710493,
+          -37.0945478
+        ]
+      },
+      "properties": {
+        "id": 931968555,
+        "name": "Bahía Lota",
+        "tourism": "viewpoint",
+        "historic": null,
+        "tags": {
+          "name": "Bahía Lota",
+          "tourism": "viewpoint"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1608085,
+          -37.0757097
+        ]
+      },
+      "properties": {
+        "id": 4733394552,
+        "name": "Pueblito Minero Chiflón del Diablo",
+        "tourism": "attraction",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "addr:street": "Antonio Rios",
+          "name": "Pueblito Minero Chiflón del Diablo",
+          "name:en": "Mining Museum",
+          "name:es": "El Chiflón del Diablo",
+          "tourism": "attraction",
+          "wikidata": "Q5351017",
+          "wikimedia_commons": "Category:Chiflón del Diablo",
+          "wikipedia": "es:Chiflón del Diablo"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1564311,
+          -37.0933502
+        ]
+      },
+      "properties": {
+        "id": 5332245008,
+        "name": "Residencia Doña Isidora",
+        "tourism": "hostel",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "name": "Residencia Doña Isidora",
+          "tourism": "hostel"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1644543,
+          -37.0891804
+        ]
+      },
+      "properties": {
+        "id": 5440949722,
+        "name": "Punto de Interés",
+        "tourism": "picnic_site",
+        "historic": null,
+        "tags": {
+          "tourism": "picnic_site"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1608954,
+          -37.0824131
+        ]
+      },
+      "properties": {
+        "id": 5866605266,
+        "name": "Pabellones Históricos de Lota",
+        "tourism": null,
+        "historic": "yes",
+        "tags": {
+          "addr:city": "Lota",
+          "addr:housenumber": "48",
+          "addr:street": "Carlos Cousiño",
+          "description": "Pabellones históricos donde vivían los mineros del carbón ",
+          "historic": "yes",
+          "name": "Pabellones Históricos de Lota",
+          "operator": "Historico"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1667168,
+          -37.0850678
+        ]
+      },
+      "properties": {
+        "id": 5866627596,
+        "name": "Tren minero antiguo",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "artwork_type": "sculpture",
+          "name": "Tren minero antiguo",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1619744,
+          -37.0893557
+        ]
+      },
+      "properties": {
+        "id": 5868464931,
+        "name": "Hostal Las Cabrias",
+        "tourism": "hostel",
+        "historic": null,
+        "tags": {
+          "check_date": "2026-05-09",
+          "name": "Hostal Las Cabrias",
+          "tourism": "hostel"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1432031,
+          -37.0978673
+        ]
+      },
+      "properties": {
+        "id": 7221403934,
+        "name": "Mirador",
+        "tourism": "viewpoint",
+        "historic": null,
+        "tags": {
+          "name": "Mirador",
+          "tourism": "viewpoint"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1678233,
+          -37.0925404
+        ]
+      },
+      "properties": {
+        "id": 7245372952,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.162731,
+          -37.089807
+        ]
+      },
+      "properties": {
+        "id": 7245397187,
+        "name": "Matias Cousiño",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "name": "Matias Cousiño",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1626253,
+          -37.0897042
+        ]
+      },
+      "properties": {
+        "id": 7245397286,
+        "name": "Carros Mineros",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "name": "Carros Mineros",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1711298,
+          -37.0945564
+        ]
+      },
+      "properties": {
+        "id": 7245793495,
+        "name": "Diana La Cazadora",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "name": "Diana La Cazadora",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1615365,
+          -37.0867111
+        ]
+      },
+      "properties": {
+        "id": 7298151121,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "memorial": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1626237,
+          -37.0894544
+        ]
+      },
+      "properties": {
+        "id": 8663748559,
+        "name": "Lota, latidos para una nueva generación",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artist_name": "Luis Núñez",
+          "artwork_type": "mural",
+          "memorial": "memorial",
+          "name": "Lota, latidos para una nueva generación",
+          "start_date": "2021-04-24",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1669167,
+          -37.0919206
+        ]
+      },
+      "properties": {
+        "id": 9843300069,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1670535,
+          -37.0918768
+        ]
+      },
+      "properties": {
+        "id": 9843300070,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1671662,
+          -37.0920763
+        ]
+      },
+      "properties": {
+        "id": 9843300082,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1669952,
+          -37.0921388
+        ]
+      },
+      "properties": {
+        "id": 9843300083,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1687518,
+          -37.0926891
+        ]
+      },
+      "properties": {
+        "id": 9843311426,
+        "name": "Caupolicán",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "name": "Caupolicán",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1676706,
+          -37.0923986
+        ]
+      },
+      "properties": {
+        "id": 9843311431,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1670444,
+          -37.0917639
+        ]
+      },
+      "properties": {
+        "id": 9845834458,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1674394,
+          -37.0925108
+        ]
+      },
+      "properties": {
+        "id": 9845834462,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1565031,
+          -37.0944487
+        ]
+      },
+      "properties": {
+        "id": 10616556910,
+        "name": "José Martí",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "bust",
+          "inscription": "JOSÉ MARTí (1853-1895) Apóstol de la independencia de Cuba \"Ser culto para ser Libre\"",
+          "material": "bronze",
+          "name": "José Martí",
+          "start_date": "2005",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1559951,
+          -37.0942276
+        ]
+      },
+      "properties": {
+        "id": 10616557078,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "bust",
+          "object:city": "Lota",
+          "object:street": "Pedro Aguirre Cerda",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1559016,
+          -37.0943866
+        ]
+      },
+      "properties": {
+        "id": 10616557082,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "bust",
+          "object:city": "Lota",
+          "object:street": "Pedro Aguirre Cerda",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1562367,
+          -37.0945607
+        ]
+      },
+      "properties": {
+        "id": 10616596676,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "statue",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1326709,
+          -37.0905091
+        ]
+      },
+      "properties": {
+        "id": 10693005172,
+        "name": "Punto de Interés",
+        "tourism": "information",
+        "historic": null,
+        "tags": {
+          "destination": "Isla de Pinos;Raices Trail;Perro Zombie",
+          "information": "guidepost",
+          "tourism": "information"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.168466,
+          -37.093024
+        ]
+      },
+      "properties": {
+        "id": 11415532842,
+        "name": "Punto de Interés",
+        "tourism": "viewpoint",
+        "historic": null,
+        "tags": {
+          "tourism": "viewpoint"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1607396,
+          -37.1062198
+        ]
+      },
+      "properties": {
+        "id": 11646392599,
+        "name": "Punto de Interés",
+        "tourism": null,
+        "historic": "memorial",
+        "tags": {
+          "historic": "memorial"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1608949,
+          -37.1062097
+        ]
+      },
+      "properties": {
+        "id": 11646392624,
+        "name": "Punto de Interés",
+        "tourism": null,
+        "historic": "cannon",
+        "tags": {
+          "altitude": "45",
+          "direction": "340",
+          "historic": "cannon"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1608959,
+          -37.106294
+        ]
+      },
+      "properties": {
+        "id": 11646392625,
+        "name": "Punto de Interés",
+        "tourism": null,
+        "historic": "cannon",
+        "tags": {
+          "altitude": "45",
+          "direction": "260",
+          "historic": "cannon"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1608339,
+          -37.1063631
+        ]
+      },
+      "properties": {
+        "id": 11646392626,
+        "name": "Punto de Interés",
+        "tourism": null,
+        "historic": "cannon",
+        "tags": {
+          "altitude": "45",
+          "direction": "200",
+          "historic": "cannon"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1607935,
+          -37.1061279
+        ]
+      },
+      "properties": {
+        "id": 11646393502,
+        "name": "Columpio de los Deseos",
+        "tourism": "attraction",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "addr:street": "Avenida Arturo Prat",
+          "name": "Columpio de los Deseos",
+          "tourism": "attraction"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1619699,
+          -37.0921189
+        ]
+      },
+      "properties": {
+        "id": 12371061215,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1618383,
+          -37.0848108
+        ]
+      },
+      "properties": {
+        "id": 12539781655,
+        "name": "Punto de Interés",
+        "tourism": "artwork",
+        "historic": null,
+        "tags": {
+          "artwork_type": "sculpture",
+          "tourism": "artwork"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1630833,
+          -37.0928917
+        ]
+      },
+      "properties": {
+        "id": 12557447365,
+        "name": "Pabellón 81",
+        "tourism": "attraction",
+        "historic": null,
+        "tags": {
+          "name": "Pabellón 81",
+          "tourism": "attraction"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.160751,
+          -37.1062779
+        ]
+      },
+      "properties": {
+        "id": 203616771,
+        "name": "Fuerte de Colcura",
+        "tourism": null,
+        "historic": "fort",
+        "tags": {
+          "access": "yes",
+          "historic": "fort",
+          "name": "Fuerte de Colcura",
+          "wikidata": "Q5470952",
+          "wikimedia_commons": "Category:Fuerte de Colcura",
+          "wikipedia": "es:Fuerte de Colcura"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1606557,
+          -37.0760097
+        ]
+      },
+      "properties": {
+        "id": 480338029,
+        "name": "Museo de Sitio Mina Chiflón del Diablo",
+        "tourism": "museum",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "addr:street": "Antonio Rios",
+          "building": "yes",
+          "description": "Mina de carbón en desuso",
+          "museum": "history",
+          "name": "Museo de Sitio Mina Chiflón del Diablo",
+          "operator": "Fundación ProCultura",
+          "operator:type": "private_non_profit",
+          "source": "https://www.registromuseoschile.cl/663/w3-article-50673.html",
+          "tourism": "museum",
+          "website": "https://cepas.cl/circuitolota/"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1593116,
+          -37.0815155
+        ]
+      },
+      "properties": {
+        "id": 620989310,
+        "name": "Plaza Carrera",
+        "tourism": "Paseo",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "check_date": "2026-03-14",
+          "description": "Plaza de paseo y juegos abierto a la comunidad",
+          "leisure": "park",
+          "name": "Plaza Carrera",
+          "tourism": "Paseo"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1645908,
+          -37.0896905
+        ]
+      },
+      "properties": {
+        "id": 621006336,
+        "name": "Museo Histórico de Lota",
+        "tourism": "museum",
+        "historic": null,
+        "tags": {
+          "addr:city": "Lota",
+          "addr:country": "CL",
+          "addr:housenumber": "21",
+          "addr:street": "Avenida El Parque",
+          "building": "yes",
+          "name": "Museo Histórico de Lota",
+          "operator": "Fundación Chile",
+          "operator:type": "private_non_profit",
+          "tourism": "museum",
+          "wikidata": "Q6033422",
+          "wikipedia": "es:Museo Histórico de Lota"
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1569779,
+          -37.0939941
+        ]
+      },
+      "properties": {
+        "id": 1356774209,
+        "name": "Ruinas Teatro Sindical n°6",
+        "tourism": null,
+        "historic": "ruins",
+        "tags": {
+          "historic": "ruins",
+          "name": "Ruinas Teatro Sindical n°6"
+        }
+      }
+    }
+  ]
+}

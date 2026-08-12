@@ -7,6 +7,8 @@ import { point as turfPoint, polygon as turfPolygon } from '@turf/turf'
 import zonasData from '../data/zonas-lota.json'
 import { useGeofenceStore } from '@/stores/geofence'
 import { useGeolocation } from '@/composables/useGeolocation'
+import { useWalletStore } from '@/stores/wallet'
+import MicroSesionChiflon from './MicroSesionChiflon.vue'
 
 interface ZonaOSM {
   id: number
@@ -19,8 +21,16 @@ const zonas = (zonasData as { zonas: ZonaOSM[]; count: number; fuente: string })
 
 const mapContainer = ref<HTMLElement | null>(null)
 const geofence = useGeofenceStore()
+const walletStore = useWalletStore()
 const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
 let map: Map | null = null
+
+const showChiflonModal = ref(false)
+
+function onMissionComplete(reward: { cobre: number; oro: number }) {
+  walletStore.balance.cobre += reward.cobre
+  walletStore.balance.oro += reward.oro
+}
 
 onMounted(() => {
   if (!mapContainer.value) return
@@ -155,9 +165,18 @@ onUnmounted(() => {
     <aside v-if="geofence.zonaActiva" class="panel-zona">
       <button class="cerrar" @click="geofence.zonaActiva = null">✕</button>
       <h2>{{ geofence.zonaActiva.zona_name }}</h2>
-      <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-10)</p>
-      <p class="hint">Geofencing listo — entrando a esta zona se activa la misión.</p>
+      <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-12)</p>
+      <p class="hint">Geofencing listo — entra a la mina para iniciar la misión histórica.</p>
+      <button class="btn-mision" @click="showChiflonModal = true">
+        Iniciar Misión: El Ciego de la Mina
+      </button>
     </aside>
+
+    <MicroSesionChiflon
+      v-if="showChiflonModal"
+      @close="showChiflonModal = false"
+      @complete="onMissionComplete"
+    />
     <aside class="panel-zonas">
       <h3>Zonas patrimoniales</h3>
       <ul>

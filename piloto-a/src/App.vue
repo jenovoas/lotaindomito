@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import MapaLota from './components/MapaLota.vue'
+import WalletHUD from './components/WalletHUD.vue'
 </script>
 
 <template>
   <main class="app">
     <header class="cabecera">
-      <h1 class="titulo">Lota Indómito</h1>
-      <p class="subtitulo">Guardianes de la Cuenca — Piloto A</p>
+      <div class="header-main">
+        <div>
+          <h1 class="titulo">Lota Indómito</h1>
+          <p class="subtitulo">Guardianes de la Cuenca — Piloto A</p>
+        </div>
+        <WalletHUD />
+      </div>
     </header>
     <div class="mapa-wrapper">
       <MapaLota />
