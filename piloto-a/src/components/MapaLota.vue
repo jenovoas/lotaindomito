@@ -11,10 +11,12 @@ import { useWalletStore } from '@/stores/wallet'
 import { useMobsStore } from '@/stores/mobs'
 import { useLatticeStore } from '@/stores/lattice'
 import { useAnalyticsStore } from '@/stores/analytics'
+import { useWorldEventsStore } from '@/stores/worldEvents'
 import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import MicroSesionChiflon from './MicroSesionChiflon.vue'
 import MicroSesionIsidora from './MicroSesionIsidora.vue'
 import MicroSesionPabellon from './MicroSesionPabellon.vue'
+import WorldEventBanner from './WorldEventBanner.vue'
 
 interface ZonaOSM {
   id: number
@@ -31,9 +33,12 @@ const walletStore = useWalletStore()
 const mobsStore = useMobsStore()
 const latticeStore = useLatticeStore()
 const analytics = useAnalyticsStore()
+const worldEvents = useWorldEventsStore()
 const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
 let map: Map | null = null
 let npcMarkers: Marker[] = []
+let npcEventMarker: Marker | null = null
+let npcEventInterval: ReturnType<typeof setInterval> | null = null
 
 const showChiflonModal = ref(false)
 const showIsidoraModal = ref(false)
@@ -47,6 +52,19 @@ function onMissionComplete(reward: { cobre: number; oro?: number }, zonaId?: num
     true,
     { cobre: reward.cobre, oro: reward.oro }
   )
+  if (worldEvents.eventosActivos.length > 0 && zonaId) {
+    const evento = worldEvents.eventosActivos[0]
+    if (evento.npc_exclusiva.zona_id === zonaId && evento.misiones[0]) {
+      const m = evento.misiones[0]
+      if (m.recompensa_insignia) {
+        const insignia = evento.insignias.find(i => i.id === m.recompensa_insignia)
+        if (insignia) worldEvents.desbloquearInsignia(insignia)
+      }
+      if (m.recompensa_cupon) {
+        worldEvents.desbloquearCupon(m.recompensa_cupon)
+      }
+    }
+  }
 }
 
 function updateNpcMarkers() {
@@ -128,6 +146,7 @@ function abrirMision(zonaId: number | null, zonaName?: string | null) {
 onMounted(() => {
   if (!mapContainer.value) return
 
+  worldEvents.init()
   latticeStore.connect()
 
   // Construir GeoJSON con polígonos de las zonas patrimoniales
@@ -194,6 +213,57 @@ onMounted(() => {
       },
     })
 
+    let npcEventMarker: Marker | null = null
+
+    watch(
+      () => worldEvents.eventosActivos,
+      (activos) => {
+        if (!map) return
+        if (activos.length === 0) {
+          if (npcEventMarker) {
+            npcEventMarker.remove()
+            npcEventMarker = null
+          }
+          return
+        }
+        const evt = activos[0]
+        const ruta = evt.npc_exclusiva.ruta_fija
+        if (ruta.length === 0) return
+        const pos = ruta[0]!
+        if (npcEventMarker) npcEventMarker.remove()
+        const el = document.createElement('div')
+        el.className = 'npc-event-marker'
+        el.innerText = `👒 ${evt.npc_exclusiva.nombre}`
+        el.style.cssText = `
+          background: ${evt.colores.primario};
+          color: white;
+          border: 2px solid ${evt.colores.secundario};
+          border-radius: 16px;
+          padding: 4px 10px;
+          font-size: 0.8rem;
+          font-weight: bold;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+          cursor: pointer;
+          white-space: nowrap;
+        `
+        npcEventMarker = new Marker({ element: el })
+          .setLngLat([pos.lon, pos.lat])
+          .addTo(map)
+        el.addEventListener('click', () => {
+          alert(`${evt.npc_exclusiva.nombre}: ${evt.npc_exclusiva.historia}`)
+        })
+        let tick = 0
+        if (npcEventInterval) clearInterval(npcEventInterval)
+        npcEventInterval = setInterval(() => {
+          if (!map || !npcEventMarker) { clearInterval(npcEventInterval!); return }
+          tick++
+          const idx = tick % ruta.length
+          npcEventMarker.setLngLat([ruta[idx]!.lon, ruta[idx]!.lat])
+        }, 5000)
+      },
+      { immediate: true }
+    )
+
     // Popup al hacer click en una zona
     map.on('click', 'zonas-fill', (e) => {
       if (!map || !e.features?.[0]) return
@@ -241,6 +311,8 @@ onMounted(() => {
 onUnmounted(() => {
   latticeStore.disconnect()
   npcMarkers.forEach((m) => m.remove())
+  if (npcEventInterval) clearInterval(npcEventInterval)
+  if (npcEventMarker) npcEventMarker.remove()
   map?.remove()
 })
 </script>
@@ -258,6 +330,9 @@ onUnmounted(() => {
     <div v-if="geofence.zonaActiva?.entered" class="banner banner-zona">
       Estás en {{ geofence.zonaActiva.zona_name }}
     </div>
+
+    <!-- Banner: World Events activos y próximos -->
+    <WorldEventBanner />
 
     <!-- Indicador de WebSocket Lattice -->
     <div class="status-ws" :class="{ conectado: latticeStore.connected }">

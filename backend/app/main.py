@@ -14,6 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.db import close_db
 from app.routers.events import router as events_router
+from app.routers.world_events import router as world_events_router
 from app.routers.geofence import router as geofence_router
 from app.routers.npcs import router as npcs_router
 from app.routers.wallet import router as wallet_router
@@ -47,6 +48,7 @@ app.add_middleware(
 
 # Routers
 app.include_router(events_router)
+app.include_router(world_events_router)
 app.include_router(zonas_router)
 app.include_router(wallet_router)
 app.include_router(geofence_router)

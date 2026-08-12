@@ -10,8 +10,8 @@ Tareas detectadas en el escaneo del repo. Referencias cruzadas a docs y código 
 - ✅ Wallet multi-moneda (`WalletHUD.vue` + `wallet.ts` store con sync a backend FastAPI).
 - ✅ Micro-sesiones de las 3 zonas: Chiflón del Diablo, Parque Isidora, Pabellón 81.
 - ✅ Instrumentación de 16 eventos anónimos para ML externo (`stores/analytics.ts` + router `/api/events`). Tests 7/7.
-- ⬜ 1 World Event demo con fecha real + NPC exclusiva + insignia.
-- ⬜ 1 comercio real con cupón QR multi-moneda (Pabellón: Panadería "El Minero" 15% desc.).
+- ✅ 1 World Event demo con fecha real + NPC exclusiva + insignia (Fiestas Patrias 18-19 sept, Doña Carmen, Catador Patrio).
+- ✅ 1 comercio real con cupón QR multi-moneda (Fiestas Patrias: Panadería El Minero 15% off, obtenido al completar Pabellón).
 - ⬜ 1 listing demo de venta en cobre (D-017 aprobada).
 - ⬜ URL pública del pasaporte digital.
 
