@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useAnalyticsStore } from '@/stores/analytics'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -12,6 +13,11 @@ const targetRounds = 6
 const timeLeft = ref(90)
 const beatIndex = ref(0)
 let timer: number | null = null
+const analytics = useAnalyticsStore()
+
+onMounted(() => {
+  analytics.trackWorldEventJoin('pabellon_81')
+})
 
 /** Secuencia de QTE de ritmo: cada paso exige una acción en el momento justo. */
 const beatPattern: Array<'press' | 'hold' | 'tap'> = [
@@ -99,6 +105,7 @@ function finishGame() {
   if (timer) clearInterval(timer)
   if (holdInterval) clearInterval(holdInterval)
   step.value = 'reward'
+  analytics.trackWorldEventComplete('pabellon_81')
   emit('complete', { cobre: 40 })
 }
 

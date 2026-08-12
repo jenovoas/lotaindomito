@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useAnalyticsStore } from '@/stores/analytics'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -11,6 +12,11 @@ const score = ref(0)
 const targetScore = 5
 const timeLeft = ref(90)
 let timer: number | null = null
+const analytics = useAnalyticsStore()
+
+onMounted(() => {
+  analytics.trackWorldEventJoin('chiflon_del_diablo')
+})
 
 interface Card {
   id: number
@@ -67,6 +73,7 @@ function selectEra(era: Card['era']) {
 function finishGame() {
   if (timer) clearInterval(timer)
   step.value = 'reward'
+  analytics.trackWorldEventComplete('chiflon_del_diablo')
   emit('complete', { cobre: 50, oro: 0 })
 }
 

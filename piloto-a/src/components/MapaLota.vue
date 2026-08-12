@@ -10,6 +10,7 @@ import { useGeolocation } from '@/composables/useGeolocation'
 import { useWalletStore } from '@/stores/wallet'
 import { useMobsStore } from '@/stores/mobs'
 import { useLatticeStore } from '@/stores/lattice'
+import { useAnalyticsStore } from '@/stores/analytics'
 import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import MicroSesionChiflon from './MicroSesionChiflon.vue'
 import MicroSesionIsidora from './MicroSesionIsidora.vue'
@@ -29,6 +30,7 @@ const geofence = useGeofenceStore()
 const walletStore = useWalletStore()
 const mobsStore = useMobsStore()
 const latticeStore = useLatticeStore()
+const analytics = useAnalyticsStore()
 const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
 let map: Map | null = null
 let npcMarkers: Marker[] = []
@@ -37,9 +39,14 @@ const showChiflonModal = ref(false)
 const showIsidoraModal = ref(false)
 const showPabellonModal = ref(false)
 
-function onMissionComplete(reward: { cobre: number; oro?: number }) {
+function onMissionComplete(reward: { cobre: number; oro?: number }, zonaId?: number | null) {
   walletStore.balance.cobre += reward.cobre
   if (reward.oro) walletStore.balance.oro += reward.oro
+  analytics.trackMissionComplete(
+    zonaId ? String(zonaId) : 'unknown',
+    true,
+    { cobre: reward.cobre, oro: reward.oro }
+  )
 }
 
 function updateNpcMarkers() {
@@ -98,6 +105,9 @@ watch(
 // Abre la micro-sesión correspondiente a una zona patrimonial.
 function abrirMision(zonaId: number | null, zonaName?: string | null) {
   const name = zonaName || ''
+  if (zonaId) {
+    analytics.trackPoiVisit(zonaId, 0)
+  }
   // Chiflón del Diablo (Museo de Sitio / Chiflón)
   if (zonaId === 480338029 || name.includes('Chiflón')) {
     showChiflonModal.value = true
@@ -113,7 +123,6 @@ function abrirMision(zonaId: number | null, zonaName?: string | null) {
     showPabellonModal.value = true
     return
   }
-  // Fallback: no abrir nada, la zona no tiene micro-sesión maquetada
 }
 
 onMounted(() => {
@@ -270,17 +279,17 @@ onUnmounted(() => {
     <MicroSesionChiflon
       v-if="showChiflonModal"
       @close="showChiflonModal = false"
-      @complete="onMissionComplete"
+      @complete="(r: { cobre: number; oro?: number }) => onMissionComplete(r, 480338029)"
     />
     <MicroSesionIsidora
       v-if="showIsidoraModal"
       @close="showIsidoraModal = false"
-      @complete="onMissionComplete"
+      @complete="(r: { cobre: number; oro?: number }) => onMissionComplete(r, 89121388)"
     />
     <MicroSesionPabellon
       v-if="showPabellonModal"
       @close="showPabellonModal = false"
-      @complete="onMissionComplete"
+      @complete="(r: { cobre: number; oro?: number }) => onMissionComplete(r, 12557447365)"
     />
     <aside class="panel-zonas">
       <h3>Zonas patrimoniales</h3>

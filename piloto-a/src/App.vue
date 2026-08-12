@@ -1,6 +1,28 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import MapaLota from './components/MapaLota.vue'
 import WalletHUD from './components/WalletHUD.vue'
+import { useAnalyticsStore } from './stores/analytics'
+
+const analytics = useAnalyticsStore()
+
+function getOrCreateUserId(): string {
+  const key = 'lota_user_id'
+  let id = localStorage.getItem(key)
+  if (!id) {
+    id = crypto.randomUUID()
+    localStorage.setItem(key, id)
+  }
+  return id
+}
+
+onMounted(() => {
+  analytics.init(getOrCreateUserId())
+})
+
+onUnmounted(() => {
+  analytics.endSession()
+})
 </script>
 
 <template>

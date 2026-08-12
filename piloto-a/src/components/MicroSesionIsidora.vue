@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useAnalyticsStore } from '@/stores/analytics'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -10,6 +11,11 @@ const step = ref<'intro' | 'game' | 'reward'>('intro')
 const score = ref(0)
 const timeLeft = ref(90)
 let timer: number | null = null
+const analytics = useAnalyticsStore()
+
+onMounted(() => {
+  analytics.trackWorldEventJoin('parque_isidora')
+})
 
 interface FloraQuestion {
   id: number
@@ -72,6 +78,7 @@ function selectOrigin(origin: FloraQuestion['origin']) {
 function finishGame() {
   if (timer) clearInterval(timer)
   step.value = 'reward'
+  analytics.trackWorldEventComplete('parque_isidora')
   const oro = hasSunsetBonus.value ? 5 : 0
   emit('complete', { cobre: 30, oro })
 }
