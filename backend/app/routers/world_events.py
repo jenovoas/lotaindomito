@@ -7,14 +7,14 @@ router = APIRouter(prefix='/api/world-events', tags=['world-events'])
 EVENTOS = [
     {
         'id': 'fiestas_patrias_2026',
-        'nombre': 'Fiestas Patrias',
-        'descripcion': 'Celebración nacional. Recorre Lota, completa las misiones patrias y canjea tu insignia.',
-        'fecha_inicio': '2026-09-18',
-        'fecha_fin': '2026-09-19',
+        'nombre': 'Fiestas Patrias en Lota',
+        'descripcion': 'Celebración de la comunidad. Recorre Lota, encuentra a Doña Carmen en el parque y canjea tu cupón para el comercio local.',
+        'fecha_inicio': '2026-08-01',
+        'fecha_fin': '2026-09-30',
         'npc_exclusiva': {
             'nombre': 'Doña Carmen',
-            'rol': 'Empanadera de Lota',
-            'historia': 'Doña Carmen horneaba empanadas en el barrio desde 1962. Cada Fiestas Patrias, sale a ofrecer sus recetas a los caminantes.',
+            'rol': 'Vecina de Lota Alto',
+            'historia': 'Doña Carmen lleva décadas preparando empanadas de pino en el barrio. En cada fecha especial sale al parque a compartir historias con vecinos y visitantes.',
             'zona_nombre': 'Parque Isidora Cousiño',
             'zona_id': 89121388,
             'ruta_fija': [

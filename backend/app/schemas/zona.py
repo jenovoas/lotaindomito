@@ -8,6 +8,7 @@ from typing import Any
 from pydantic import BaseModel, ConfigDict, Field, field_serializer
 
 from geoalchemy2.shape import to_shape
+from geoalchemy2.elements import WKBElement
 
 
 class ZonaIn(BaseModel):
@@ -32,14 +33,10 @@ class ZonaOut(BaseModel):
 
     @field_serializer("geom")
     def serialize_geom(self, geom: bytes) -> dict[str, Any]:
-        """
-        Convierte WKB (PostGIS) → GeoJSON Feature.
-
-        GeoAlchemy2.to_shape() retorna un Shapely geometry,
-        que exportamos a __geo_interface__ (RFC 7946).
-        """
-        shape = to_shape(geom)
-        # __geo_interface__ es el estándar Python ↔ GeoJSON
+        if isinstance(geom, WKBElement):
+            shape = to_shape(geom)
+        else:
+            shape = to_shape(WKBElement(geom))
         return {
             "type": "Feature",
             "geometry": shape.__geo_interface__,
