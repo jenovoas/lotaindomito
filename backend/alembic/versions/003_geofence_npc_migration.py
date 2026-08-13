@@ -58,25 +58,12 @@ def upgrade() -> None:
 
     # NPC semilla del piloto: Isidora Goyenechea
     op.execute(
-        sa.text(
-            """
-            INSERT INTO npcs (id, name, zona_id, fsm_state, lat, lon, mission_id, active)
-            VALUES (:id, :name, :zona_id, :fsm_state, :lat, :lon, :mission_id, :active)
-            """
-        ).bindparams(
-            id=1,
-            name="Isidora Goyenechea",
-            zona_id=89121388,
-            fsm_state="idle",
-            lat=-37.089,
-            lon=-73.165,
-            mission_id=1,
-            active=True,
-        )
+        "INSERT INTO npcs (id, name, zona_id, fsm_state, lat, lon, mission_id, active) "
+        "VALUES (1, 'Isidora Goyenechea', 89121388, 'idle'::npc_state_enum, -37.089, -73.165, 1, TRUE)"
     )
 
 
 def downgrade() -> None:
+    op.execute("DROP TYPE IF EXISTS npc_state_enum")
     op.drop_table("npcs")
     op.drop_table("user_locations")
-    op.execute("DROP TYPE IF EXISTS npc_state_enum")

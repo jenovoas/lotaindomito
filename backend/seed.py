@@ -90,7 +90,7 @@ async def seed() -> None:
                 {
                     "id": zona["id"],
                     "name": zona["name"],
-                    "tags": zona["tags"],
+                    "tags": json.dumps(zona["tags"]),
                     "geom": wkb,
                 },
             )

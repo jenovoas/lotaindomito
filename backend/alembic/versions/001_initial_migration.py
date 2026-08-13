@@ -24,7 +24,7 @@ def upgrade() -> None:
     # Crear tabla zonas
     op.create_table(
         "zonas",
-        sa.Column("id", sa.Integer(), primary_key=True),
+        sa.Column("id", sa.BigInteger(), primary_key=True),
         sa.Column("name", sa.String(256), nullable=False),
         sa.Column(
             "tags",
