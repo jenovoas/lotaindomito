@@ -137,7 +137,7 @@ onUnmounted(() => {
           </div>
         </div>
         <p class="dialogo">
-          "En estos pabellones se levantó la comunidad carbonera, Explorador. Aquí, amasar pan era el pulso de cada familia. Sigue el ritmo de la mesa para revivir la memoria colectiva del barrio."
+          "En los pabellones de Lota, el olor a pan amasado acompañaba cada madrugá antes de bajar a la mina. Sigue el ritmo de las manos en la mesa para preparar la masa del día."
         </p>
         <button class="btn-primary" @click="startGame">Comenzar Misión (90s)</button>
       </div>

@@ -99,7 +99,7 @@ onMounted(() => {
           </div>
         </div>
         <p class="dialogo">
-          "Bienvenido al Chiflón del Diablo, Explorador. Abajo en la galería, las capas de la tierra cuentan la historia de 300 millones de años. Clasifica las capas geológicas para rescatar la memoria del mineral."
+          "Hola, viajero. En las galerías del Chiflón, el suelo habla de la historia minera de Lota. Ayúdanos a reconocer los minerales y muestras geológicas que guardan la memoria del carbón."
         </p>
         <button class="btn-primary" @click="startGame">Comenzar Misión (90s)</button>
       </div>

@@ -109,7 +109,7 @@ onUnmounted(() => {
           </div>
         </div>
         <p class="dialogo">
-          "Bienvenida al Parque que llevo mi nombre, Explorador. Aquí la naturaleza y la historia conviven. Demuestra que conoces las especies que cuidé —nativas y traídas— para honrar la memoria botánica de Lota."
+          "Te doy la bienvenida al Parque. Entre estas laderas trajimos plantas de distintos rincones del mundo para acompañar la vegetación nativa de nuestra tierra. Ayúdame a identificar cuáles son propias de Chile."
         </p>
         <button class="btn-primary" @click="startGame">Comenzar Misión (90s)</button>
       </div>
