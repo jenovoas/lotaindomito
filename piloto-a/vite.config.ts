@@ -15,8 +15,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  test: {
-    setupFiles: ['./tests/setup.ts'],
-    environment: 'node',
-  },
 })

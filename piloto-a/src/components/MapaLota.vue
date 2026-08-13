@@ -54,7 +54,7 @@ function onMissionComplete(reward: { cobre: number; oro?: number }, zonaId?: num
   )
   if (worldEvents.eventosActivos.length > 0 && zonaId) {
     const evento = worldEvents.eventosActivos[0]
-    if (evento.npc_exclusiva.zona_id === zonaId && evento.misiones[0]) {
+    if (evento && evento.npc_exclusiva.zona_id === zonaId && evento.misiones[0]) {
       const m = evento.misiones[0]
       if (m.recompensa_insignia) {
         const insignia = evento.insignias.find(i => i.id === m.recompensa_insignia)
@@ -213,7 +213,7 @@ onMounted(() => {
       },
     })
 
-    let npcEventMarker: Marker | null = null
+let npcEventMarker: any = null
 
     watch(
       () => worldEvents.eventosActivos,
@@ -227,10 +227,11 @@ onMounted(() => {
           return
         }
         const evt = activos[0]
+        if (!evt) return
         const ruta = evt.npc_exclusiva.ruta_fija
         if (ruta.length === 0) return
         const pos = ruta[0]!
-        if (npcEventMarker) npcEventMarker.remove()
+  if (npcEventMarker) npcEventMarker.remove()
         const el = document.createElement('div')
         el.className = 'npc-event-marker'
         el.innerText = `👒 ${evt.npc_exclusiva.nombre}`
@@ -312,7 +313,7 @@ onUnmounted(() => {
   latticeStore.disconnect()
   npcMarkers.forEach((m) => m.remove())
   if (npcEventInterval) clearInterval(npcEventInterval)
-  if (npcEventMarker) npcEventMarker.remove()
+  if (npcEventMarker) (npcEventMarker as any).remove()
   map?.remove()
 })
 </script>
