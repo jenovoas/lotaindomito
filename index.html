@@ -241,17 +241,18 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 
 <!-- ═══════════ GAMEPLAY CINEMATIC SHOWCASE ═══════════ -->
 <section id="gameplay" style="border-top:1px solid var(--line);">
-  <div class="section-label reveal">// Demostración interactiva</div>
-  <h2 class="reveal">Así se vive la experiencia en terreno</h2>
-  <p class="lead reveal">El jugador camina por las calles reales de Lota observando portales de historia, diálogos en Realidad Aumentada (RA) y la recolección de minerales minerales patrimoniales.</p>
+  <div class="section-label reveal">// Demostración interactiva en vivo</div>
+  <h2 class="reveal">Prueba el Piloto A directamente</h2>
+  <p class="lead reveal">Navega el mapa 3D táctico de Lota en tiempo real. Puedes interactuar con las LotaStops patrimoniales, iniciar micro-sesiones con Isidora Goyenechea y El Ciego de la Mina, o abrir la PWA en pantalla completa.</p>
   
-  <div style="margin-top:36px;position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,0.7);" class="reveal">
-    <img src="public/gameplay_hero.jpg" alt="Demostración Gameplay en Terreno en Chiflón del Diablo" style="width:100%;height:auto;display:block;filter:brightness(0.95);">
-    <div style="position:absolute;bottom:0;inset-x:0;padding:30px;background:linear-gradient(0deg, rgba(10,12,16,0.95) 0%, transparent 100%);">
-      <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;">GAMEPLAY EN VIVO · CHIFLÓN DEL DIABLO</span>
-      <h3 style="font-size:24px;margin-top:4px;color:#fff;">Encuentro en RA con "El Ciego de la Mina"</h3>
-      <p style="color:var(--muted);font-size:14px;max-width:650px;margin-top:6px;">El sensor de geofencing detecta la llegada al Chiflón del Diablo y despliega al personaje histórico en la pantalla del celular para encomendar la misión del día.</p>
+  <div style="margin-top:36px;position:relative;border-radius:20px;overflow:hidden;border:2px solid var(--copper);box-shadow:0 20px 60px rgba(0,0,0,0.7);" class="reveal">
+    <div style="padding:14px 20px;background:var(--bg3);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;">
+        <span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--teal);"></span> PILOTO A — MAPA TÁCTICO 3D (MAPLIBRE + TURF.JS)
+      </div>
+      <a href="app/index.html" target="_blank" style="color:var(--text);font-family:var(--mono);font-size:11px;text-decoration:none;padding:6px 14px;border:1px solid var(--copper);background:rgba(200,125,85,0.1);border-radius:4px;">Abrir PWA Fullscreen ⛶</a>
     </div>
+    <iframe src="app/index.html" style="width:100%;height:680px;border:none;display:block;background:#0d1117;" title="Lota Indómito Piloto A"></iframe>
   </div>
 </section>
 

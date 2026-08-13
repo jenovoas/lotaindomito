@@ -120,6 +120,23 @@ watch(
   }
 )
 
+function teleportAZona(zona: ZonaOSM) {
+  console.log('[teleportAZona] Teletransportando a:', zona.name)
+  if (!zona.coords || !zona.coords.length) return
+  const avgLng = zona.coords.reduce((s, c) => s + c.lon, 0) / zona.coords.length
+  const avgLat = zona.coords.reduce((s, c) => s + c.lat, 0) / zona.coords.length
+
+  if (map) {
+    map.flyTo({ center: [avgLng, avgLat], zoom: 16.5, speed: 1.2 })
+  }
+  teleport(avgLat, avgLng)
+  geofence.zonaActiva = {
+    entered: true,
+    zona_id: zona.id,
+    zona_name: zona.name
+  }
+}
+
 // Abre la micro-sesión correspondiente a una zona patrimonial.
 function abrirMision(zonaId: number | null, zonaName?: string | null) {
   const name = zonaName || ''
@@ -172,17 +189,19 @@ onMounted(() => {
     style: {
       version: 8,
       sources: {
-        osm: {
+        carto: {
           type: 'raster',
-          tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+          tiles: ['https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'],
           tileSize: 256,
-          attribution: '© OpenStreetMap contributors',
+          attribution: '© CARTO / OpenStreetMap',
         },
       },
-      layers: [{ id: 'osm-tiles', type: 'raster', source: 'osm' }],
+      layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto' }],
     },
     center: [-73.165, -37.089],
-    zoom: 15,
+    zoom: 16,
+    pitch: 55, // Vista en 3ª persona estilo RPG / Pokémon GO
+    bearing: -20,
   })
 
   map.addControl(new NavigationControl(), 'top-right')
@@ -368,13 +387,27 @@ onUnmounted(() => {
       @complete="(r: { cobre: number; oro?: number }) => onMissionComplete(r, 12557447365)"
     />
     <aside class="panel-zonas">
-      <h3>Zonas patrimoniales</h3>
-      <ul>
-        <li v-for="z in zonas" :key="z.id">
-          {{ z.name }}
-        </li>
-      </ul>
-      <p class="count">{{ zonas.length }} zonas · fuente OSM</p>
+      <div class="panel-header-gaming">
+        <span class="icon">📍</span>
+        <div>
+          <h3>LotaStops Patrimoniales</h3>
+          <span class="subtext">{{ zonas.length }} Lugares de Interés Histórico</span>
+        </div>
+      </div>
+      <div class="zonas-list-scroll">
+        <div
+          v-for="z in zonas"
+          :key="z.id"
+          class="zona-card-gaming"
+          @click="teleportAZona(z)"
+        >
+          <div class="zona-info">
+            <span class="zona-badge">LotaStop</span>
+            <h4 class="zona-title">{{ z.name }}</h4>
+          </div>
+          <button class="btn-play-zona">EXPLORAR ▶</button>
+        </div>
+      </div>
     </aside>
   </div>
 </template>
@@ -442,56 +475,120 @@ onUnmounted(() => {
 .panel-zona,
 .panel-zonas {
   position: absolute;
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  border: 2px solid #c87d55;
+  border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
   color: #c9d1d9;
 }
 
 .panel-zona {
   right: 1rem;
   bottom: 2rem;
-  width: 280px;
+  width: 300px;
 }
 
 .panel-zonas {
   left: 1rem;
-  top: 6rem;
-  width: 260px;
-  max-height: calc(100vh - 8rem);
-  overflow-y: auto;
+  top: 5rem;
+  width: 295px;
+  max-height: calc(100vh - 7rem);
+  display: flex;
+  flex-direction: column;
 }
 
-.panel-zonas h3 {
-  font-size: 1rem;
+.panel-header-gaming {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #30363d;
+}
+
+.panel-header-gaming .icon {
+  font-size: 20px;
+}
+
+.panel-header-gaming h3 {
+  font-size: 0.95rem;
   color: #3FE6C0;
-  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.panel-zonas ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.panel-zonas li {
-  padding: 0.4rem 0.6rem;
-  margin: 2px 0;
-  border-radius: 4px;
-  font-size: 0.85rem;
-}
-
-.panel-zonas li:hover {
-  background: #21262d;
-  color: #3FE6C0;
-}
-
-.panel-zonas .count {
-  margin-top: 0.5rem;
+.panel-header-gaming .subtext {
   font-size: 0.7rem;
-  color: #6e7681;
+  color: #8b949e;
+  display: block;
+}
+
+.zonas-list-scroll {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+}
+
+.zona-card-gaming {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zona-card-gaming:hover {
+  border-color: #3FE6C0;
+  background: rgba(63, 230, 192, 0.08);
+  transform: translateX(3px);
+}
+
+.zona-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zona-badge {
+  font-size: 0.65rem;
+  font-family: monospace;
+  color: #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.zona-title {
+  font-size: 0.82rem;
+  color: #f0f4f9;
+  font-weight: 600;
+}
+
+.btn-play-zona {
+  background: #c87d55;
+  color: #000;
+  border: none;
+  font-family: monospace;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.zona-card-gaming:hover .btn-play-zona {
+  background: #3FE6C0;
+  color: #000;
 }
 
 .panel-zona h2 {
