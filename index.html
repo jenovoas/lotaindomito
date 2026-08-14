@@ -430,7 +430,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 
 </div>
 
-<!-- ═══════════ THREE.JS — MAR DE LOTA, COSTA Y FARO HISTÓRICO ═══════════ -->
+<!-- ═══════════ THREE.JS — PANORAMA COSTERO DE LOTA, MAR & FARO ═══════════ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function () {
@@ -445,26 +445,27 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x07080b, 0.038);
+  scene.fog = new THREE.FogExp2(0x06080c, 0.024);
 
-  const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.set(0, 4.2, 16);
+  // ── Cámara Panorámica Cinematográfica (Vista amplia de la bahía) ──
+  const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 0.1, 300);
+  camera.position.set(0, 10.5, 36);
 
-  // ── Luces de la Escena Costera ──
-  const ambientLight = new THREE.AmbientLight(0x0c1524, 2.0);
+  // ── Iluminación Ambiental y Lunar ──
+  const ambientLight = new THREE.AmbientLight(0x0c1828, 2.2);
   scene.add(ambientLight);
 
-  const moonLight = new THREE.DirectionalLight(0x73a8c8, 1.4);
-  moonLight.position.set(12, 20, 10);
+  const moonLight = new THREE.DirectionalLight(0x8bc3e2, 1.8);
+  moonLight.position.set(25, 35, 15);
   scene.add(moonLight);
 
-  const beaconPointLight = new THREE.PointLight(0x65dabc, 3.5, 45);
-  beaconPointLight.position.set(-7, 5.2, -6);
-  scene.add(beaconPointLight);
+  const beaconLight = new THREE.PointLight(0x65dabc, 4.0, 60);
+  beaconLight.position.set(-19, 10, -16);
+  scene.add(beaconLight);
 
-  // ── 1. Océano del Golfo de Arauco (Mar de Lota en Movimiento) ──
-  const oceanSegments = isMobile ? 48 : 84;
-  const oceanGeo = new THREE.PlaneGeometry(90, 80, oceanSegments, oceanSegments);
+  // ── 1. Océano del Golfo de Arauco (Simulación Multi-Onda Gerstner) ──
+  const oceanSegments = isMobile ? 54 : 96;
+  const oceanGeo = new THREE.PlaneGeometry(160, 130, oceanSegments, oceanSegments);
   oceanGeo.rotateX(-Math.PI / 2);
 
   const oceanPos = oceanGeo.attributes.position.array;
@@ -475,26 +476,34 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   for (let i = 0; i < oceanVertexCount; i++) {
     initialOceanX[i] = oceanPos[i * 3];
     initialOceanZ[i] = oceanPos[i * 3 + 2];
-    // Nivel base del mar
-    oceanPos[i * 3 + 1] = -3.2;
+    oceanPos[i * 3 + 1] = -4.5;
   }
   oceanGeo.computeVertexNormals();
 
+  // Capa profunda del mar
   const oceanMat = new THREE.MeshStandardMaterial({
-    color: 0x071b28,
-    roughness: 0.25,
-    metalness: 0.75,
-    wireframe: true,
+    color: 0x051624,
+    roughness: 0.18,
+    metalness: 0.82,
     transparent: true,
-    opacity: isMobile ? 0.45 : 0.65,
+    opacity: isMobile ? 0.65 : 0.82,
   });
   const oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
   scene.add(oceanMesh);
 
-  // ── 2. Costa, Playa de Arena Negra y Acantilados de Lota ──
-  // Reconstrucción de la forma real de la Ensenada de Lota y Morro de Punta Lota
-  const coastSegments = isMobile ? 36 : 64;
-  const coastGeo = new THREE.PlaneGeometry(70, 70, coastSegments, coastSegments);
+  // Malla de crestas de olas (Wireframe superior con brillo turquesa)
+  const oceanWireMat = new THREE.MeshBasicMaterial({
+    color: 0x2A9D8F,
+    wireframe: true,
+    transparent: true,
+    opacity: isMobile ? 0.25 : 0.38,
+  });
+  const oceanWireMesh = new THREE.Mesh(oceanGeo, oceanWireMat);
+  scene.add(oceanWireMesh);
+
+  // ── 2. Costa, Bahía de Lota y Acantilados de Punta Lota ──
+  const coastSegments = isMobile ? 42 : 80;
+  const coastGeo = new THREE.PlaneGeometry(150, 120, coastSegments, coastSegments);
   coastGeo.rotateX(-Math.PI / 2);
   const coastPos = coastGeo.attributes.position.array;
 
@@ -502,176 +511,191 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     const x = coastPos[i];
     const z = coastPos[i + 2];
 
-    // Curva de la bahía de Lota: la costa se curva desde la izquierda (Punta Lota) hacia el fondo
-    // Distancia al centro de la bahía
-    const shoreCurve = -Math.sin(z * 0.08 + 1.2) * 8 - 4;
-    const isLand = x < shoreCurve;
-    const distToShore = shoreCurve - x;
+    // Curvatura geográfica de la Bahía de Lota
+    const bayLine = -Math.sin(z * 0.05 + 1.1) * 16 - 10;
+    const isLand = x < bayLine;
+    const distFromShore = bayLine - x;
 
     if (isLand) {
-      // Tierra firme: acantilado elevado en Punta Lota (x < -6) y playa suave hacia el sur
-      const cliffHeight = Math.max(0, -x - 2) * 0.65 + Math.sin(z * 0.15) * 1.2;
-      coastPos[i + 1] = -3.15 + cliffHeight + Math.sin(x * 0.3 + z * 0.3) * 0.4;
+      // Acantilado de Punta Lota en el extremo izquierdo y colinas de Nahuelbuta al fondo
+      const cliffLift = Math.max(0, -x - 8) * 0.75;
+      const hills = Math.sin(z * 0.08) * 2.5 + Math.cos(x * 0.06) * 2.0;
+      coastPos[i + 1] = -4.4 + cliffLift + hills;
     } else {
-      // Playa que se sumerge gradualmente bajo el mar
-      coastPos[i + 1] = -3.3 - Math.min(distToShore * 0.18, 4.5);
+      // Lecho arenoso que se hunde suavemente
+      coastPos[i + 1] = -4.6 - Math.min(distFromShore * 0.15, 6.0);
     }
   }
   coastGeo.computeVertexNormals();
 
   const coastMat = new THREE.MeshLambertMaterial({
-    color: 0x11161f, // Arena oscura carbonífera
-    wireframe: false,
+    color: 0x0e131b, // Arena negra y roca carbonífera
   });
   const coastMesh = new THREE.Mesh(coastGeo, coastMat);
   scene.add(coastMesh);
 
-  // Línea de Espuma de Orilla (Surf Line)
-  const surfCurvePoints = [];
-  for (let z = -32; z <= 32; z += 2) {
-    const x = -Math.sin(z * 0.08 + 1.2) * 8 - 3.8;
-    surfCurvePoints.push(new THREE.Vector3(x, -3.12, z));
+  // ── 3. Rompientes de Olas en la Playa (Animated Surf Strips) ──
+  const surfWaves = [];
+  const surfMatList = [];
+
+  for (let s = 0; s < 3; s++) {
+    const surfPoints = [];
+    for (let z = -55; z <= 55; z += 4) {
+      const x = -Math.sin(z * 0.05 + 1.1) * 16 - 9.5 + s * 1.6;
+      surfPoints.push(new THREE.Vector3(x, -4.38 + s * 0.04, z));
+    }
+    const curve = new THREE.CatmullRomCurve3(surfPoints);
+    const geo = new THREE.TubeGeometry(curve, 64, 0.28, 6, false);
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x65dabc,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    scene.add(mesh);
+    surfWaves.push({ mesh, offset: s * (Math.PI * 2 / 3) });
+    surfMatList.push(mat);
   }
-  const surfCurve = new THREE.CatmullRomCurve3(surfCurvePoints);
-  const surfGeo = new THREE.TubeGeometry(surfCurve, 64, 0.22, 6, false);
-  const surfMat = new THREE.MeshBasicMaterial({
-    color: 0x65dabc,
-    transparent: true,
-    opacity: 0.75,
-    blending: THREE.AdditiveBlending
-  });
-  const surfMesh = new THREE.Mesh(surfGeo, surfMat);
-  scene.add(surfMesh);
 
-  // ── 3. Muelle Histórico Carbonero (Estructura de Pilotes sobre el Mar) ──
+  // ── 4. Muelle Histórico Carbonero (En la bahía) ──
   const pierGroup = new THREE.Group();
-  pierGroup.position.set(-1.5, -3.2, 2);
-  pierGroup.rotation.y = -0.35;
+  pierGroup.position.set(-6, -4.5, 4);
+  pierGroup.rotation.y = -0.42;
 
-  const pierDeckGeo = new THREE.BoxGeometry(1.6, 0.15, 14);
-  const pierDeckMat = new THREE.MeshLambertMaterial({ color: 0x181e28 });
+  const pierDeckGeo = new THREE.BoxGeometry(2.2, 0.25, 22);
+  const pierDeckMat = new THREE.MeshLambertMaterial({ color: 0x1a212d });
   const pierDeck = new THREE.Mesh(pierDeckGeo, pierDeckMat);
-  pierDeck.position.set(0, 0.6, 6);
+  pierDeck.position.set(0, 1.1, 9);
   pierGroup.add(pierDeck);
 
-  // Pilotes de madera del muelle
-  const pileGeo = new THREE.CylinderGeometry(0.08, 0.09, 2.5, 6);
-  const pileMat = new THREE.MeshLambertMaterial({ color: 0x0f141c });
-  for (let pz = 0; pz <= 12; pz += 2) {
+  // Pilotes de madera
+  const pileGeo = new THREE.CylinderGeometry(0.12, 0.14, 4.0, 6);
+  const pileMat = new THREE.MeshLambertMaterial({ color: 0x0c1017 });
+  for (let pz = 0; pz <= 18; pz += 3) {
     const pileL = new THREE.Mesh(pileGeo, pileMat);
-    pileL.position.set(-0.7, -0.4, pz);
+    pileL.position.set(-0.95, -0.6, pz);
     pierGroup.add(pileL);
 
     const pileR = new THREE.Mesh(pileGeo, pileMat);
-    pileR.position.set(0.7, -0.4, pz);
+    pileR.position.set(0.95, -0.6, pz);
     pierGroup.add(pileR);
+
+    // Pequeño farol tenue en el muelle
+    if (pz % 6 === 0) {
+      const lampGeo = new THREE.SphereGeometry(0.12, 8, 8);
+      const lampMat = new THREE.MeshBasicMaterial({ color: 0xffd166 });
+      const lamp = new THREE.Mesh(lampGeo, lampMat);
+      lamp.position.set(0.95, 1.6, pz);
+      pierGroup.add(lamp);
+    }
   }
   scene.add(pierGroup);
 
-  // ── 4. Faro Histórico de Punta Lota (Arquitectura Siglo XIX) ──
+  // ── 5. Faro Histórico de Punta Lota (Sobre el Acantilado Izquierdo) ──
   const lighthouseGroup = new THREE.Group();
-  lighthouseGroup.position.set(-8.5, -0.5, -6);
+  lighthouseGroup.position.set(-19, 1.5, -16);
+  lighthouseGroup.scale.set(0.85, 0.85, 0.85);
 
-  // A. Promontorio Rocoso
-  const cliffBaseGeo = new THREE.CylinderGeometry(2.8, 3.6, 2.5, 7);
-  const cliffBaseMat = new THREE.MeshLambertMaterial({ color: 0x0f131a });
+  // A. Promontorio Rocoso Elevado
+  const cliffBaseGeo = new THREE.CylinderGeometry(3.5, 4.8, 4.0, 8);
+  const cliffBaseMat = new THREE.MeshLambertMaterial({ color: 0x0b0e14 });
   const cliffBase = new THREE.Mesh(cliffBaseGeo, cliffBaseMat);
-  cliffBase.position.y = -1.25;
+  cliffBase.position.y = -2.0;
   lighthouseGroup.add(cliffBase);
 
-  // B. Base de Cantería de Piedra
-  const baseGeo = new THREE.CylinderGeometry(1.6, 1.9, 0.9, 8);
-  const stoneMat = new THREE.MeshLambertMaterial({ color: 0x1a222e });
+  // B. Base de Cantería
+  const baseGeo = new THREE.CylinderGeometry(2.0, 2.4, 1.2, 8);
+  const stoneMat = new THREE.MeshLambertMaterial({ color: 0x161d27 });
   const base = new THREE.Mesh(baseGeo, stoneMat);
-  base.position.y = 0.45;
+  base.position.y = 0.6;
   lighthouseGroup.add(base);
 
-  // C. Torre Cónica / Octogonal
-  const towerGeo = new THREE.CylinderGeometry(0.9, 1.4, 5.6, 8);
-  const towerMat = new THREE.MeshLambertMaterial({ color: 0x222d3d });
+  // C. Torre Victoriana Cónica
+  const towerGeo = new THREE.CylinderGeometry(1.1, 1.7, 7.5, 8);
+  const towerMat = new THREE.MeshLambertMaterial({ color: 0x1f2937 });
   const tower = new THREE.Mesh(towerGeo, towerMat);
-  tower.position.y = 3.6;
+  tower.position.y = 4.8;
   lighthouseGroup.add(tower);
 
-  // Molduras Victorianas de Refuerzo
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x3fe6c0, transparent: true, opacity: 0.65 });
+  // Molduras de Hierro
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x3fe6c0, transparent: true, opacity: 0.75 });
   for (let r = 1; r <= 3; r++) {
-    const ringGeo = new THREE.TorusGeometry(1.25 - r * 0.11, 0.045, 6, 16);
+    const ringGeo = new THREE.TorusGeometry(1.55 - r * 0.14, 0.05, 6, 16);
     ringGeo.rotateX(Math.PI / 2);
     const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.y = 1.3 + r * 1.3;
+    ring.position.y = 1.8 + r * 1.7;
     lighthouseGroup.add(ring);
   }
 
-  // D. Galería del Vigía y Balaustrada de Hierro
-  const galleryGeo = new THREE.CylinderGeometry(1.35, 0.95, 0.35, 12);
+  // D. Galería del Vigía
+  const galleryGeo = new THREE.CylinderGeometry(1.8, 1.2, 0.45, 12);
   const gallery = new THREE.Mesh(galleryGeo, stoneMat);
-  gallery.position.y = 6.5;
+  gallery.position.y = 8.7;
   lighthouseGroup.add(gallery);
 
-  const railingGeo = new THREE.TorusGeometry(1.3, 0.04, 6, 24);
+  const railingGeo = new THREE.TorusGeometry(1.7, 0.05, 6, 24);
   railingGeo.rotateX(Math.PI / 2);
   const railing = new THREE.Mesh(railingGeo, ringMat);
-  railing.position.y = 6.9;
+  railing.position.y = 9.25;
   lighthouseGroup.add(railing);
 
-  // E. Linterna de Cristales y Lámpara Central
-  const lanternGlassGeo = new THREE.CylinderGeometry(0.85, 0.85, 1.2, 12, 1, true);
+  // E. Linterna de Cristales y Núcleo Fresnel
+  const lanternGlassGeo = new THREE.CylinderGeometry(1.1, 1.1, 1.6, 12, 1, true);
   const lanternGlassMat = new THREE.MeshBasicMaterial({
     color: 0x65dabc,
     transparent: true,
-    opacity: 0.5,
+    opacity: 0.55,
     wireframe: true
   });
   const lanternGlass = new THREE.Mesh(lanternGlassGeo, lanternGlassMat);
-  lanternGlass.position.y = 7.3;
+  lanternGlass.position.y = 9.7;
   lighthouseGroup.add(lanternGlass);
 
-  // Núcleo incandescente (Lente Fresnel)
-  const lampCoreGeo = new THREE.SphereGeometry(0.38, 16, 16);
+  const lampCoreGeo = new THREE.SphereGeometry(0.48, 16, 16);
   const lampCoreMat = new THREE.MeshBasicMaterial({ color: 0xffe082 });
   const lampCore = new THREE.Mesh(lampCoreGeo, lampCoreMat);
-  lampCore.position.y = 7.3;
+  lampCore.position.y = 9.7;
   lighthouseGroup.add(lampCore);
 
-  // F. Cúpula Victoriana y Pararrayos
-  const domeGeo = new THREE.SphereGeometry(0.88, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
-  const domeMat = new THREE.MeshLambertMaterial({ color: 0x161e2b });
+  // F. Cúpula y Pararrayos
+  const domeGeo = new THREE.SphereGeometry(1.15, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
+  const domeMat = new THREE.MeshLambertMaterial({ color: 0x111620 });
   const dome = new THREE.Mesh(domeGeo, domeMat);
-  dome.position.y = 7.9;
+  dome.position.y = 10.5;
   lighthouseGroup.add(dome);
 
-  const spireGeo = new THREE.ConeGeometry(0.09, 1.3, 8);
+  const spireGeo = new THREE.ConeGeometry(0.11, 1.8, 8);
   const spire = new THREE.Mesh(spireGeo, new THREE.MeshBasicMaterial({ color: 0xd4af37 }));
-  spire.position.y = 9.1;
+  spire.position.y = 12.0;
   lighthouseGroup.add(spire);
 
-  // G. Doble Haz de Luz Giratorio sobre el Océano
+  // G. Doble Haz de Luz Volumétrico
   const lightBeams = new THREE.Group();
-  lightBeams.position.y = 7.3;
+  lightBeams.position.y = 9.7;
 
-  // Haz principal largo barriendo las olas
-  const beamMainGeo = new THREE.ConeGeometry(4.8, 28, 32, 1, true);
+  // Haz principal de largo alcance
+  const beamMainGeo = new THREE.ConeGeometry(6.5, 45, 32, 1, true);
   beamMainGeo.rotateX(Math.PI / 2);
-  beamMainGeo.translate(0, 0, 14);
+  beamMainGeo.translate(0, 0, 22.5);
   const beamMat = new THREE.MeshBasicMaterial({
     color: 0x65dabc,
     transparent: true,
-    opacity: 0.18,
+    opacity: 0.16,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending
   });
   const beamMain = new THREE.Mesh(beamMainGeo, beamMat);
   lightBeams.add(beamMain);
 
-  // Haz secundario posterior cálido
-  const beamRearGeo = new THREE.ConeGeometry(3.0, 14, 24, 1, true);
+  // Haz secundario de refracción
+  const beamRearGeo = new THREE.ConeGeometry(4.0, 20, 24, 1, true);
   beamRearGeo.rotateX(-Math.PI / 2);
-  beamRearGeo.translate(0, 0, -7);
+  beamRearGeo.translate(0, 0, -10);
   const beamRear = new THREE.Mesh(beamRearGeo, new THREE.MeshBasicMaterial({
     color: 0xf4a261,
     transparent: true,
-    opacity: 0.12,
+    opacity: 0.10,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending
   }));
@@ -680,25 +704,25 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   lighthouseGroup.add(lightBeams);
   scene.add(lighthouseGroup);
 
-  // ── 5. Partículas: Ascuas de Carbón & Espuma Marina Flotante ──
-  const pCount = isMobile ? 300 : 700;
+  // ── 6. Ascuas de Carbón & Rocío Marino Flotante ──
+  const pCount = isMobile ? 350 : 750;
   const pGeo = new THREE.BufferGeometry();
   const pPositions = new Float32Array(pCount * 3);
   const pColors = new Float32Array(pCount * 3);
   const pVelocities = [];
 
   const colorPalette = [
-    new THREE.Color(0xf4a261), // Ámbar de llama minera
-    new THREE.Color(0xe76f51), // Brasa de carbón
+    new THREE.Color(0xf4a261), // Ámbar cálido
+    new THREE.Color(0xe76f51), // Brasa viva
     new THREE.Color(0xd4af37), // Oro / Pirita
-    new THREE.Color(0x65dabc), // Espuma marina turquesa
-    new THREE.Color(0xa7d8de)  // Rocío del mar
+    new THREE.Color(0x65dabc), // Espuma marina
+    new THREE.Color(0xa7d8de)  // Brisa del Pacífico
   ];
 
   for (let i = 0; i < pCount; i++) {
-    pPositions[i * 3] = (Math.random() - 0.5) * 44;
-    pPositions[i * 3 + 1] = -3 + Math.random() * 18;
-    pPositions[i * 3 + 2] = (Math.random() - 0.5) * 36;
+    pPositions[i * 3] = (Math.random() - 0.5) * 60;
+    pPositions[i * 3 + 1] = -4 + Math.random() * 26;
+    pPositions[i * 3 + 2] = (Math.random() - 0.5) * 50;
 
     const col = colorPalette[Math.floor(Math.random() * colorPalette.length)];
     pColors[i * 3] = col.r;
@@ -706,9 +730,9 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     pColors[i * 3 + 2] = col.b;
 
     pVelocities.push({
-      x: (Math.random() - 0.5) * 0.007,
-      y: 0.008 + Math.random() * 0.016,
-      z: (Math.random() - 0.5) * 0.007,
+      x: (Math.random() - 0.5) * 0.009,
+      y: 0.010 + Math.random() * 0.018,
+      z: (Math.random() - 0.5) * 0.009,
       phase: Math.random() * Math.PI * 2
     });
   }
@@ -717,7 +741,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   pGeo.setAttribute("color", new THREE.BufferAttribute(pColors, 3));
 
   const pMat = new THREE.PointsMaterial({
-    size: isMobile ? 0.07 : 0.09,
+    size: isMobile ? 0.08 : 0.11,
     vertexColors: true,
     transparent: true,
     opacity: 0.85,
@@ -726,7 +750,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   const particles = new THREE.Points(pGeo, pMat);
   scene.add(particles);
 
-  // ── Interacción con Puntero y Scroll ──
+  // ── Interacción: Puntero & Scroll Parallax ──
   const pointer = { x: 0, y: 0 };
   let scrollY = 0;
 
@@ -746,7 +770,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     renderer.setSize(w, h);
   });
 
-  // ── Bucle de Animación del Oleaje de Lota ──
+  // ── Bucle de Animación Continuo de Lota ──
   let clock = 0;
   function animate() {
     requestAnimationFrame(animate);
@@ -758,49 +782,55 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
       const x = initialOceanX[i];
       const z = initialOceanZ[i];
 
-      // Ondas compuestas: oleaje de fondo + marejada costera
-      const wave1 = Math.sin(z * 0.16 + x * 0.09 - clock * 1.8) * 0.65;
-      const wave2 = Math.cos(x * 0.22 - z * 0.12 + clock * 2.2) * 0.35;
-      const wave3 = Math.sin((x + z) * 0.35 - clock * 3.0) * 0.18;
+      // 4 trenes de olas armónicas (Swell + Marejada + Choppiness)
+      const swell = Math.sin(z * 0.09 + x * 0.05 - clock * 1.5) * 0.85;
+      const chop = Math.cos(x * 0.14 - z * 0.08 + clock * 2.0) * 0.42;
+      const ripple = Math.sin((x * 0.25 + z * 0.2) - clock * 2.8) * 0.20;
+      const detail = Math.cos(x * 0.4 + clock * 3.5) * 0.08;
 
-      pos[i * 3 + 1] = -3.2 + wave1 + wave2 + wave3;
+      pos[i * 3 + 1] = -4.5 + swell + chop + ripple + detail;
     }
     oceanGeo.attributes.position.needsUpdate = true;
     oceanGeo.computeVertexNormals();
 
-    // 2. Pulso de espuma en la línea de rompiente de la playa
-    const tidePulse = 0.55 + Math.sin(clock * 1.6) * 0.35;
-    surfMat.opacity = tidePulse;
-    surfMesh.scale.set(1 + Math.sin(clock * 1.6) * 0.03, 1, 1);
+    // 2. Rompiente y vaivén de espuma en la playa
+    for (let s = 0; s < surfWaves.length; s++) {
+      const wave = surfWaves[s];
+      const cycle = Math.sin(clock * 1.4 + wave.offset);
+      const intensity = (cycle + 1) / 2; // 0..1
+      surfMatList[s].opacity = 0.25 + intensity * 0.6;
+      wave.mesh.position.x = Math.sin(clock * 1.4 + wave.offset) * 0.6;
+    }
 
-    // 3. Rotación del haz del Faro Histórico de Punta Lota
-    lightBeams.rotation.y = clock * 0.52;
-    lampCore.scale.setScalar(1 + Math.sin(clock * 4) * 0.15);
+    // 3. Rotación del haz del Faro de Punta Lota
+    lightBeams.rotation.y = clock * 0.45;
+    lampCore.scale.setScalar(1 + Math.sin(clock * 4.5) * 0.18);
 
-    // 4. Deriva ascendente de ascuas y brisa marina
+    // 4. Ascuas y brisa marina en espiral
     const pPos = particles.geometry.attributes.position.array;
     for (let i = 0; i < pCount; i++) {
       const v = pVelocities[i];
       pPos[i * 3 + 1] += v.y;
-      pPos[i * 3] += Math.sin(clock + v.phase) * 0.007;
+      pPos[i * 3] += Math.sin(clock + v.phase) * 0.010;
+      pPos[i * 3 + 2] += Math.cos(clock * 0.8 + v.phase) * 0.008;
 
-      if (pPos[i * 3 + 1] > 15) {
-        pPos[i * 3 + 1] = -3.5;
-        pPos[i * 3] = (Math.random() - 0.5) * 44;
+      if (pPos[i * 3 + 1] > 20) {
+        pPos[i * 3 + 1] = -4.8;
+        pPos[i * 3] = (Math.random() - 0.5) * 60;
       }
     }
     particles.geometry.attributes.position.needsUpdate = true;
 
-    // 5. Parallax y descenso de cámara con el scroll
-    const targetCamY = 4.2 - scrollY * 0.0035 + pointer.y * 0.5;
-    const targetCamX = pointer.x * 1.3;
-    const targetCamZ = 16 + Math.sin(scrollY * 0.0008) * 2;
+    // 5. Parallax y descenso de cámara suave
+    const targetCamY = 10.5 - scrollY * 0.004 + pointer.y * 0.8;
+    const targetCamX = pointer.x * 2.0;
+    const targetCamZ = 36 + Math.sin(scrollY * 0.0006) * 3;
 
-    camera.position.y += (targetCamY - camera.position.y) * 0.05;
-    camera.position.x += (targetCamX - camera.position.x) * 0.05;
-    camera.position.z += (targetCamZ - camera.position.z) * 0.05;
+    camera.position.y += (targetCamY - camera.position.y) * 0.04;
+    camera.position.x += (targetCamX - camera.position.x) * 0.04;
+    camera.position.z += (targetCamZ - camera.position.z) * 0.04;
 
-    camera.lookAt(0, -1.8 - scrollY * 0.002, 0);
+    camera.lookAt(1.5, -1.2 - scrollY * 0.002, -2);
 
     renderer.render(scene, camera);
   }
