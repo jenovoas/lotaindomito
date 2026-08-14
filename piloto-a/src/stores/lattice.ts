@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export interface LatticeTickEvent {
@@ -25,6 +25,18 @@ function defaultWsUrl(): string {
   return `${protocol}//${url.host}/ws/events`
 }
 
+export type ConnectionStatus = 'connected' | 'reconnecting' | 'offline'
+
+/**
+ * Backoff exponencial con jitter ± 20%.
+ * Backoff inicial 1s, máximo 30s.
+ */
+function backoffMs(retries: number): number {
+  const base = Math.min(30_000, 1_000 * Math.pow(2, retries))
+  const jitter = 1 + (Math.random() - 0.5) * 0.4
+  return Math.max(500, Math.floor(base * jitter))
+}
+
 export const useLatticeStore = defineStore('lattice', () => {
   const lastTick = ref<number | null>(null)
   const lastWaveSample = ref<number[]>([])
@@ -32,10 +44,11 @@ export const useLatticeStore = defineStore('lattice', () => {
   const portalCount = ref<number>(0)
   const connected = ref(false)
   const error = ref<string | null>(null)
+  const reconnectAttempts = ref(0)
+  const connectionStatus = ref<ConnectionStatus>('offline')
 
   let socket: WebSocket | null = null
   let reconnectTimer: ReturnType<typeof setTimeout> | null = null
-  let reconnectDelay = 1000
   let isIntentionallyClosed = false
 
   function connect(wsUrl?: string): void {
@@ -46,13 +59,18 @@ export const useLatticeStore = defineStore('lattice', () => {
     isIntentionallyClosed = false
     const targetUrl = wsUrl || defaultWsUrl()
 
+    if (reconnectAttempts.value > 0) {
+      connectionStatus.value = 'reconnecting'
+    }
+
     try {
       socket = new WebSocket(targetUrl)
 
       socket.onopen = () => {
         connected.value = true
         error.value = null
-        reconnectDelay = 1000
+        connectionStatus.value = 'connected'
+        reconnectAttempts.value = 0
       }
 
       socket.onmessage = (msg) => {
@@ -78,22 +96,28 @@ export const useLatticeStore = defineStore('lattice', () => {
         connected.value = false
         socket = null
         if (!isIntentionallyClosed) {
+          connectionStatus.value = reconnectAttempts.value === 0 ? 'reconnecting' : 'reconnecting'
           scheduleReconnect(targetUrl)
+        } else {
+          connectionStatus.value = 'offline'
         }
       }
     } catch (e) {
       error.value = 'No se pudo crear WebSocket'
       connected.value = false
+      connectionStatus.value = 'reconnecting'
       scheduleReconnect(targetUrl)
     }
   }
 
   function scheduleReconnect(targetUrl: string): void {
     if (reconnectTimer) clearTimeout(reconnectTimer)
+    const delay = backoffMs(reconnectAttempts.value)
+    reconnectAttempts.value += 1
+    connectionStatus.value = 'reconnecting'
     reconnectTimer = setTimeout(() => {
-      reconnectDelay = Math.min(reconnectDelay * 2, 30000)
       connect(targetUrl)
-    }, reconnectDelay)
+    }, delay)
   }
 
   function disconnect(): void {
@@ -107,7 +131,11 @@ export const useLatticeStore = defineStore('lattice', () => {
       socket = null
     }
     connected.value = false
+    connectionStatus.value = 'offline'
+    reconnectAttempts.value = 0
   }
+
+  const isLatticePaused = computed(() => connectionStatus.value !== 'connected')
 
   return {
     lastTick,
@@ -116,6 +144,9 @@ export const useLatticeStore = defineStore('lattice', () => {
     portalCount,
     connected,
     error,
+    reconnectAttempts,
+    connectionStatus,
+    isLatticePaused,
     connect,
     disconnect,
   }
