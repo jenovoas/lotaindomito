@@ -563,30 +563,117 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 
   scene.add(veinGroup);
 
-  // ── 4. Faro Patrimonial & Haz de Luz Espectral ──
-  const beaconGroup = new THREE.Group();
-  const towerGeo = new THREE.CylinderGeometry(0.2, 0.5, 4, 16, 1, true);
-  const towerMat = new THREE.MeshBasicMaterial({ color: 0x2a384b, wireframe: true });
-  const tower = new THREE.Mesh(towerGeo, towerMat);
-  tower.position.set(-6, 0, -8);
-  beaconGroup.add(tower);
+  // ── 4. Faro Histórico de Punta Lota (Arquitectura Patrimonial Siglo XIX) ──
+  const lighthouseGroup = new THREE.Group();
+  lighthouseGroup.position.set(-6.5, -2.5, -7);
 
-  // Haz cónico de luz
-  const beamGeo = new THREE.ConeGeometry(3.5, 16, 32, 1, true);
-  beamGeo.rotateX(Math.PI / 2);
-  beamGeo.translate(0, 0, 8);
+  // A. Promontorio Rocoso (Acantilado sobre el Pacífico)
+  const cliffGeo = new THREE.CylinderGeometry(2.6, 3.4, 2.2, 7);
+  const cliffMat = new THREE.MeshLambertMaterial({ color: 0x121720 });
+  const cliff = new THREE.Mesh(cliffGeo, cliffMat);
+  cliff.position.y = -1.1;
+  lighthouseGroup.add(cliff);
+
+  // B. Base de Cantería de Piedra
+  const baseGeo = new THREE.CylinderGeometry(1.5, 1.8, 0.8, 8);
+  const stoneMat = new THREE.MeshLambertMaterial({ color: 0x1b2330 });
+  const base = new THREE.Mesh(baseGeo, stoneMat);
+  base.position.y = 0.4;
+  lighthouseGroup.add(base);
+
+  // C. Torre Cónica / Octogonal de Hierro y Mampostería
+  const towerGeo = new THREE.CylinderGeometry(0.85, 1.35, 5.2, 8);
+  const towerMat = new THREE.MeshLambertMaterial({ color: 0x222d3d });
+  const tower = new THREE.Mesh(towerGeo, towerMat);
+  tower.position.y = 3.4;
+  lighthouseGroup.add(tower);
+
+  // Molduras Victorianas de Refuerzo
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x3fe6c0, transparent: true, opacity: 0.65 });
+  for (let r = 1; r <= 3; r++) {
+    const ringGeo = new THREE.TorusGeometry(1.22 - r * 0.12, 0.04, 6, 16);
+    ringGeo.rotateX(Math.PI / 2);
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.position.y = 1.2 + r * 1.2;
+    lighthouseGroup.add(ring);
+  }
+
+  // D. Galería del Vigía y Balaustrada de Hierro
+  const galleryGeo = new THREE.CylinderGeometry(1.3, 0.9, 0.3, 12);
+  const gallery = new THREE.Mesh(galleryGeo, stoneMat);
+  gallery.position.y = 6.1;
+  lighthouseGroup.add(gallery);
+
+  const railingGeo = new THREE.TorusGeometry(1.25, 0.035, 6, 24);
+  railingGeo.rotateX(Math.PI / 2);
+  const railing = new THREE.Mesh(railingGeo, ringMat);
+  railing.position.y = 6.45;
+  lighthouseGroup.add(railing);
+
+  // E. Linterna de Cristales y Lámpara Central
+  const lanternGlassGeo = new THREE.CylinderGeometry(0.8, 0.8, 1.1, 12, 1, true);
+  const lanternGlassMat = new THREE.MeshBasicMaterial({
+    color: 0x65dabc,
+    transparent: true,
+    opacity: 0.45,
+    wireframe: true
+  });
+  const lanternGlass = new THREE.Mesh(lanternGlassGeo, lanternGlassMat);
+  lanternGlass.position.y = 6.8;
+  lighthouseGroup.add(lanternGlass);
+
+  // Núcleo incandescente (Lente Fresnel)
+  const lampCoreGeo = new THREE.SphereGeometry(0.35, 16, 16);
+  const lampCoreMat = new THREE.MeshBasicMaterial({ color: 0xffe082 });
+  const lampCore = new THREE.Mesh(lampCoreGeo, lampCoreMat);
+  lampCore.position.y = 6.8;
+  lighthouseGroup.add(lampCore);
+
+  // F. Cúpula Victoriana y Pararrayos
+  const domeGeo = new THREE.SphereGeometry(0.84, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
+  const domeMat = new THREE.MeshLambertMaterial({ color: 0x161e2b });
+  const dome = new THREE.Mesh(domeGeo, domeMat);
+  dome.position.y = 7.35;
+  lighthouseGroup.add(dome);
+
+  const spireGeo = new THREE.ConeGeometry(0.08, 1.2, 8);
+  const spire = new THREE.Mesh(spireGeo, new THREE.MeshBasicMaterial({ color: 0xd4af37 }));
+  spire.position.y = 8.4;
+  lighthouseGroup.add(spire);
+
+  // G. Doble Haz de Luz Giratorio
+  const lightBeams = new THREE.Group();
+  lightBeams.position.y = 6.8;
+
+  // Haz principal largo
+  const beamMainGeo = new THREE.ConeGeometry(4.2, 22, 32, 1, true);
+  beamMainGeo.rotateX(Math.PI / 2);
+  beamMainGeo.translate(0, 0, 11);
   const beamMat = new THREE.MeshBasicMaterial({
     color: 0x65dabc,
     transparent: true,
-    opacity: 0.12,
+    opacity: 0.16,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending
   });
-  const lightBeam = new THREE.Mesh(beamGeo, beamMat);
-  lightBeam.position.set(-6, 2, -8);
-  beaconGroup.add(lightBeam);
+  const beamMain = new THREE.Mesh(beamMainGeo, beamMat);
+  lightBeams.add(beamMain);
 
-  scene.add(beaconGroup);
+  // Haz secundario posterior ámbar
+  const beamRearGeo = new THREE.ConeGeometry(2.5, 12, 24, 1, true);
+  beamRearGeo.rotateX(-Math.PI / 2);
+  beamRearGeo.translate(0, 0, -6);
+  const beamRear = new THREE.Mesh(beamRearGeo, new THREE.MeshBasicMaterial({
+    color: 0xf4a261,
+    transparent: true,
+    opacity: 0.10,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending
+  }));
+  lightBeams.add(beamRear);
+
+  lighthouseGroup.add(lightBeams);
+  scene.add(lighthouseGroup);
 
   // ── Interacción con Puntero y Scroll ──
   const pointer = { x: 0, y: 0 };
@@ -637,9 +724,9 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     }
     particles.geometry.attributes.position.needsUpdate = true;
 
-    // 3. Rotación del haz del Faro de Lota
-    lightBeam.rotation.y = clock * 0.45;
-    lightBeam.rotation.x = Math.sin(clock * 0.3) * 0.15;
+    // 3. Rotación del haz del Faro Histórico de Punta Lota
+    lightBeams.rotation.y = clock * 0.55;
+    lampCore.scale.setScalar(1 + Math.sin(clock * 4) * 0.15);
 
     // 4. Pulso de luminosidad en las vetas de cobre/oro
     const pulse = 0.5 + Math.sin(clock * 2.2) * 0.3;
