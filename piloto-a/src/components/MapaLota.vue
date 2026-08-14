@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import { Map, NavigationControl, Popup, Marker, type LngLatLike } from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import type { LngLatLike } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import booleanPointInPolygon from '@turf/boolean-point-in-polygon'
-import { point as turfPoint, polygon as turfPolygon } from '@turf/turf'
 import zonasData from '../data/zonas-lota.json'
 import { useGeofenceStore } from '@/stores/geofence'
 import { useGeolocation } from '@/composables/useGeolocation'
@@ -16,7 +15,6 @@ import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import { useGameLoop } from '@/composables/useGameLoop'
 import { useGraphicsProfile } from '@/composables/useGraphicsProfile'
 import { RingBuffer, sampleAt } from '@/utils/interpolationBuffer'
-import NpcAvatar from './NpcAvatar.vue'
 import BrumaCostera from './BrumaCostera.vue'
 import EncuentroPulso from './EncuentroPulso.vue'
 import EncuentroSheet from './EncuentroSheet.vue'
@@ -45,12 +43,12 @@ const latticeStore = useLatticeStore()
 const analytics = useAnalyticsStore()
 const worldEvents = useWorldEventsStore()
 const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
-const { value: graphics } = useGraphicsProfile()
+const graphics = useGraphicsProfile()
 
-let map: Map | null = null
-let playerMarker: Marker | null = null
-let npcMarkers: Map<string, Marker> = new Map()
-let npcEventMarker: Marker | null = null
+let map: maplibregl.Map | null = null
+let playerMarker: maplibregl.Marker | null = null
+const npcMarkers: Map<string, maplibregl.Marker> = new Map()
+let npcEventMarker: maplibregl.Marker | null = null
 let npcEventInterval: ReturnType<typeof setInterval> | null = null
 const playerBuffer = new RingBuffer<{ lat: number; lon: number }>(10)
 const npcBuffers: Map<string, RingBuffer<{ lat: number; lon: number }>> = new Map()
@@ -97,18 +95,38 @@ function onMissionComplete(reward: { cobre: number; oro?: number }, zonaId?: num
   }
 }
 
-function ensureNpcMarker(npc: NpcWire): Marker {
-  const existing = npcMarkers.get(npc.npcId || npc.id.toString())
+function npcKey(npc: NpcWire): string {
+  return npc.id.toString()
+}
+
+interface NpcSheetView {
+  npcId: string
+  name: string
+  avatar?: string
+  historia?: string
+  estado?: string
+}
+
+function normalizeForSheet(npc: NpcWire): NpcSheetView {
+  return {
+    npcId: npc.id.toString(),
+    name: npc.name,
+    avatar: npc.avatar,
+    historia: npc.dialogueLines?.[0] || `${npc.title} — ${npc.faction}`,
+    estado: npc.state,
+  }
+}
+
+function ensureNpcMarker(npc: NpcWire): maplibregl.Marker {
+  const key = npcKey(npc)
+  const existing = npcMarkers.get(key)
   if (existing) return existing
 
   const el = document.createElement('div')
   el.className = 'npc-marker-wrapper'
 
-  // El componente Vue se monta sobre el div vía createApp sería más limpio,
-  // pero para mantener esta fase sin tocar el runtime de Vue,
-  // renderizamos un fallback HTML con clases CSS que luego enriquezca NpcAvatar.
   el.innerHTML = `
-    <div class="npc-hex" data-npc-id="${npc.npcId || npc.id}">
+    <div class="npc-hex" data-npc-id="${key}">
       <div class="npc-hex-inner">${npc.avatar || '◈'}</div>
       <div class="npc-name">${npc.name}</div>
     </div>
@@ -116,16 +134,15 @@ function ensureNpcMarker(npc: NpcWire): Marker {
   el.style.cursor = 'pointer'
   el.addEventListener('click', () => openEncuentroSheet(npc))
 
-  const marker = new Marker({ element: el })
+  const marker = new maplibregl.Marker({ element: el })
     .setLngLat([s60ToDegrees(npc.lon_s60), s60ToDegrees(npc.lat_s60)])
     .addTo(map!)
 
-  npcMarkers.set(npc.npcId || npc.id.toString(), marker)
-  // crea buffer por NPC
-  if (!npcBuffers.has(npc.npcId || npc.id.toString())) {
-    npcBuffers.set(npc.npcId || npc.id.toString(), new RingBuffer<{ lat: number; lon: number }>(10))
+  npcMarkers.set(key, marker)
+  if (!npcBuffers.has(key)) {
+    npcBuffers.set(key, new RingBuffer<{ lat: number; lon: number }>(10))
   }
-  npcBuffers.get(npc.npcId || npc.id.toString())!.push(
+  npcBuffers.get(key)!.push(
     { lat: s60ToDegrees(npc.lat_s60), lon: s60ToDegrees(npc.lon_s60) },
     performance.now() / 1000
   )
@@ -133,8 +150,7 @@ function ensureNpcMarker(npc: NpcWire): Marker {
 }
 
 function rebuildNpcMarkers() {
-  // Limpia markers huérfanos
-  const keep = new Set(mobsStore.mobsActivos.map(n => n.npcId || n.id.toString()))
+  const keep = new Set(mobsStore.mobsActivos.map(npcKey))
   for (const [key, marker] of npcMarkers.entries()) {
     if (!keep.has(key)) {
       marker.remove()
@@ -297,7 +313,7 @@ onMounted(() => {
     features,
   }
 
-  map = new Map({
+  map = new maplibregl.Map({
     container: mapContainer.value,
     style: {
       version: 8,
@@ -330,7 +346,7 @@ onMounted(() => {
     doubleClickZoom: true,
   })
 
-  map.addControl(new NavigationControl({ visualizePitch: true, showCompass: true, showZoom: false }), 'top-right')
+  map.addControl(new maplibregl.NavigationControl({ visualizePitch: true, showCompass: true, showZoom: false }), 'top-right')
 
   map.on('load', () => {
     if (!map) return
@@ -389,7 +405,7 @@ onMounted(() => {
           cursor: pointer;
           white-space: nowrap;
         `
-        npcEventMarker = new Marker({ element: el })
+        npcEventMarker = new maplibregl.Marker({ element: el })
           .setLngLat([pos.lon, pos.lat])
           .addTo(map)
         el.addEventListener('click', () => {
@@ -407,12 +423,12 @@ onMounted(() => {
       { immediate: true }
     )
 
-    map.on('click', 'zonas-fill', (e) => {
+    map.on('click', 'zonas-fill', (e: maplibregl.MapMouseEvent & { features?: GeoJSON.Feature[] }) => {
       if (!map || !e.features?.[0]) return
       const feature = e.features[0]
       const name = feature.properties?.name ?? 'Sin nombre'
       const tags = JSON.stringify(feature.properties?.tags ?? {})
-      new Popup({ offset: 12, closeButton: true })
+      new maplibregl.Popup({ offset: 12, closeButton: true })
         .setLngLat(e.lngLat as LngLatLike)
         .setHTML(`<h3>${name}</h3><p style="font-size:0.8em;color:#8b949e">${tags}</p>`)
         .addTo(map)
@@ -431,7 +447,7 @@ onMounted(() => {
     playerEl.style.fontSize = '1.8rem'
     playerEl.style.filter = 'drop-shadow(0 0 8px #3FE6C0)'
 
-    playerMarker = new Marker({ element: playerEl })
+    playerMarker = new maplibregl.Marker({ element: playerEl })
       .setLngLat([lon.value || -73.165, lat.value || -37.089])
       .addTo(map)
 
@@ -508,8 +524,8 @@ onUnmounted(() => {
     <!-- Ficha coleccionable -->
     <EncuentroSheet
       v-if="showEncuentroSheet && activeNpcForRa"
-      :npc="activeNpcForRa"
-      :epiteto="activeNpcForRa.estado === 'Approach' ? 'En el rango' : 'A la espera'"
+      :npc="normalizeForSheet(activeNpcForRa)"
+      :epiteto="activeNpcForRa.state === 'approach' ? 'En el rango' : 'A la espera'"
       @close="showEncuentroSheet = false"
       @iniciar="() => { showEncuentroSheet = false; openVisorRa(activeNpcForRa!) }"
     />

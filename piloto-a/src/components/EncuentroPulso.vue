@@ -16,8 +16,8 @@ const props = withDefaults(
   { visible: false }
 )
 
-const { value: graphics } = useGraphicsProfile()
-const ringCount = computed(() => (graphics.value.profile === 'lite' ? 1 : 3))
+const graphics = useGraphicsProfile()
+const ringCount = computed(() => (graphics.profile === 'lite' ? 1 : 3))
 </script>
 
 <template>

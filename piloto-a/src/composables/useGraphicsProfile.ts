@@ -34,8 +34,8 @@ function detectWebGL(): boolean {
  * - 'lite':     deviceMemory < 4 o viewport móvil → partículas reducidas, sin shaders pesados
  * - 'full':     desktop moderno con GPU dedicada
  */
-export function useGraphicsProfile() {
-  if (typeof window === 'undefined') return state
+export function useGraphicsProfile(): ProfileState {
+  if (typeof window === 'undefined') return state.value
 
   if (state.value.deviceMemory === null) {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -61,5 +61,5 @@ export function useGraphicsProfile() {
     }
   }
 
-  return state
+  return state.value
 }

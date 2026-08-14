@@ -20,8 +20,8 @@ const props = withDefaults(
   { density: 0.6, force: false }
 )
 
-const { value: graphics } = useGraphicsProfile()
-const enabled = computed(() => props.force || graphics.value.profile === 'full')
+const graphics = useGraphicsProfile()
+const enabled = computed(() => props.force || graphics.profile === 'full')
 const count = computed(() => Math.max(4, Math.floor(14 * props.density)))
 </script>
 
