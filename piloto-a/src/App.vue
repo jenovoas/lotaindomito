@@ -94,9 +94,9 @@ onUnmounted(() => {
 
 html, body {
   height: 100%;
-  font-family: system-ui, sans-serif;
-  background: #0d1117;
-  color: #e6edf3;
+  font-family: var(--lota-font-sans, system-ui, sans-serif);
+  background: var(--lota-bg, #0d1117);
+  color: var(--lota-text, #e6edf3);
 }
 
 #app {
@@ -119,8 +119,8 @@ html, body {
 
 .cabecera {
   flex-shrink: 0;
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
+  background: var(--lota-bg-2, #161b22);
+  border-bottom: 1px solid var(--lota-line-strong, #30363d);
   position: relative;
 }
 
@@ -139,16 +139,21 @@ html, body {
 }
 
 .titulo {
+  font-family: var(--lota-font-sans, "Space Grotesk", sans-serif);
   font-size: 1.3rem;
-  font-weight: 800;
-  color: #3fe6c0;
+  font-weight: 700;
+  letter-spacing: var(--lota-tracking-title, 1.5px);
+  text-transform: uppercase;
+  color: var(--lota-teal, #3fe6c0);
   padding: 0;
   line-height: 1.1;
 }
 
 .subtitulo {
+  font-family: var(--lota-font-mono, "JetBrains Mono", monospace);
   font-size: 0.75rem;
-  color: #8b949e;
+  letter-spacing: var(--lota-tracking-mono, 2.5px);
+  color: var(--lota-text-muted, #8b949e);
   padding: 0;
   margin-top: 2px;
 }
@@ -161,29 +166,34 @@ html, body {
 
 .btn-mochila {
   background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  border: 1.5px solid #d17a4f;
-  color: #f1f5f9;
+  border: 1.5px solid var(--lota-copper, #d17a4f);
+  color: var(--lota-text, #f1f5f9);
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: var(--lota-radius-pill, 20px);
+  font-family: var(--lota-font-sans, "Space Grotesk", sans-serif);
   font-weight: 700;
   font-size: 0.85rem;
+  letter-spacing: var(--lota-tracking-cta, 1px);
+  text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
   box-shadow: 0 2px 10px rgba(209, 122, 79, 0.25);
-  transition: all 0.2s ease;
+  transition: transform var(--lota-duration-fast, 150ms) var(--lota-ease-out, ease),
+              box-shadow var(--lota-duration-fast, 150ms) var(--lota-ease-out, ease);
 }
 
 .btn-mochila:hover {
-  border-color: #3fe6c0;
+  border-color: var(--lota-teal, #3fe6c0);
   transform: translateY(-1px);
   box-shadow: 0 4px 16px rgba(63, 230, 192, 0.3);
 }
 
 .badge-count {
-  background: #d17a4f;
-  color: #0f1216;
+  background: var(--lota-copper, #d17a4f);
+  color: var(--lota-bg, #0f1216);
+  font-family: var(--lota-font-mono, "JetBrains Mono", monospace);
   font-size: 0.7rem;
   font-weight: 800;
   padding: 1px 6px;
@@ -196,22 +206,26 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   background: rgba(15, 23, 42, 0.95);
-  border: 1.5px solid #ffd700;
-  color: #ffd700;
+  border: 1.5px solid var(--lota-gold, #ffd700);
+  color: var(--lota-gold, #ffd700);
   padding: 8px 18px;
-  border-radius: 20px;
+  border-radius: var(--lota-radius-pill, 20px);
+  font-family: var(--lota-font-sans, "Space Grotesk", sans-serif);
   font-size: 0.85rem;
   font-weight: 700;
+  letter-spacing: var(--lota-tracking-cta, 1px);
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   z-index: 999;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--lota-glass-blur, blur(10px));
 }
 
 .toast-slide-enter-active, .toast-slide-leave-active {
-  transition: all 0.3s ease;
+  transition: opacity var(--lota-duration-base, 250ms) ease,
+              transform var(--lota-duration-base, 250ms) ease;
 }
 .toast-slide-enter-from, .toast-slide-leave-to {
   opacity: 0;
@@ -220,11 +234,11 @@ html, body {
 
 .pie-pagina {
   flex-shrink: 0;
-  background: #0d1117;
-  border-top: 1px solid #21262d;
+  background: var(--lota-bg, #0d1117);
+  border-top: 1px solid var(--lota-line, #21262d);
   padding: 0.55rem 1rem;
   font-size: 0.72rem;
-  color: #8b949e;
+  color: var(--lota-text-muted, #8b949e);
   z-index: 10;
 }
 
@@ -240,14 +254,14 @@ html, body {
 }
 
 .pie-link {
-  color: #3FE6C0;
+  color: var(--lota-teal, #3FE6C0);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.15s ease;
+  transition: color var(--lota-duration-fast, 150ms) ease;
 }
 
 .pie-link:hover {
-  color: #58a6ff;
+  color: var(--lota-teal-bright, #58a6ff);
   text-decoration: underline;
 }
 
@@ -262,6 +276,15 @@ html, body {
 }
 
 .pie-sep {
-  color: #30363d;
+  color: var(--lota-line-strong, #30363d);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-mochila,
+  .item-toast,
+  .toast-slide-enter-active,
+  .toast-slide-leave-active {
+    transition: none;
+  }
 }
 </style>
