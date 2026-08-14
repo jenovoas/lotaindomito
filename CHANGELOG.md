@@ -8,6 +8,28 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ---
 
+## 2026-08-14
+
+### Sistema de diseño HUD táctico-patrimonial + Arquitectura de Juego en 3 capas (D-021)
+- **Tokens visuales unificados:** nuevo [`piloto-a/src/assets/design-tokens.css`](piloto-a/src/assets/design-tokens.css) con paleta turbo-industrial (`--lota-teal`, `--lota-gold`, `--lota-copper`, `--lota-coral`, `--lota-peach`), tipografía (Space Grotesk + JetBrains Mono), biseles carbón, sombras, radios, espaciados y efectos de cristal. Importado en `main.ts` antes de los estilos de componentes.
+- **Componentes visuales nuevos:**
+  - [`piloto-a/src/components/NpcAvatar.vue`](piloto-a/src/components/NpcAvatar.vue): retratos SVG 2.5D para Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor y El Palanquero (silueta + iluminación lateral + detalle de vestimenta histórica, ~3 KB cada uno).
+  - [`piloto-a/src/components/BrumaCostera.vue`](piloto-a/src/components/BrumaCostera.vue): capa de niebla costera animada vía CSS (sin canvas extra), respeta `prefers-reduced-motion` y se desactiva automáticamente en perfil lite/css-only.
+  - [`piloto-a/src/components/EncuentroSheet.vue`](piloto-a/src/components/EncuentroSheet.vue): modal tipo "ficha de colección" con retrato grande, epíteto histórico, fragmento narrativo y CTA "Iniciar Encuentro".
+  - [`piloto-a/src/components/EncuentroPulso.vue`](piloto-a/src/components/EncuentroPulso.vue): tres anillos concéntricos que se disparan al entrar a una zona patrimonial (perfil lite → un anillo).
+  - [`piloto-a/src/components/BannerIntercept.vue`](piloto-a/src/components/BannerIntercept.vue): banner "EN EL RANGO" con halo animado y vibración háptica opcional (`navigator.vibrate`).
+- **Composables y arquitectura:**
+  - [`piloto-a/src/composables/useGameLoop.ts`](piloto-a/src/composables/useGameLoop.ts): bucle de presentación desacoplado de la red, basado en `requestAnimationFrame` con control de `dt`, pausa automática por `document.hidden` y cleanup en `onBeforeUnmount`.
+  - [`piloto-a/src/utils/interpolationBuffer.ts`](piloto-a/src/utils/interpolationBuffer.ts): `RingBuffer<T>` (N=10) + `sampleAt` con factor de suavizado LERP configurable. Acompaña tests Vitest ([`piloto-a/tests/interpolationBuffer.spec.ts`](piloto-a/tests/interpolationBuffer.spec.ts)).
+  - [`piloto-a/src/composables/useGraphicsProfile.ts`](piloto-a/src/composables/useGraphicsProfile.ts): detecta capacidades (`navigator.deviceMemory`, `devicePixelRatio`, WebGL) y devuelve perfil `full` / `lite` / `css-only` consumido por BrumaCostera, EncuentroPulso y la landing.
+- **Refactor de `stores/lattice.ts`:** reconnect exponencial con jitter (± 20 %, backoff inicial 1 s, max 30 s), `connectionStatus: 'connected' | 'reconnecting' | 'offline'` y `isLatticePaused` (computed) consumido por el HUD.
+- **Migración del Piloto A a tokens:** `App.vue`, `MapaLota.vue` y banners consumen variables CSS `--lota-*` con fallback a valores legacy; añadidos marcadores hexagonales para NPCs (estilo "ficha de colección"), pulso luminoso al entrar en zonas patrimoniales e indicador `LATTICE EN PAUSA` cuando el WebSocket cae.
+- **Landing pública optimizada:** script de detección de perfil + `?deviceMemory` al cargar; `css-only` reemplaza three.js por gradiente CSS animado; `lite` capea `devicePixelRatio` a 1.2 y reduce partículas a 250. Nueva sección **#encuentros** con tarjetas coleccionables de los 4 NPCs (SVGs inline).
+- **Documentación:** creado [`_analisis/26_arquitectura_game_loop_3_capas.md`](_analisis/26_arquitectura_game_loop_3_capas.md) con diagrama, contrato WebSocket, anti-patrones y guía de extensión. Decisión D-021 registrada en [`docs/decisiones.md`](docs/decisiones.md).
+- **Métricas objetivo:** ≥ 50 FPS en gama media (4 GB RAM), bundle JS adicional ≤ 16 KB para los 4 retratos SVG.
+
+---
+
 ## 2026-08-13
 
 ### Mochila Minera y Bitácora de Despachos en Piloto A (D-020)

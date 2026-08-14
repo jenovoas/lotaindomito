@@ -88,6 +88,16 @@ abs(amp_a_raw - amp_b_raw) < SCALE_0 / 50  // SCALE_0 = 12_960_000
 5. Portal dual-lane = convergencia `|amp_A - amp_B| < SCALE_0/50`.
 6. Licencia: Apache 2.0 + cláusula No Comercial (heredada de Sentinel).
 
+## Arquitectura de Juego: 3 capas + Game Loop (D-021, 2026-08-14)
+- **Capa 1 · Simulación (Rust + S60, Piloto B):** dueña del estado de mundo. Game Loop determinista, FSM de NPCs. Emite por WebSocket: `lattice_tick`, `portal_opened`, `npc_moved`, `npc_state_changed`.
+- **Capa 2 · Estado y sync (Vue/Pinia, Piloto A):** dueña del estado del jugador y caché de mundo. Recibe eventos, los empuja a `RingBuffer` (N=10), mantiene inventario/wallet offline-first. Reconnect exponencial con jitter.
+- **Capa 3 · Presentación (Vue + render loop):** dibuja estado, no calcula. Usa `useGameLoop()` (rAF con pausa por `document.hidden`).
+- **Regla:** la Capa 3 NO llama al backend. Si necesita datos, los lee de Pinia. La Capa 2 NO ejecuta lógica de simulación.
+- **Tokens visuales centralizados** en `piloto-a/src/assets/design-tokens.css` (consumidos vía variables CSS, no hardcoded hex).
+- **Componentes nuevos Piloto A:** `NpcAvatar.vue`, `BrumaCostera.vue`, `EncuentroSheet.vue`, `EncuentroPulso.vue`, `BannerIntercept.vue`.
+- **Perfiles gráficos:** `full` / `lite` / `css-only` detectados automáticamente por `useGraphicsProfile()` (memoria, dpr, WebGL) y aplicados en BrumaCostera, EncuentroPulso y la landing.
+- **Referencia completa:** `_analisis/26_arquitectura_game_loop_3_capas.md`.
+
 ## Documentos clave para IAs
 - `CHANGELOG.md` — registro de hitos con evidencia real (commits, tests); material de portfolio. **Convención de INTERLOCUTOR: siempre CHANGELOG + `docs/decisiones.md`. Agregar una entrada al CHANGELOG con cada hito.**
 - `docs/decisiones.md` — D-001 a D-014, decisiones de diseño registradas. **D-014 es el encuadre vigente.**
