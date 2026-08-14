@@ -614,87 +614,158 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   lighthouseGroup.position.set(-30, 4.5, -28); // En la cima de la meseta (y: -12 + 16.5 = 4.5)
   lighthouseGroup.scale.set(1.1, 1.1, 1.1);
 
-  // Base de Cantería
-  const baseGeo = new THREE.CylinderGeometry(2.4, 3.0, 1.6, 8);
   const stoneMat = new THREE.MeshLambertMaterial({ color: 0x1e2735 });
+  const whiteStoneMat = new THREE.MeshLambertMaterial({ color: 0x94a3b8 });
+  const darkMetalMat = new THREE.MeshLambertMaterial({ color: 0x0f172a });
+
+  // Base octogonal de Cantería con moldura
+  const baseGeo = new THREE.CylinderGeometry(2.5, 3.2, 1.8, 8);
   const base = new THREE.Mesh(baseGeo, stoneMat);
-  base.position.y = 0.8;
+  base.position.y = 0.9;
   lighthouseGroup.add(base);
 
-  // Torre Victoriana Cónica
-  const towerGeo = new THREE.CylinderGeometry(1.4, 2.2, 9.0, 8);
-  const towerMat = new THREE.MeshLambertMaterial({ color: 0x2d3a4d });
-  const tower = new THREE.Mesh(towerGeo, towerMat);
-  tower.position.y = 5.8;
-  lighthouseGroup.add(tower);
+  // Puerta de entrada histórica
+  const doorGeo = new THREE.BoxGeometry(0.8, 1.2, 0.4);
+  const door = new THREE.Mesh(doorGeo, darkMetalMat);
+  door.position.set(0, 0.8, 2.7);
+  lighthouseGroup.add(door);
 
-  // Molduras de Hierro
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x3fe6c0, transparent: true, opacity: 0.8 });
+  // Torre Victoriana Cónica con franjas alternadas
+  const bandHeights = [1.8, 2.2, 2.4, 2.6];
+  let currentY = 1.8;
+  for (let b = 0; b < bandHeights.length; b++) {
+    const h = bandHeights[b];
+    const rTop = 2.1 - b * 0.18;
+    const rBot = 2.4 - b * 0.18;
+    const bandGeo = new THREE.CylinderGeometry(rTop, rBot, h, 12);
+    const bandMat = b % 2 === 0 ? stoneMat : whiteStoneMat;
+    const band = new THREE.Mesh(bandGeo, bandMat);
+    band.position.y = currentY + h / 2;
+    lighthouseGroup.add(band);
+    currentY += h;
+  }
+
+  // Molduras y cornisas de hierro
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.85 });
   for (let r = 1; r <= 3; r++) {
-    const ringGeo = new THREE.TorusGeometry(1.95 - r * 0.18, 0.07, 6, 16);
+    const ringGeo = new THREE.TorusGeometry(2.1 - r * 0.18, 0.08, 6, 24);
     ringGeo.rotateX(Math.PI / 2);
     const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.y = 2.2 + r * 2.1;
+    ring.position.y = 2.2 + r * 2.3;
     lighthouseGroup.add(ring);
   }
 
-  // Galería y Linterna
-  const galleryGeo = new THREE.CylinderGeometry(2.3, 1.6, 0.5, 12);
-  const gallery = new THREE.Mesh(galleryGeo, stoneMat);
-  gallery.position.y = 10.6;
+  // Galería de Observación (Base + Barandilla)
+  const galleryGeo = new THREE.CylinderGeometry(2.4, 1.7, 0.6, 16);
+  const gallery = new THREE.Mesh(galleryGeo, darkMetalMat);
+  gallery.position.y = 10.8;
   lighthouseGroup.add(gallery);
 
-  const lanternGlassGeo = new THREE.CylinderGeometry(1.4, 1.4, 2.0, 12, 1, true);
+  // Barandilla de hierro perimetral (Torus + Barrotes)
+  const railTopGeo = new THREE.TorusGeometry(2.35, 0.05, 6, 24);
+  railTopGeo.rotateX(Math.PI / 2);
+  const railTop = new THREE.Mesh(railTopGeo, ringMat);
+  railTop.position.y = 11.7;
+  lighthouseGroup.add(railTop);
+
+  for (let p = 0; p < 12; p++) {
+    const angle = (p / 12) * Math.PI * 2;
+    const postGeo = new THREE.CylinderGeometry(0.04, 0.04, 0.8, 6);
+    const post = new THREE.Mesh(postGeo, darkMetalMat);
+    post.position.set(Math.cos(angle) * 2.35, 11.3, Math.sin(angle) * 2.35);
+    lighthouseGroup.add(post);
+  }
+
+  // Linterna de Cristal Fresnel
+  const lanternGlassGeo = new THREE.CylinderGeometry(1.5, 1.5, 2.0, 12, 1, true);
   const lanternGlassMat = new THREE.MeshBasicMaterial({
     color: 0x67e8f9,
     transparent: true,
-    opacity: 0.7,
+    opacity: 0.75,
     wireframe: true
   });
   const lanternGlass = new THREE.Mesh(lanternGlassGeo, lanternGlassMat);
-  lanternGlass.position.y = 11.8;
+  lanternGlass.position.y = 12.0;
   lighthouseGroup.add(lanternGlass);
 
-  const lampCoreGeo = new THREE.SphereGeometry(0.7, 16, 16);
-  const lampCoreMat = new THREE.MeshBasicMaterial({ color: 0xfef08a });
+  // Núcleo brillante de la Lámpara (Núcleo + Halo Fresnel)
+  const lampCoreGeo = new THREE.SphereGeometry(0.75, 16, 16);
+  const lampCoreMat = new THREE.MeshBasicMaterial({ color: 0xfff59d });
   const lampCore = new THREE.Mesh(lampCoreGeo, lampCoreMat);
-  lampCore.position.y = 11.8;
+  lampCore.position.y = 12.0;
   lighthouseGroup.add(lampCore);
 
-  // Cúpula
-  const domeGeo = new THREE.SphereGeometry(1.5, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
-  const domeMat = new THREE.MeshLambertMaterial({ color: 0x161e2c });
-  const dome = new THREE.Mesh(domeGeo, domeMat);
-  dome.position.y = 12.8;
-  lighthouseGroup.add(dome);
-
-  // Haz de Luz Giratorio sobre el Océano
-  const lightBeams = new THREE.Group();
-  lightBeams.position.y = 11.8;
-
-  const beamMainGeo = new THREE.ConeGeometry(6.5, 55, 32, 1, true);
-  beamMainGeo.rotateX(Math.PI / 2);
-  beamMainGeo.translate(0, 0, 27.5);
-  const beamMat = new THREE.MeshBasicMaterial({
+  const lampGlowGeo = new THREE.SphereGeometry(1.4, 16, 16);
+  const lampGlowMat = new THREE.MeshBasicMaterial({
     color: 0x67e8f9,
     transparent: true,
-    opacity: 0.14,
+    opacity: 0.40,
+    blending: THREE.AdditiveBlending
+  });
+  const lampGlow = new THREE.Mesh(lampGlowGeo, lampGlowMat);
+  lampGlow.position.y = 12.0;
+  lighthouseGroup.add(lampGlow);
+
+  // Cúpula Victoriana y Aguja de remate
+  const domeGeo = new THREE.SphereGeometry(1.6, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2);
+  const dome = new THREE.Mesh(domeGeo, darkMetalMat);
+  dome.position.y = 13.0;
+  lighthouseGroup.add(dome);
+
+  const spireGeo = new THREE.ConeGeometry(0.18, 1.2, 8);
+  const spire = new THREE.Mesh(spireGeo, darkMetalMat);
+  spire.position.y = 14.8;
+  lighthouseGroup.add(spire);
+
+  // ── Haz de Luz Volumétrico Dual Giratorio sobre el Océano ──
+  const lightBeams = new THREE.Group();
+  lightBeams.position.y = 12.0;
+
+  // Luz puntual real que ilumina el océano y acantilado al girar
+  const beaconLight = new THREE.PointLight(0x67e8f9, 4.5, 90);
+  beaconLight.position.set(0, 0, 10);
+  lightBeams.add(beaconLight);
+
+  // Haz principal central (núcleo brillante)
+  const beamCoreGeo = new THREE.ConeGeometry(3.8, 62, 32, 1, true);
+  beamCoreGeo.rotateX(Math.PI / 2);
+  beamCoreGeo.translate(0, 0, 31);
+  const beamCoreMat = new THREE.MeshBasicMaterial({
+    color: 0xe0f2fe,
+    transparent: true,
+    opacity: 0.28,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending
   });
-  const beamMain = new THREE.Mesh(beamMainGeo, beamMat);
-  lightBeams.add(beamMain);
+  const beamCore = new THREE.Mesh(beamCoreGeo, beamCoreMat);
+  lightBeams.add(beamCore);
 
-  const beamRearGeo = new THREE.ConeGeometry(3.5, 18, 24, 1, true);
-  beamRearGeo.rotateX(-Math.PI / 2);
-  beamRearGeo.translate(0, 0, -9);
-  const beamRear = new THREE.Mesh(beamRearGeo, new THREE.MeshBasicMaterial({
-    color: 0xfbbf24,
+  // Halo envolvente exterior (difusión atmosférica)
+  const beamHaloGeo = new THREE.ConeGeometry(9.5, 68, 32, 1, true);
+  beamHaloGeo.rotateX(Math.PI / 2);
+  beamHaloGeo.translate(0, 0, 34);
+  const beamHaloMat = new THREE.MeshBasicMaterial({
+    color: 0x0284c7,
     transparent: true,
-    opacity: 0.08,
+    opacity: 0.10,
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending
-  }));
+  });
+  const beamHalo = new THREE.Mesh(beamHaloGeo, beamHaloMat);
+  lightBeams.add(beamHalo);
+
+  // Haz secundario opuesto (reflejo posterior de óptica Fresnel)
+  const beamRearGeo = new THREE.ConeGeometry(3.0, 22, 24, 1, true);
+  beamRearGeo.rotateX(-Math.PI / 2);
+  beamRearGeo.translate(0, 0, -11);
+  const beamRearMat = new THREE.MeshBasicMaterial({
+    color: 0xfbbf24,
+    transparent: true,
+    opacity: 0.12,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending
+  });
+  const beamRear = new THREE.Mesh(beamRearGeo, beamRearMat);
   lightBeams.add(beamRear);
 
   lighthouseGroup.add(lightBeams);
@@ -849,6 +920,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     // 4. Giro del haz del Faro
     lightBeams.rotation.y = clock * 0.45;
     lampCore.scale.setScalar(1 + Math.sin(clock * 4.5) * 0.15);
+    lampGlow.scale.setScalar(1 + Math.sin(clock * 4.5 + 0.5) * 0.12);
 
     // 5. Ascuas flotantes
     const posArr = particles.geometry.attributes.position.array;
