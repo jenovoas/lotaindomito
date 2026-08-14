@@ -3,6 +3,8 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import type { NpcWire } from '@/stores/mobs'
 import { useAnalyticsStore } from '@/stores/analytics'
 
+import { useInventoryStore } from '@/stores/inventory'
+
 const props = defineProps<{
   npc: NpcWire
 }>()
@@ -13,6 +15,7 @@ const emit = defineEmits<{
 }>()
 
 const analytics = useAnalyticsStore()
+const inventory = useInventoryStore()
 const videoElement = ref<HTMLVideoElement | null>(null)
 const cameraActive = ref(false)
 const cameraError = ref(false)
@@ -81,6 +84,59 @@ function nextDialogue() {
 function finishEncounter() {
   questAccepted.value = true
   isWalking.value = false
+
+  // Registrar ítem histórico en la mochila
+  if (props.npc.id === 2) {
+    // El Palanquero
+    inventory.addItem({
+      id: 'despacho_palanquero',
+      name: 'Orden de Despacho Ferroviario',
+      category: 'reliquia',
+      rarity: 'raro',
+      icon: '📜',
+      description: 'Orden firmada para autorizar el cambio de agujas del tren de carbón.',
+      lore: 'Los trenes de Lota transportaban miles de toneladas al puerto. El palanquero era el árbitro de la vida y la muerte en las vías.'
+    }, 1)
+
+    inventory.acceptQuest({
+      id: `quest_palanquero_${Date.now()}`,
+      npcId: 2,
+      npcName: 'El Palanquero',
+      npcAvatar: '⛏️',
+      title: 'El Tren de la Maestranza',
+      description: 'Lleva la orden de cambio de agujas al sector de Pabellones y Chiflón.',
+      objective: 'Caminar 200m hacia el Chiflón del Diablo',
+      targetZoneId: 480338029,
+      targetZoneName: 'Chiflón del Diablo',
+      status: 'lista_para_entrega',
+      reward: { cobre: 75, oro: 5 },
+      progress: 100,
+      createdAt: Date.now()
+    })
+  } else if (props.npc.id === 1) {
+    // Doña Isidora
+    inventory.addItem({
+      id: 'carta_isidora',
+      name: 'Carta Lacrada de Doña Isidora',
+      category: 'reliquia',
+      rarity: 'epico',
+      icon: '👑',
+      description: 'Documento sellado con cera y la corona de la familia Cousiño.',
+      lore: 'Contiene planos de la primera planta hidroeléctrica de Chivilingo que iluminó Lota.'
+    }, 1)
+  } else {
+    // El Ciego de la Mina
+    inventory.addItem({
+      id: 'carbon_grasa',
+      name: 'Carbón Grasa de Lota',
+      category: 'mineral',
+      rarity: 'comun',
+      icon: '⬛',
+      description: 'Carbón sub-bituminoso extraído a 500 metros bajo el nivel del mar.',
+      lore: 'La memoria viva de las galerías submarinas del Chiflón.'
+    }, 3)
+  }
+
   emit('complete', props.npc.reward)
 }
 </script>

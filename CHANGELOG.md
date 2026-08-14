@@ -10,6 +10,12 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ## 2026-08-13
 
+### Mochila Minera y Bitácora de Despachos en Piloto A (D-020)
+- **Inventario Diegético Táctil:** Creado [`piloto-a/src/stores/inventory.ts`](piloto-a/src/stores/inventory.ts) y [`piloto-a/src/components/MochilaMinera.vue`](piloto-a/src/components/MochilaMinera.vue) para gestionar minerales (*Carbón Grasa*, *Pirita*), monedas históricas (*Fichas Cousiño 1895*) y reliquias con memoria histórica.
+- **Bitácora de Misiones Activas:** Integrada la recepción de despachos al culminar encuentros en [`VisorRA.vue`](piloto-a/src/components/VisorRA.vue), con seguimiento de objetivos y entrega de recompensas en Cobre/Oro.
+- **HUD & Notificaciones Toast:** Agregado el botón de acceso rápido en el header con conteo de ítems y animación de toast al recolectar recursos en el mapa.
+- **Decisión D-020 registrada** en [`docs/decisiones.md`](docs/decisiones.md).
+
 ### Redefinición de la Experiencia de Juego Temática: MMO-RA Urbano (D-019)
 - **Fusión Pokémon GO × World of Warcraft en RA:** Redefinido el GDD ([`docs/concepto-juego.md`](docs/concepto-juego.md)) y el loop del jugador ([`_analisis/20_loop_jugador_dia_a_dia.md`](_analisis/20_loop_jugador_dia_a_dia.md)) para transformar el juego en un MMO del Mundo Real.
 - **Patrullas Sincronizadas en Movimiento:** Especificada la dinámica de intercepción física a pie y diálogo en marcha ("caminar hombro a hombro" en RA) con personajes históricos desplazándose por las calles reales con sincronización determinista entre jugadores.

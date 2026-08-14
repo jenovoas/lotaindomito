@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import MapaLota from './components/MapaLota.vue'
 import WalletHUD from './components/WalletHUD.vue'
+import MochilaMinera from './components/MochilaMinera.vue'
 import { useAnalyticsStore } from './stores/analytics'
+import { useInventoryStore } from './stores/inventory'
 
 const analytics = useAnalyticsStore()
+const inventory = useInventoryStore()
+const showMochilaModal = ref(false)
 
 function getOrCreateUserId(): string {
   const key = 'lota_user_id'
@@ -29,16 +33,39 @@ onUnmounted(() => {
   <main class="app">
     <header class="cabecera">
       <div class="header-main">
-        <div>
+        <div class="brand-group">
           <h1 class="titulo">Lota Indómito</h1>
           <p class="subtitulo">Guardianes de la Cuenca — Piloto A</p>
         </div>
-        <WalletHUD />
+
+        <div class="hud-actions">
+          <WalletHUD />
+          <button class="btn-mochila" @click="showMochilaModal = true">
+            <span>🎒 Mochila</span>
+            <span class="badge-count">{{ inventory.items.length }}</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Toast Flotante de Ítems Obtenidos -->
+      <transition name="toast-slide">
+        <div v-if="inventory.lastAcquiredItem" class="item-toast">
+          <span class="toast-sparkle">✨</span>
+          <span>¡Nuevo ítem: <strong>{{ inventory.lastAcquiredItem.icon }} {{ inventory.lastAcquiredItem.name }}</strong>!</span>
+        </div>
+      </transition>
     </header>
+
     <div class="mapa-wrapper">
       <MapaLota />
     </div>
+
+    <!-- Modal de Mochila Minera & Bitácora -->
+    <MochilaMinera
+      v-if="showMochilaModal"
+      @close="showMochilaModal = false"
+    />
+
     <footer class="pie-pagina">
       <div class="pie-content">
         <span class="pie-tech">
@@ -92,19 +119,103 @@ html, body {
 
 .cabecera {
   flex-shrink: 0;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  position: relative;
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  color: #3FE6C0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #3fe6c0;
+  padding: 0;
+  line-height: 1.1;
 }
 
 .subtitulo {
-  font-size: 0.85rem;
-  padding: 0 1rem 0.5rem;
+  font-size: 0.75rem;
   color: #8b949e;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.hud-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-mochila {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border: 1.5px solid #d17a4f;
+  color: #f1f5f9;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(209, 122, 79, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-mochila:hover {
+  border-color: #3fe6c0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(63, 230, 192, 0.3);
+}
+
+.badge-count {
+  background: #d17a4f;
+  color: #0f1216;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.item-toast {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1.5px solid #ffd700;
+  color: #ffd700;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  backdrop-filter: blur(10px);
+}
+
+.toast-slide-enter-active, .toast-slide-leave-active {
+  transition: all 0.3s ease;
+}
+.toast-slide-enter-from, .toast-slide-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -10px);
 }
 
 .pie-pagina {
