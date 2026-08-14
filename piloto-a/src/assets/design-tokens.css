@@ -1,0 +1,94 @@
+/* ═══════════ DESIGN TOKENS — Lota Indómito ═══════════
+   Sistema de tokens visuales unificado para landing + Piloto A.
+   Consumir siempre vía variables CSS — no hardcodear valores. */
+
+:root {
+  /* ── Paleta: Turbo Industrial ── */
+  --lota-bg: #07080b;
+  --lota-bg-2: #0f131a;
+  --lota-bg-3: #161c26;
+  --lota-line: #1e2634;
+  --lota-line-strong: #2c3546;
+
+  --lota-text: #f0f4f9;
+  --lota-text-muted: #a0aec0;
+  --lota-text-dim: #4a5568;
+  --lota-text-meta: #556072;
+
+  --lota-teal: #65dabc;
+  --lota-teal-dim: #2A9D8F;
+  --lota-gold: #D4AF37;
+  --lota-gold-bright: #ffe9a0;
+  --lota-peach: #F4A261;
+  --lota-peach-bright: #f5a285;
+  --lota-copper: #c87d55;
+  --lota-coral: #E76F51;
+
+  /* Alias para migración desde valores hex sueltos */
+  --lota-accent: var(--lota-teal);
+  --lota-warning: var(--lota-peach);
+  --lota-success: var(--lota-teal);
+
+  /* ── Tipografía ── */
+  --lota-font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --lota-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --lota-tracking-title: 1.5px;
+  --lota-tracking-cta: 1px;
+  --lota-tracking-mono: 2.5px;
+
+  /* ── Espaciado ── */
+  --lota-space-1: 4px;
+  --lota-space-2: 8px;
+  --lota-space-3: 12px;
+  --lota-space-4: 16px;
+  --lota-space-5: 24px;
+  --lota-space-6: 32px;
+  --lota-space-7: 48px;
+  --lota-space-8: 64px;
+
+  /* ── Radios ── */
+  --lota-radius-sm: 6px;
+  --lota-radius-md: 10px;
+  --lota-radius-lg: 16px;
+  --lota-radius-pill: 999px;
+
+  /* ── Bisel carbón (paneles y HUD) ── */
+  --lota-bisel-border: 2px;
+  --lota-bisel-border-glow: rgba(212, 175, 55, 0.35);
+  --lota-bisel-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04),
+                      inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+
+  /* ── Sombras ── */
+  --lota-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --lota-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --lota-shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.6);
+  --lota-shadow-teal-glow: 0 0 12px rgba(101, 218, 188, 0.55);
+  --lota-shadow-gold-glow: 0 0 18px rgba(212, 175, 55, 0.5);
+
+  /* ── Cristal / backdrop ── */
+  --lota-glass-bg: rgba(18, 22, 29, 0.72);
+  --lota-glass-bg-strong: rgba(10, 12, 16, 0.92);
+  --lota-glass-blur: blur(12px);
+  --lota-glass-blur-strong: blur(14px);
+
+  /* ── Animación ── */
+  --lota-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --lota-ease-in-out: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --lota-duration-fast: 150ms;
+  --lota-duration-base: 250ms;
+  --lota-duration-slow: 600ms;
+
+  /* ── Bisel mixins helpers ── */
+  --lota-bisel-copper: 2px solid var(--lota-copper);
+  --lota-bisel-gold: 2px solid var(--lota-gold);
+  --lota-bisel-teal: 2px solid var(--lota-teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --lota-duration-fast: 0ms;
+    --lota-duration-base: 0ms;
+    --lota-duration-slow: 0ms;
+  }
+}

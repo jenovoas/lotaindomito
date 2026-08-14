@@ -1,0 +1,12 @@
+/* Tipografías — Lota Indómito
+   La landing usa CDN Google Fonts (Space Grotesk + JetBrains Mono).
+   Aquí se declaran las CSS variables de familia reutilizables.
+   Si en algún momento se quiere self-host, agregar @font-face aquí
+   y cambiar las URLs en index.html y main.ts del Piloto A. */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --lota-font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --lota-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
