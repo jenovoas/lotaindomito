@@ -243,7 +243,7 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
 <section id="gameplay" style="border-top:1px solid var(--line);">
   <div class="section-label reveal">// Demostración interactiva en vivo</div>
   <h2 class="reveal">Prueba el Piloto A directamente</h2>
-  <p class="lead reveal">Navega el mapa 3D táctico de Lota en tiempo real. Puedes interactuar con las LotaStops patrimoniales, iniciar micro-sesiones con Isidora Goyenechea y El Ciego de la Mina, o abrir la PWA en pantalla completa.</p>
+  <p class="lead reveal">Navega el mapa 3D táctico de Lota en tiempo real. Puedes interactuar con las tiendas patrimoniales, iniciar micro-sesiones con Isidora Goyenechea y El Ciego de la Mina, o abrir la PWA en pantalla completa.</p>
   
   <div style="margin-top:36px;position:relative;border-radius:20px;overflow:hidden;border:2px solid var(--copper);box-shadow:0 20px 60px rgba(0,0,0,0.7);" class="reveal">
     <div style="padding:14px 20px;background:var(--bg3);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
@@ -514,8 +514,8 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   scene.add(sky);
 
   // ── 1. Superficie Oceánica Horizontal (Mar de Lota) ──
-  const xSeg = isMobile ? 56 : 90;
-  const zSeg = isMobile ? 40 : 64;
+  const xSeg = isMobile ? 64 : 110;
+  const zSeg = isMobile ? 48 : 80;
   const oceanW = 300;
   const oceanH = 200;
   const oceanGeo = new THREE.PlaneGeometry(oceanW, oceanH, xSeg, zSeg);
@@ -525,22 +525,25 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   const oceanVertexCount = oceanPos.length / 3;
   const initialOceanX = new Float32Array(oceanVertexCount);
   const initialOceanZ = new Float32Array(oceanVertexCount);
+  const oceanColors = new Float32Array(oceanVertexCount * 3);
 
   for (let i = 0; i < oceanVertexCount; i++) {
     initialOceanX[i] = oceanPos[i * 3];
     initialOceanZ[i] = oceanPos[i * 3 + 2];
     oceanPos[i * 3 + 1] = 0;
   }
+  oceanGeo.setAttribute("color", new THREE.BufferAttribute(oceanColors, 3));
   oceanGeo.computeVertexNormals();
 
   const oceanMat = new THREE.MeshPhongMaterial({
-    color: 0x0a4b60,
+    color: 0xffffff,
+    vertexColors: true,
     emissive: 0x021d28,
-    specular: 0x67e8f9,
-    shininess: 55,
+    specular: 0xbae6fd,
+    shininess: 70,
     flatShading: true,
     transparent: true,
-    opacity: 0.90,
+    opacity: 0.92,
   });
   const oceanMesh = new THREE.Mesh(oceanGeo, oceanMat);
   oceanMesh.position.set(5, -14.0, -55); // Bajado y empujado hacia el horizonte
@@ -794,10 +797,11 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
   });
 
   function getWaveY(x, z, t) {
-    const w1 = Math.sin(z * 0.10 - t * 2.0 + x * 0.04) * 0.9;
-    const w2 = Math.cos(x * 0.12 + z * 0.08 - t * 1.5) * 0.5;
-    const w3 = Math.sin((x * 0.2 + z * 0.15) - t * 2.8) * 0.25;
-    return w1 + w2 + w3;
+    const w1 = Math.sin(z * 0.08 - t * 1.8 + x * 0.03) * 1.1;  // Marejada principal del Pacífico
+    const w2 = Math.cos(x * 0.14 - z * 0.06 - t * 1.4) * 0.55; // Olas cruzadas de golfo
+    const w3 = Math.sin(x * 0.32 + z * 0.22 - t * 2.8) * 0.22; // Crestas rizadas
+    const w4 = Math.cos(x * 0.60 - z * 0.40 + t * 4.0) * 0.08; // Micro-rizo de brisa
+    return w1 + w2 + w3 + w4;
   }
 
   // ── Bucle de Animación ──
@@ -806,14 +810,24 @@ footer .mono { font-family: var(--mono); color: var(--gold); }
     requestAnimationFrame(animate);
     clock += 0.016;
 
-    // 1. Ondulación suave del mar de Lota
+    // 1. Ondulación y espuma dinámica en las crestas del mar de Lota
     const pos = oceanGeo.attributes.position.array;
+    const cols = oceanGeo.attributes.color.array;
     for (let i = 0; i < oceanVertexCount; i++) {
       const u = initialOceanX[i];
       const v = initialOceanZ[i];
-      pos[i * 3 + 1] = getWaveY(u, v, clock);
+      const wy = getWaveY(u, v, clock);
+      pos[i * 3 + 1] = wy;
+
+      const normalizedHeight = (wy + 1.8) / 3.6;
+      const crestFoam = Math.pow(Math.max(0, (wy - 0.7) / 1.2), 2);
+
+      cols[i * 3]     = 0.04 + normalizedHeight * 0.12 + crestFoam * 0.60;
+      cols[i * 3 + 1] = 0.22 + normalizedHeight * 0.32 + crestFoam * 0.65;
+      cols[i * 3 + 2] = 0.35 + normalizedHeight * 0.35 + crestFoam * 0.45;
     }
     oceanGeo.attributes.position.needsUpdate = true;
+    oceanGeo.attributes.color.needsUpdate = true;
     oceanGeo.computeVertexNormals();
 
     // 2. Balanceo de botes sobre las olas
