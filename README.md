@@ -1,6 +1,6 @@
 # Lota Indómito
 
-Juego tipo Pokémon GO ambientado en Lota (Chile). El jugador camina por la ciudad, entra a zonas históricas, descubre personajes del pasado carbonero (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero), completa misiones y sube de rango recolectando minerales del juego.
+Juego tipo Pokémon GO ambientado en Lota (Chile). El jugador camina por la ciudad, entra a zonas históricas, descubre personajes del pasado histórico (Isidora Goyenechea, El Ciego de la Mina, La Chinchorrera Mayor, El Palanquero), completa misiones y sube de rango recolectando minerales del juego.
 
 > **Estado:** diseño de concepto completo (D-014). Piloto demostrable en preparación: teléfono (PWA, Piloto A) + motor (Rust + wgpu + Sentinel S60, Piloto B — el centro del concepto). Propuesta de concepto en `docs/propuesta-concepto.md` (28 secciones). Resumen ejecutivo en `docs/resumen-ejecutivo.md`.
 
