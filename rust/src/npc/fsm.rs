@@ -75,7 +75,7 @@ pub struct Npc {
     pub state: NpcState,
     pub lat: i64,
     pub lon: i64,
-    pub zona_id: u32,
+    pub zona_id: u64,
     pub mission_id: u32,
     pub waypoints: Vec<(i64, i64)>,
     pub waypoint_idx: usize,
@@ -88,7 +88,7 @@ pub struct Npc {
 
 impl Npc {
     /// Crea un nuevo NPC en estado `Idle`.
-    pub fn new(id: u32, name: &str, lat: i64, lon: i64, zona_id: u32, mission_id: u32) -> Self {
+    pub fn new(id: u32, name: &str, lat: i64, lon: i64, zona_id: u64, mission_id: u32) -> Self {
         Self {
             id,
             name: name.to_string(),

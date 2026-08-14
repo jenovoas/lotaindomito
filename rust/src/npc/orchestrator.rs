@@ -5,7 +5,7 @@
 use std::collections::HashMap;
 
 use super::fsm::{InteractionAction, Npc, NpcInteractionResult, NpcState};
-use super::spawn::{spawn_npc_from_event, SkyEvent};
+use super::spawn::spawn_initial_npcs;
 
 /// Orquesta todos los NPCs del servidor.
 ///
@@ -17,13 +17,21 @@ pub struct NpcOrchestrator {
 }
 
 impl NpcOrchestrator {
-    /// Crea el orquestador con el NPC piloto por defecto (Isidora).
+    /// Crea el orquestador con los NPCs piloto iniciales.
     pub fn new() -> Self {
         let mut npcs = HashMap::new();
-        if let Some(isidora) = spawn_npc_from_event(SkyEvent::TestEvent) {
-            npcs.insert(isidora.id, isidora);
+        let initial = spawn_initial_npcs();
+        let mut max_id = 0;
+        for npc in initial {
+            if npc.id > max_id {
+                max_id = npc.id;
+            }
+            npcs.insert(npc.id, npc);
         }
-        Self { npcs, next_id: 2 }
+        Self {
+            npcs,
+            next_id: max_id + 1,
+        }
     }
 
     /// Avanza la FSM de cada NPC un tick determinista.
@@ -34,7 +42,7 @@ impl NpcOrchestrator {
     }
 
     /// Devuelve los NPCs activos en una zona.
-    pub fn get_active_npcs(&self, zona_id: u32) -> Vec<&Npc> {
+    pub fn get_active_npcs(&self, zona_id: u64) -> Vec<&Npc> {
         self.npcs
             .values()
             .filter(|npc| npc.zona_id == zona_id && npc.active)
@@ -87,11 +95,19 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_orchestrator_has_default_npc() {
+    fn test_orchestrator_has_default_npcs() {
         let orchestrator = NpcOrchestrator::new();
-        let npcs = orchestrator.get_active_npcs(89121388);
-        assert_eq!(npcs.len(), 1);
-        assert_eq!(npcs[0].name, "Isidora Goyenechea");
+        let isidora = orchestrator.get_active_npcs(89121388);
+        assert_eq!(isidora.len(), 1);
+        assert_eq!(isidora[0].name, "Isidora Goyenechea");
+
+        let palanquero = orchestrator.get_active_npcs(12557447365);
+        assert_eq!(palanquero.len(), 1);
+        assert_eq!(palanquero[0].name, "El Palanquero");
+
+        let ciego = orchestrator.get_active_npcs(480338029);
+        assert_eq!(ciego.len(), 1);
+        assert_eq!(ciego[0].name, "El Ciego de la Mina");
     }
 
     #[test]

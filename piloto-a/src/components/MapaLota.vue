@@ -16,7 +16,9 @@ import { s60ToDegrees } from '@/utils/s60-to-degrees'
 import MicroSesionChiflon from './MicroSesionChiflon.vue'
 import MicroSesionIsidora from './MicroSesionIsidora.vue'
 import MicroSesionPabellon from './MicroSesionPabellon.vue'
+import VisorRA from './VisorRA.vue'
 import WorldEventBanner from './WorldEventBanner.vue'
+import type { NpcWire } from '@/stores/mobs'
 
 interface ZonaOSM {
   id: number
@@ -43,6 +45,13 @@ let npcEventInterval: ReturnType<typeof setInterval> | null = null
 const showChiflonModal = ref(false)
 const showIsidoraModal = ref(false)
 const showPabellonModal = ref(false)
+const showVisorRaModal = ref(false)
+const activeNpcForRa = ref<NpcWire | null>(null)
+
+function openVisorRa(npc: NpcWire) {
+  activeNpcForRa.value = npc
+  showVisorRaModal.value = true
+}
 
 function onMissionComplete(reward: { cobre: number; oro?: number }, zonaId?: number | null) {
   walletStore.balance.cobre += reward.cobre
@@ -78,7 +87,7 @@ function updateNpcMarkers() {
       const npcLon = s60ToDegrees(npc.lon_s60)
       const el = document.createElement('div')
       el.className = 'npc-marker'
-      el.innerText = '👤 ' + npc.name
+      el.innerText = `${npc.avatar || '👤'} ${npc.name} [RA]`
       el.style.backgroundColor = '#161b22'
       el.style.color = '#3FE6C0'
       el.style.border = '2px solid #3FE6C0'
@@ -86,8 +95,13 @@ function updateNpcMarkers() {
       el.style.padding = '4px 8px'
       el.style.fontSize = '0.8rem'
       el.style.fontWeight = 'bold'
-      el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.5)'
+      el.style.boxShadow = '0 2px 10px rgba(63, 230, 192, 0.4)'
       el.style.cursor = 'pointer'
+      el.style.transition = 'transform 0.2s'
+
+      el.addEventListener('click', () => {
+        openVisorRa(npc)
+      })
 
       const marker = new Marker({ element: el })
         .setLngLat([npcLon, npcLat])
@@ -97,6 +111,11 @@ function updateNpcMarkers() {
     } catch (e) {
       console.warn('Coordenadas S60 inválidas para NPC', npc, e)
     }
+  }
+
+  // Verificar proximidad para activar el banner de intercepción
+  if (lat.value && lon.value) {
+    mobsStore.checkProximity(lat.value, lon.value)
   }
 }
 
@@ -120,6 +139,35 @@ watch(
   }
 )
 
+function zoomIn() {
+  if (map) map.zoomIn({ duration: 300 })
+}
+
+function zoomOut() {
+  if (map) map.zoomOut({ duration: 300 })
+}
+
+function centrarEnJugador() {
+  if (map && lat.value && lon.value) {
+    map.flyTo({
+      center: [lon.value, lat.value],
+      zoom: 17,
+      pitch: 55,
+      bearing: -15,
+      speed: 1.3,
+      essential: true
+    })
+  } else if (map) {
+    map.flyTo({
+      center: [-73.165, -37.089],
+      zoom: 16.5,
+      pitch: 55,
+      speed: 1.2,
+      essential: true
+    })
+  }
+}
+
 function teleportAZona(zona: ZonaOSM) {
   console.log('[teleportAZona] Teletransportando a:', zona.name)
   if (!zona.coords || !zona.coords.length) return
@@ -127,7 +175,15 @@ function teleportAZona(zona: ZonaOSM) {
   const avgLat = zona.coords.reduce((s, c) => s + c.lat, 0) / zona.coords.length
 
   if (map) {
-    map.flyTo({ center: [avgLng, avgLat], zoom: 16.5, speed: 1.2 })
+    map.flyTo({
+      center: [avgLng, avgLat],
+      zoom: 17,
+      pitch: 55,
+      bearing: -15,
+      speed: 1.4,
+      curve: 1.4,
+      essential: true
+    })
   }
   teleport(avgLat, avgLng)
   geofence.zonaActiva = {
@@ -165,6 +221,8 @@ onMounted(() => {
 
   worldEvents.init()
   latticeStore.connect()
+  mobsStore.startPatrolTicker()
+  updateNpcMarkers()
 
   // Construir GeoJSON con polígonos de las zonas patrimoniales
   const features = zonas
@@ -193,18 +251,31 @@ onMounted(() => {
           type: 'raster',
           tiles: ['https://basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}.png'],
           tileSize: 256,
+          maxzoom: 19,
           attribution: '© CARTO / OpenStreetMap',
         },
       },
-      layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto' }],
+      layers: [{ id: 'carto-tiles', type: 'raster', source: 'carto', maxzoom: 22 }],
     },
     center: [-73.165, -37.089],
-    zoom: 16,
-    pitch: 55, // Vista en 3ª persona estilo RPG / Pokémon GO
-    bearing: -20,
+    zoom: 16.2,
+    minZoom: 13,
+    maxZoom: 19.5,
+    maxBounds: [
+      [-73.22, -37.14],
+      [-73.10, -37.05]
+    ],
+    pitch: 52,
+    maxPitch: 68,
+    bearing: -15,
+    dragRotate: true,
+    touchZoomRotate: true,
+    touchPitch: true,
+    scrollZoom: true,
+    doubleClickZoom: true,
   })
 
-  map.addControl(new NavigationControl(), 'top-right')
+  map.addControl(new NavigationControl({ visualizePitch: true, showCompass: true, showZoom: false }), 'top-right')
 
   map.on('load', () => {
     if (!map) return
@@ -304,24 +375,23 @@ let npcEventMarker: any = null
       if (map) map.getCanvas().style.cursor = ''
     })
 
-    // Teletransporte virtual al hacer click en el mapa
-    map.on('click', (e) => {
-      if (geofence.isVirtualMode) {
-        teleport(e.lngLat.lat, e.lngLat.lng)
+    // Marcador del jugador
+    const playerEl = document.createElement('div')
+    playerEl.className = 'player-marker'
+    playerEl.innerHTML = '🚶'
+    playerEl.style.fontSize = '1.8rem'
+    playerEl.style.filter = 'drop-shadow(0 0 8px #3FE6C0)'
+
+    const playerMarker = new Marker({ element: playerEl })
+      .setLngLat([lon.value || -73.165, lat.value || -37.089])
+      .addTo(map)
+
+    // Actualizar posición del jugador al cambiar GPS
+    watch([lat, lon], ([newLat, newLon]) => {
+      if (newLat && newLon && playerMarker) {
+        playerMarker.setLngLat([newLon, newLat])
       }
     })
-
-    // Demo de geofencing: promedio de vértices cae dentro del polígono del Parque Isidora
-    const isidora = zonas.find((z) => z.id === 89121388 || z.name.includes('Isidora'))
-    if (isidora && isidora.coords.length >= 3) {
-      const coords: [number, number][] = isidora.coords.map((c) => [c.lon, c.lat])
-      const poly = turfPolygon([[...coords, coords[0]!]])
-      const avgLng = coords.reduce((s, c) => s + c[0], 0) / coords.length
-      const avgLat = coords.reduce((s, c) => s + c[1], 0) / coords.length
-      const pt = turfPoint([avgLng, avgLat])
-      const inside = booleanPointInPolygon(pt, poly)
-      console.log(`[geofencing] ${isidora.name}: promedio de vértices dentro = ${inside}`)
-    }
 
     // Forzar resize tras layout estable
     setTimeout(() => map?.resize(), 100)
@@ -329,6 +399,7 @@ let npcEventMarker: any = null
 })
 
 onUnmounted(() => {
+  mobsStore.stopPatrolTicker()
   latticeStore.disconnect()
   npcMarkers.forEach((m) => m.remove())
   if (npcEventInterval) clearInterval(npcEventInterval)
@@ -341,8 +412,17 @@ onUnmounted(() => {
   <div class="mapa-container">
     <div ref="mapContainer" class="mapa"></div>
 
+    <!-- Banner: Intercepción en Movimiento / Proximidad RA -->
+    <div
+      v-if="mobsStore.interceptedNpc && !showVisorRaModal"
+      class="banner banner-intercepcion"
+      @click="openVisorRa(mobsStore.interceptedNpc)"
+    >
+      🚨 ¡{{ mobsStore.interceptedNpc.name }} camina a tu lado! Toca para Visor RA 👁️
+    </div>
+
     <!-- Banner: GPS no disponible -->
-    <div v-if="!gpsAvailable" class="banner banner-gps">
+    <div v-else-if="!gpsAvailable" class="banner banner-gps">
       GPS no disponible, modo manual activado
     </div>
 
@@ -364,7 +444,7 @@ onUnmounted(() => {
       <h2>{{ geofence.zonaActiva.zona_name }}</h2>
       <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-12)</p>
       <p class="hint">
-        {{ mobsStore.mobsActivos.length > 0 ? `NPC ${mobsStore.mobsActivos[0]?.name} detectada en la zona.` : 'Geofencing listo — entra a una zona patrimonial para encontrar personajes históricos.' }}
+        {{ mobsStore.mobsActivos.length > 0 ? `Patrullas vivas activas en la comuna.` : 'Geofencing listo — entra a una zona patrimonial para encontrar personajes históricos.' }}
       </p>
       <button class="btn-mision" @click="abrirMision(geofence.zonaActiva.zona_id, geofence.zonaActiva.zona_name)">
         Iniciar Misión: {{ geofence.zonaActiva.zona_name }}
@@ -386,6 +466,15 @@ onUnmounted(() => {
       @close="showPabellonModal = false"
       @complete="(r: { cobre: number; oro?: number }) => onMissionComplete(r, 12557447365)"
     />
+
+    <!-- Visor de Realidad Aumentada (RA) y Encuentro en Marcha -->
+    <VisorRA
+      v-if="showVisorRaModal && activeNpcForRa"
+      :npc="activeNpcForRa"
+      @close="showVisorRaModal = false"
+      @complete="(r: { cobre: number; oro?: number }) => { onMissionComplete(r, activeNpcForRa?.zona_id); showVisorRaModal = false }"
+    />
+
     <aside class="panel-zonas">
       <div class="panel-header-gaming">
         <span class="icon">📍</span>
@@ -409,10 +498,62 @@ onUnmounted(() => {
         </div>
       </div>
     </aside>
+
+    <!-- Controles Flotantes de Zoom y Cámara -->
+    <div class="map-controls-floating">
+      <button class="btn-map-control" title="Acercar Cámara (+)" @click="zoomIn">➕</button>
+      <button class="btn-map-control" title="Alejar Cámara (-)" @click="zoomOut">➖</button>
+      <button class="btn-map-control btn-center-player" title="Centrar en Jugador" @click="centrarEnJugador">🎯</button>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.map-controls-floating {
+  position: absolute;
+  top: 4.5rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 15;
+}
+
+.btn-map-control {
+  width: 38px;
+  height: 38px;
+  background: rgba(22, 27, 34, 0.92);
+  border: 1.5px solid #30363d;
+  color: #3fe6c0;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-map-control:hover {
+  background: #3fe6c0;
+  color: #0f1216;
+  border-color: #3fe6c0;
+  transform: scale(1.08);
+}
+
+.btn-center-player {
+  border-color: #f5a285;
+  color: #f5a285;
+}
+
+.btn-center-player:hover {
+  background: #f5a285;
+  color: #0f1216;
+  border-color: #f5a285;
+}
+
 .mapa-container {
   flex: 1;
   position: relative;
@@ -447,6 +588,22 @@ onUnmounted(() => {
   background: #161b22;
   border: 1px solid #30363d;
   color: #e6e9ef;
+}
+
+.banner-intercepcion {
+  background: linear-gradient(135deg, #d17a4f 0%, #f5a285 100%);
+  color: #0f1216;
+  border: 2px solid #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  font-weight: 800;
+  animation: pulseGlow 1.8s infinite alternate ease-in-out;
+  box-shadow: 0 4px 20px rgba(209, 122, 79, 0.7);
+}
+
+@keyframes pulseGlow {
+  0% { transform: translateX(-50%) scale(1); }
+  100% { transform: translateX(-50%) scale(1.04); }
 }
 
 .banner-zona {

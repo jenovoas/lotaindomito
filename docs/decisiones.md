@@ -10,7 +10,7 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 
 | Estado | Decisiones |
 |---|---|
-| **Vigentes** (encuadran el proyecto hoy) | [D-006](#d-006--servidor-fase-1--python-fastapi), [D-007](#d-007--interfaz--vue-3--typescript), [D-011](#d-011--camino-c-confirmado--motor-propio-s60--pipeline-gpu-activo-2026-08-09), [D-012](#d-012--arquitectura-de-integracin-sentinel--gpu-confirmada-2026-08-09), [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da), [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10-aprobada-el-2026-08-12), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10-aprobada-el-2026-08-12), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12) |
+| **Vigentes** (encuadran el proyecto hoy) | [D-006](#d-006--servidor-fase-1--python-fastapi), [D-007](#d-007--interfaz--vue-3--typescript), [D-011](#d-011--camino-c-confirmado--motor-propio-s60--pipeline-gpu-activo-2026-08-09), [D-012](#d-012--arquitectura-de-integracin-sentinel--gpu-confirmada-2026-08-09), [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da), [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10-aprobada-el-2026-08-12), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10-aprobada-el-2026-08-12), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12), [D-019](#d-019--experiencia-de-juego-mmo-ra-urbano-pokmon-go--wow-con-patrullas-sincronizadas-2026-08-13) |
 | **Propuestas** (pendientes de aprobación) | — |
 | **Operativas** (reglas y procedimientos) | [D-001](#d-001--sync-bidireccional-con-drive-para-lotaindomito), [D-002](#d-002--transcripcin-local-con-faster-whisper), [D-003](#d-003--espaol-chileno-obligatorio-en-redaccin) |
 | **Históricas** (contexto de módulos y decisiones viejas) | [D-002](#d-002--memoria-operativa-en-docs-separada-de-_analisis), [D-003](#d-003--event-engine-ejemplo-celestialrs--sincronizacin-eventos-digitales--reales), [D-004](#d-004--entregable-para-el-fondo--propuesta--maqueta--demo-de-interfaz), [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-cliente-de-un-men-de-opciones), [D-009](#d-009--autorizacin-de-uso-de-celestialrspy-en-lota-indmito), [D-010](#d-010--lota-indmito-integra-mdulos-matemticos-del-core-s60-de-sentinel-celestial-como-caso-de-uso), [D-010-A](#d-010-a--mdulos-del-framework-sentinel-identificados-para-integrar-al-juego-rol-especfico-propuesto-pendiente-confirmacin), [D-013](#d-013--dos-pilotos-en-paralelo-motor-propio-vs-tecnologa-de-mercado-2026-08-10) |
@@ -19,11 +19,29 @@ Registro de decisiones tomadas. **Fecha + decisión + razón + contraparte anali
 
 | Dominio | Decisiones |
 |---|---|
-| **Concepto / diseño del juego** | [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da), [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10-aprobada-el-2026-08-12), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10-aprobada-el-2026-08-12) |
+| **Concepto / diseño del juego** | [D-014](#d-014--encuadre-vigente-concepto-real-del-proyecto-2026-08-10-corregida-el-mismo-da), [D-016](#d-016--reemplazo-de-carboncillo-por-sistema-multi-moneda-de-minerales-2026-08-10-aprobada-el-2026-08-12), [D-017](#d-017--subastas-digitales-de-cosas-reales-con-pago-en-minerales-2026-08-10-aprobada-el-2026-08-12), [D-019](#d-019--experiencia-de-juego-mmo-ra-urbano-pokmon-go--wow-con-patrullas-sincronizadas-2026-08-13) |
 | **Motor / Piloto B (Sentinel S60)** | [D-009](#d-009--autorizacin-de-uso-de-celestialrspy-en-lota-indmito), [D-010](#d-010--lota-indmito-integra-mdulos-matemticos-del-core-s60-de-sentinel-celestial-como-caso-de-uso), [D-010-A](#d-010-a--mdulos-del-framework-sentinel-identificados-para-integrar-al-juego-rol-especfico-propuesto-pendiente-confirmacin), [D-011](#d-011--camino-c-confirmado--motor-propio-s60--pipeline-gpu-activo-2026-08-09), [D-012](#d-012--arquitectura-de-integracin-sentinel--gpu-confirmada-2026-08-09), [D-013](#d-013--dos-pilotos-en-paralelo-motor-propio-vs-tecnologa-de-mercado-2026-08-10), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12) |
-| **Piloto A (frontend PWA)** | [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-007](#d-007--interfaz--vue-3--typescript), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-cliente-de-un-men-de-opciones), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12) |
+| **Piloto A (frontend PWA)** | [D-005](#d-005--alcance-del-piloto--lean-doc-04-sin-3d-ni-minijuegos), [D-007](#d-007--interfaz--vue-3--typescript), [D-008](#d-008--la-pila-tcnica-del-juego-la-elige-cliente-de-un-men-de-opciones), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12), [D-019](#d-019--experiencia-de-juego-mmo-ra-urbano-pokmon-go--wow-con-patrullas-sincronizadas-2026-08-13) |
 | **Backend / infra** | [D-001](#d-001--sync-bidireccional-con-drive-para-lotaindomito), [D-006](#d-006--servidor-fase-1--python-fastapi), [D-018](#d-018--wire-format-s60-componentes-explcitos-en-api-rest-y-websocket-2026-08-12) |
 | **Operación y reglas del proyecto** | [D-002](#d-002--transcripcin-local-con-faster-whisper), [D-002](#d-002--memoria-operativa-en-docs-separada-de-_analisis), [D-003](#d-003--espaol-chileno-obligatorio-en-redaccin), [D-003](#d-003--event-engine-ejemplo-celestialrs--sincronizacin-eventos-digitales--reales), [D-004](#d-004--entregable-para-el-fondo--propuesta--maqueta--demo-de-interfaz) |
+
+---
+
+## 2026-08-13
+
+### D-019 · Experiencia de juego MMO-RA Urbano: Pokémon GO × WoW con patrullas sincronizadas (2026-08-13)
+
+- **Decisión:** redefinir formalmente el género y la experiencia de juego de *Lota Indómito* como un **MMO-RA Urbano en el Mundo Real**, fusionando la exploración territorial (Pokémon GO) con la profundidad de rol, facciones, clases, cadenas de misiones (Quest Chains) y World Bosses / Raids cooperativos en RA (World of Warcraft).
+- **Pilares clave:**
+  1. **Patrullas de NPCs en movimiento:** los personajes históricos patrullan activamente las calles con horarios y turnos reales; el jugador los intercepta a pie y camina a su lado en RA ("hombro a hombro").
+  2. **Sincronización extrema:** visibilidad colectiva y determinista de apariciones en el espacio físico para todos los jugadores presentes.
+  3. **Diseño "Ojos Arriba" (Look-Up Design):** eliminación de minijuegos 2D abstractos/QTE aislados en favor de dinámicas que exigen observar y alinear elementos del entorno patrimonial real en RA.
+  4. **Facciones y Clases:** 3 facciones históricas (*Hermandad del Carbón*, *Linaje de la Luz*, *Gremio de las Mareas*) y 4 clases (*Barretero*, *Chinchorrera*, *Cronista de Salón*, *Fogonero*) con habilidades de campo pasivas.
+  5. **Economía de Fichas de Pulpería:** integración diegética de minerales del juego (Cu/Au/Sn) con canje en el comercio real de Lota.
+- **Razón:** supera las limitaciones de las audioguías gamificadas y minijuegos desconectados del entorno físico, dotando al juego de tensión, inmersión, identidad de rol y autenticidad histórica.
+- **Estado:** APROBADA por INTERLOCUTOR (2026-08-13). Documentación actualizada en `docs/concepto-juego.md` y `_analisis/20_loop_jugador_dia_a_dia.md`.
+
+---
 
 ---
 

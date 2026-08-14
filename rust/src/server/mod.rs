@@ -81,7 +81,7 @@ pub struct NpcWire {
     pub state: NpcState,
     pub lat_s60: S60Components,
     pub lon_s60: S60Components,
-    pub zona_id: u32,
+    pub zona_id: u64,
     pub mission_id: u32,
     pub active: bool,
 }
@@ -122,7 +122,7 @@ impl AppState {
 /// Respuesta JSON para /npcs.
 #[derive(Debug, Serialize)]
 struct NpcsResponse {
-    zona_id: u32,
+    zona_id: u64,
     count: usize,
     npcs: Vec<NpcWire>,
 }
@@ -130,7 +130,7 @@ struct NpcsResponse {
 /// Query params para /npcs.
 #[derive(Debug, Deserialize)]
 struct NpcsQuery {
-    zona_id: u32,
+    zona_id: u64,
 }
 
 /// Body para POST /npcs/interact.

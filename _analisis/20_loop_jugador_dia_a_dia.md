@@ -1,222 +1,106 @@
-# Loop del jugador día-a-día — Lota Indómito
+# Loop del jugador día-a-día — Lota Indómito: MMO-RA Urbano
 
 > **Documento de diseño conceptual.**
-> **Fecha:** 2026-08-10.
-> **Destinatario:** INTERLOCUTOR (Jaime), para discusión antes de bajar a mecánica.
-> **Encuadre:** D-014 (turista de paso + micro-sesión + eventos del cielo como anzuelo + retención D1/D7/D30). Cualquier decisión de este doc debe leerse contra `docs/decisiones.md` D-014 y `docs/concepto-juego.md` GDD.
+> **Fecha:** 2026-08-10 (Actualizado: 2026-08-13 — Encuadre MMO-RA D-019).
+> **Destinatario:** INTERLOCUTOR (Jaime).
+> **Encuadre:** D-014 + D-016 + D-019 (MMO-RA del Mundo Real: Pokémon GO × World of Warcraft con patrullas sincronizadas en RA, diseño "Ojos Arriba" y economía viva de minerales y comercio).
 
 ---
 
-## 0. Por qué este documento
+## 0. Por qué este documento y Filosofía de Diseño
 
-El "Core Game Loop" descrito en `docs/concepto-juego.md` §2 es un **loop de encuentro** (mapa → zona → diálogo → minijuego → recompensa). Describe UNA acción mecánica, no un día del jugador.
+El juego fusiona la **exploración territorial en mundo real (estilo Pokémon GO)** con la **profundidad de rol, facciones, clases, cadenas de misiones y World Bosses (estilo World of Warcraft)**, potenciado por **Realidad Aumentada (RA)** y **patrullas de NPCs que se desplazan físicamente por las calles en tiempo real con sincronización extrema**.
 
-Para validar el modelo de negocio D-014 (autofinanciamiento por comercio local), hace falta definir **el día-a-día del turista**: cuándo abre la app, qué hace, qué lo trae de vuelta, qué hace distinta a la sesión 50. Este doc cubre eso.
-
-**Tesis central:** para un turista de paso (1-2 días en Lota), **no hay loop diario** — hay **loop de visita** (dentro de la estadía) y **loop de retorno** (después de irse). Las mecánicas clásicas de mobile tipo "racha diaria / energía que regenera" NO aplican y deben descartarse.
+### Pilares Fundamentales:
+1. **Diseño "Ojos Arriba" (Look-Up Game Design):** El teléfono es un *Visor del Tiempo / Candil Espectral*, un artefacto para conectar con el entorno real de Lota, no una pantalla para aislarse jugando minijuegos genéricos.
+2. **Patrullas Vivas en Movimiento:** Los NPCs no son marcadores estáticos. Tienen turnos de trabajo, horarios y caminan físicamente por las veredas de la comuna. El jugador debe calcular rutas a pie e interceptarlos.
+3. **Caminar Hombro a Hombro en RA:** La interacción ocurre en marcha. El jugador camina junto al espectro histórico en RA mientras escucha su relato o recibe su encomienda.
+4. **Sincronización Extrema:** Si varios jugadores están en la misma esquina, todos presencian al mismo personaje cruzar el mismo paso peatonal en el mismo segundo exacto.
+5. **Sin mecánicas móviles artificiales:** No hay energía que recarga con tiempo ni rachas diarias forzadas. El compromiso nace de la inmersión, el pasaporte de aventuras y el calendario del cielo.
 
 ---
 
-## 1. Mapa del día del turista
+## 1. Mapa del día del explorador (El Viaje en Lota)
 
-### 1.1 Pre-visita (D-3 → día 0)
+### 1.1 Pre-visita (D-3 → Día 0)
 
 Fuera del juego, pero apalancado por él:
 
-- **Awareness:** alguien que ya jugó comparte su pasaporte público (URL) → efecto red orgánico.
-- **Reservar la visita:** link al **Calendario del Cielo** (ver §3) → muestra qué eventos ocurren mientras el turista está en Lota.
-- **Kit de viaje:** pasaporte descargable como PDF con las 8 rutas + mapa offline (funciona sin conexión en el Chiflón, el Parque, etc.).
+- **Elegir Facción y Clase:** El jugador selecciona su alineación (*Hermandad del Carbón*, *Linaje de la Luz*, o *Gremio de las Mareas*) y su especialidad (*Barretero*, *Chinchorrera*, *Cronista de Salón*, *Fogonero*).
+- **Calendario del Cielo y de Patrullas:** Consulta los horarios de aparición de personajes legendarios y ventanas de World Events (astronómicos, climáticos o festividades).
+- **Kit de Exploración Offline:** Descarga del mapa base y pasaporte digital para operar en zonas con sombra de señal (galerías del Chiflón, senderos densos del Parque).
 
-### 1.2 Visita — Día 1 (2-4 h caminando, ~6-10 micro-sesiones)
+### 1.2 Visita — Día 1 (2-4 h de expedición activa)
 
-1. **Llegada.** GPS detecta entrada a Lota → push: *"Bienvenido, Guardián. Tu pasaporte está activo. Hoy hay 3 eventos del cielo."*
-2. **Primera micro-sesión.** Tutorial suave + elección de modo (Jugador / Turista / Familia).
-3. **Exploración libre.** Camina por la ciudad → la app vibra al entrar a un POI (geofencing cliente, Turf.js). Cada POI = 1 micro-sesión.
-4. **Pausa café/comercio.** El pasaporte sigue, no se pierde. Modo Turista es ideal aquí (sin temporizadores).
-5. **Evento del cielo #1** (ver §3). Anzuelo intra-visita: urgencia real de 5-30 min.
-6. **Atardecer.** Cambio de cielo → se desbloquean NPCs nocturnos (Chinchorreras, Palanquero).
-7. **Antes de dormir.** Sugerencia de comercio local cercano para canjear Carboncillos. **Esto es D-014 operando.**
+1. **Llegada a la Cuenca:** El visor se activa al entrar a Lota con el eco sordo de una campana de pique: *"Bienvenido a la Cuenca, Explorador. Las almas del carbón despiertan hoy a las 14:00."*
+2. **Primera Intercepción en Calle:** El radar detecta una patrulla móvil (*El Palanquero* bajando hacia la Maestranza). El jugador camina a cortarle el paso y activa el Visor RA para acompañarlo unos metros.
+3. **Inicio de Quest Chain (Cadena de Misiones):** El personaje entrega una orden de despacho histórica que requiere buscar una marca física de cantería en el Pabellón 83 y forjar un sello de carbón.
+4. **Encuentro en Geositio / RA Arquitectónica:** En las ruinas del Pique Carlos, el visor superpone el palacio o la torre de extracción original en 3D sobre los cimientos reales.
+5. **Alerta de World Event / Raid Urbana:** A las 19:00 (Atardecer del Carbón), suena la alarma general: *"Aparición del Galeón Fantasma en el Fuerte Viejo"*. Los jugadores convergen en el mirador para cooperar en RA.
+6. **Canje en la Pulpería:** Antes de terminar la jornada, los minerales recolectados (cobre/oro) se usan en comercios locales asociados (panaderías, cafés, artesanías) reviviendo el histórico canje de fichas.
 
-### 1.3 Visita — Día 2 (si se queda; sesión más corta, 1-2 h)
+### 1.3 Visita — Día 2 (Cierre de gestas y rango)
 
-- Misiones pendientes del día 1: *"Te faltan 2 POIs para cerrar Ruta Fuego y Carbón."*
-- Eventos matutinos puntuales (Amanecer del Minero, 07:00).
-- Última compra antes de irse: gastar Carboncillos en comercio local.
-- Despedida: pasaporte se cierra con stats finales + diploma descargable.
+- Cierre de cadenas de misiones de facción pendientes.
+- Eventos matutinos especiales (Amanecer del Minero a las 07:00 en la boca del túnel).
+- Subasta de artesanías o productos locales en minerales del juego.
+- Emisión del **Pasaporte de Leyenda** con estadísticas finales, títulos honoríficos y diploma de explorador.
 
-### 1.4 Post-visita (D+1 → D+30) — vector de retorno
+### 1.4 Post-visita (D+1 → D+30) — Retorno Orgánico
 
-- **D+1:** *"Tu pasaporte está al 75%. Vuelve antes del [próximo evento del cielo] para cerrarlo."*
-- **D+7:** newsletter del cielo con la próxima ventana importante.
-- **D+30:** *"Lota tiene 3 eventos esta temporada. ¿Vienes a completarlo?"*
-
-El detalle de cada uno está en §4.
+- **D+1:** Pasaporte compartido en redes; visualización del porcentaje de secretos descubiertos.
+- **D+7:** Notificación del próximo evento de temporada (ej. Luna Llena o Día del Patrimonio).
+- **D+30:** Nuevos capítulos y expansión del corredor patrimonial (Curanilahue, Lebu).
 
 ---
 
-## 2. Anatomía de la micro-sesión (1-5 min)
+## 2. Anatomía del Encuentro y la Micro-Sesión en RA (1-3 min)
 
-Estructura **fija de 5 tramos**, ejecutada en 60-300 s. Es la unidad atómica de engagement.
+Estructura dinámica de interacción en campo:
 
-| Tramo | Tiempo | Qué pasa | Regla dura |
+| Fase | Duración | Experiencia del Jugador | Enfoque "Ojos Arriba" & RA |
 |---|---|---|---|
-| **Trigger** | 0-15 s | Vibración + banner: *"Estás en el Chiflón del Diablo. Toca para descubrir."* | Geofencing cliente (Turf.js). Sin texto antes del tap. |
-| **Contexto** | 15-60 s | Mapa mini + avatar del personaje histórico + 2-3 frases de diálogo + audio opcional | Sin scrolls. Sin muros de texto. ≤30 palabras en pantalla. |
-| **Acción** | 60-180 s | Minijuego táctil corto (QTE, hidden object, trivia) o escaneo de cámara | Pre-cargado. Cero loading entre tramos. |
-| **Recompensa** | 180-240 s | +cobre (o +oro según evento), +XP, animación de insignia, *"Has rescatado un fragmento del carbón."* | Siempre gana algo. Nunca "casi". |
-| **Próximo** | 240-300 s | *"La próxima zona está a 320 m al sur."* Mini-mapa con ruta | Nunca terminar sin dirección. La pantalla siempre cierra con un "hacé X". |
-
-### 2.1 Reglas del tramo Acción (clave para que entre en 1-5 min)
-
-- **1 acción por micro-sesión.** Nunca encadenar minijuegos.
-- **3 modos, 1 duración cada uno:**
-  - **Jugador** = 90 s de acción dura (QTE, puzle).
-  - **Turista** = 0 s (escaneo + foto, sin minijuego).
-  - **Familia** = rol-asignado, todos participan en su rol (Vigía / Cronista / Fotógrafo).
-- **Si pierde**, retry inmediato. Sin penalización de Carboncillos.
-
-### 2.2 Lo que NO debe pasar en 1-5 min
-
-- Tutoriales recurrentes (solo el primero).
-- Loading screens entre tramos.
-- Cualquier flujo que requiera conexión obligatoria (modo offline-first).
-- Esperas por GPS fino: si el GPS está sucio, se muestra la última posición conocida + se reintenta.
+| **1. Detección & Radar** | 0-15 s | Alerta sensorial (audio de pasos, silbato o vibración). El mapa muestra el vector de movimiento del NPC. | El jugador levanta la vista y ubica la calle física por donde viene la patrulla. |
+| **2. Intercepción a pie** | 15-45 s | El jugador camina hacia el punto de cruce en la acera real. | Tensión de encuentro en tiempo real: si no te apuras, el NPC sigue su camino. |
+| **3. Encuentro en Marcha (RA)** | 30-90 s | Se activa el *Visor del Tiempo*. El NPC camina a escala 1:1 por la vereda. | El jugador camina a su lado; escucha su voz espacial y recibe la misión o pista. |
+| **4. Acción de Campo** | 30-60 s | Resolver el enigma observando el entorno físico (buscar un relieve, alinear una silueta, enfocar la bruma). | Cero QTEs de pulsar botones; la acción valida la agudeza visual en el mundo real. |
+| **5. Recompensa & Rastro** | 15-30 s | Acuñación de minerales (Cu/Au), reputación con la facción y la dirección de la siguiente posta. | Animación de reliquia en 3D y rastro de huellas espectrales hacia el siguiente hito. |
 
 ---
 
-## 3. Catálogo de eventos del cielo (anzuelo intra-visita)
+## 3. Catálogo de Eventos del Mundo (World Events & Raids en RA)
 
-Cuatro tipos, todos movidos por Sentinel S60 (sin floats, deterministas). El jugador consulta el **Calendario del Cielo** (tipo tabla de mareas) antes y durante la visita.
+Integración de eventos atmosféricos con fechas reales del calendario:
 
-### 3.1 Astronómicos — predecibles, anuales
+### 3.1 Eventos Diarios y Atmosféricos
+- **Amanecer del Minero (07:00):** Salida de cuadrillas espectrales desde los piques hacia los pabellones.
+- **Atardecer del Carbón (19:00):** Isidora Goyenechea recorre los senderos altos del Parque; secretos de alcoba y diplomacia.
+- **Noche de las Chinchorreras (22:00):** Sombras en la playa preparando redes; requiere linterna o visor nocturno.
+- **Niebla del Golfo / Marejada:** Eventos marinos y apariciones de naufragios en el borde costero.
 
-- **Salida/puesta de sol (±30 min):** desbloquea NPCs del carbón.
-- **Luna llena:** el Palanquero se vuelve visible.
-- **Luna nueva:** las Chinchorreras aparecen, más esquivas.
-- **Equinoccios/solsticios (4 al año):** eventos especiales de 1-2 h.
-
-### 3.2 Climáticos — ventana corta, parcialmente impredecibles
-
-- **Niebla en el Parque:** visibilidad reducida, NPCs ocultos hasta que el jugador escanea.
-- **Marejada:** eventos marinos activos en Borde Costero.
-- **Lluvia:** el Chiflón del Diablo cambia de mecánica (agua, reflejo).
-
-### 3.3 Temporales — reloj local, recurrentes
-
-| Hora | Evento | Zona |
-|---|---|---|
-| 07:00 | Amanecer del Minero | El Ciego aparece en la Mina (Piques). |
-| 14:00 | Hora del Trueque | NPCs en zonas de comercio. |
-| 19:00 | Atardecer del Carbón | Isidora Goyenechea en el Parque. |
-| 22:00 | Noche de las Chinchorreras | La Chinchorrera Mayor en la Caleta, ventana de 90 min. |
-
-### 3.4 Raros (S60) — matemáticos, únicos
-
-Cuando los dos carriles de la lattice convergen (`|amp_A - amp_B| < SCALE_0 / 50` en GPU, computado por `lota-server`), se abre un **portal** en alguna zona:
-
-- Encuentro único: el Carboncillo que entrega **no se repite** nunca.
-- Diploma especial *"Cazador de Portales"*.
-- Es el **diferenciador central del concepto** (D-014) hecho jugable.
-
-### 3.5 Reglas comunes a todos los eventos
-
-- **Ventana corta** (5-30 min) → urgencia real, no FOMO cosmético.
-- **Anuncio anticipado** (5-15 min antes), pero el marcador **no aparece en el mapa** hasta cerca de la hora.
-- El **Calendario del Cielo SÍ los lista** con horario exacto → el turista planifica su visita alrededor.
-- Cada evento tiene un **"ya pasó"** claro en el pasaporte — el jugador sabe qué se perdió, sin ansiedad retroactiva.
-
-### 3.6 World Events — sincronización con fechas reales
-
-Los cuatro tipos de arriba son **driver atmosférico** (modulan cuándo y dónde aparecen los NPCs del enjambre SOMA). Hay una capa encima, los **World Events**, que se sincronizan con **fechas reales del calendario** (festividades nacionales, aniversarios locales, temporadas comerciales, efemérides del comercio).
-
-**Diferencia clave:**
-
-| Capa | Driver | Duración |
-|---|---|---|
-| Eventos del cielo (§3.1-3.5) | Cielo, hora, clima, lattice S60 | Minutos a horas |
-| **World Events** | **Fecha real del calendario** | **1-3 días (turista de paso)** |
-
-**Mecánica de World Event** (resumen):
-
-1. **Trigger por fecha real.** Sentinel o un calendario curado detecta la fecha → activa el World Event 24-48 h antes.
-2. **Temática del juego.** NPCs exclusivas del evento (vestidas con la temática), diálogos contextualizados, decoraciones de mapa, audio ambiental.
-3. **Misiones exclusivas con REQUIRE físico al comercio local.** El turista debe salir del teléfono y entrar al comercio real para completar la cadena. Ejemplos: "Visita 3 locales con comida típica asociada, escanea el QR en cada uno" → insignia exclusiva + cupón real.
-4. **Recompensas exclusivas con caducidad real.** Insignia única (no se obtiene después, estilo WoW), título de avatar, cupón real en comercio asociado (restaurant, café, completo, etc.).
-5. **NPCs exclusivas que caminan por el mapa.** Las NPCs del evento no son fijas — deambulan por una zona predefinida, creando micro-carreras de caza de 1-5 min. Modelo de movimiento: ruta fija en piloto, S60-driven en fase 1.
-6. **Anuncio cross-channel.** Calendario del Cielo público + push 24-48 h antes + push 5-15 min antes + afiche QR en el comercio asociado.
-
-**Por qué importa para D-014:** los World Events convierten el comercio local de "destino opcional" a "parte del evento mismo". Coordinan oferta (comercio) con demanda (turista) en fechas sincronizadas.
-
-**Diseño completo en** [`_analisis/21_world_events_d014.md`](21_world_events_d014.md) — incluye catálogo de eventos reales verificables (Fiestas Patrias, San Juan, Día del Patrimonio, temporada de ballenas, etc.), mecánica detallada de los 5 componentes, modelos de movimiento de NPCs, mecánica de cupones, decisiones de diseño abiertas, e implicaciones para el piloto de 30 días.
+### 3.2 Raids Comunitarias y World Bosses en RA
+- **El Galeón Fantasma de la Bahía:** Aparición colosal en el mar frente al Fuerte Viejo. Requiere que múltiples jugadores coordinen habilidades (avistamiento, señalización, descifrado).
+- **La Fisura del Pique Grande:** Derrumbe espectral en las ruinas que debe ser sellado colectivamente aportando minerales y resolviendo sellos de cantería en RA.
 
 ---
 
-## 4. Vector de retorno
+## 4. Economía Diegética: La Ficha de Pulpería y Minerales
 
-Para un turista de paso, **las mecánicas clásicas de mobile NO aplican** y deben sacarse. Lo que sí funciona:
-
-### 4.1 Pasaporte incompleto (motor principal, orgánico)
-
-- *"Te falta el 25% para Leyenda de la Cuenca."*
-- **Diploma descargable al 100%** — objeto social (se comparte, se imprime, se pega en la pared).
-- **Insignia *"Completó Lota en 1 día"*** — premium entre los completadores.
-
-### 4.2 Calendario del Cielo público (1 año adelantado)
-
-- Fechas concretas: equinoccios, luna llena, solsticios → *"vuelve el [fecha]"*.
-- El calendario se publica en web abierta (no requiere tener la app instalada).
-- Es el **anzuelo principal** del retorno.
-
-### 4.3 Carboncillos sin gastar (D-014 directo)
-
-- **Cupones digitales con caducidad corta** (30-60 días) en comercio local.
-- Ato el retorno a un beneficio económico concreto, no a una promesa abstracta.
-- Si el turista se va con Carboncillos en el bolsillo → razón directa para volver a Lota.
-
-### 4.4 Contenido nuevo (largo plazo)
-
-- **Temporada 2** introduce NPCs de Curanilahue → preludio de la expansión regional D-014 (Lota → Curanilahue → Lebu → Arauco → Concepción).
-- Eventos ligados a festividades locales: San Juan, aniversario del carbón, etc.
-
-### 4.5 Lo que NO incluir (antipatrones para turista de paso)
-
-- Racha diaria / streak.
-- Energía que regenera con tiempo.
-- Notificación genérica *"vuelve a jugar"*.
-- Cualquier mensaje que diga "hoy no jugaste" — para un turista de 1-2 días, es ruido insoportable.
+El comercio local no es publicidad intrusiva, es parte de la historia:
+- **Cobre (Cu):** Moneda de faena diaria y comercio cotidiano.
+- **Oro (Au):** Obtenido en gestas de facción y eventos de cielo.
+- **Estaño (Sn):** Obtenido en portales raros de convergencia matemática y pasaporte 100%.
+- **La Pulpería:** Locales reales de Lota donde el jugador gasta sus minerales acuñados para canjear productos tradicionales reales (pan amasado, gastronomía marina, artesanías en carbón de piedra).
 
 ---
 
-## 5. Implicaciones para el piloto de 30 días
+## 5. Alcance para el Piloto (30 Días)
 
-El piloto debe demostrar **una corrida completa del loop de visita**, no un día aislado:
-
-| Ítem | Alcance piloto | Justificación |
-|---|---|---|
-| **Zonas** | 1 zona (Parque de Lota o Chiflón del Diablo) | La más rica culturalmente. Suficiente para demostrar el loop sin dispersión. |
-| **Evento del cielo en vivo** | 1 evento, ejecutado durante la demo a cliente | Es el momento mágico de la urgencia. Sin él, no se ve el diferenciador. |
-| **Calendario del Cielo** | Simulado para 30 días, con datos sintéticos de Sentinel | Demuestra que la mecánica es repetible, no un one-shot. |
-| **Pasaporte público** | URL compartible, render público | Muestra efecto red. Cualquiera puede ver el pasaporte de otro sin instalar la app. |
-| **Comercio local** | 1 comercio real con canje de Carboncillos (aunque sea simulado en maqueta) | Demuestra D-014 de un plumazo: el juego guía al turista al comercio. |
-| **Modos** | Jugador + Turista (no Familia en piloto) | Suficiente para el slice. Familia es feature de fase 1. |
-
----
-
-## 6. Preguntas abiertas (no resueltas en este doc)
-
-Para discutir con INTERLOCUTOR antes de bajar a mecánica:
-
-1. **¿Quién opera el Calendario del Cielo?** ¿Es generado automáticamente por Sentinel con datos astronómicos reales, o hay curación humana para eventos climáticos?
-2. **¿El "modo virtual" (teleport para testing) entra en el piloto?** El GDD lo menciona para el MVP, pero si el loop depende de urgencia intra-visita, el modo virtual rompe la urgencia.
-3. **¿La inscripción al evento del cielo es individual o por grupo?** Implica distinto diseño de notificaciones.
-4. **¿Los portales S60 son solo en Lota o también en otras comunas?** Tiene implicaciones para la expansión regional D-014.
-
----
-
-## 7. Referencias cruzadas
-
-- **D-014** (encuadre vigente): `docs/decisiones.md`.
-- **GDD completo:** `docs/concepto-juego.md` (este doc reemplaza §2 "Core Game Loop" cuando se apruebe; el resto se conserva).
-- **Catálogo de NPCs:** `docs/concepto-juego.md` §3 — Isidora, El Ciego, La Chinchorrera Mayor, El Palanquero.
-- **Motor GPU y portal dual-lane:** `docs/estado.md` §10 + `_analisis/17_arquitectura_gpu_motor_lota.md`.
-- **Piloto B como centro del concepto:** `_analisis/16_vision_motor_grafico_sentinel_completo.md`.
+| Componente | Demostración en Piloto |
+|---|---|
+| **Zona de Operación** | 1 corredor conectado (Chiflón del Diablo ↔ Pabellón 83 ↔ Parque de Lota). |
+| **Patrullas Sincronizadas** | 2 NPCs con rutas activas en tiempo real (*El Palanquero* e *Isidora Goyenechea*). |
+| **Visor RA en Marcha** | Intercepción y diálogo en movimiento a escala 1:1 con audio espacial. |
+| **Facciones y Clases** | Selección de bando y perfil con bonificación pasiva visible en UI. |
+| **1 Quest Chain de 3 Pasos** | Misión que inicia en calle, pasa por observación de ruina real y concluye en comercio. |
+| **Comercio Local (Pulpería)** | 1 local real con canje de Ficha/Mineral vía QR. |

@@ -8,6 +8,17 @@ Las decisiones de diseño se registran aparte, en [`docs/decisiones.md`](docs/de
 
 ---
 
+## 2026-08-13
+
+### Redefinición de la Experiencia de Juego Temática: MMO-RA Urbano (D-019)
+- **Fusión Pokémon GO × World of Warcraft en RA:** Redefinido el GDD ([`docs/concepto-juego.md`](docs/concepto-juego.md)) y el loop del jugador ([`_analisis/20_loop_jugador_dia_a_dia.md`](_analisis/20_loop_jugador_dia_a_dia.md)) para transformar el juego en un MMO del Mundo Real.
+- **Patrullas Sincronizadas en Movimiento:** Especificada la dinámica de intercepción física a pie y diálogo en marcha ("caminar hombro a hombro" en RA) con personajes históricos desplazándose por las calles reales con sincronización determinista entre jugadores.
+- **Diseño "Ojos Arriba" (Look-Up Design):** Reemplazo de minijuegos 2D abstractos por mecánicas de Realidad Aumentada que exigen observar y alinear el entorno patrimonial físico (resonancia térmica, phasing arquitectónico, sellos de cantería).
+- **Facciones, Clases y Raids Urbanas:** Integradas 3 Facciones (*Hermandad del Carbón*, *Linaje de la Luz*, *Gremio de las Mareas*), 4 Clases de Explorador (*Barretero*, *Chinchorrera*, *Cronista*, *Fogonero*) y eventos de World Bosses en RA cooperativos sobre el paisaje real.
+- **Decisión D-019 registrada** en [`docs/decisiones.md`](docs/decisiones.md).
+
+---
+
 ## 2026-08-12
 
 ### Implementación del Piloto de Demostración (Pasos 1, 2 y 3)
