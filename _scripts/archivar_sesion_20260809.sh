@@ -28,7 +28,7 @@
 
 set -euo pipefail
 
-REPO="/home/jnovoas/Proyectos/LotaIndomito"
+REPO="/home/jnovoas/proyectos/LotaIndomito"
 ARCHIVE_DIR="$REPO/_analisis/archive/2026-08-09"
 
 DOCS_A_ARCHIVAR=(

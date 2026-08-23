@@ -28,7 +28,7 @@
 
 set -euo pipefail
 
-REPO="/home/jnovoas/Proyectos/LotaIndomito"
+REPO="/home/jnovoas/proyectos/LotaIndomito"
 DOC12="_analisis/12_inputs_pendientes_de_interlocutor.md"
 DEC="docs/decisiones.md"
 

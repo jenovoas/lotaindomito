@@ -12,7 +12,7 @@ name = "lota-server"
 path = "src/main.rs"
 
 [dependencies]
-me60os = { path = "/home/jnovoas/Proyectos/sentinel/me-60os-core" }
+me60os = { path = "/home/jnovoas/proyectos/sentinel/me-60os-core" }
 bytemuck = { version = "1.16", features = ["derive"] }
 wgpu = "0.20"
 tokio = { version = "1.37", features = ["full"] }
