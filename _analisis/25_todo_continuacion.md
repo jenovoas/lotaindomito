@@ -29,16 +29,19 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 > D-016 y D-017 fueron aprobadas formalmente por INTERLOCUTOR el **2026-08-12**. La sección 3 pasa de "pendientes de aprobación" a "aprobadas"; el trabajo que dependía de su OK ahora está habilitado para implementación.
 
 ### D-016 · Sistema multi-moneda cobre/oro/estaño — **APROBADA (2026-08-12)**
+
 - Diseño completo en [`_analisis/23_sistema_monedas_minerales.md`](23_sistema_monedas_minerales.md).
 - Reemplaza Carboncillo formalmente. Propagación a otros docs en curso (ver `todo.md`). Implementar wallet multi-moneda en Piloto A y backend.
 
 ### D-017 · Subastas digitales de cosas reales — **APROBADA (2026-08-12)**
+
 - Diseño completo en [`_analisis/24_subastas_reales.md`](24_subastas_reales.md).
 - Aprobada la mecánica (sin pago en CLP). Diseñar backend de subastas, integrar con wallet multi-moneda, validar regulación chilena como paso de implementación.
 
 ## 4. Decisiones de diseño abiertas (por doc)
 
 ### Doc 23 (monedas minerales) — 6 decisiones
+
 1. ¿Ratio fijo o fluctuante en piloto?
 2. ¿Quién define el ratio?
 3. ¿Hay límite total de cada mineral en circulación?
@@ -47,23 +50,27 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 6. ¿Inscripción del comercio: abierta o curada?
 
 ### Doc 24 (subastas reales) — 3 decisiones
+
 1. ¿Geocerca o cupón digital libre?
 2. ¿Caducidad rígida estilo WoW o flexible?
 3. ¿Movimiento de NPCs: ruta fija o S60-driven?
 
 ### Doc 22 (ML externo) — 4 decisiones
+
 1. ¿DB local (servidor fan) o nube?
 2. ¿Stack Python confirmado?
 3. ¿Quién opera el servicio de ML?
 4. ¿El dashboard es público o restringido?
 
 ### Doc 21 (World Events) — 4 decisiones
+
 1. ¿Quién opera el calendario de World Events?
 2. ¿Solo Lota o también expansión regional?
 3. ¿Geocerca para activar el cupón?
 4. ¿Caducidad rígida o flexible?
 
 ### Doc 20 (loop del jugador) — 4 preguntas
+
 1. ¿Quién opera el Calendario del Cielo?
 2. ¿El modo virtual (teleport) entra en el piloto?
 3. ¿Inscripción al evento individual o grupal?
@@ -74,6 +81,7 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 ## 5. Trabajo de implementación pendiente
 
 ### Piloto A (PWA Vue 3 + MapLibre) — sprint del mes
+
 - [ ] Wallet multi-moneda (3 minerales, ratios fijos, UI simple).
 - [ ] Geofencing cliente con Turf.js.
 - [ ] Anatomía de micro-sesión 1-5 min (5 tramos: trigger, contexto, acción, recompensa, próximo).
@@ -85,16 +93,19 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 - [ ] Render HTML del sitio (`index.html` + `render-docs.py`).
 
 ### Backend (FastAPI — Ya existe: PostgreSQL+PostGIS, geofencing, wallet, zonas; ver `backend/`)
+
 - [ ] Vistas materializadas para ML.
 - [ ] Servicio de subastas (D-017 aprobada — mecánica de pujas, escrow, reputación bilateral).
 - [ ] Servicio de ML externo (cuando haya volumen).
 
 ### Piloto B (motor GPU + Sentinel) — centro del concepto
+
 - [ ] Geofencing con R-Tree (`rstar`) — pendiente del concepto.
 - [ ] NPCs del enjambre SOMA móviles (mecánica de movimiento S60).
 - [ ] Integración del motor con el PWA cliente.
 
 ### Material para el fondo
+
 - [ ] `[doc retirado]` — actualizar con D-016 y D-017 si se aprueban.
 - [ ] `[doc retirado]` — ajustar al alcance MVP real.
 - [ ] `_analisis/08_CARTA_GANTT_3_semanas.md` — ajustar al cronograma real.
@@ -104,11 +115,13 @@ Si esto es trabajo en curso tuyo, decime "cámbialo" y lo commiteo.
 ## 6. Input requerido de terceros
 
 ### cliente / Municipio
+
 - Fechas exactas de festividades locales de Lota (aniversario, semana del carbón, fiesta patronal).
 - Selección de 1 comercio real para el piloto (cupones QR, canje de minerales).
 - Validación del modelo de autofinanciamiento (D-014).
 
 ### INTERLOCUTOR (decisiones de arquitectura)
+
 - Resolver las 21 decisiones de diseño abiertas (lista en §4).
 - Definir operador del servicio de ML (¿él mismo, cliente, externo?).
 - Decidir si DB va en servidor fan o nube.
