@@ -125,7 +125,7 @@ onUnmounted(() => {
 <template>
   <div class="modal-overlay">
     <div class="modal-card">
-      <button class="btn-cerrar" @click="emit('close')">✕</button>
+      <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
       <div v-if="step === 'intro'" class="intro-step">
@@ -171,17 +171,20 @@ onUnmounted(() => {
         <div class="action-zone">
           <button
             class="btn-qte"
+            aria-label="Golpear masa"
             :class="{ 'is-current': qtePhase === 'press' }"
             @pointerdown="onPress"
             @click="qtePhase === 'press' ? onPress() : null"
           >👊</button>
           <button
             class="btn-qte"
+            aria-label="Amasar"
             :class="{ 'is-current': qtePhase === 'hold' }"
             @pointerdown="qtePhase === 'hold' ? onHoldStart() : onMiss()"
           >🖐️</button>
           <button
             class="btn-qte"
+            aria-label="Aplaudir masa"
             :class="{ 'is-current': qtePhase === 'tap' }"
             @pointerdown="onTap"
           >👏</button>

@@ -175,7 +175,7 @@ function finishEncounter() {
         <div class="compass-badge">
           <span>🧭 {{ heading }}° | RUMBO CALLE</span>
         </div>
-        <button class="btn-close" @click="emit('close')">✕ SALIR</button>
+        <button class="btn-close" aria-label="Cerrar" @click="emit('close')">✕ SALIR</button>
       </div>
 
       <!-- Espacio Central: Modelo Espectral en Marcha -->
