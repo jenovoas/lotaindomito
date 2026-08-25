@@ -87,7 +87,7 @@ onMounted(() => {
 <template>
   <div class="modal-overlay">
     <div class="modal-card">
-      <button class="btn-cerrar" @click="emit('close')">✕</button>
+      <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
       <div v-if="step === 'intro'" class="intro-step">

@@ -510,7 +510,7 @@ onUnmounted(() => {
     </div>
 
     <aside v-if="geofence.zonaActiva" class="panel-zona">
-      <button class="cerrar" @click="geofence.zonaActiva = null">✕</button>
+      <button class="cerrar" aria-label="Cerrar" @click="geofence.zonaActiva = null">✕</button>
       <h2>{{ geofence.zonaActiva.zona_name }}</h2>
       <p class="origen">Origen: OpenStreetMap (Overpass API, 2026-08-12)</p>
       <p class="hint">
@@ -578,9 +578,9 @@ onUnmounted(() => {
     </aside>
 
     <div class="map-controls-floating">
-      <button class="btn-map-control" title="Acercar Cámara (+)" @click="zoomIn">➕</button>
-      <button class="btn-map-control" title="Alejar Cámara (-)" @click="zoomOut">➖</button>
-      <button class="btn-map-control btn-center-player" title="Centrar en Jugador" @click="centrarEnJugador">🎯</button>
+      <button class="btn-map-control" aria-label="Acercar cámara" title="Acercar Cámara (+)" @click="zoomIn">➕</button>
+      <button class="btn-map-control" aria-label="Alejar cámara" title="Alejar Cámara (-)" @click="zoomOut">➖</button>
+      <button class="btn-map-control btn-center-player" aria-label="Centrar en jugador" title="Centrar en Jugador" @click="centrarEnJugador">🎯</button>
     </div>
   </div>
 </template>

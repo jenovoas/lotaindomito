@@ -43,7 +43,7 @@ function claimQuestReward(quest: Quest) {
             <span class="subtitle">Equipamiento & Registro de la Cuenca</span>
           </div>
         </div>
-        <button class="btn-close" @click="emit('close')">✕</button>
+        <button class="btn-close" aria-label="Cerrar" @click="emit('close')">✕</button>
       </div>
 
       <!-- Pestañas de Navegación -->
