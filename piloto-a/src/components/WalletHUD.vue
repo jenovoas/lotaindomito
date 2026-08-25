@@ -14,16 +14,16 @@ onMounted(() => {
 
 <template>
   <div class="wallet-hud">
-    <span class="currency cobre">
-      <span class="icon">Cu</span>
+    <span class="currency cobre" title="Cobre" :aria-label="`Cobre: ${wallet.balance.cobre.toLocaleString()} fichas`">
+      <span class="icon" aria-hidden="true">Cu</span>
       <span class="amount">{{ wallet.balance.cobre.toLocaleString() }}</span>
     </span>
-    <span class="currency oro">
-      <span class="icon">Au</span>
+    <span class="currency oro" title="Oro" :aria-label="`Oro: ${wallet.balance.oro.toLocaleString()} fichas`">
+      <span class="icon" aria-hidden="true">Au</span>
       <span class="amount">{{ wallet.balance.oro.toLocaleString() }}</span>
     </span>
-    <span class="currency estanio">
-      <span class="icon">Sn</span>
+    <span class="currency estanio" title="Estaño" :aria-label="`Estaño: ${wallet.balance.estanio.toLocaleString()} fichas`">
+      <span class="icon" aria-hidden="true">Sn</span>
       <span class="amount">{{ wallet.balance.estanio.toLocaleString() }}</span>
     </span>
   </div>
