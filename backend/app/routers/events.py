@@ -1,16 +1,19 @@
+import json
 from datetime import datetime
 from typing import Any
-from fastapi import APIRouter, Depends, HTTPException, status
+
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 from sqlalchemy import text
-from app.db import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db import get_db
 
 router = APIRouter(prefix='/api/events', tags=['analytics'])
 
 
 class EventItem(BaseModel):
-    event: str = Field(..., description="Nombre del evento (ej. session_start, poi_visit)")
+    event: str = Field(..., description="Nombre del evento")
     payload: dict[str, Any] = Field(..., description="Datos del evento")
 
 
@@ -44,18 +47,22 @@ async def ingest_events(
         """)
     )
 
+    params = []
     for ev in req.events:
         user_id = ev.payload.get('user_id', '')
+        params.append({
+            'event_name': ev.event,
+            'user_id': user_id,
+            'payload': json.dumps(ev.payload),
+        })
+
+    if params:
         await db.execute(
             text("""
                 INSERT INTO analytics_events (event_name, user_id, payload)
-                VALUES (:event_name, :user_id, :payload::jsonb)
+                VALUES (:event_name, :user_id, CAST(:payload AS JSONB))
             """),
-            {
-                'event_name': ev.event,
-                'user_id': user_id,
-                'payload': ev.payload,
-            },
+            params
         )
 
     await db.commit()

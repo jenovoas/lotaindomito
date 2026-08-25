@@ -47,7 +47,7 @@ testpaths = ["tests"]
 filterwarnings = ["ignore::DeprecationWarning"]
 
 [tool.ruff.lint]
-target-version = "py312"
+
 select = [
     "E",    # pycodestyle errors
     "W",    # pycodestyle warnings
