@@ -1,7 +1,8 @@
+import json
 from datetime import datetime
 from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import text
 from app.db import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -12,6 +13,13 @@ router = APIRouter(prefix='/api/events', tags=['analytics'])
 class EventItem(BaseModel):
     event: str = Field(..., description="Nombre del evento (ej. session_start, poi_visit)")
     payload: dict[str, Any] = Field(..., description="Datos del evento")
+
+    @field_validator('payload')
+    @classmethod
+    def validate_payload_size(cls, v: dict[str, Any]) -> dict[str, Any]:
+        if len(json.dumps(v)) > 8192:
+            raise ValueError("El tamaño del payload excede el límite de 8KB")
+        return v
 
 
 class EventsRequest(BaseModel):
