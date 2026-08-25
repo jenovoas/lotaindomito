@@ -99,6 +99,8 @@ EVENTOS = [
     },
 ]
 
+EVENTOS_BY_ID = {e['id']: e for e in EVENTOS}
+
 
 class Insignia(BaseModel):
     id: str
@@ -175,26 +177,26 @@ async def eventos_proximos() -> list[WorldEvent]:
 
 @router.get('/{event_id}', response_model=WorldEvent)
 async def obtener_evento(event_id: str) -> WorldEvent:
-    for e in EVENTOS:
-        if e['id'] == event_id:
-            return WorldEvent(**e)
+    e = EVENTOS_BY_ID.get(event_id)
+    if e:
+        return WorldEvent(**e)
     from fastapi import HTTPException, status
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Evento no encontrado')
 
 
 @router.get('/{event_id}/npc/posicion')
 async def npc_posicion(event_id: str, tick: int = 0) -> dict:
-    for e in EVENTOS:
-        if e['id'] == event_id:
-            ruta = e['npc_exclusiva']['ruta_fija']
-            idx = tick % len(ruta)
-            return {
-                'event_id': event_id,
-                'npc': e['npc_exclusiva']['nombre'],
-                'tick': tick,
-                'posicion_idx': idx,
-                'lat': ruta[idx]['lat'],
-                'lon': ruta[idx]['lon'],
-            }
+    e = EVENTOS_BY_ID.get(event_id)
+    if e:
+        ruta = e['npc_exclusiva']['ruta_fija']
+        idx = tick % len(ruta)
+        return {
+            'event_id': event_id,
+            'npc': e['npc_exclusiva']['nombre'],
+            'tick': tick,
+            'posicion_idx': idx,
+            'lat': ruta[idx]['lat'],
+            'lon': ruta[idx]['lon'],
+        }
     from fastapi import HTTPException, status
     raise HTTPException(status_code=404, detail='Evento no encontrado')
