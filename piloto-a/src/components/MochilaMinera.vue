@@ -33,13 +33,18 @@ function claimQuestReward(quest: Quest) {
 
 <template>
   <div class="mochila-overlay" @click.self="emit('close')">
-    <div class="mochila-modal">
+    <div
+      class="mochila-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mochila-title"
+    >
       <!-- Encabezado Diegético -->
       <div class="modal-header">
         <div class="header-title">
           <span class="icon-pack">🎒</span>
           <div>
-            <h2>Mochila de Barretero</h2>
+            <h2 id="mochila-title">Mochila de Barretero</h2>
             <span class="subtitle">Equipamiento & Registro de la Cuenca</span>
           </div>
         </div>
@@ -47,9 +52,11 @@ function claimQuestReward(quest: Quest) {
       </div>
 
       <!-- Pestañas de Navegación -->
-      <div class="tab-nav">
+      <div class="tab-nav" role="tablist">
         <button
           class="tab-btn"
+          role="tab"
+          :aria-selected="activeTab === 'mochila'"
           :class="{ active: activeTab === 'mochila' }"
           @click="activeTab = 'mochila'"
         >
@@ -57,6 +64,8 @@ function claimQuestReward(quest: Quest) {
         </button>
         <button
           class="tab-btn"
+          role="tab"
+          :aria-selected="activeTab === 'bitacora'"
           :class="{ active: activeTab === 'bitacora' }"
           @click="activeTab = 'bitacora'"
         >
@@ -71,8 +80,12 @@ function claimQuestReward(quest: Quest) {
             v-for="item in inventory.items"
             :key="item.id"
             class="item-card"
+            role="button"
+            tabindex="0"
             :class="[item.rarity, { selected: selectedItem?.id === item.id }]"
             @click="selectItem(item)"
+            @keydown.enter="selectItem(item)"
+            @keydown.space.prevent="selectItem(item)"
           >
             <div class="item-icon-wrapper">
               <span class="item-icon">{{ item.icon }}</span>
@@ -115,8 +128,12 @@ function claimQuestReward(quest: Quest) {
             v-for="quest in inventory.quests"
             :key="quest.id"
             class="quest-card"
+            role="button"
+            tabindex="0"
             :class="[quest.status, { selected: selectedQuest?.id === quest.id }]"
             @click="selectQuest(quest)"
+            @keydown.enter="selectQuest(quest)"
+            @keydown.space.prevent="selectQuest(quest)"
           >
             <div class="quest-card-header">
               <div class="npc-badge">
@@ -278,6 +295,13 @@ function claimQuestReward(quest: Quest) {
   color: #3fe6c0;
   border-bottom-color: #3fe6c0;
   background: rgba(63, 230, 192, 0.04);
+}
+
+.tab-btn:focus-visible,
+.item-card:focus-visible,
+.quest-card:focus-visible {
+  outline: 2px solid #3fe6c0;
+  outline-offset: 2px;
 }
 
 .tab-content {
