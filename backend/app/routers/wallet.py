@@ -9,7 +9,7 @@ Endpoints:
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import func, or_, select
+from sqlalchemy import func, or_, select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db import get_db
@@ -114,6 +114,11 @@ async def spend(
 ) -> BalanceResponse:
     """Registra un gasto de moneda para un usuario si tiene saldo suficiente."""
     try:
+        await db.execute(
+            text("SELECT pg_advisory_xact_lock(hashtext('wallet'), hashtext(:user_id::text))"),
+            {"user_id": payload.user_id}
+        )
+
         balance_result = await db.execute(
             select(func.coalesce(func.sum(WalletTransaction.amount), 0)).where(
                 WalletTransaction.user_id == payload.user_id,
@@ -154,6 +159,14 @@ async def transfer(
 ) -> BalanceResponse:
     """Transfiere moneda de un usuario a otro de forma atómica."""
     try:
+        # Acquire transaction-level advisory locks for both users.
+        # Order the locks to avoid deadlocks.
+        for uid in sorted([payload.from_id, payload.to_id]):
+            await db.execute(
+                text("SELECT pg_advisory_xact_lock(hashtext('wallet'), hashtext(:user_id::text))"),
+                {"user_id": uid}
+            )
+
         # Verificar saldo del emisor
         balance_result = await db.execute(
             select(func.coalesce(func.sum(WalletTransaction.amount), 0)).where(

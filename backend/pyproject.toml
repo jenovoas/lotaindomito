@@ -69,3 +69,9 @@ ignore = [
 typeCheckingMode = "all"
 reportMissingTypeStubs = false
 pythonVersion = "3.12"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest-asyncio>=1.4.0",
+]
