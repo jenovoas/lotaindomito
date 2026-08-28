@@ -566,7 +566,11 @@ onUnmounted(() => {
           v-for="z in zonas"
           :key="z.id"
           class="zona-card-gaming"
+          role="button"
+          tabindex="0"
           @click="teleportAZona(z)"
+          @keydown.enter="teleportAZona(z)"
+          @keydown.space.prevent="teleportAZona(z)"
         >
           <div class="zona-info">
             <span class="zona-badge">LotaStop</span>
@@ -827,9 +831,11 @@ onUnmounted(() => {
               border-color var(--lota-duration-fast, 150ms) var(--lota-ease-out, ease);
 }
 
-.zona-card-gaming:hover {
+.zona-card-gaming:hover,
+.zona-card-gaming:focus-visible {
   border-color: var(--lota-teal, #3FE6C0);
   transform: translateX(3px);
+  outline: none; /* Removed default outline since we are using border color */
 }
 
 .zona-info {
