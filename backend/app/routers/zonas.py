@@ -29,8 +29,6 @@ async def list_zonas(db: AsyncSession = Depends(get_db)) -> list[ZonaOut]:
         HTTP 500 si la DB no está disponible.
     """
     try:
-        result = await db.execute(text("SELECT 1"))
-        result.release()
         result = await db.execute(text("SELECT COUNT(*) FROM zonas"))
         count = result.scalar() or 0
         if count == 0:
