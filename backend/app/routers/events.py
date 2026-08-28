@@ -40,18 +40,6 @@ async def ingest_events(
         if not ev.payload.get('timestamp'):
             ev.payload['timestamp'] = datetime.utcnow().isoformat()
 
-    await db.execute(
-        text("""
-            CREATE TABLE IF NOT EXISTS analytics_events (
-                id BIGSERIAL PRIMARY KEY,
-                event_name TEXT NOT NULL,
-                user_id TEXT,
-                payload JSONB NOT NULL,
-                received_at TIMESTAMPTZ DEFAULT NOW()
-            )
-        """)
-    )
-
     for ev in req.events:
         user_id = ev.payload.get('user_id', '')
         await db.execute(
@@ -74,19 +62,6 @@ async def ingest_events(
 async def events_stats(
     db: AsyncSession = Depends(get_db),
 ) -> dict[str, Any]:
-    await db.execute(
-        text("""
-            CREATE TABLE IF NOT EXISTS analytics_events (
-                id BIGSERIAL PRIMARY KEY,
-                event_name TEXT NOT NULL,
-                user_id TEXT,
-                payload JSONB NOT NULL,
-                received_at TIMESTAMPTZ DEFAULT NOW()
-            )
-        """)
-    )
-    await db.commit()
-
     rows = await db.execute(
         text("""
             SELECT
