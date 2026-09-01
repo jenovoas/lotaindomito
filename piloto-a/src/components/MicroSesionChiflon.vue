@@ -121,9 +121,9 @@ onMounted(() => {
         </div>
 
         <div class="era-buttons">
-          <button @click="selectEra('Carbonífero (300 Ma)')">Carbonífero (300 Ma)</button>
-          <button @click="selectEra('Terciario (50 Ma)')">Terciario (50 Ma)</button>
-          <button @click="selectEra('Cuaternario (Reciente)')">Cuaternario (Reciente)</button>
+          <button :disabled="!!feedback" @click="selectEra('Carbonífero (300 Ma)')">Carbonífero (300 Ma)</button>
+          <button :disabled="!!feedback" @click="selectEra('Terciario (50 Ma)')">Terciario (50 Ma)</button>
+          <button :disabled="!!feedback" @click="selectEra('Cuaternario (Reciente)')">Cuaternario (Reciente)</button>
         </div>
       </div>
 
@@ -270,9 +270,14 @@ onMounted(() => {
   cursor: pointer;
 }
 
-.era-buttons button:hover {
+.era-buttons button:hover:not(:disabled) {
   border-color: #3FE6C0;
   color: #3FE6C0;
+}
+
+.era-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .reward-step {

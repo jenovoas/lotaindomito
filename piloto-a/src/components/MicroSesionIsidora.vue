@@ -132,8 +132,8 @@ onUnmounted(() => {
         </div>
 
         <div class="era-buttons">
-          <button @click="selectOrigin('Nativa')">Nativa 🌿</button>
-          <button @click="selectOrigin('Introducida')">Introducida 🌍</button>
+          <button :disabled="!!feedback" @click="selectOrigin('Nativa')">Nativa 🌿</button>
+          <button :disabled="!!feedback" @click="selectOrigin('Introducida')">Introducida 🌍</button>
         </div>
       </div>
 
@@ -292,9 +292,14 @@ onUnmounted(() => {
   cursor: pointer;
 }
 
-.era-buttons button:hover {
+.era-buttons button:hover:not(:disabled) {
   border-color: #D4A547;
   color: #D4A547;
+}
+
+.era-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .reward-step {
