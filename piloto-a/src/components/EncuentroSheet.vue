@@ -30,7 +30,7 @@ defineEmits<{
 
 <template>
   <div class="sheet-backdrop" @click.self="$emit('close')">
-    <div class="sheet" role="dialog" aria-modal="true">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
       <button class="cerrar" @click="$emit('close')" aria-label="Cerrar ficha">✕</button>
 
       <div class="portrait">
@@ -39,7 +39,7 @@ defineEmits<{
 
       <div class="meta">
         <span class="tag">PERSONAJE HISTÓRICO</span>
-        <h2 class="name">{{ npc.name }}</h2>
+        <h2 id="sheet-title" class="name">{{ npc.name }}</h2>
         <span v-if="epiteto" class="epiteto">{{ epiteto }}</span>
 
         <p class="historia">
