@@ -85,8 +85,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
-    <div class="modal-card">
+  <div class="modal-overlay" @click.self="emit('close')">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Misión del Chiflón">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
