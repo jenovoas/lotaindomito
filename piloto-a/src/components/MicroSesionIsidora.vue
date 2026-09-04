@@ -95,8 +95,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
-    <div class="modal-card">
+  <div class="modal-overlay" @click.self="emit('close')">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="isidora-title">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
@@ -104,7 +104,7 @@ onUnmounted(() => {
         <div class="avatar-header">
           <div class="avatar-circle">🌹</div>
           <div>
-            <h3>Isidora Goyenechea</h3>
+            <h3 id="isidora-title">Isidora Goyenechea</h3>
             <p class="role">Patrona y Visión del Desarrollo</p>
           </div>
         </div>
@@ -140,7 +140,7 @@ onUnmounted(() => {
       <!-- TRAMO 4 Y 5: RECOMPENSA Y DIRECCIÓN -->
       <div v-else-if="step === 'reward'" class="reward-step">
         <div class="reward-icon">🌳</div>
-        <h3>¡Misión Completada!</h3>
+        <h3 id="isidora-title">¡Misión Completada!</h3>
         <p>Has identificado las especies botánicas del Parque Isidora Cousiño.</p>
 
         <div class="reward-box">

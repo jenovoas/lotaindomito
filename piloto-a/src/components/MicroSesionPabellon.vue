@@ -123,8 +123,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
-    <div class="modal-card">
+  <div class="modal-overlay" @click.self="emit('close')">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pabellon-title">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
@@ -132,7 +132,7 @@ onUnmounted(() => {
         <div class="avatar-header">
           <div class="avatar-circle">🥖</div>
           <div>
-            <h3>La Chinchorrera y El Palanquero</h3>
+            <h3 id="pabellon-title">La Chinchorrera y El Palanquero</h3>
             <p class="role">Memoria Social de Lota</p>
           </div>
         </div>
@@ -194,7 +194,7 @@ onUnmounted(() => {
       <!-- TRAMO 4 Y 5: RECOMPENSA Y DIRECCIÓN -->
       <div v-else-if="step === 'reward'" class="reward-step">
         <div class="reward-icon">🍞</div>
-        <h3>¡Memoria Viva!</h3>
+        <h3 id="pabellon-title">¡Memoria Viva!</h3>
         <p>Has amasado pan como las familias mineras del Pabellón 81.</p>
 
         <div class="reward-box">
