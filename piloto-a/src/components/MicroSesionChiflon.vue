@@ -85,8 +85,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
-    <div class="modal-card">
+  <div class="modal-overlay" @click.self="emit('close')">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="chiflon-title">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
@@ -94,7 +94,7 @@ onMounted(() => {
         <div class="avatar-header">
           <div class="avatar-circle">⛏️</div>
           <div>
-            <h3>El Ciego de la Mina</h3>
+            <h3 id="chiflon-title">El Ciego de la Mina</h3>
             <p class="role">Guía Histórico del Pique</p>
           </div>
         </div>
@@ -130,7 +130,7 @@ onMounted(() => {
       <!-- TRAMO 4 Y 5: RECOMPENSA Y DIRECCIÓN -->
       <div v-else-if="step === 'reward'" class="reward-step">
         <div class="reward-icon">🏆</div>
-        <h3>¡Misión Completada!</h3>
+        <h3 id="chiflon-title">¡Misión Completada!</h3>
         <p>Has clasificado las muestras geológicas del Chiflón del Diablo.</p>
         
         <div class="reward-box">
