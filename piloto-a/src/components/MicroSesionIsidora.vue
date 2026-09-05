@@ -95,7 +95,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
+  <div class="modal-overlay" @click.self="emit('close')">
     <div class="modal-card">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
