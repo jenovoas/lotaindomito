@@ -42,7 +42,7 @@ const mobsStore = useMobsStore()
 const latticeStore = useLatticeStore()
 const analytics = useAnalyticsStore()
 const worldEvents = useWorldEventsStore()
-const { lat, lon, gpsAvailable, isWatching, teleport } = useGeolocation()
+const { lat, lon, gpsAvailable, teleport } = useGeolocation()
 const graphics = useGraphicsProfile()
 
 let map: maplibregl.Map | null = null

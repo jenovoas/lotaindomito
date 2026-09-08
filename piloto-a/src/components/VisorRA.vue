@@ -142,7 +142,7 @@ function finishEncounter() {
 </script>
 
 <template>
-  <div class="visor-ra-overlay">
+  <div class="visor-ra-overlay" @click.self="emit('close')">
     <!-- Capa de Cámara Real o Filtro Espectral -->
     <div class="camera-container">
       <video
