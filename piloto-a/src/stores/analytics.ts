@@ -34,24 +34,24 @@ export interface AnalyticsEvent {
 }
 
 // // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const EVENT_SCHEMAS: Record<EventName, string[]> = {
-  session_start: ['user_id', 'timestamp', 'lat', 'lng', 'mode'],
-  session_end: ['user_id', 'timestamp', 'duration_s'],
-  poi_visit: ['user_id', 'poi_id', 'timestamp', 'duration_s'],
-  world_event_join: ['user_id', 'event_id', 'timestamp'],
-  mission_complete: ['user_id', 'mission_id', 'timestamp', 'success', 'mineral_earned'],
-  world_event_complete: ['user_id', 'event_id', 'timestamp'],
-  coupon_redeemed: ['user_id', 'coupon_id', 'commerce_id', 'timestamp', 'mineral_amount'],
-  passport_update: ['user_id', 'completion_pct', 'timestamp'],
-  transfer_sent: ['from_user', 'to_user', 'mineral_type', 'amount', 'timestamp', 'channel'],
-  transfer_received: ['to_user', 'from_user', 'mineral_type', 'amount', 'timestamp'],
-  trade_offered: ['from_user', 'to_user', 'offer_json', 'timestamp'],
-  trade_accepted: ['from_user', 'to_user', 'exchange_json', 'timestamp'],
-  gift_sent: ['from_user', 'to_user', 'mineral_type', 'amount', 'message', 'timestamp'],
-  commerce_registered: ['commerce_id', 'name', 'location', 'accepted_minerals', 'exchange_rates'],
-  coupon_issued: ['coupon_id', 'commerce_id', 'mineral_type', 'amount', 'expiry', 'world_event_id'],
-  commerce_mineral_received: ['commerce_id', 'mineral_type', 'amount', 'timestamp', 'source'],
-}
+// // const EVENT_SCHEMAS: Record<EventName, string[]> = {
+//   session_start: ['user_id', 'timestamp', 'lat', 'lng', 'mode'],
+//   session_end: ['user_id', 'timestamp', 'duration_s'],
+//   poi_visit: ['user_id', 'poi_id', 'timestamp', 'duration_s'],
+//   world_event_join: ['user_id', 'event_id', 'timestamp'],
+//   mission_complete: ['user_id', 'mission_id', 'timestamp', 'success', 'mineral_earned'],
+//   world_event_complete: ['user_id', 'event_id', 'timestamp'],
+//   coupon_redeemed: ['user_id', 'coupon_id', 'commerce_id', 'timestamp', 'mineral_amount'],
+//   passport_update: ['user_id', 'completion_pct', 'timestamp'],
+//   transfer_sent: ['from_user', 'to_user', 'mineral_type', 'amount', 'timestamp', 'channel'],
+//   transfer_received: ['to_user', 'from_user', 'mineral_type', 'amount', 'timestamp'],
+//   trade_offered: ['from_user', 'to_user', 'offer_json', 'timestamp'],
+//   trade_accepted: ['from_user', 'to_user', 'exchange_json', 'timestamp'],
+//   gift_sent: ['from_user', 'to_user', 'mineral_type', 'amount', 'message', 'timestamp'],
+//   commerce_registered: ['commerce_id', 'name', 'location', 'accepted_minerals', 'exchange_rates'],
+//   coupon_issued: ['coupon_id', 'commerce_id', 'mineral_type', 'amount', 'expiry', 'world_event_id'],
+//   commerce_mineral_received: ['commerce_id', 'mineral_type', 'amount', 'timestamp', 'source'],
+// }
 
 export const useAnalyticsStore = defineStore('analytics', () => {
   const queue = ref<AnalyticsEvent[]>([])

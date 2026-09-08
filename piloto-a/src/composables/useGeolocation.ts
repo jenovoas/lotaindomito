@@ -12,7 +12,7 @@ export function useGeolocation() {
   const TEST_USER = 'test-1'
   // // @ts-ignore
 
-  const POLL_INTERVAL = 3000 // 3s
+  // const POLL_INTERVAL = 3000 // 3s
 
   function startWatch(): void {
     // Intentar GPS real primero
