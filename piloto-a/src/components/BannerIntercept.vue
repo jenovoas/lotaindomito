@@ -5,7 +5,7 @@
  */
 import { onMounted } from 'vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     npcName: string
     distanceMeters?: number

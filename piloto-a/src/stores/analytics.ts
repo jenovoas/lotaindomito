@@ -33,6 +33,7 @@ export interface AnalyticsEvent {
   payload: EventPayload
 }
 
+// // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EVENT_SCHEMAS: Record<EventName, string[]> = {
   session_start: ['user_id', 'timestamp', 'lat', 'lng', 'mode'],
   session_end: ['user_id', 'timestamp', 'duration_s'],

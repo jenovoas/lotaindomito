@@ -9,7 +9,7 @@ const emit = defineEmits<{
 
 const step = ref<'intro' | 'game' | 'reward'>('intro')
 const score = ref(0)
-const targetScore = 5
+// const targetScore = 5
 const timeLeft = ref(90)
 let timer: number | null = null
 const analytics = useAnalyticsStore()
@@ -85,8 +85,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="modal-overlay">
-    <div class="modal-card">
+  <div class="modal-overlay" @click.self="emit('close')">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Misión: El Ciego de la Mina">
       <button class="btn-cerrar" aria-label="Cerrar" @click="emit('close')">✕</button>
 
       <!-- TRAMO 2: CONTEXTO -->
