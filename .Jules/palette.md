@@ -6,3 +6,7 @@
 ## 2024-03-24 - Prevent Rapid Multiple Clicks on Game Choices
 **Learning:** Disabling interactive choices during short state transitions (like when showing success/error feedback) prevents accidental double-clicks and clearly communicates that the UI is processing the input. Without it, users might spam-click buttons and skip ahead unexpectedly.
 **Action:** Always add `:disabled` states to choice buttons when an interaction causes a temporary delay before moving to the next state, and apply styles for disabled elements such as `opacity: 0.5` and `cursor: not-allowed` while avoiding pseudo-classes like `:hover`.
+
+## 2026-08-27 - Custom Tab and Progress Bar ARIA Roles
+**Learning:** Custom UI elements like tab lists and progress bars are often built with div/span tags for styling but lack screen reader context. Vue dynamic bindings make it very easy to pass correct aria-valuenow properties, but roles and aria-controls are frequently forgotten.
+**Action:** Always link tab buttons to their panels using `aria-controls` and `aria-labelledby`, and ensure visual progress indicators use `role="progressbar"` with appropriate min/max/value attributes.
