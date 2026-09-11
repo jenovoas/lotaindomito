@@ -46,7 +46,15 @@ defineEmits<{
           {{ npc.historia || 'Fragmento narrativo en preparación.' }}
         </p>
 
-        <div v-if="typeof progress === 'number'" class="progress-bar" :aria-valuenow="Math.round(progress * 100)">
+        <div
+          v-if="typeof progress === 'number'"
+          class="progress-bar"
+          role="progressbar"
+          :aria-valuenow="Math.round(progress * 100)"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Progreso del encuentro"
+        >
           <span class="progress-fill" :style="{ width: Math.round(progress * 100) + '%' }"></span>
         </div>
 
