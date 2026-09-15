@@ -54,8 +54,10 @@ function claimQuestReward(quest: Quest) {
       <!-- Pestañas de Navegación -->
       <div class="tab-nav" role="tablist">
         <button
+          id="tab-mochila"
           class="tab-btn"
           role="tab"
+          aria-controls="panel-mochila"
           :aria-selected="activeTab === 'mochila'"
           :class="{ active: activeTab === 'mochila' }"
           @click="activeTab = 'mochila'"
@@ -63,8 +65,10 @@ function claimQuestReward(quest: Quest) {
           ⛏️ Minerales & Fichas ({{ inventory.items.length }})
         </button>
         <button
+          id="tab-bitacora"
           class="tab-btn"
           role="tab"
+          aria-controls="panel-bitacora"
           :aria-selected="activeTab === 'bitacora'"
           :class="{ active: activeTab === 'bitacora' }"
           @click="activeTab = 'bitacora'"
@@ -74,7 +78,7 @@ function claimQuestReward(quest: Quest) {
       </div>
 
       <!-- Contenido de la Pestaña Mochila -->
-      <div v-if="activeTab === 'mochila'" class="tab-content mochila-grid-layout">
+      <div v-if="activeTab === 'mochila'" id="panel-mochila" role="tabpanel" aria-labelledby="tab-mochila" class="tab-content mochila-grid-layout">
         <div class="items-grid">
           <div
             v-for="item in inventory.items"
@@ -122,7 +126,7 @@ function claimQuestReward(quest: Quest) {
       </div>
 
       <!-- Contenido de la Pestaña Bitácora -->
-      <div v-else-if="activeTab === 'bitacora'" class="tab-content bitacora-layout">
+      <div v-else-if="activeTab === 'bitacora'" id="panel-bitacora" role="tabpanel" aria-labelledby="tab-bitacora" class="tab-content bitacora-layout">
         <div class="quests-list">
           <div
             v-for="quest in inventory.quests"
@@ -149,7 +153,14 @@ function claimQuestReward(quest: Quest) {
             <p class="quest-objective">📍 {{ quest.objective }}</p>
 
             <!-- Barra de Progreso -->
-            <div class="progress-bar-container">
+            <div
+              class="progress-bar-container"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              :aria-valuenow="quest.progress"
+              :aria-label="`Progreso de la misión: ${quest.progress}%`"
+            >
               <div class="progress-bar-fill" :style="{ width: `${quest.progress}%` }"></div>
             </div>
 
