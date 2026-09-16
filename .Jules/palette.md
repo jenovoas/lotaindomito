@@ -6,3 +6,7 @@
 ## 2024-03-24 - Prevent Rapid Multiple Clicks on Game Choices
 **Learning:** Disabling interactive choices during short state transitions (like when showing success/error feedback) prevents accidental double-clicks and clearly communicates that the UI is processing the input. Without it, users might spam-click buttons and skip ahead unexpectedly.
 **Action:** Always add `:disabled` states to choice buttons when an interaction causes a temporary delay before moving to the next state, and apply styles for disabled elements such as `opacity: 0.5` and `cursor: not-allowed` while avoiding pseudo-classes like `:hover`.
+
+## 2024-05-20 - Adding modal close on overlay click
+**Learning:** Found that custom modal implementations often lack a standard, accessible way to close by clicking outside the modal content, specifically using `@click.self` on the overlay.
+**Action:** Always verify that `.modal-overlay` wrappers include an explicit click handler to dismiss the modal, and ensure standard `role="dialog"` and `aria-modal="true"` are on the `.modal-card`.
