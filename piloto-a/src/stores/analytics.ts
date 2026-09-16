@@ -33,7 +33,7 @@ export interface AnalyticsEvent {
   payload: EventPayload
 }
 
-const EVENT_SCHEMAS: Record<EventName, string[]> = {
+const _EVENT_SCHEMAS: Record<EventName, string[]> = {
   session_start: ['user_id', 'timestamp', 'lat', 'lng', 'mode'],
   session_end: ['user_id', 'timestamp', 'duration_s'],
   poi_visit: ['user_id', 'poi_id', 'timestamp', 'duration_s'],
