@@ -9,7 +9,7 @@ const emit = defineEmits<{
 
 const step = ref<'intro' | 'game' | 'reward'>('intro')
 const score = ref(0)
-
+const targetScore = 5
 const timeLeft = ref(90)
 let timer: number | null = null
 const analytics = useAnalyticsStore()
