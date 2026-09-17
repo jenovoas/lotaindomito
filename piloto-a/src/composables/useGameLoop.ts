@@ -31,7 +31,7 @@ export function useGameLoop(update: (dtSeconds: number) => void): void {
       update(dt)
     } catch (err) {
       // El loop nunca debe morir por una excepción del consumidor.
-      // eslint-disable-next-line no-console
+
       console.error('[useGameLoop] update error:', err)
     }
     rafId = requestAnimationFrame(loop)
