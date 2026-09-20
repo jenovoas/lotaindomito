@@ -9,3 +9,6 @@
 ## 2024-05-18 - Accessible Modals with Dynamic Headings
 **Learning:** When building multi-step modals where the primary heading (`h3` or `h4`) changes depending on the active step (e.g., intro, game, reward), using `aria-labelledby` with a static ID isn't viable because the heading element itself might be conditionally rendered (`v-if`/`v-else-if`), leading to missing or dangling references.
 **Action:** In these cases, use `aria-label` directly on the element with `role="dialog"` providing a general, constant description of the modal's purpose (e.g., `aria-label="Micro-sesión"`) instead of relying on an internal dynamic heading ID.
+## 2026-09-20 - ARIA role text non-standard
+**Learning:** The `role="text"` is a non-standard WebKit-specific ARIA role. For generic elements like `span` that need to be read by screen readers along with `aria-label`, use a standard W3C structural role like `role="group"` or `role="img"`.
+**Action:** Avoid using `role="text"`. Use `role="group"` when grouping text elements that need an accessible name.
