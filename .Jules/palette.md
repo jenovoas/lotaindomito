@@ -9,3 +9,6 @@
 ## 2024-05-18 - Accessible Modals with Dynamic Headings
 **Learning:** When building multi-step modals where the primary heading (`h3` or `h4`) changes depending on the active step (e.g., intro, game, reward), using `aria-labelledby` with a static ID isn't viable because the heading element itself might be conditionally rendered (`v-if`/`v-else-if`), leading to missing or dangling references.
 **Action:** In these cases, use `aria-label` directly on the element with `role="dialog"` providing a general, constant description of the modal's purpose (e.g., `aria-label="Micro-sesión"`) instead of relying on an internal dynamic heading ID.
+## 2026-09-23 - Progress Bar ARIA Attributes
+**Learning:** Visual progress indicators (like hold-bars or progress bars) require specific ARIA attributes for proper accessibility, specifically `role="progressbar"`, `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
+**Action:** Always ensure any dynamic visual progress indicator includes the complete set of standard ARIA progress bar attributes to be accessible to screen readers.

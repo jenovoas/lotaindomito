@@ -157,7 +157,7 @@ onUnmounted(() => {
           <div v-else-if="qtePhase === 'hold'" class="qte-prompt">
             <strong>¡Mantén presionado!</strong>
             <p>Amasa firmemente para integrar la harina.</p>
-            <div class="hold-bar"><div class="hold-fill" :style="{ width: holdProgress + '%' }"></div></div>
+            <div class="hold-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="holdProgress"><div class="hold-fill" :style="{ width: holdProgress + '%' }"></div></div>
           </div>
           <div v-else class="qte-prompt">
             <strong>¡Toca rápido!</strong>
