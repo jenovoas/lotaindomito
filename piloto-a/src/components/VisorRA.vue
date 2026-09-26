@@ -142,7 +142,7 @@ function finishEncounter() {
 </script>
 
 <template>
-  <div class="visor-ra-overlay">
+  <div class="visor-ra-overlay" role="dialog" aria-modal="true" aria-label="Encuentro de Realidad Aumentada">
     <!-- Capa de Cámara Real o Filtro Espectral -->
     <div class="camera-container">
       <video
