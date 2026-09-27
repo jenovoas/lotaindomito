@@ -12,3 +12,6 @@
 ## 2024-05-18 - Accessibility improvements for custom UI elements
 **Learning:** When adding `aria-label` to generic text elements (like `span` or `div`), a W3C structural role such as `role="group"` or `role="img"` must also be applied. Otherwise, screen readers will ignore the `aria-label`. Furthermore, custom full-screen overlay components serving as interactive modules must have `role="dialog"` and `aria-modal="true"` to prevent screen reader users from becoming trapped or unaware of the modality.
 **Action:** Always verify that generic container tags used as specialized interactive elements (e.g. custom HUD elements, overlays) are supplemented with their appropriate semantic `role` attributes, especially when leveraging ARIA properties.
+## 2026-09-27 - Progress Bar ARIA Roles
+**Learning:** When creating visual progress bars using generic elements (like `div` or `span`), it's crucial to include `role="progressbar"`, `aria-valuemin`, and `aria-valuemax` attributes, not just `:aria-valuenow`. Screen readers rely on the complete set of these attributes to announce the progress correctly to users.
+**Action:** Always verify that custom progress indicators use the complete set of standard ARIA progressbar attributes to ensure full accessibility.
