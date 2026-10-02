@@ -180,6 +180,7 @@ onUnmounted(() => {
             class="btn-qte"
             aria-label="Golpear masa"
             :class="{ 'is-current': qtePhase === 'press' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="onPress"
             @click="qtePhase === 'press' ? onPress() : null"
           >👊</button>
@@ -187,12 +188,14 @@ onUnmounted(() => {
             class="btn-qte"
             aria-label="Amasar"
             :class="{ 'is-current': qtePhase === 'hold' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="qtePhase === 'hold' ? onHoldStart() : onMiss()"
           >🖐️</button>
           <button
             class="btn-qte"
             aria-label="Aplaudir masa"
             :class="{ 'is-current': qtePhase === 'tap' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="onTap"
           >👏</button>
         </div>
@@ -386,8 +389,13 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-.btn-qte:hover {
+.btn-qte:hover:not(:disabled) {
   border-color: #E8B86D;
+}
+
+.btn-qte:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-qte.is-current {
