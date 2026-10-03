@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { s60ToDegrees, degreesToS60, type S60Components } from '@/utils/s60-to-degrees'
 
@@ -184,7 +184,7 @@ export const useMobsStore = defineStore('mobs', () => {
           interceptedNpc.value = npc
           return npc
         }
-      } catch (e) {
+      } catch {
         // Coordenadas en cálculo
       }
     }
@@ -217,7 +217,7 @@ export const useMobsStore = defineStore('mobs', () => {
           return
         }
       }
-    } catch (e) {
+    } catch {
       // Fallback determinista local activo
     } finally {
       loading.value = false

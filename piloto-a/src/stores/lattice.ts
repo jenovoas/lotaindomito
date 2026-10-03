@@ -102,7 +102,7 @@ export const useLatticeStore = defineStore('lattice', () => {
           connectionStatus.value = 'offline'
         }
       }
-    } catch (e) {
+    } catch {
       error.value = 'No se pudo crear WebSocket'
       connected.value = false
       connectionStatus.value = 'reconnecting'
