@@ -127,8 +127,10 @@ onUnmounted(() => {
           <p class="card-prompt">¿Es nativa de Chile o introducida?</p>
         </div>
 
-        <div v-if="feedback" class="feedback-msg">
-          {{ feedback }}
+        <div aria-live="polite">
+          <div v-if="feedback" class="feedback-msg">
+            {{ feedback }}
+          </div>
         </div>
 
         <div class="era-buttons">

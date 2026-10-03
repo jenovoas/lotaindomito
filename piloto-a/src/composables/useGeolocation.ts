@@ -10,7 +10,6 @@ export function useGeolocation() {
   let watchId: number | null = null
 
   const TEST_USER = 'test-1'
-  const POLL_INTERVAL = 3000 // 3s
 
   function startWatch(): void {
     // Intentar GPS real primero
