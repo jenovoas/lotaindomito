@@ -171,8 +171,10 @@ onUnmounted(() => {
             <p>Da palmadas al pan para darle forma.</p>
           </div>
 
-          <div v-if="showSuccess" class="qte-feedback success">✓ ¡Buen ritmo!</div>
-          <div v-if="showMiss" class="qte-feedback miss">✕ ¡Se te cayó la masa!</div>
+          <div aria-live="polite" role="status">
+            <div v-if="showSuccess" class="qte-feedback success">✓ ¡Buen ritmo!</div>
+            <div v-if="showMiss" class="qte-feedback miss">✕ ¡Se te cayó la masa!</div>
+          </div>
         </div>
 
         <div class="action-zone">

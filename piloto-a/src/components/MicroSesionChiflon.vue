@@ -116,8 +116,10 @@ onMounted(() => {
           <p class="card-hint">¿A qué era geológica pertenece este hallazgo?</p>
         </div>
 
-        <div v-if="feedback" class="feedback-msg">
-          {{ feedback }}
+        <div aria-live="polite" role="status">
+          <div v-if="feedback" class="feedback-msg">
+            {{ feedback }}
+          </div>
         </div>
 
         <div class="era-buttons">
