@@ -12,3 +12,6 @@
 ## 2024-05-18 - Accessibility improvements for custom UI elements
 **Learning:** When adding `aria-label` to generic text elements (like `span` or `div`), a W3C structural role such as `role="group"` or `role="img"` must also be applied. Otherwise, screen readers will ignore the `aria-label`. Furthermore, custom full-screen overlay components serving as interactive modules must have `role="dialog"` and `aria-modal="true"` to prevent screen reader users from becoming trapped or unaware of the modality.
 **Action:** Always verify that generic container tags used as specialized interactive elements (e.g. custom HUD elements, overlays) are supplemented with their appropriate semantic `role` attributes, especially when leveraging ARIA properties.
+## 2024-10-24 - Dynamic feedback announcements in Vue
+**Learning:** Screen readers often miss dynamically rendered feedback elements (like toasts appearing via `v-if`) because the element wasn't present in the DOM for the screen reader to attach to its live region status.
+**Action:** Always wrap conditionally rendered (`v-if` / `<transition>`) feedback messages in a persistent outer container with `aria-live="polite"` (or `role="status"`) that is always in the DOM, so that any content injected into it is reliably announced.
