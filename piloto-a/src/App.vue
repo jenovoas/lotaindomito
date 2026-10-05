@@ -40,20 +40,22 @@ onUnmounted(() => {
 
         <div class="hud-actions">
           <WalletHUD />
-          <button class="btn-mochila" @click="showMochilaModal = true">
+          <button class="btn-mochila" @click="showMochilaModal = true" :aria-label="`Mochila, ${inventory.items.length} ítems`">
             <span>🎒 Mochila</span>
-            <span class="badge-count">{{ inventory.items.length }}</span>
+            <span class="badge-count" aria-hidden="true">{{ inventory.items.length }}</span>
           </button>
         </div>
       </div>
 
       <!-- Toast Flotante de Ítems Obtenidos -->
-      <transition name="toast-slide">
-        <div v-if="inventory.lastAcquiredItem" class="item-toast">
-          <span class="toast-sparkle">✨</span>
-          <span>¡Nuevo ítem: <strong>{{ inventory.lastAcquiredItem.icon }} {{ inventory.lastAcquiredItem.name }}</strong>!</span>
-        </div>
-      </transition>
+      <div aria-live="polite" class="toast-container">
+        <transition name="toast-slide">
+          <div v-if="inventory.lastAcquiredItem" class="item-toast">
+            <span class="toast-sparkle" aria-hidden="true">✨</span>
+            <span>¡Nuevo ítem: <strong>{{ inventory.lastAcquiredItem.icon }} {{ inventory.lastAcquiredItem.name }}</strong>!</span>
+          </div>
+        </transition>
+      </div>
     </header>
 
     <div class="mapa-wrapper">
@@ -190,6 +192,20 @@ html, body {
   box-shadow: 0 4px 16px rgba(63, 230, 192, 0.3);
 }
 
+.btn-mochila:focus-visible {
+  outline: 2px solid var(--lota-teal, #3fe6c0);
+  outline-offset: 2px;
+}
+
+.toast-container {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  pointer-events: none;
+}
+
 .badge-count {
   background: var(--lota-copper, #d17a4f);
   color: var(--lota-bg, #0f1216);
@@ -201,10 +217,6 @@ html, body {
 }
 
 .item-toast {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
   background: rgba(15, 23, 42, 0.95);
   border: 1.5px solid var(--lota-gold, #ffd700);
   color: var(--lota-gold, #ffd700);
@@ -219,7 +231,6 @@ html, body {
   align-items: center;
   gap: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  z-index: 999;
   backdrop-filter: var(--lota-glass-blur, blur(10px));
 }
 
