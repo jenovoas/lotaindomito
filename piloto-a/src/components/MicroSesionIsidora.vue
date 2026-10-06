@@ -127,8 +127,10 @@ onUnmounted(() => {
           <p class="card-prompt">¿Es nativa de Chile o introducida?</p>
         </div>
 
-        <div v-if="feedback" class="feedback-msg">
-          {{ feedback }}
+        <div class="feedback-container" aria-live="polite" role="status">
+          <div v-if="feedback" class="feedback-msg">
+            {{ feedback }}
+          </div>
         </div>
 
         <div class="era-buttons">
@@ -270,11 +272,15 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
+.feedback-container {
+  min-height: 24px;
+  margin-bottom: 0.5rem;
+}
+
 .feedback-msg {
   text-align: center;
   font-size: 0.85rem;
   color: #D4A547;
-  margin-bottom: 0.5rem;
 }
 
 .era-buttons {
