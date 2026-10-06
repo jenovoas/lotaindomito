@@ -12,3 +12,7 @@
 ## 2024-05-18 - Accessibility improvements for custom UI elements
 **Learning:** When adding `aria-label` to generic text elements (like `span` or `div`), a W3C structural role such as `role="group"` or `role="img"` must also be applied. Otherwise, screen readers will ignore the `aria-label`. Furthermore, custom full-screen overlay components serving as interactive modules must have `role="dialog"` and `aria-modal="true"` to prevent screen reader users from becoming trapped or unaware of the modality.
 **Action:** Always verify that generic container tags used as specialized interactive elements (e.g. custom HUD elements, overlays) are supplemented with their appropriate semantic `role` attributes, especially when leveraging ARIA properties.
+
+## 2026-10-06 - Persistent ARIA-Live Containers
+**Learning:** When displaying dynamically rendered feedback messages (e.g., v-if), screen readers may fail to announce them if the `aria-live` attribute is applied directly to the dynamically appearing element. Layout shifts can also occur if the container height isn't reserved.
+**Action:** Always wrap dynamically rendered feedback in a persistent, pre-rendered container with `aria-live="polite"` (or `role="status"`) and a CSS `min-height` to ensure reliable announcements and stable layouts.
