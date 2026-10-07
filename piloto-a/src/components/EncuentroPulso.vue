@@ -9,7 +9,7 @@
 import { computed } from 'vue'
 import { useGraphicsProfile } from '@/composables/useGraphicsProfile'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     visible: boolean
   }>(),
