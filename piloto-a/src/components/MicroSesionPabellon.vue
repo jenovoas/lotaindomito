@@ -171,8 +171,10 @@ onUnmounted(() => {
             <p>Da palmadas al pan para darle forma.</p>
           </div>
 
-          <div v-if="showSuccess" class="qte-feedback success">✓ ¡Buen ritmo!</div>
-          <div v-if="showMiss" class="qte-feedback miss">✕ ¡Se te cayó la masa!</div>
+          <div class="qte-feedback-container" role="status" aria-live="polite">
+            <div v-if="showSuccess" class="qte-feedback success">✓ ¡Buen ritmo!</div>
+            <div v-else-if="showMiss" class="qte-feedback miss">✕ ¡Se te cayó la masa!</div>
+          </div>
         </div>
 
         <div class="action-zone">
@@ -351,8 +353,12 @@ onUnmounted(() => {
   transition: width 0.1s linear;
 }
 
-.qte-feedback {
+.qte-feedback-container {
   margin-top: 0.75rem;
+  min-height: 1.2rem;
+}
+
+.qte-feedback {
   font-weight: 700;
   font-size: 0.9rem;
 }
