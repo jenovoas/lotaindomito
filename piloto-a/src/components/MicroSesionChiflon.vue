@@ -9,7 +9,6 @@ const emit = defineEmits<{
 
 const step = ref<'intro' | 'game' | 'reward'>('intro')
 const score = ref(0)
-const targetScore = 5
 const timeLeft = ref(90)
 let timer: number | null = null
 const analytics = useAnalyticsStore()
@@ -116,7 +115,7 @@ onMounted(() => {
           <p class="card-hint">¿A qué era geológica pertenece este hallazgo?</p>
         </div>
 
-        <div v-if="feedback" class="feedback-msg">
+        <div class="feedback-msg" role="status" aria-live="polite">
           {{ feedback }}
         </div>
 
@@ -253,6 +252,7 @@ onMounted(() => {
   font-size: 0.85rem;
   color: #3FE6C0;
   margin-bottom: 0.5rem;
+  min-height: 1.2rem;
 }
 
 .era-buttons {
