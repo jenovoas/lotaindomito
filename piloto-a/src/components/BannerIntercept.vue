@@ -68,6 +68,23 @@ onMounted(() => {
   cursor: pointer;
   box-shadow: 0 8px 28px rgba(212, 175, 55, 0.45);
   overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.banner-intercept:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.55);
+  filter: brightness(1.05);
+}
+
+.banner-intercept:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35);
+}
+
+.banner-intercept:focus-visible {
+  outline: 3px solid var(--lota-gold, #D4AF37);
+  outline-offset: 4px;
 }
 
 .halo {
