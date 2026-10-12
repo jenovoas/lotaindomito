@@ -62,6 +62,7 @@ function advanceBeat() {
 }
 
 function onPress() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'press') return
   score.value++
   showSuccess.value = true
@@ -69,6 +70,7 @@ function onPress() {
 }
 
 function onHoldStart() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'hold') {
     onMiss()
     return
@@ -77,6 +79,8 @@ function onHoldStart() {
   holdInterval = window.setInterval(() => {
     holdProgress.value += 8
     if (holdProgress.value >= 100) {
+      clearInterval(holdInterval as number)
+      holdInterval = null
       score.value++
       showSuccess.value = true
       setTimeout(() => advanceBeat(), 400)
@@ -85,6 +89,7 @@ function onHoldStart() {
 }
 
 function onTap() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'tap') {
     onMiss()
     return
@@ -95,6 +100,7 @@ function onTap() {
 }
 
 function onMiss() {
+  if (showSuccess.value || showMiss.value) return
   if (holdInterval) clearInterval(holdInterval)
   holdInterval = null
   showMiss.value = true
