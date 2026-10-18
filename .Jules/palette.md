@@ -15,3 +15,7 @@
 ## 2024-10-09 - Ensure persistent aria-live container for dynamically rendered feedback messages
 **Learning:** When feedback messages are conditionally rendered (e.g., using `v-if`), screen readers may not reliably announce them, and their appearance can cause layout shifts.
 **Action:** Always wrap dynamically rendered feedback messages in a persistent container with `aria-live="polite"` (or `role="alert"` / `role="status"`) and provide a CSS `min-height` to prevent layout shifts and ensure accessibility.
+
+## 2026-10-18 - Focus States on Floating CTAs
+**Learning:** Floating, globally positioned CTAs (like BannerIntercept) often miss standard button interaction states because they are visually distinct from forms. This causes a severe accessibility gap for keyboard users and a lack of tactile feedback on touch/mouse.
+**Action:** Always verify that every custom interactive element, especially prominent CTAs, includes `:hover`, `:active`, and accessible `:focus-visible` states with transitions.
