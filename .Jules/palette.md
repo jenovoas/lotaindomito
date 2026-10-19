@@ -15,3 +15,8 @@
 ## 2024-10-09 - Ensure persistent aria-live container for dynamically rendered feedback messages
 **Learning:** When feedback messages are conditionally rendered (e.g., using `v-if`), screen readers may not reliably announce them, and their appearance can cause layout shifts.
 **Action:** Always wrap dynamically rendered feedback messages in a persistent container with `aria-live="polite"` (or `role="alert"` / `role="status"`) and provide a CSS `min-height` to prevent layout shifts and ensure accessibility.
+## 2024-05-18 - Improve missing visual focus indicators
+
+**Learning:** Missing global CSS styles for interactive elements in the components to indicate when they are focused, causing accessibility issue with keyboard navigation. Adding `:focus-visible` to interactive elements and adding outline improves screen reader navigation.
+
+**Action:** Look for instances of elements with `role="button"` or elements that can receive focus (like links and buttons) and ensure they have a `:focus-visible` state. Add global utility classes if required to standardise this.
