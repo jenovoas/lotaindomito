@@ -15,3 +15,6 @@
 ## 2024-10-09 - Ensure persistent aria-live container for dynamically rendered feedback messages
 **Learning:** When feedback messages are conditionally rendered (e.g., using `v-if`), screen readers may not reliably announce them, and their appearance can cause layout shifts.
 **Action:** Always wrap dynamically rendered feedback messages in a persistent container with `aria-live="polite"` (or `role="alert"` / `role="status"`) and provide a CSS `min-height` to prevent layout shifts and ensure accessibility.
+## 2026-10-20 - Persistent ARIA Live Regions for Toasts
+**Learning:** Screen readers often fail to announce dynamic alerts (like toasts) if the element containing `aria-live` or `role="status"` is conditionally rendered (e.g., via `v-if`). They need a persistent DOM container to reliably track content mutations.
+**Action:** Always wrap dynamically entering/leaving toast or alert components inside a persistent wrapper div that holds the `aria-live` attribute and maintains structural stability (like `min-height`) to ensure seamless screen reader announcements and avoid layout shifts.
