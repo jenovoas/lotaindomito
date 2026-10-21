@@ -835,7 +835,6 @@ onUnmounted(() => {
 .zona-card-gaming:focus-visible {
   border-color: var(--lota-teal, #3FE6C0);
   transform: translateX(3px);
-  outline: none; /* Removed default outline since we are using border color */
 }
 
 .zona-info {
