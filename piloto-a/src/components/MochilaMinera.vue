@@ -307,13 +307,6 @@ function claimQuestReward(quest: Quest) {
   background: rgba(63, 230, 192, 0.04);
 }
 
-.tab-btn:focus-visible,
-.item-card:focus-visible,
-.quest-card:focus-visible {
-  outline: 2px solid #3fe6c0;
-  outline-offset: 2px;
-}
-
 .tab-content {
   padding: 20px;
   overflow-y: auto;

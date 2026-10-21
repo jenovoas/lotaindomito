@@ -1,17 +1,27 @@
-## 2026-08-25 - WalletHUD Accessibility\n**Learning:** Using aria-label on generic spans may not always be announced by all screen readers without a role. \n**Action:** For generic text elements, evaluate if visual tooltips (title) are sufficient or if structural roles are needed alongside ARIA labels.
+## 2026-08-25 - WalletHUD Accessibility
+**Learning:** Using aria-label on generic spans may not always be announced by all screen readers without a role.
+**Action:** For generic text elements, evaluate if visual tooltips (title) are sufficient or if structural roles are needed alongside ARIA labels.
 
 ## 2026-08-26 - MochilaMinera Keyboard Accessibility
 **Learning:** The item-card and quest-card components were originally just divs. Adding role="button" and tabindex="0" is necessary for keyboard focus, but Vue requires both @keydown.enter and @keydown.space.prevent to fully mimic button behavior for keyboard users.
 **Action:** Always ensure custom interactive elements have proper roles, tabindex, keydown handlers, and :focus-visible states.
+
 ## 2024-03-24 - Prevent Rapid Multiple Clicks on Game Choices
 **Learning:** Disabling interactive choices during short state transitions (like when showing success/error feedback) prevents accidental double-clicks and clearly communicates that the UI is processing the input. Without it, users might spam-click buttons and skip ahead unexpectedly.
 **Action:** Always add `:disabled` states to choice buttons when an interaction causes a temporary delay before moving to the next state, and apply styles for disabled elements such as `opacity: 0.5` and `cursor: not-allowed` while avoiding pseudo-classes like `:hover`.
+
 ## 2024-05-18 - Accessible Modals with Dynamic Headings
 **Learning:** When building multi-step modals where the primary heading (`h3` or `h4`) changes depending on the active step (e.g., intro, game, reward), using `aria-labelledby` with a static ID isn't viable because the heading element itself might be conditionally rendered (`v-if`/`v-else-if`), leading to missing or dangling references.
 **Action:** In these cases, use `aria-label` directly on the element with `role="dialog"` providing a general, constant description of the modal's purpose (e.g., `aria-label="Micro-sesión"`) instead of relying on an internal dynamic heading ID.
+
 ## 2024-05-18 - Accessibility improvements for custom UI elements
 **Learning:** When adding `aria-label` to generic text elements (like `span` or `div`), a W3C structural role such as `role="group"` or `role="img"` must also be applied. Otherwise, screen readers will ignore the `aria-label`. Furthermore, custom full-screen overlay components serving as interactive modules must have `role="dialog"` and `aria-modal="true"` to prevent screen reader users from becoming trapped or unaware of the modality.
 **Action:** Always verify that generic container tags used as specialized interactive elements (e.g. custom HUD elements, overlays) are supplemented with their appropriate semantic `role` attributes, especially when leveraging ARIA properties.
+
 ## 2024-10-09 - Ensure persistent aria-live container for dynamically rendered feedback messages
 **Learning:** When feedback messages are conditionally rendered (e.g., using `v-if`), screen readers may not reliably announce them, and their appearance can cause layout shifts.
 **Action:** Always wrap dynamically rendered feedback messages in a persistent container with `aria-live="polite"` (or `role="alert"` / `role="status"`) and provide a CSS `min-height` to prevent layout shifts and ensure accessibility.
+
+## 2024-10-10 - Global Focus Ring
+**Learning:** Explicitly setting `border-radius: 2px;` on a global `*:focus-visible` pseudo-class causes previously rounded interactive elements (e.g. `.zona-card-gaming`) to lose their original rounded edges during focus.
+**Action:** Rely on modern browser behavior which naturally conforms the `outline` to the existing `border-radius` of the element.
