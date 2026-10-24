@@ -28,7 +28,7 @@ export class RingBuffer<T> {
       throw new Error('RingBuffer: capacity debe ser >= 2')
     }
     this.capacity = capacity
-    this.buf = new Array(capacity)
+    this.buf = Array.from({ length: capacity })
   }
 
   push(value: T, t: number): void {
