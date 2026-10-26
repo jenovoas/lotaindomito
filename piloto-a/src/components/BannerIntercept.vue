@@ -5,7 +5,7 @@
  */
 import { onMounted } from 'vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     npcName: string
     distanceMeters?: number
@@ -68,6 +68,23 @@ onMounted(() => {
   cursor: pointer;
   box-shadow: 0 8px 28px rgba(212, 175, 55, 0.45);
   overflow: hidden;
+  transition: transform 0.2s var(--lota-ease-out, ease), box-shadow 0.2s var(--lota-ease-out, ease), filter 0.2s var(--lota-ease-out, ease);
+}
+
+.banner-intercept:hover {
+  transform: scale(1.02) translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
+}
+
+.banner-intercept:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
+}
+
+.banner-intercept:focus-visible {
+  outline: 2px solid #f0f4f9;
+  outline-offset: 4px;
 }
 
 .halo {
