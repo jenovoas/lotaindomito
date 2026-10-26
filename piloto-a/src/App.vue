@@ -48,12 +48,14 @@ onUnmounted(() => {
       </div>
 
       <!-- Toast Flotante de Ítems Obtenidos -->
-      <transition name="toast-slide">
-        <div v-if="inventory.lastAcquiredItem" class="item-toast">
-          <span class="toast-sparkle">✨</span>
-          <span>¡Nuevo ítem: <strong>{{ inventory.lastAcquiredItem.icon }} {{ inventory.lastAcquiredItem.name }}</strong>!</span>
-        </div>
-      </transition>
+      <div class="toast-container" aria-live="polite" role="status">
+        <transition name="toast-slide">
+          <div v-if="inventory.lastAcquiredItem" class="item-toast">
+            <span class="toast-sparkle">✨</span>
+            <span>¡Nuevo ítem: <strong>{{ inventory.lastAcquiredItem.icon }} {{ inventory.lastAcquiredItem.name }}</strong>!</span>
+          </div>
+        </transition>
+      </div>
     </header>
 
     <div class="mapa-wrapper">
@@ -200,11 +202,19 @@ html, body {
   border-radius: 10px;
 }
 
-.item-toast {
+.toast-container {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.item-toast {
   background: rgba(15, 23, 42, 0.95);
   border: 1.5px solid var(--lota-gold, #ffd700);
   color: var(--lota-gold, #ffd700);
@@ -219,8 +229,8 @@ html, body {
   align-items: center;
   gap: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  z-index: 999;
   backdrop-filter: var(--lota-glass-blur, blur(10px));
+  pointer-events: auto;
 }
 
 .toast-slide-enter-active, .toast-slide-leave-active {
@@ -229,7 +239,7 @@ html, body {
 }
 .toast-slide-enter-from, .toast-slide-leave-to {
   opacity: 0;
-  transform: translate(-50%, -10px);
+  transform: translateY(-10px);
 }
 
 .pie-pagina {
