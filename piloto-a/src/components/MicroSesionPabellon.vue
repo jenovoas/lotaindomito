@@ -62,6 +62,7 @@ function advanceBeat() {
 }
 
 function onPress() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'press') return
   score.value++
   showSuccess.value = true
@@ -69,6 +70,7 @@ function onPress() {
 }
 
 function onHoldStart() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'hold') {
     onMiss()
     return
@@ -77,6 +79,8 @@ function onHoldStart() {
   holdInterval = window.setInterval(() => {
     holdProgress.value += 8
     if (holdProgress.value >= 100) {
+      clearInterval(holdInterval as number)
+      holdInterval = null
       score.value++
       showSuccess.value = true
       setTimeout(() => advanceBeat(), 400)
@@ -85,6 +89,7 @@ function onHoldStart() {
 }
 
 function onTap() {
+  if (showSuccess.value || showMiss.value) return
   if (qtePhase.value !== 'tap') {
     onMiss()
     return
@@ -95,6 +100,7 @@ function onTap() {
 }
 
 function onMiss() {
+  if (showSuccess.value || showMiss.value) return
   if (holdInterval) clearInterval(holdInterval)
   holdInterval = null
   showMiss.value = true
@@ -182,6 +188,7 @@ onUnmounted(() => {
             class="btn-qte"
             aria-label="Golpear masa"
             :class="{ 'is-current': qtePhase === 'press' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="onPress"
             @click="qtePhase === 'press' ? onPress() : null"
           >👊</button>
@@ -189,12 +196,14 @@ onUnmounted(() => {
             class="btn-qte"
             aria-label="Amasar"
             :class="{ 'is-current': qtePhase === 'hold' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="qtePhase === 'hold' ? onHoldStart() : onMiss()"
           >🖐️</button>
           <button
             class="btn-qte"
             aria-label="Aplaudir masa"
             :class="{ 'is-current': qtePhase === 'tap' }"
+            :disabled="showSuccess || showMiss"
             @pointerdown="onTap"
           >👏</button>
         </div>
@@ -395,8 +404,13 @@ onUnmounted(() => {
   justify-content: center;
 }
 
-.btn-qte:hover {
+.btn-qte:hover:not(:disabled) {
   border-color: #E8B86D;
+}
+
+.btn-qte:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-qte.is-current {
