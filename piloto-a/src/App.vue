@@ -209,8 +209,8 @@ html, body {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   pointer-events: none;
-  min-height: 40px; /* Persistent minimum height so screen readers track changes */
   z-index: 999;
 }
 
